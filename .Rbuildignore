@@ -1,0 +1,11 @@
+^\.vscode$
+^doc$
+^Meta$
+^data-raw$
+^simulations$
+^LICENSE\.md$
+^README\.md$
+^README\.Rmd$
+^README\.html$
+^README_files$
+^tests\.r$

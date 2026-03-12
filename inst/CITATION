@@ -1,0 +1,12 @@
+citHeader("To cite AIDA in publications use:")
+
+citEntry(
+  entry = "Manual",
+  title = "AIDA: Analysis of Interval DAta",
+  author = personList(
+    person("Catarina", family = "P. Loureiro")
+  ),
+  year = "2026",
+  note = paste("R package version", packageVersion("AIDA")),
+  textVersion = paste("Catarina P. Loureiro (2026). AIDA: Analysis of Interval DAta. R package version", packageVersion("AIDA"))
+)
