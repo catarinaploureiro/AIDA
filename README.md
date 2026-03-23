@@ -28,7 +28,7 @@ You can install the development version from GitHub:
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("catarinaploureiro/AIDA", build_vignettes = TRUE)
+remotes::install_github("catarinaploureiro/AIDA")
 ```
 
 ## Minimal Example
