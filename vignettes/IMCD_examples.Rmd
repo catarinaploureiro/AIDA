@@ -49,9 +49,8 @@ cars_int <- intCars$intData
 The `IMCD` function is used to compute the reweighted IMCD estimates and the robust squared Interval-Mahalanobis distances of each observation from the estimated barycenter. The subset size is set to $\lfloor 0.75\times 27\rfloor=20$, and the reweighting cutoff to "farness" with a cutoff level of $0.9$. The `int_outliers` function identifies potential outliers based on the robust distances obtained from the IMCD estimates, using the same cutoff criteria.
 
 ```{r}
-cars_IMCD <- IMCD(cars_int, m=floor(0.75*cars_int@NObs), cutoff = "farness", cutoff_lvl = 0.9)
-cars_outliers <- int_outliers(cars_IMCD$robust_dist, p = cars_int@NIVar,
-                                    cutoff = "farness", cutoff_lvl = 0.9)
+cars_IMCD <- IMCD(cars_int, m = floor(0.75*cars_int@NObs), cutoff = "farness", cutoff_lvl = 0.9)
+cars_outliers <- int_outliers(cars_IMCD$robust_dist, cutoff = "farness", cutoff_lvl = 0.9)
 cars_outliers$outliers_names
 ```
 
@@ -64,7 +63,7 @@ cars_outliers_colors[cars_outliers$outliers_names] <- 'red'
 
 SYMB.pairs.panels(cars_int, palette = cars_outliers_colors, type = "rectangles", 
                     corr = cov2cor(cars_IMCD$cov_IMCD), labels = colnames(cars_int),
-                    is_outlier = cars_outliers$is_outlier, gap=0)
+                    is_outlier = cars_outliers$is_outlier, gap = 0)
 ```
 
 Distance-distance plot of the classical versus robust squared Interval-Mahalanobis distances. The points' shape represents the car model class, the horizontal and vertical lines correspond to the 0.9 farness cutoff value and the 1.5 adjusted boxplot cutoff value, respectively, with the outliers marked in red.
@@ -72,7 +71,7 @@ Distance-distance plot of the classical versus robust squared Interval-Mahalanob
 ```{r}
 # Classical distances and outliers
 cars_class_dist <- IMah_dist(cars_int, z = rep(1,cars_int@NObs))
-cars_class_outliers <- int_outliers(cars_class_dist, cutoff = "adjbox", p = p,cutoff_lvl = 1.5)
+cars_class_outliers <- int_outliers(cars_class_dist, cutoff = "adjbox", cutoff_lvl = 1.5)
 
 cars_is_outliers <- as.character(cars_outliers$is_outlier)
 cars_is_outliers[cars_outliers$is_outlier] <- "Outlier"
@@ -110,15 +109,15 @@ spotify_int <- spotify_tracks$intData_trimmed
 The IMCD estimates are computed using the `IMCD` function with a subset size of $\lfloor 0.75\times 111\rfloor=83$, and a reweighting cutoff based on "farness" with a cutoff level of $0.95$. The `int_outliers` function applies the outlier detection rule using a "farness" cutoff of $0.95$ to identify strong outliers and $0.9$ for mild outliers.
 
 ```{r}
-spotify_IMCD <- IMCD(spotify_int, m=round(0.75*nrow(spotify_int)), 
-                              cutoff="farness", cutoff_lvl = 0.95)
+spotify_IMCD <- IMCD(spotify_int, m = round(0.75*nrow(spotify_int)), 
+                      cutoff = "farness", cutoff_lvl = 0.95)
 
 # Strong outliers
-spotify_outliers <- int_outliers(spotify_IMCD$robust_dist,cutoff="farness", cutoff_lvl = 0.95)
+spotify_outliers <- int_outliers(spotify_IMCD$robust_dist, cutoff = "farness", cutoff_lvl = 0.95)
 spotify_outliers$outliers_names
 
 # Mild outliers
-spotify_outliers_2 <- int_outliers(spotify_IMCD$robust_dist,cutoff="farness", cutoff_lvl = 0.9)
+spotify_outliers_2 <- int_outliers(spotify_IMCD$robust_dist, cutoff = "farness", cutoff_lvl = 0.9)
 spotify_outliers_2$outliers_names[!spotify_outliers_2$outliers_names%in%spotify_outliers$outliers_names]
 ```
 
@@ -149,22 +148,22 @@ Distance-distance plot of the classical versus robust squared Interval-Mahalanob
 
 ```{r}
 # Classical distances and outliers
-spotify_class_dist <- IMah_dist(spotify_int, z=rep(1,spotify_int@NObs))
-spotify_class_outliers <- int_outliers(spotify_class_dist,cutoff = "adjbox",p=spotify_int@NIVar)
+spotify_class_dist <- IMah_dist(spotify_int, z = rep(1,spotify_int@NObs))
+spotify_class_outliers <- int_outliers(spotify_class_dist, cutoff = "adjbox")
 
 spotify_is_outliers <- as.character(spotify_outliers$is_outlier)
 spotify_is_outliers[!spotify_outliers_2$is_outlier] <- "Regular"
 spotify_is_outliers[spotify_outliers_2$is_outlier] <- "Mild Outlier"
 spotify_is_outliers[spotify_outliers$is_outlier] <- "Extreme Outlier"
 palette_outliers <- c(
-  "Regular"        = "gray50",
-  "Mild Outlier"   = "darkorange",
-  "Extreme Outlier"= "red"
+  "Regular"         = "gray50",
+  "Mild Outlier"    = "darkorange",
+  "Extreme Outlier" = "red"
 )
 
 plot_dist_dist(spotify_class_dist, spotify_class_outliers$cutoff_value[[2]], 
                 "1.5 Adjbox", spotify_IMCD$robust_dist, 
-                c(spotify_outliers_2$cutoff_value,spotify_outliers$cutoff_value), 
+                c(spotify_outliers_2$cutoff_value, spotify_outliers$cutoff_value), 
                 c("0.90 Farness", "0.95 Farness"), color_class = spotify_is_outliers, 
                 color_label = "Outlier Status", palette = palette_outliers, ggplotly = FALSE, 
                 label_obs = spotify_outliers_2$outliers_names)
