@@ -2,10 +2,10 @@
 
 * Initial GitHub commit.
 
-# AIDA 0.1.1
+## AIDA 0.1.1
 
 * Fix vignette rendering issue.
 
-# AIDA 0.1.2
+## AIDA 0.1.2
 
 * Add pre-built vignettes.
