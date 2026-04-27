@@ -2,7 +2,3 @@ url: https://catarinaploureiro.github.io/AIDA/
 template:
   bootstrap: 5
   light-switch: true
-  theme:
-    dark: darkly
-    light: flatly
-
