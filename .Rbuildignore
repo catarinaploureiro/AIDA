@@ -10,3 +10,6 @@
 ^README_files$
 ^tests\.r$
 ^\.github$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
