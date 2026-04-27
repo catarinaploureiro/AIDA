@@ -71,7 +71,7 @@ iris_corr <- cov2cor(iris_cov)
 SYMB.pairs.panels(iris_int, corr = iris_corr, labels = colnames(iris_int))
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
+![](man/figures/unnamed-chunk-2-1.png)<!-- -->
 
 ## Vignettes
 
