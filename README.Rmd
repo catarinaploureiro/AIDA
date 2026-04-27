@@ -15,6 +15,7 @@ knitr::opts_chunk$set(
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)]()
 [![Version](https://img.shields.io/badge/version-0.1.2-blue.svg)]()
+[![R-CMD-check](https://github.com/catarinaploureiro/AIDA/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/catarinaploureiro/AIDA/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 ## Overview
