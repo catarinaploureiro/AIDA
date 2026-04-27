@@ -1,0 +1,198 @@
+# AIDA: Analysis of Interval DAta
+
+## Overview
+
+**AIDA** provides tools for the analysis of interval-valued data,
+including construction, visualization, robust estimation, and outlier
+detection. The package is built around the `intData` class and is
+designed to support methodological research and applied workflows
+involving interval-valued data.
+
+AIDA currently includes functionality for:
+
+- Construction of interval-valued datasets
+- Interval-valued covariance estimation
+- Interval Minimum Covariance Determinant (IMCD) estimator
+- Robust squared Interval-Mahalanobis distance
+- Outlier detection based on robust distances
+- Visualization tools for interval data
+
+## Installation
+
+You can install the development version from GitHub:
+
+``` r
+# install.packages("remotes")
+remotes::install_github("catarinaploureiro/AIDA")
+```
+
+## Minimal Example
+
+``` r
+library(AIDA)
+
+# Create an intData object from the iris dataset, using the Species column as 
+# grouping variable. We also specify the latent distribution as "General" to 
+# estimate the parameters based on the microdata.
+data(iris)
+iris_int <- micro2intData(iris[,1:4], iris$Species, LatentCase = "General")
+
+# Check the parameters of the latent distribution
+iris_int@LatentParam
+#> [[1]]
+#>           [,1]      [,2]      [,3]      [,4]
+#> [1,] 0.1835903 0.1554921 0.1660354 0.1990067
+#> [2,] 0.1554921 0.1381013 0.1461729 0.1683492
+#> [3,] 0.1660354 0.1461729 0.1627440 0.1828199
+#> [4,] 0.1990067 0.1683492 0.1828199 0.2704900
+#> 
+#> [[2]]
+#>            [,1]       [,2]       [,3]       [,4]
+#> [1,] 0.01851852 0.00000000 0.00000000  0.0000000
+#> [2,] 0.00000000 0.04199507 0.00000000  0.0000000
+#> [3,] 0.00000000 0.00000000 0.02913753  0.0000000
+#> [4,] 0.00000000 0.00000000 0.00000000 -0.1802821
+
+# Compute the classical covariance and correlation matrices
+iris_cov <- int_cov(iris_int)
+iris_corr <- cov2cor(iris_cov)
+
+# Pairs plot, the lower triangular shows scatter plots of the four variables, 
+# while the upper triangular shows the interval correlation matrix.
+SYMB.pairs.panels(iris_int, corr = iris_corr, labels = colnames(iris_int))
+```
+
+![](README_files/figure-gfm/unnamed-chunk-2-1.png)
+
+## Vignettes
+
+For a full introduction about the `intData` class, see:
+
+``` r
+vignette("intData_examples", package = "AIDA")
+```
+
+For examples on the IMCD estimator and outlier detection based on the
+robust squared Interval-Mahalanobis distance, see:
+
+``` r
+vignette("IMCD_examples", package = "AIDA")
+```
+
+# Package index
+
+## All functions
+
+- [`Centers()`](https://catarinaploureiro.github.io/AIDA/reference/Centers.md)
+  : Centers Method for intData
+- [`IMCD()`](https://catarinaploureiro.github.io/AIDA/reference/IMCD.md)
+  : Interval-valued data Minimum Covariance Determinant (IMCD)
+  estimation
+- [`IMah_dist()`](https://catarinaploureiro.github.io/AIDA/reference/IMah_dist.md)
+  : Interval-Mahalanobis Distance
+- [`IMah_dist_pairs()`](https://catarinaploureiro.github.io/AIDA/reference/IMah_dist_pairs.md)
+  : Interval-Mahalanobis distance for all pairs
+- [`KL_divergence()`](https://catarinaploureiro.github.io/AIDA/reference/KL_divergence.md)
+  : Kullback-Leibler (KL) Divergence
+- [`LatentCase()`](https://catarinaploureiro.github.io/AIDA/reference/LatentCase.md)
+  : Latent Case Method for intData
+- [`LatentDist()`](https://catarinaploureiro.github.io/AIDA/reference/LatentDist.md)
+  : Latent Distribution Method for intData
+- [`LatentParam()`](https://catarinaploureiro.github.io/AIDA/reference/LatentParam.md)
+  : Latent Parameters Method for intData
+- [`LogRanges()`](https://catarinaploureiro.github.io/AIDA/reference/LogRanges.md)
+  : LogRanges Method for intData
+- [`LowerBounds()`](https://catarinaploureiro.github.io/AIDA/reference/LowerBounds.md)
+  : Lower Bounds Method for intData
+- [`Mallows_dist()`](https://catarinaploureiro.github.io/AIDA/reference/Mallows_dist.md)
+  : Mallows Distance
+- [`NbMicroUnits()`](https://catarinaploureiro.github.io/AIDA/reference/NbMicroUnits.md)
+  : Number of Micro Units Method for intData
+- [`Ranges()`](https://catarinaploureiro.github.io/AIDA/reference/Ranges.md)
+  : Ranges Method for intData
+- [`` `[`( ``*`<intData>`*`)`](https://catarinaploureiro.github.io/AIDA/reference/S4-Extract-methods.md)
+  : Subset an intData Object
+- [`SYMB.biplot()`](https://catarinaploureiro.github.io/AIDA/reference/SYMB.biplot.md)
+  : Symbolic Biplot for Interval-valued Data
+- [`SYMB.pairs.panels()`](https://catarinaploureiro.github.io/AIDA/reference/SYMB.pairs.panels.md)
+  : Pairs-plot for Interval-valued Symbolic data.
+- [`UpperBounds()`](https://catarinaploureiro.github.io/AIDA/reference/UpperBounds.md)
+  : Upper Bounds Method for intData
+- [`angle_error()`](https://catarinaploureiro.github.io/AIDA/reference/angle_error.md)
+  : Angle Error
+- [`colnames(`*`<intData>`*`)`](https://catarinaploureiro.github.io/AIDA/reference/colnames.md)
+  : Column Names Method for intData
+- [`` `==`( ``*`<intData>`*`,`*`<intData>`*`)`](https://catarinaploureiro.github.io/AIDA/reference/comparison-methods.md)
+  [`` `!=`( ``*`<intData>`*`,`*`<intData>`*`)`](https://catarinaploureiro.github.io/AIDA/reference/comparison-methods.md)
+  : Equality Comparison for intData Objects
+- [`creditcard`](https://catarinaploureiro.github.io/AIDA/reference/creditcard.md)
+  : Credit Card Dataset
+- [`dim(`*`<intData>`*`)`](https://catarinaploureiro.github.io/AIDA/reference/dim.md)
+  : Dimensions Method for intData
+- [`entrecampos_air_quality`](https://catarinaploureiro.github.io/AIDA/reference/entrecampos_air_quality.md)
+  : Entrecampos Air Quality Dataset
+- [`farness()`](https://catarinaploureiro.github.io/AIDA/reference/farness.md)
+  : Farness Estimation
+- [`frobenius_error()`](https://catarinaploureiro.github.io/AIDA/reference/frobenius_error.md)
+  : Relative Frobenius Error
+- [`get_latent_param()`](https://catarinaploureiro.github.io/AIDA/reference/get_latent_param.md)
+  : Compute Latent Variables Parameters
+- [`get_latent_var()`](https://catarinaploureiro.github.io/AIDA/reference/get_latent_var.md)
+  : Compute Latent Variables
+- [`head(`*`<intData>`*`)`](https://catarinaploureiro.github.io/AIDA/reference/head.md)
+  : Head Method for intData
+- [`intCars`](https://catarinaploureiro.github.io/AIDA/reference/intCars.md)
+  : Cars Dataset
+- [`intData-class`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+  : Interval Data Class
+- [`intData()`](https://catarinaploureiro.github.io/AIDA/reference/intData.md)
+  : Interval Data Constructor
+- [`int_cov()`](https://catarinaploureiro.github.io/AIDA/reference/int_cov.md)
+  : Interval-valued Covariance
+- [`int_cov_z()`](https://catarinaploureiro.github.io/AIDA/reference/int_cov_z.md)
+  : Sample Interval-valued Covariance
+- [`int_mean_z()`](https://catarinaploureiro.github.io/AIDA/reference/int_mean_z.md)
+  : Sample Mean
+- [`int_outliers()`](https://catarinaploureiro.github.io/AIDA/reference/int_outliers.md)
+  : Outlier Detection for Interval-Valued Data Based on Robust Distances
+- [`micro2intData()`](https://catarinaploureiro.github.io/AIDA/reference/micro2intData.md)
+  : Aggregate Microdata into Interval-Valued Data
+- [`names(`*`<intData>`*`)`](https://catarinaploureiro.github.io/AIDA/reference/names.md)
+  : Variable Names Method for intData
+- [`ncol(`*`<intData>`*`)`](https://catarinaploureiro.github.io/AIDA/reference/ncol.md)
+  : Number of Columns Method for intData
+- [`nrow(`*`<intData>`*`)`](https://catarinaploureiro.github.io/AIDA/reference/nrow.md)
+  : Number of Rows Method for intData
+- [`plot(`*`<intData>`*`,`*`<intData>`*`)`](https://catarinaploureiro.github.io/AIDA/reference/plot.md)
+  [`plot(`*`<intData>`*`,`*`<missing>`*`)`](https://catarinaploureiro.github.io/AIDA/reference/plot.md)
+  : Plot Method for Two intData Objects
+- [`plot_dist_dist()`](https://catarinaploureiro.github.io/AIDA/reference/plot_dist_dist.md)
+  : Distance-Distance plot for interval-valued data.
+- [`plot_interval_dist()`](https://catarinaploureiro.github.io/AIDA/reference/plot_interval_dist.md)
+  : Interval-Mahalanobis distance plot for interval-valued data.
+- [`print(`*`<summaryintData>`*`)`](https://catarinaploureiro.github.io/AIDA/reference/print.md)
+  : Print Method for Summary intData
+- [`row.names(`*`<intData>`*`)`](https://catarinaploureiro.github.io/AIDA/reference/row.names.md)
+  : Row.Names Method for intData
+- [`rownames(`*`<intData>`*`)`](https://catarinaploureiro.github.io/AIDA/reference/rownames.md)
+  : Row Names Method for intData
+- [`show(`*`<intData>`*`)`](https://catarinaploureiro.github.io/AIDA/reference/show.md)
+  [`show(`*`<summaryintData>`*`)`](https://catarinaploureiro.github.io/AIDA/reference/show.md)
+  : Show Method for intData
+- [`spotify_tracks`](https://catarinaploureiro.github.io/AIDA/reference/spotify_tracks.md)
+  : Spotify Tracks Dataset
+- [`summary(`*`<intData>`*`)`](https://catarinaploureiro.github.io/AIDA/reference/summary.md)
+  : Summary Method for intData
+- [`summaryintData-class`](https://catarinaploureiro.github.io/AIDA/reference/summaryintData-class.md)
+  : Summary Interval Data Class
+- [`tail(`*`<intData>`*`)`](https://catarinaploureiro.github.io/AIDA/reference/tail.md)
+  : Tail Method for intData
+
+# Articles
+
+### All vignettes
+
+- [IMCD estimator
+  examples](https://catarinaploureiro.github.io/AIDA/articles/IMCD_examples.md):
+- [Class \`intData\`
+  examples](https://catarinaploureiro.github.io/AIDA/articles/intData_examples.md):
