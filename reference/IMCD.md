@@ -110,9 +110,15 @@ A list containing the robustly estimated parameters:
 
 ## References
 
+Loureiro, C. P., Oliveira, M. R., Brito, P., & Oliveira, L. (2026).
+Minimum Covariance Determinant Estimator and Outlier Detection for
+Interval-valued Data. arXiv preprint arXiv:2604.26769.
+<https://arxiv.org/abs/2604.26769>
+
 Adapted from <https://github.com/frankp-0/fastMCD>.
 
-`cutoff=="F-dist"` adapted from package `CerioliOutlierDetection`
+The case `cutoff=="F-dist"` is adapted from package
+`CerioliOutlierDetection`
 (<https://cran.r-project.org/package=CerioliOutlierDetection>).
 
 ## Examples

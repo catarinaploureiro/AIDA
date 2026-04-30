@@ -11,7 +11,7 @@ involving interval-valued data.
 AIDA currently includes functionality for:
 
 - Construction of interval-valued datasets
-- Interval-valued covariance estimation
+- Interval-valued covariance estimation based on Mallows’ distance
 - Interval Minimum Covariance Determinant (IMCD) estimator
 - Robust squared Interval-Mahalanobis distance
 - Outlier detection based on robust distances
@@ -22,6 +22,7 @@ AIDA currently includes functionality for:
 You can install the development version from GitHub:
 
 ``` r
+
 # install.packages("remotes")
 remotes::install_github("catarinaploureiro/AIDA")
 ```
@@ -29,6 +30,7 @@ remotes::install_github("catarinaploureiro/AIDA")
 ## Minimal Example
 
 ``` r
+
 library(AIDA)
 
 # Create an intData object from the iris dataset, using the Species column as 
@@ -66,18 +68,32 @@ SYMB.pairs.panels(iris_int, corr = iris_corr, labels = colnames(iris_int))
 
 ## Vignettes
 
-For a full introduction about the `intData` class, see:
+For a full introduction about the `intData` class (Oliveira, Pinheiro,
+and Oliveira (2025)), see:
 
 ``` r
+
 vignette("intData_examples", package = "AIDA")
 ```
 
 For examples on the IMCD estimator and outlier detection based on the
-robust squared Interval-Mahalanobis distance, see:
+robust squared Interval-Mahalanobis distance (Loureiro et al. (2026)),
+see:
 
 ``` r
+
 vignette("IMCD_examples", package = "AIDA")
 ```
+
+## References
+
+Loureiro, Catarina P., M. Rosário Oliveira, Paula Brito, and Lina
+Oliveira. 2026. “Minimum Covariance Determinant Estimator and Outlier
+Detection for Interval-valued Data.” <https://arxiv.org/abs/2604.26769>.
+
+Oliveira, M. Rosário, Diogo Pinheiro, and Lina Oliveira. 2025. “Location
+and association measures for interval data based on Mallows’ distance.”
+<https://arxiv.org/abs/2407.05105>.
 
 # Package index
 

@@ -78,12 +78,11 @@ Loureiro</h4>
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/catarinaploureiro/AIDA" class="external-link">AIDA</a></span><span class="op">)</span></span></code></pre></div>
-<p>This vignette reproduces the examples presented in the paper “Minimum
-Covariance Determinant Estimator and Outlier Detection for
-Interval-valued Data”. The real-life examples included here are the <a href="#cars"><em>Cars</em></a> and <a href="#spotify"><em>Spotify
-Tracks</em></a> datasets, which are discussed in Sections 6.1 and 6.2 of
-the paper, respectively. The datasets are available in the package and
-can be loaded using <code>data("intCars")</code> and
+<p>This vignette reproduces the examples presented in <span class="citation">Loureiro et al. (<a href="#ref-loureiro2026">2026</a>)</span>. The real-life examples
+included here are the <a href="#cars"><em>Cars</em></a> and <a href="#spotify"><em>Spotify Tracks</em></a> datasets, which are
+discussed in Sections 6.1 and 6.2 of the paper, respectively. The
+datasets are available in the package and can be loaded using
+<code>data("intCars")</code> and
 <code>data("spotify_tracks")</code>.</p>
 <p>The <code>intData</code> class is used to create objects that
 represent interval-valued data. The <code>IMCD</code> function computes
@@ -199,7 +198,7 @@ observations. It is composed of 11 audio features:</p>
 <em>loudness</em> and <em>tempo</em>, <em>duration_ms</em> in
 milliseconds was converted to <em>duration</em> in minutes, and
 <em>popularity</em> was scaled to the range
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="true" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">[0,1]</annotation></semantics></math>.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">[0,1]</annotation></semantics></math>.
 The latent variables’ parameters are estimated from the microdata, using
 Kernel Density Estimation (KDE) (package <code>kde1d</code>). Here, we
 will use the data aggregated into trimmed intervals, taking as lower and
@@ -292,14 +291,18 @@ adjusted boxplot cutoff.</p>
 <div class="section level2 unnumbered">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
-<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-MAINT.Data" class="csl-entry">
 Duarte Silva, Pedro, and Paula Brito. 2025. <em><span class="nocase">MAINT.Data: Model and Analyse Interval Data</span></em>.
 <a href="https://doi.org/10.32614/CRAN.package.MAINT.Data" class="external-link">https://doi.org/10.32614/CRAN.package.MAINT.Data</a>.
 </div>
+<div id="ref-loureiro2026" class="csl-entry">
+Loureiro, Catarina P., M. Rosário Oliveira, Paula Brito, and Lina
+Oliveira. 2026. <em><span class="nocase">Minimum Covariance Determinant
+Estimator and Outlier Detection for Interval-valued Data</span></em>. <a href="https://arxiv.org/abs/2604.26769" class="external-link">https://arxiv.org/abs/2604.26769</a>.
+</div>
 <div id="ref-kaggle.spotify2022" class="csl-entry">
-Pandya, Maharshi. 2022. <span>“<span>Spotify Tracks
-Dataset</span>.”</span> <a href="https://doi.org/10.34740/KAGGLE/DSV/4372070" class="external-link">https://doi.org/10.34740/KAGGLE/DSV/4372070</a>.
+Pandya, Maharshi. 2022. <em><span>Spotify Tracks Dataset</span></em>. <a href="https://doi.org/10.34740/KAGGLE/DSV/4372070" class="external-link">https://doi.org/10.34740/KAGGLE/DSV/4372070</a>.
 </div>
 </div>
 </div>

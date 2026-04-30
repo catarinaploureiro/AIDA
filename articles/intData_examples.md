@@ -1,6 +1,7 @@
 # Class \`intData\` examples
 
 ``` r
+
 library(AIDA)
 ```
 
@@ -16,8 +17,8 @@ functionalities of the `intData` class and how to work with
 interval-valued data in R.
 
 For more details on the interval-valued data framework implemented in
-the package, please refer to Oliveira, Pinheiro, and Oliveira
-([2024](#ref-oliveira2024)).
+the package, please refer to Oliveira et al.
+([2025](#ref-oliveira2025)).
 
 ## Credit Card Dataset
 
@@ -25,7 +26,7 @@ This dataset contains interval data of credit card expenses (Billard and
 Diday ([2006](#ref-billard_diday_2006))), including min-max values,
 centers and ranges, centers and logranges, and microdata. The
 aggregation of the microdata was done by person-month, resulting in
-$n = 36$ observations. It is composed of $5$ variables:
+$`n=36`$ observations. It is composed of $`5`$ variables:
 
 - *Food*
 - *Social*
@@ -35,19 +36,20 @@ $n = 36$ observations. It is composed of $5$ variables:
 
 The `creditcard` dataset includes the following components:
 
-- `microdata`: A data frame with $1000$ rows and $7$ columns. It
+- `microdata`: A data frame with $`1000`$ rows and $`7`$ columns. It
   contains the microdata, with individual measurements of each variable
   for all observations.
-- `min_max`: A data frame with $36$ rows and $10$ columns. Each row
+- `min_max`: A data frame with $`36`$ rows and $`10`$ columns. Each row
   corresponds to a different interval observation, and each column gives
   the minimum and maximum values for each variable.
-- `centers_ranges`: A data frame with $36$ rows and $10$ columns. Each
-  row corresponds to the centers and ranges of the interval data.
-- `centers_logranges`: A data frame with $36$ rows and $10$ columns.
+- `centers_ranges`: A data frame with $`36`$ rows and $`10`$ columns.
+  Each row corresponds to the centers and ranges of the interval data.
+- `centers_logranges`: A data frame with $`36`$ rows and $`10`$ columns.
   Each row corresponds to the centers and logranges of the interval
   data.
 
 ``` r
+
 data(creditcard)
 CreditCard_microdata <- creditcard$microdata
 CreditCard_min_max <- creditcard$min_max
@@ -59,10 +61,11 @@ depending on the assumptions about the latent distribution of the
 microdata. In this example, we will create an `intData` object using the
 `min_max` component of the dataset, assuming a continuous uniform
 distribution for the latent variables, which corresponds to the
-symmetric and i.d. case with $\delta = 1/12$. This is the default
+symmetric and i.d. case with $`\delta = 1/12`$. This is the default
 setting for the `intData` class.
 
 ``` r
+
 credit_card_int_unif <- intData(CreditCard_min_max, Seq = "LbUb_VarbyVar", 
                                 VarNames = colnames(CreditCard_microdata)[3:7])
 
@@ -75,15 +78,15 @@ credit_card_int_unif@LatentParam
 Since the microdata are available, we can take a closer look at the
 distribution of the latent variables. The `get_latent_var` function can
 be used to obtain the latent variables observed values, by standardizing
-the microdata into the $\lbrack - 1,1\rbrack$ interval. In this example,
-we will use the `min_max` component of the dataset to standardize the
-microdata. The aggregation criterion is by month and name, so we will
-create a new variable that combines the name and month to use as the
-grouping variable for the standardization process. We can then visualize
-the distribution of the latent variables using histograms and density
-plots.
+the microdata into the $`[-1,1]`$ interval. In this example, we will use
+the `min_max` component of the dataset to standardize the microdata. The
+aggregation criterion is by month and name, so we will create a new
+variable that combines the name and month to use as the grouping
+variable for the standardization process. We can then visualize the
+distribution of the latent variables using histograms and density plots.
 
 ``` r
+
 credit_agrby <- factor(paste(CreditCard_microdata$Name,CreditCard_microdata$Month, sep = "_"))
 credit_card_U <- get_latent_var(CreditCard_microdata[,3:7], CreditCard_min_max, credit_agrby,
                                 rownames(CreditCard_min_max), Seq = "LbUb_VarbyVar")
@@ -104,6 +107,7 @@ can create an `intData` object using the `min_max` component of the
 dataset, specifying the latent distribution as “Triang”.
 
 ``` r
+
 credit_card_int_triang <- intData(CreditCard_min_max, Seq = "LbUb_VarbyVar", LatentDist = "Triang", 
                                     VarNames = colnames(CreditCard_microdata)[3:7])
 
@@ -129,6 +133,7 @@ respectively, while the lower and upper bounds can be obtained using the
 `LowerBounds` and `UpperBounds` functions.
 
 ``` r
+
 credit_card_int_triang@Centers[1:5,]
 #>     Food.Centers Social.Centers Travel.Centers Gas.Centers Clothes.Centers
 #> 1_1       25.095         14.300        198.780      18.715          49.050
@@ -170,6 +175,7 @@ necessary to specify the `Umicro` argument, which contains the
 standardized microdata values.
 
 ``` r
+
 credit_card_int_KDE <- intData(CreditCard_CR, Seq = "LbUb_VarbyVar", 
                                 VarNames = colnames(CreditCard_microdata)[3:7], 
                                 LatentCase = "General", LatentDist = "KDE", Umicro = credit_card_U)
@@ -206,6 +212,7 @@ uniform (i.d. and symmetric), which is the default setting for the
 as seen in the previous examples.
 
 ``` r
+
 credit_card_int_agr <- micro2intData(CreditCard_microdata[,3:7], credit_agrby, LatentCase = "General")
 
 # Check the parameters of the latent distribution
@@ -241,6 +248,7 @@ compute the symbolic covariance and correlation matrices of the interval
 data using the `int_cov` function.
 
 ``` r
+
 credit_card_cov <- int_cov(credit_card_int_agr)
 credit_card_cor <- cov2cor(credit_card_cov)
 
@@ -261,6 +269,7 @@ variables, while the upper triangular shows the interval correlation
 matrix.
 
 ``` r
+
 SYMB.pairs.panels(credit_card_int_agr, type = "rectangles", 
                     corr = credit_card_cor, labels = colnames(credit_card_int_agr))
 ```
@@ -273,6 +282,6 @@ Billard, Lynne, and Edwin Diday. 2006. *Symbolic Data Analysis:
 Conceptual Statistics and Data Mining*. John Wiley & Sons.
 <https://doi.org/10.1002/9780470090183>.
 
-Oliveira, M. Rosário, Diogo Pinheiro, and Lina Oliveira. 2024. “Location
-and association measures for interval data based on Mallows’ distance.”
+Oliveira, M. Rosário, Diogo Pinheiro, and Lina Oliveira. 2025. *Location
+and association measures for interval data based on Mallows’ distance*.
 <https://arxiv.org/abs/2407.05105>.

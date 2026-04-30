@@ -109,6 +109,13 @@ defined according to the `LatentCase`:
 
   - \\\boldsymbol{\Psi}=\text{Diag}(\mathbb{E}(U_1),\dots,\mathbb{E}(U_p))\\
 
+## References
+
+Oliveira, M. R., Pinheiro, D., & Oliveira, L. (2025). Location and
+association measures for interval-valued data based on Mallows'
+distance. arXiv preprint arXiv:2407.05105.
+<https://arxiv.org/abs/2407.05105>
+
 ## Examples
 
 ``` r

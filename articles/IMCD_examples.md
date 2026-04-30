@@ -1,13 +1,13 @@
 # IMCD estimator examples
 
 ``` r
+
 library(AIDA)
 ```
 
-This vignette reproduces the examples presented in the paper “Minimum
-Covariance Determinant Estimator and Outlier Detection for
-Interval-valued Data”. The real-life examples included here are the
-[*Cars*](#cars) and [*Spotify Tracks*](#spotify) datasets, which are
+This vignette reproduces the examples presented in Loureiro et al.
+([2026](#ref-loureiro2026)). The real-life examples included here are
+the [*Cars*](#cars) and [*Spotify Tracks*](#spotify) datasets, which are
 discussed in Sections 6.1 and 6.2 of the paper, respectively. The
 datasets are available in the package and can be loaded using
 `data("intCars")` and `data("spotify_tracks")`.
@@ -32,7 +32,7 @@ examples*](https://catarinaploureiro.github.io/AIDA/articles/intData_examples.md
 This dataset contains interval data of car specifications (Duarte Silva
 and Brito ([2025](#ref-MAINT.Data))), including min-max values. The
 aggregation of the microdata was done by car model, resulting in
-$n = 27$ observations. It is composed of $5$ variables:
+$`n=27`$ observations. It is composed of $`5`$ variables:
 
 - Engine Capacity (*EngCap*)
 - *Top Speed*
@@ -43,9 +43,10 @@ $n = 27$ observations. It is composed of $5$ variables:
 As no microdata are available, and following the standard assumption in
 the literature, we adopt a continuous uniform distribution for the
 latent variables, corresponding to the symmetric and i.d. case with
-$\delta = 1/12$. This is the default setting for the `intData` class.
+$`\delta = 1/12`$. This is the default setting for the `intData` class.
 
 ``` r
+
 data(intCars)
 cars_microdata <- intCars$microdata
 cars_int <- intCars$intData
@@ -54,12 +55,13 @@ cars_int <- intCars$intData
 The `IMCD` function is used to compute the reweighted IMCD estimates and
 the robust squared Interval-Mahalanobis distances of each observation
 from the estimated barycenter. The subset size is set to
-$\lfloor 0.75 \times 27\rfloor = 20$, and the reweighting cutoff to
-“farness” with a cutoff level of $0.9$. The `int_outliers` function
+$`\lfloor 0.75\times 27\rfloor=20`$, and the reweighting cutoff to
+“farness” with a cutoff level of $`0.9`$. The `int_outliers` function
 identifies potential outliers based on the robust distances obtained
 from the IMCD estimates, using the same cutoff criteria.
 
 ``` r
+
 cars_IMCD <- IMCD(cars_int, m = floor(0.75*cars_int@NObs), cutoff = "farness", cutoff_lvl = 0.9)
 cars_outliers <- int_outliers(cars_IMCD$robust_dist, cutoff = "farness", cutoff_lvl = 0.9)
 cars_outliers$outliers_names
@@ -72,6 +74,7 @@ variables, with the outlying observations highlighted in red, while the
 upper triangular shows the interval correlation matrix.
 
 ``` r
+
 cars_outliers_colors <- rep('gray50', cars_int@NObs)
 names(cars_outliers_colors) <- rownames(cars_int)
 cars_outliers_colors[cars_outliers$outliers_names] <- 'red'
@@ -90,6 +93,7 @@ farness cutoff value and the 1.5 adjusted boxplot cutoff value,
 respectively, with the outliers marked in red.
 
 ``` r
+
 # Classical distances and outliers
 cars_class_dist <- IMah_dist(cars_int, z = rep(1,cars_int@NObs))
 cars_class_outliers <- int_outliers(cars_class_dist, cutoff = "adjbox", cutoff_lvl = 1.5)
@@ -112,7 +116,7 @@ plot_dist_dist(cars_class_dist, cars_class_outliers$cutoff_value[[2]], class_cut
 This dataset contains interval data of Spotify tracks’ audio features
 (Pandya ([2022](#ref-kaggle.spotify2022))), including min-max values and
 trimmed intervals, as well as the microdata. The aggregation of the
-microdata was done by track genre, resulting in $n = 111$ observations.
+microdata was done by track genre, resulting in $`n=111`$ observations.
 It is composed of 11 audio features:
 
 - *duration*
@@ -130,24 +134,25 @@ It is composed of 11 audio features:
 Prior to aggregation, logarithmic transformations were applied to
 *loudness* and *tempo*, *duration_ms* in milliseconds was converted to
 *duration* in minutes, and *popularity* was scaled to the range
-$\lbrack 0,1\rbrack$. The latent variables’ parameters are estimated
-from the microdata, using Kernel Density Estimation (KDE) (package
-`kde1d`). Here, we will use the data aggregated into trimmed intervals,
-taking as lower and upper bounds the $1\%$ and $99\%$ quantiles,
-respectively.
+$`[0,1]`$. The latent variables’ parameters are estimated from the
+microdata, using Kernel Density Estimation (KDE) (package `kde1d`).
+Here, we will use the data aggregated into trimmed intervals, taking as
+lower and upper bounds the $`1\%`$ and $`99\%`$ quantiles, respectively.
 
 ``` r
+
 data(spotify_tracks)
 spotify_int <- spotify_tracks$intData_trimmed
 ```
 
 The IMCD estimates are computed using the `IMCD` function with a subset
-size of $\lfloor 0.75 \times 111\rfloor = 83$, and a reweighting cutoff
-based on “farness” with a cutoff level of $0.95$. The `int_outliers`
+size of $`\lfloor 0.75\times 111\rfloor=83`$, and a reweighting cutoff
+based on “farness” with a cutoff level of $`0.95`$. The `int_outliers`
 function applies the outlier detection rule using a “farness” cutoff of
-$0.95$ to identify strong outliers and $0.9$ for mild outliers.
+$`0.95`$ to identify strong outliers and $`0.9`$ for mild outliers.
 
 ``` r
+
 spotify_IMCD <- IMCD(spotify_int, m = round(0.75*nrow(spotify_int)), 
                       cutoff = "farness", cutoff_lvl = 0.95)
 
@@ -165,6 +170,7 @@ spotify_outliers_2$outliers_names[!spotify_outliers_2$outliers_names%in%spotify_
 Interval correlation matrix plot based on the IMCD estimates.
 
 ``` r
+
 # Compute correlation matrix from the robust covariance matrix
 spotify_corr <- cov2cor(spotify_IMCD$cov_IMCD)
 
@@ -189,11 +195,12 @@ corrplot::corrplot(
 
 Distance-distance plot of the classical versus robust squared
 Interval-Mahalanobis distances for the Spotify dataset. The horizontal
-lines correspond to the $0.9$ and $0.95$ farness cutoff values, with the
-extreme outliers marked in red and the mild outliers in orange, while
-the vertical line represents the $1.5$ adjusted boxplot cutoff.
+lines correspond to the $`0.9`$ and $`0.95`$ farness cutoff values, with
+the extreme outliers marked in red and the mild outliers in orange,
+while the vertical line represents the $`1.5`$ adjusted boxplot cutoff.
 
 ``` r
+
 # Classical distances and outliers
 spotify_class_dist <- IMah_dist(spotify_int, z = rep(1,spotify_int@NObs))
 spotify_class_outliers <- int_outliers(spotify_class_dist, cutoff = "adjbox")
@@ -224,5 +231,9 @@ Duarte Silva, Pedro, and Paula Brito. 2025. *MAINT.Data: Model and
 Analyse Interval Data*.
 <https://doi.org/10.32614/CRAN.package.MAINT.Data>.
 
-Pandya, Maharshi. 2022. “Spotify Tracks Dataset.”
+Loureiro, Catarina P., M. Rosário Oliveira, Paula Brito, and Lina
+Oliveira. 2026. *Minimum Covariance Determinant Estimator and Outlier
+Detection for Interval-valued Data*. <https://arxiv.org/abs/2604.26769>.
+
+Pandya, Maharshi. 2022. *Spotify Tracks Dataset*.
 <https://doi.org/10.34740/KAGGLE/DSV/4372070>.

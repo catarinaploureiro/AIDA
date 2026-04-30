@@ -11,8 +11,8 @@
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Analysis of Interval DAta">
-<meta name="description" content="Tools for the analysis of interval-valued data, including construction, visualization, and statistical modeling. The package provides the intData class for representing interval-valued data, along with functions to aggregate microdata and to estimate parameters of latent distributions. Barycenter and covariance matrix estimation is implemented based on the Mallows distance (Oliveira et al. (2025) &lt;doi:10.48550/arXiv.2407.05105&gt;). Robust estimation of the symbolic covariance matrix is implemented via the Interval Minimum Covariance Determinant (IMCD) estimator, enabling outlier detection based on the robust squared Interval-Mahalanobis distance, as proposed by Loureiro et al. (2026).">
-<meta property="og:description" content="Tools for the analysis of interval-valued data, including construction, visualization, and statistical modeling. The package provides the intData class for representing interval-valued data, along with functions to aggregate microdata and to estimate parameters of latent distributions. Barycenter and covariance matrix estimation is implemented based on the Mallows distance (Oliveira et al. (2025) &lt;doi:10.48550/arXiv.2407.05105&gt;). Robust estimation of the symbolic covariance matrix is implemented via the Interval Minimum Covariance Determinant (IMCD) estimator, enabling outlier detection based on the robust squared Interval-Mahalanobis distance, as proposed by Loureiro et al. (2026).">
+<meta name="description" content="Tools for the analysis of interval-valued data, including construction, visualization, and statistical modeling. The package provides the intData class for representing interval-valued data, along with functions to aggregate microdata and to estimate parameters of latent distributions. Barycenter and covariance matrix estimation is implemented based on the Mallows distance (Oliveira et al. (2025) &lt;doi:10.48550/arXiv.2407.05105&gt;). Robust estimation of the symbolic covariance matrix is implemented via the Interval Minimum Covariance Determinant (IMCD) estimator, enabling outlier detection based on the robust squared Interval-Mahalanobis distance, as proposed by Loureiro et al. (2026) &lt;doi:10.48550/2604.26769&gt;.">
+<meta property="og:description" content="Tools for the analysis of interval-valued data, including construction, visualization, and statistical modeling. The package provides the intData class for representing interval-valued data, along with functions to aggregate microdata and to estimate parameters of latent distributions. Barycenter and covariance matrix estimation is implemented based on the Mallows distance (Oliveira et al. (2025) &lt;doi:10.48550/arXiv.2407.05105&gt;). Robust estimation of the symbolic covariance matrix is implemented via the Interval Minimum Covariance Determinant (IMCD) estimator, enabling outlier detection based on the robust squared Interval-Mahalanobis distance, as proposed by Loureiro et al. (2026) &lt;doi:10.48550/2604.26769&gt;.">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -73,7 +73,7 @@
 <p>AIDA currently includes functionality for:</p>
 <ul>
 <li>Construction of interval-valued datasets</li>
-<li>Interval-valued covariance estimation</li>
+<li>Interval-valued covariance estimation based on Mallows’ distance</li>
 <li>Interval Minimum Covariance Determinant (IMCD) estimator</li>
 <li>Robust squared Interval-Mahalanobis distance</li>
 <li>Outlier detection based on robust distances</li>
@@ -128,12 +128,24 @@
 <div class="section level2">
 <h2 id="vignettes">Vignettes<a class="anchor" aria-label="anchor" href="#vignettes"></a>
 </h2>
-<p>For a full introduction about the <code>intData</code> class, see:</p>
+<p>For a full introduction about the <code>intData</code> class (Oliveira, Pinheiro, and Oliveira (2025)), see:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/vignette.html" class="external-link">vignette</a></span><span class="op">(</span><span class="st">"intData_examples"</span>, package <span class="op">=</span> <span class="st">"AIDA"</span><span class="op">)</span></span></code></pre></div>
-<p>For examples on the IMCD estimator and outlier detection based on the robust squared Interval-Mahalanobis distance, see:</p>
+<p>For examples on the IMCD estimator and outlier detection based on the robust squared Interval-Mahalanobis distance (Loureiro et al. (2026)), see:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/vignette.html" class="external-link">vignette</a></span><span class="op">(</span><span class="st">"IMCD_examples"</span>, package <span class="op">=</span> <span class="st">"AIDA"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="ref-loureiro2026" class="csl-entry">
+Loureiro, Catarina P., M. Rosário Oliveira, Paula Brito, and Lina Oliveira. 2026. “<span class="nocase">Minimum Covariance Determinant Estimator and Outlier Detection for Interval-valued Data</span>.” <a href="https://arxiv.org/abs/2604.26769" class="external-link uri">https://arxiv.org/abs/2604.26769</a>.
+</div>
+<div id="ref-oliveira2025" class="csl-entry">
+Oliveira, M. Rosário, Diogo Pinheiro, and Lina Oliveira. 2025. “<span class="nocase">Location and association measures for interval data based on Mallows’ distance</span>.” <a href="https://arxiv.org/abs/2407.05105" class="external-link uri">https://arxiv.org/abs/2407.05105</a>.
+</div>
+</div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
@@ -173,6 +185,7 @@
 <li><a href="https://github.com/catarinaploureiro/AIDA/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/catarinaploureiro/AIDA/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href=""><img src="https://img.shields.io/badge/version-0.1.2-blue.svg" alt="Version"></a></li>
 <li><a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT"></a></li>
+<li><a href="https://arxiv.org/abs/2604.26769" class="external-link"><img src="https://img.shields.io/badge/arXiv-2604.26769-b31b1b.svg" alt="arXiv"></a></li>
 </ul>
 </div>
 

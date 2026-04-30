@@ -1,10 +1,10 @@
-pandoc: 3.1.11
+pandoc: 3.8.3
 pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
   IMCD_examples: IMCD_examples.html
   intData_examples: intData_examples.html
-last_built: 2026-04-27T21:38Z
+last_built: 2026-04-30T12:25Z
 urls:
   reference: https://catarinaploureiro.github.io/AIDA/reference
   article: https://catarinaploureiro.github.io/AIDA/articles

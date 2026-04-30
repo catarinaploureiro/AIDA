@@ -59,6 +59,13 @@ The squared Interval-Mahalanobis distance is defined according to the
 
   - \\\bullet\\ denotes the Schur (or entrywise) product of matrices.
 
+## References
+
+Loureiro, C. P., Oliveira, M. R., Brito, P., & Oliveira, L. (2026).
+Minimum Covariance Determinant Estimator and Outlier Detection for
+Interval-valued Data. arXiv preprint arXiv:2604.26769.
+<https://arxiv.org/abs/2604.26769>
+
 ## Examples
 
 ``` r
