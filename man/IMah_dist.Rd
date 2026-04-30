@@ -53,3 +53,8 @@ credit_card_int <- creditcard$intData
 z <- rep(1, nrow(credit_card_int))
 credit_card_dist<-IMah_dist(credit_card_int,z)
 }
+\references{
+Loureiro, C. P., Oliveira, M. R., Brito, P., & Oliveira, L. (2026).
+Minimum Covariance Determinant Estimator and Outlier Detection for Interval-valued Data.
+arXiv preprint arXiv:2604.26769. \url{https://arxiv.org/abs/2604.26769}
+}

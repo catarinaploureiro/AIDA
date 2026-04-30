@@ -76,3 +76,8 @@ credit_card_U<-get_latent_var(CreditCard_microdata[,3:7], CreditCard_min_max, cr
                               agrlevels = row.names(CreditCard_min_max), Seq="LbUb_VarbyVar")
 credit_card_param<-get_latent_param(LatentCase="General",LatentDist="KDE",Umicro=credit_card_U)
 }
+\references{
+Oliveira, M. R., Pinheiro, D., & Oliveira, L. (2025).
+Location and association measures for interval-valued data based on Mallows' distance.
+arXiv preprint arXiv:2407.05105. \url{https://arxiv.org/abs/2407.05105}
+}

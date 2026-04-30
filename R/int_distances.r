@@ -111,6 +111,9 @@ Mallows_dist <- function(data,mean_c=NULL,mean_r=NULL){
 #' 
 #' z <- rep(1, nrow(credit_card_int))
 #' credit_card_dist<-IMah_dist(credit_card_int,z)
+#' @references Loureiro, C. P., Oliveira, M. R., Brito, P., & Oliveira, L. (2026). 
+#' Minimum Covariance Determinant Estimator and Outlier Detection for Interval-valued Data. 
+#' arXiv preprint arXiv:2604.26769. \url{https://arxiv.org/abs/2604.26769}
 IMah_dist <- function(data,z=NULL,mean_c=NULL,mean_r=NULL,cov=NULL){
 
     if (is.null(z) && (is.null(mean_c) || is.null(mean_r) || is.null(cov))) {
@@ -192,6 +195,9 @@ IMah_dist <- function(data,z=NULL,mean_c=NULL,mean_r=NULL,cov=NULL){
 #' credit_card_int <- creditcard$intData
 #' 
 #' credit_card_dist<-IMah_dist_pairs(credit_card_int)
+#' @references Loureiro, C. P., Oliveira, M. R., Brito, P., & Oliveira, L. (2026). 
+#' Minimum Covariance Determinant Estimator and Outlier Detection for Interval-valued Data. 
+#' arXiv preprint arXiv:2604.26769. \url{https://arxiv.org/abs/2604.26769}
 IMah_dist_pairs <- function(data,cov=NULL){
 
     C<-as.matrix(data@Centers)

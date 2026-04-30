@@ -23,7 +23,7 @@ knitr::opts_chunk$set(
 library(AIDA)
 ```
 
-This vignette reproduces the examples presented in the paper "Minimum Covariance Determinant Estimator and Outlier Detection for Interval-valued Data". The real-life examples included here are the [*Cars*](#cars) and [*Spotify Tracks*](#spotify) datasets, which are discussed in Sections 6.1 and 6.2 of the paper, respectively. The datasets are available in the package and can be loaded using `data("intCars")` and `data("spotify_tracks")`.
+This vignette reproduces the examples presented in @loureiro2026. The real-life examples included here are the [*Cars*](#cars) and [*Spotify Tracks*](#spotify) datasets, which are discussed in Sections 6.1 and 6.2 of the paper, respectively. The datasets are available in the package and can be loaded using `data("intCars")` and `data("spotify_tracks")`.
 
 The `intData` class is used to create objects that represent interval-valued data. The `IMCD` function computes the reweighted IMCD estimates, which are robust estimates of location and scatter for interval-valued data. The function allows for different cutoff methods and levels for a one-step reweighting process. The function `int_outliers` identifies potential outliers in interval-valued data using robust distance-based methods with customizable cutoff criteria. The examples provided here demonstrate how to apply these methods to real datasets, and the results can be compared to those presented in the paper for validation.
 

@@ -23,7 +23,7 @@ library(AIDA)
 
 This vignette provides examples of how to use the `intData` class and related functions for handling interval-valued data. The `intData` class is designed to represent interval-valued data. The examples included here demonstrate how to create `intData` objects, compute summary statistics, and visualize interval-valued data using the `SYMB.pairs.panels` function. The dataset used in these examples is the *Credit Card* dataset, which is available in the package and can be loaded using `data("creditcard")`. The examples illustrate the basic functionalities of the `intData` class and how to work with interval-valued data in R.
 
-For more details on the interval-valued data framework implemented in the package, please refer to @oliveira2024.
+For more details on the interval-valued data framework implemented in the package, please refer to @oliveira2025.
 
 ## Credit Card Dataset
 This dataset contains interval data of credit card expenses (@billard_diday_2006), including min-max values, centers and ranges, centers and logranges, and microdata. The aggregation of the microdata was done by person-month, resulting in $n=36$ observations. It is composed of $5$ variables:

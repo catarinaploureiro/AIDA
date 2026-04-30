@@ -42,7 +42,10 @@
 #' 
 #' @importFrom robustbase adjboxStats
 #' @importFrom stats qchisq qf qbeta
-#' @references \code{cutoff=="F-dist"} adapted from package \code{CerioliOutlierDetection} (\url{https://cran.r-project.org/package=CerioliOutlierDetection}).
+#' @references Loureiro, C. P., Oliveira, M. R., Brito, P., & Oliveira, L. (2026). 
+#' Minimum Covariance Determinant Estimator and Outlier Detection for Interval-valued Data. 
+#' arXiv preprint arXiv:2604.26769. \url{https://arxiv.org/abs/2604.26769}
+#' @references Case \code{cutoff=="F-dist"} is adapted from package \code{CerioliOutlierDetection} (\url{https://cran.r-project.org/package=CerioliOutlierDetection}).
 #' @examples
 #' # Example of detecting outliers using robust distances
 #' set.seed(42)

@@ -65,5 +65,9 @@ credit_card_IMCD <- IMCD(credit_card_int, floor(0.75*credit_card_int@NObs), "far
 credit_card_outliers <- int_outliers(credit_card_IMCD$robust_dist, "farness", 0.9)
 }
 \references{
-\code{cutoff=="F-dist"} adapted from package \code{CerioliOutlierDetection} (\url{https://cran.r-project.org/package=CerioliOutlierDetection}).
+Loureiro, C. P., Oliveira, M. R., Brito, P., & Oliveira, L. (2026).
+Minimum Covariance Determinant Estimator and Outlier Detection for Interval-valued Data.
+arXiv preprint arXiv:2604.26769. \url{https://arxiv.org/abs/2604.26769}
+
+Case \code{cutoff=="F-dist"} is adapted from package \code{CerioliOutlierDetection} (\url{https://cran.r-project.org/package=CerioliOutlierDetection}).
 }

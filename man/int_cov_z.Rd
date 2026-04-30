@@ -49,3 +49,12 @@ credit_card_int <- creditcard$intData
 z <- rep(1, nrow(credit_card_int))
 credit_card_cov<-int_cov_z(z,credit_card_int)
 }
+\references{
+Oliveira, M. R., Pinheiro, D., & Oliveira, L. (2025).
+Location and association measures for interval-valued data based on Mallows' distance.
+arXiv preprint arXiv:2407.05105. \url{https://arxiv.org/abs/2407.05105}
+
+Loureiro, C. P., Oliveira, M. R., Brito, P., & Oliveira, L. (2026).
+Minimum Covariance Determinant Estimator and Outlier Detection for Interval-valued Data.
+arXiv preprint arXiv:2604.26769. \url{https://arxiv.org/abs/2604.26769}
+}

@@ -243,8 +243,11 @@ bigIMCD <- function(m, p, n, data){
 #' @importFrom robustbase adjboxStats
 #' @importFrom CerioliOutlierDetection hr05CutoffMvnormal
 #' @importFrom stats qchisq qf
+#' @references Loureiro, C. P., Oliveira, M. R., Brito, P., & Oliveira, L. (2026). 
+#' Minimum Covariance Determinant Estimator and Outlier Detection for Interval-valued Data. 
+#' arXiv preprint arXiv:2604.26769. \url{https://arxiv.org/abs/2604.26769}
 #' @references Adapted from \url{https://github.com/frankp-0/fastMCD}.
-#' @references \code{cutoff=="F-dist"} adapted from package \code{CerioliOutlierDetection} (\url{https://cran.r-project.org/package=CerioliOutlierDetection}).
+#' @references The case \code{cutoff=="F-dist"} is adapted from package \code{CerioliOutlierDetection} (\url{https://cran.r-project.org/package=CerioliOutlierDetection}).
 #' @examples
 #' # Example using creditcard dataset
 #' data(creditcard)

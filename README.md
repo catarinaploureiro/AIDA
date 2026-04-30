@@ -3,10 +3,11 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/catarinaploureiro/AIDA/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/catarinaploureiro/AIDA/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/catarinaploureiro/AIDA/actions/workflows/R-CMD-check/badge.svg)](https://github.com/catarinaploureiro/AIDA/actions/workflows/R-CMD-check.yaml)
 [![Version](https://img.shields.io/badge/version-0.1.2-blue.svg)]()
 [![License:
 MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![arXiv](https://img.shields.io/badge/arXiv-2604.26769-b31b1b.svg)](https://arxiv.org/abs/2604.26769)
 <!-- badges: end -->
 
 ## Overview
@@ -20,7 +21,7 @@ involving interval-valued data.
 AIDA currently includes functionality for:
 
 - Construction of interval-valued datasets
-- Interval-valued covariance estimation
+- Interval-valued covariance estimation based on Mallows’ distance
 - Interval Minimum Covariance Determinant (IMCD) estimator
 - Robust squared Interval-Mahalanobis distance
 - Outlier detection based on robust distances
@@ -75,15 +76,42 @@ SYMB.pairs.panels(iris_int, corr = iris_corr, labels = colnames(iris_int))
 
 ## Vignettes
 
-For a full introduction about the `intData` class, see:
+For a full introduction about the `intData` class (Oliveira, Pinheiro,
+and Oliveira (2025)), see:
 
 ``` r
 vignette("intData_examples", package = "AIDA")
 ```
 
 For examples on the IMCD estimator and outlier detection based on the
-robust squared Interval-Mahalanobis distance, see:
+robust squared Interval-Mahalanobis distance (Loureiro et al. (2026)),
+see:
 
 ``` r
 vignette("IMCD_examples", package = "AIDA")
 ```
+
+## References
+
+<div id="refs" class="references csl-bib-body hanging-indent"
+entry-spacing="0">
+
+<div id="ref-loureiro2026" class="csl-entry">
+
+Loureiro, Catarina P., M. Rosário Oliveira, Paula Brito, and Lina
+Oliveira. 2026. “<span class="nocase">Minimum Covariance Determinant
+Estimator and Outlier Detection for Interval-valued Data</span>.”
+<https://arxiv.org/abs/2604.26769>.
+
+</div>
+
+<div id="ref-oliveira2025" class="csl-entry">
+
+Oliveira, M. Rosário, Diogo Pinheiro, and Lina Oliveira. 2025.
+“<span class="nocase">Location and association measures for interval
+data based on Mallows’ distance</span>.”
+<https://arxiv.org/abs/2407.05105>.
+
+</div>
+
+</div>
