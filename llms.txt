@@ -11,7 +11,7 @@ involving interval-valued data.
 AIDA currently includes functionality for:
 
 - Construction of interval-valued datasets
-- Interval-valued covariance estimation based on Mallows’ distance
+- Interval-valued covariance estimation based on Mallows distance
 - Interval Minimum Covariance Determinant (IMCD) estimator
 - Robust squared Interval-Mahalanobis distance
 - Outlier detection based on robust distances

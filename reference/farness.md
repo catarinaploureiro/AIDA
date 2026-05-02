@@ -31,7 +31,7 @@ distance value in the original distance scale is returned.
 
 J. Raymaekers and P.J. Rousseeuw (2021). Transforming variables to
 central normality. Machine Learning.
-<https://doi.org/10.1007/s10994-021-05960-5>
+[doi:10.1007/s10994-021-05960-5](https://doi.org/10.1007/s10994-021-05960-5)
 
 Based on the `cellWise` package: Raymaekers J, Rousseeuw P (2023).
 *cellWise: Analyzing Data with Cellwise Outliers*. R package version

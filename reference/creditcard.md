@@ -45,7 +45,7 @@ A list with the following components:
 
 This data was retrieved from Billard, L. and Diday, E. (2006). Symbolic
 Data Analysis: Conceptual Statistics and Data Mining. John Wiley & Sons.
-<http://dx.doi.org/10.1002/9780470090183>.
+[doi:10.1002/9780470090183](https://doi.org/10.1002/9780470090183) .
 
 ## Examples
 

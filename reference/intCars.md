@@ -32,7 +32,7 @@ A list with the following components:
 ## References
 
 This data was retrieved from the `MAINT.Data` package, available at
-<https://cran.r-project.org/web/packages/MAINT.Data/index.html>.
+<https://cran.r-project.org/package=MAINT.Data>.
 
 ## Examples
 

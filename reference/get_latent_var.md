@@ -71,7 +71,7 @@ variables with support on \\\[-1,1\]\\, uncorrelated with \\(C_j,R_j)\\.
 Oliveira, M.R., Azeitona, M., Pacheco, A., Valadas, R.. Association
 measures for interval variables. Advances in Data Analysis and
 Classification 16, 491–520 (2022).
-<https://doi.org/10.1007/s11634-021-00445-8>
+[doi:10.1007/s11634-021-00445-8](https://doi.org/10.1007/s11634-021-00445-8)
 
 ## Examples
 
