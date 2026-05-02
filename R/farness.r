@@ -7,7 +7,7 @@
 #' @return  Farness of each observation. Values between 0 and 1. If \code{cutoff_value} is provided, a list with the farness probabilities and the cutoff distance value in the original distance scale is returned.
 #' @importFrom cellWise transfo transfo_transformback
 #' @importFrom stats mad pnorm qnorm sd median
-#' @references J. Raymaekers and P.J. Rousseeuw (2021). Transforming variables to central normality. Machine Learning. \url{https://doi.org/10.1007/s10994-021-05960-5}
+#' @references J. Raymaekers and P.J. Rousseeuw (2021). Transforming variables to central normality. Machine Learning. \doi{10.1007/s10994-021-05960-5}
 #' @references Based on the \code{cellWise} package: Raymaekers J, Rousseeuw P (2023). _cellWise: Analyzing Data with Cellwise Outliers_. R package version 2.5.3, \url{https://CRAN.R-project.org/package=cellWise}.
 #' @export
 #' @examples

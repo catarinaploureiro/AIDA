@@ -51,5 +51,5 @@ credit_card_U<-get_latent_var(CreditCard_microdata[,3:7], CreditCard_min_max, cr
                               agrlevels = row.names(CreditCard_min_max), Seq="LbUb_VarbyVar")
 }
 \references{
-Oliveira, M.R., Azeitona, M., Pacheco, A., Valadas, R.. Association measures for interval variables. Advances in Data Analysis and Classification 16, 491–520 (2022). \url{https://doi.org/10.1007/s11634-021-00445-8}
+Oliveira, M.R., Azeitona, M., Pacheco, A., Valadas, R.. Association measures for interval variables. Advances in Data Analysis and Classification 16, 491–520 (2022). \doi{10.1007/s11634-021-00445-8}
 }

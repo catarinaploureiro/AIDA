@@ -26,6 +26,6 @@ head(intCars$intData)
 
 }
 \references{
-This data was retrieved from the \code{MAINT.Data} package, available at \url{https://cran.r-project.org/web/packages/MAINT.Data/index.html}.
+This data was retrieved from the \code{MAINT.Data} package, available at \url{https://cran.r-project.org/package=MAINT.Data}.
 }
 \keyword{datasets}

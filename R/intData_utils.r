@@ -21,7 +21,7 @@
 #'   \item \code{"CenRng_VarbyVar"}: Centers followed by Ranges, variable by variable.
 #' }
 #' @return A matrix with the same size as the microdata.
-#' @references Oliveira, M.R., Azeitona, M., Pacheco, A., Valadas, R.. Association measures for interval variables. Advances in Data Analysis and Classification 16, 491–520 (2022). \url{https://doi.org/10.1007/s11634-021-00445-8}
+#' @references Oliveira, M.R., Azeitona, M., Pacheco, A., Valadas, R.. Association measures for interval variables. Advances in Data Analysis and Classification 16, 491–520 (2022). \doi{10.1007/s11634-021-00445-8}
 #' @export
 #' @examples
 #' data(creditcard)

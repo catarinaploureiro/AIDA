@@ -29,6 +29,6 @@ head(creditcard$intData)
 }
 \references{
 This data was retrieved from Billard, L. and Diday, E. (2006). Symbolic Data Analysis: Conceptual Statistics and Data Mining.
-John Wiley & Sons. \url{http://dx.doi.org/10.1002/9780470090183}.
+John Wiley & Sons. \doi{10.1002/9780470090183}.
 }
 \keyword{datasets}

@@ -40,7 +40,7 @@
 #' @usage data(creditcard)
 #' 
 #' @references This data was retrieved from Billard, L. and Diday, E. (2006). Symbolic Data Analysis: Conceptual Statistics and Data Mining. 
-#' John Wiley & Sons. \url{http://dx.doi.org/10.1002/9780470090183}.
+#' John Wiley & Sons. \doi{10.1002/9780470090183}.
 #' 
 #' @format A list with the following components:
 #' \describe{
@@ -99,7 +99,7 @@
 #' @name intCars
 #' @usage data(intCars)
 #' 
-#' @references This data was retrieved from the \code{MAINT.Data} package, available at \url{https://cran.r-project.org/web/packages/MAINT.Data/index.html}.
+#' @references This data was retrieved from the \code{MAINT.Data} package, available at \url{https://cran.r-project.org/package=MAINT.Data}.
 #' 
 #' @format A list with the following components:
 #' \describe{

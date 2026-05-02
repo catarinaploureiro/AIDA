@@ -28,7 +28,7 @@ credit_card_dist<-IMah_dist(credit_card_int,z)
 credit_card_farness <- farness(credit_card_dist, 0.9)
 }
 \references{
-J. Raymaekers and P.J. Rousseeuw (2021). Transforming variables to central normality. Machine Learning. \url{https://doi.org/10.1007/s10994-021-05960-5}
+J. Raymaekers and P.J. Rousseeuw (2021). Transforming variables to central normality. Machine Learning. \doi{10.1007/s10994-021-05960-5}
 
 Based on the \code{cellWise} package: Raymaekers J, Rousseeuw P (2023). \emph{cellWise: Analyzing Data with Cellwise Outliers}. R package version 2.5.3, \url{https://CRAN.R-project.org/package=cellWise}.
 }

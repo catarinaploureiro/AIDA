@@ -1,17 +1,12 @@
-citHeader("To cite AIDA in publications use:")
+citHeader("To cite AIDA in publications, please use:")
 
-ver <- as.character(packageVersion("AIDA"))
-
-citEntry(
-  entry = "Manual",
+bibentry(
+  bibtype = "Manual",
   title = "AIDA: Analysis of Interval DAta",
-  author = personList(
-    person("Catarina", family = "P. Loureiro")
+  author = c(
+    person("Catarina", "P.", "Loureiro", role = c("aut", "cre"))
   ),
   year = "2026",
-  note = paste("R package version", ver),
-  textVersion = paste(
-    "Catarina P. Loureiro (2026). AIDA: Analysis of Interval DAta. R package version",
-    ver
-  )
+  note = "R package version 0.1.2",
+  textVersion = "Loureiro C. P. (2026). AIDA: Analysis of Interval DAta. R package version 0.1.2."
 )

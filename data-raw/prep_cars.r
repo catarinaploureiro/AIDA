@@ -1,7 +1,7 @@
 ###
 #----Cars----
 # Data retrieved from the MAINT.Data package. 
-# Available at \url{https://cran.r-project.org/web/packages/MAINT.Data/index.html}.
+# Available at \url{https://cran.r-project.org/package=MAINT.Data}.
 # This script generates the dataset `cars.rda`.
 ###
 
