@@ -16,3 +16,7 @@
 
 - First CRAN submission.
 - Minor fixes for CRAN compliance.
+
+### AIDA 0.1.4
+
+- Compress included datasets to reduce package size.

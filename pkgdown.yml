@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   IMCD_examples: IMCD_examples.html
   intData_examples: intData_examples.html
-last_built: 2026-05-03T23:03Z
+last_built: 2026-05-03T23:17Z
 urls:
   reference: https://catarinaploureiro.github.io/AIDA/reference
   article: https://catarinaploureiro.github.io/AIDA/articles
