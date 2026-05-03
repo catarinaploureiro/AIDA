@@ -19,4 +19,4 @@ intCars <- list(
   intData = cars_int
 )
 
-usethis::use_data(intCars, overwrite = TRUE)
+usethis::use_data(intCars, overwrite = TRUE, compress = "xz")

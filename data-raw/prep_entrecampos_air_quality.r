@@ -108,4 +108,4 @@ entrecampos_air_quality <- list(
 )
 
 #save(entrecampos_air_quality, file = "./data/entrecampos_air_quality.rda")
-usethis::use_data(entrecampos_air_quality, overwrite = TRUE)
+usethis::use_data(entrecampos_air_quality, overwrite = TRUE, compress = "xz")

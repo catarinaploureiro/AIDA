@@ -165,4 +165,4 @@ spotify_tracks <- list(
 )
 
 ##### Save the processed data
-usethis::use_data(spotify_tracks, overwrite = TRUE)
+usethis::use_data(spotify_tracks, overwrite = TRUE, compress = "xz")
