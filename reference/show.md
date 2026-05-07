@@ -21,3 +21,8 @@ show(object)
 - object:
 
   An object of class `summaryintData`.
+
+## Value
+
+The object itself, returned invisibly. Called for its side effects
+(printing).

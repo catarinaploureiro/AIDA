@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">AIDA</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -70,7 +70,7 @@
 Loureiro</h4>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/catarinaploureiro/AIDA/blob/v0.1.4/vignettes/intData_examples.Rmd" class="external-link"><code>vignettes/intData_examples.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/catarinaploureiro/AIDA/blob/v0.1.5/vignettes/intData_examples.Rmd" class="external-link"><code>vignettes/intData_examples.Rmd</code></a></small>
       <div class="d-none name"><code>intData_examples.Rmd</code></div>
     </div>
 
@@ -178,6 +178,7 @@ latent variables using histograms and density plots.</p>
 <span><span class="va">credit_card_U</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_latent_var.html">get_latent_var</a></span><span class="op">(</span><span class="va">CreditCard_microdata</span><span class="op">[</span>,<span class="fl">3</span><span class="op">:</span><span class="fl">7</span><span class="op">]</span>, <span class="va">CreditCard_min_max</span>, <span class="va">credit_agrby</span>,</span>
 <span>                                <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">CreditCard_min_max</span><span class="op">)</span>, Seq <span class="op">=</span> <span class="st">"LbUb_VarbyVar"</span><span class="op">)</span></span>
 <span></span>
+<span><span class="va">oldpar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>no.readonly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">5</span><span class="op">)</span>, mar<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span><span class="op">{</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">credit_card_U</span><span class="op">[</span>,<span class="va">i</span><span class="op">]</span>, xlab <span class="op">=</span> <span class="cn">NULL</span>, ylab <span class="op">=</span> <span class="cn">NULL</span>, </span>
@@ -185,12 +186,14 @@ latent variables using histograms and density plots.</p>
 <span>    <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html" class="external-link">density</a></span><span class="op">(</span><span class="va">credit_card_U</span><span class="op">[</span>,<span class="va">i</span><span class="op">]</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">'#009de0'</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <p><img src="intData_examples_files/figure-html/unnamed-chunk-4-1.png" class="r-plt" alt="" width="672"></p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">oldpar</span><span class="op">)</span></span></code></pre></div>
 <p>After examining the distribution of the latent variables, we can
 assume the distributions are approximately triangular and symmetric.
 Then, we can create an <code>intData</code> object using the
 <code>min_max</code> component of the dataset, specifying the latent
 distribution as “Triang”.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">credit_card_int_triang</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/intData.html">intData</a></span><span class="op">(</span><span class="va">CreditCard_min_max</span>, Seq <span class="op">=</span> <span class="st">"LbUb_VarbyVar"</span>, LatentDist <span class="op">=</span> <span class="st">"Triang"</span>, </span>
 <span>                                    VarNames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">CreditCard_microdata</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">7</span><span class="op">]</span><span class="op">)</span></span>
 <span></span>
@@ -213,7 +216,7 @@ The centers and ranges can be accessed using the <code>@Centers</code>
 and <code>@Ranges</code> slots, respectively, while the lower and upper
 bounds can be obtained using the <code>LowerBounds</code> and
 <code>UpperBounds</code> functions.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">credit_card_int_triang</span><span class="op">@</span><span class="va">Centers</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="op">]</span></span>
 <span><span class="co">#&gt;     Food.Centers Social.Centers Travel.Centers Gas.Centers Clothes.Centers</span></span>
 <span><span class="co">#&gt; 1_1       25.095         14.300        198.780      18.715          49.050</span></span>
@@ -251,7 +254,7 @@ estimate the parameters directly based on the microdata by setting
 to use a kernel density estimation for the latent distribution. In this
 case, it is necessary to specify the <code>Umicro</code> argument, which
 contains the standardized microdata values.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">credit_card_int_KDE</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/intData.html">intData</a></span><span class="op">(</span><span class="va">CreditCard_CR</span>, Seq <span class="op">=</span> <span class="st">"LbUb_VarbyVar"</span>, </span>
 <span>                                VarNames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">CreditCard_microdata</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">7</span><span class="op">]</span>, </span>
 <span>                                LatentCase <span class="op">=</span> <span class="st">"General"</span>, LatentDist <span class="op">=</span> <span class="st">"KDE"</span>, Umicro <span class="op">=</span> <span class="va">credit_card_U</span><span class="op">)</span></span>
@@ -285,7 +288,7 @@ assumes the latent distribution is uniform (i.d. and symmetric), which
 is the default setting for the <code>intData</code> class. It is also
 possible to specify the latent distribution, as seen in the previous
 examples.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">credit_card_int_agr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/micro2intData.html">micro2intData</a></span><span class="op">(</span><span class="va">CreditCard_microdata</span><span class="op">[</span>,<span class="fl">3</span><span class="op">:</span><span class="fl">7</span><span class="op">]</span>, <span class="va">credit_agrby</span>, LatentCase <span class="op">=</span> <span class="st">"General"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Check the parameters of the latent distribution</span></span>
@@ -317,7 +320,7 @@ examples.</p>
 <p>Now that we have created the <code>intData</code> object, we can, for
 instance, compute the symbolic covariance and correlation matrices of
 the interval data using the <code>int_cov</code> function.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">credit_card_cov</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/int_cov.html">int_cov</a></span><span class="op">(</span><span class="va">credit_card_int_agr</span><span class="op">)</span></span>
 <span><span class="va">credit_card_cor</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cov2cor</a></span><span class="op">(</span><span class="va">credit_card_cov</span><span class="op">)</span></span>
 <span></span>
@@ -334,7 +337,7 @@ the interval data using the <code>int_cov</code> function.</p>
 interval-valued data. The lower triangular shows scatter plots of the
 variables, while the upper triangular shows the interval correlation
 matrix.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/SYMB.pairs.panels.html">SYMB.pairs.panels</a></span><span class="op">(</span><span class="va">credit_card_int_agr</span>, type <span class="op">=</span> <span class="st">"rectangles"</span>, </span>
 <span>                    corr <span class="op">=</span> <span class="va">credit_card_cor</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">credit_card_int_agr</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="intData_examples_files/figure-html/unnamed-chunk-10-1.png" class="r-plt" alt="" width="576"></p>

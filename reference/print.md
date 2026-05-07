@@ -19,3 +19,8 @@ print(x, ...)
 - ...:
 
   Additional arguments passed to print.
+
+## Value
+
+The object itself, returned invisibly. Called for its side effects
+(printing).

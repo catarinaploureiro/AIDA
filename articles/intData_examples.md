@@ -91,6 +91,7 @@ credit_agrby <- factor(paste(CreditCard_microdata$Name,CreditCard_microdata$Mont
 credit_card_U <- get_latent_var(CreditCard_microdata[,3:7], CreditCard_min_max, credit_agrby,
                                 rownames(CreditCard_min_max), Seq = "LbUb_VarbyVar")
 
+oldpar <- par(no.readonly = TRUE)
 par(mfrow=c(1,5), mar=c(2, 2, 2, 1))
 for (i in 1:5){
     hist(credit_card_U[,i], xlab = NULL, ylab = NULL, 
@@ -100,6 +101,11 @@ for (i in 1:5){
 ```
 
 ![](intData_examples_files/figure-html/unnamed-chunk-4-1.png)
+
+``` r
+
+par(oldpar)
+```
 
 After examining the distribution of the latent variables, we can assume
 the distributions are approximately triangular and symmetric. Then, we
