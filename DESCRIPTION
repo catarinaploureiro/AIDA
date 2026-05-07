@@ -1,7 +1,7 @@
 Package: AIDA
 Type: Package
 Title: Analysis of Interval DAta
-Version: 0.1.4
+Version: 0.1.5
 Authors@R: 
     person("Catarina P. Loureiro", role = c("aut", "cre"), email = "catarinapadrela@tecnico.ulisboa.pt", comment = c(ORCID = "0009-0001-9464-5824"))
 Description: Tools for the analysis of interval-valued data, including construction, visualization, and statistical modeling.

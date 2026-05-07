@@ -65,12 +65,14 @@ credit_agrby <- factor(paste(CreditCard_microdata$Name,CreditCard_microdata$Mont
 credit_card_U <- get_latent_var(CreditCard_microdata[,3:7], CreditCard_min_max, credit_agrby,
                                 rownames(CreditCard_min_max), Seq = "LbUb_VarbyVar")
 
+oldpar <- par(no.readonly = TRUE)
 par(mfrow=c(1,5), mar=c(2, 2, 2, 1))
 for (i in 1:5){
     hist(credit_card_U[,i], xlab = NULL, ylab = NULL, 
             main = colnames(credit_card_U)[i], probability = TRUE)
     lines(density(credit_card_U[,i], na.rm = TRUE), col = '#009de0', lwd = 2)
 }
+par(oldpar)
 ```
 
 After examining the distribution of the latent variables, we can assume the distributions are approximately triangular and symmetric. Then, we can create an `intData` object using the `min_max` component of the dataset, specifying the latent distribution as "Triang".

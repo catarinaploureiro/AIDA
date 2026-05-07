@@ -123,6 +123,9 @@ SYMB.pairs.panels<-function (data,
                               is_outlier=NULL,
                               ...){
   type <- match.arg(type)
+  oldpar <- par(no.readonly = TRUE)
+  on.exit(par(oldpar), add = TRUE)
+  
   "SYMB.panel.rect" <- function(x,y,n=length(x)/2, ...) {
       xmin<-x[1:(length(x)/2)]
       xmax<-x[(length(x)/2+1):length(x)]

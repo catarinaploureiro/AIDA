@@ -12,6 +12,9 @@
 \arguments{
 \item{object}{An object of class \code{summaryintData}.}
 }
+\value{
+The object itself, returned invisibly. Called for its side effects (printing).
+}
 \description{
 Show Method for \linkS4class{intData}
 

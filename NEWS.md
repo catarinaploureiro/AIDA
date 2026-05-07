@@ -18,3 +18,7 @@
 ## AIDA 0.1.4
 
 * Compress included datasets to reduce package size.
+
+## AIDA 0.1.5
+
+* Missing \value entries added; graphical parameter handling fixed.

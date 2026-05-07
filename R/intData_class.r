@@ -220,6 +220,7 @@ setMethod("summary",
 #' Show Method for \linkS4class{intData}
 #'
 #' @param object An object of class \linkS4class{intData}.
+#' @return The object itself, returned invisibly. Called for its side effects (printing).
 #' @import methods
 #' @export
 #' @rdname show
@@ -647,6 +648,7 @@ setMethod("show",
 #'
 #' @param x An object of class \code{summaryintData}.
 #' @param ... Additional arguments passed to print.
+#' @return The object itself, returned invisibly. Called for its side effects (printing).
 #' @import methods
 #' @export
 #' @rdname print

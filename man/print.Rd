@@ -11,6 +11,9 @@
 
 \item{...}{Additional arguments passed to print.}
 }
+\value{
+The object itself, returned invisibly. Called for its side effects (printing).
+}
 \description{
 Print Method for Summary \linkS4class{intData}
 }
