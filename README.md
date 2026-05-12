@@ -4,7 +4,13 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/catarinaploureiro/AIDA/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/catarinaploureiro/AIDA/actions/workflows/R-CMD-check.yaml)
-[![Version](https://img.shields.io/badge/version-0.1.5-blue.svg)]()
+[![CRAN
+status](https://www.r-pkg.org/badges/version/AIDA)](https://CRAN.R-project.org/package=AIDA)
+[![CRAN
+checks](https://badges.cranchecks.info/worst/AIDA.svg)](https://cran.r-project.org/web/checks/check_results_AIDA.html)
+<!--[![Version](https://img.shields.io/badge/version-0.1.5-blue.svg)]()-->
+[![GitHub
+release](https://img.shields.io/github/v/release/catarinaploureiro/AIDA)](https://github.com/catarinaploureiro/AIDA/releases)
 [![License:
 MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![arXiv](https://img.shields.io/badge/arXiv-2604.26769-b31b1b.svg)](https://arxiv.org/abs/2604.26769)
@@ -14,7 +20,7 @@ MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 **AIDA** provides tools for the analysis of interval-valued data,
 including construction, visualization, robust estimation, and outlier
-detection. The package is built around the `intData` class and is
+detection. The R package is built around the `intData` class and is
 designed to support methodological research and applied workflows
 involving interval-valued data.
 
