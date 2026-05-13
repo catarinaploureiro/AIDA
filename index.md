@@ -4,7 +4,7 @@
 
 **AIDA** provides tools for the analysis of interval-valued data,
 including construction, visualization, robust estimation, and outlier
-detection. The package is built around the `intData` class and is
+detection. The R package is built around the `intData` class and is
 designed to support methodological research and applied workflows
 involving interval-valued data.
 
