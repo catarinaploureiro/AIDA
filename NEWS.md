@@ -22,3 +22,7 @@
 ## AIDA 0.1.5
 
 * Missing \value entries added; graphical parameter handling fixed.
+
+## AIDA 0.1.6
+
+* Add `rbind` method for `intData` class.

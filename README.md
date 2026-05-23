@@ -8,7 +8,7 @@
 status](https://www.r-pkg.org/badges/version/AIDA)](https://CRAN.R-project.org/package=AIDA)
 [![CRAN
 checks](https://badges.cranchecks.info/worst/AIDA.svg)](https://cran.r-project.org/web/checks/check_results_AIDA.html)
-[![Github Version](https://img.shields.io/badge/GitHub-v0.1.5-blue)]()
+[![GitHub Version](https://img.shields.io/badge/GitHub-v0.1.6-blue)]()
 [![License:
 MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![arXiv](https://img.shields.io/badge/arXiv-2604.26769-b31b1b.svg)](https://arxiv.org/abs/2604.26769)
@@ -44,6 +44,11 @@ remotes::install_github("catarinaploureiro/AIDA")
 
 ``` r
 library(AIDA)
+#> 
+#> Attaching package: 'AIDA'
+#> The following object is masked from 'package:base':
+#> 
+#>     rbind
 
 # Create an intData object from the iris dataset, using the Species column as 
 # grouping variable. We also specify the latent distribution as "General" to 

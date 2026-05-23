@@ -62,6 +62,10 @@ setGeneric("head",package="utils",signature="x")
 setGeneric("tail",package="utils",signature="x")
 
 #' @export
+#' @rdname rbind
+setGeneric("rbind", signature="...")
+
+#' @export
 #' @rdname Centers
 setGeneric("Centers",function(Sdt) standardGeneric("Centers"))
 
@@ -693,6 +697,44 @@ setMethod("[",
     intData(cbind(x@Centers[i,j,drop=FALSE],x@Ranges[i,j,drop=FALSE]),
       Seq="AllCen_AllRng",VarNames=x@VarNames[j],ObsNames=x@ObsNames[i],
       LatentParam=latent_param,LatentCase=x@LatentCase,LatentDist=latent_dist)
+  }
+)
+
+#' Row Bind for \linkS4class{intData}
+#'
+#' Combine multiple \linkS4class{intData} objects by rows.
+#'
+#' @param ... \linkS4class{intData} objects to combine.
+#' @param deparse.level An integer controlling the construction of labels in the result (default is \code{1}).
+#' @return An \linkS4class{intData} object with rows combined from the input \linkS4class{intData} objects.
+#' @import methods
+#' @export
+#' @rdname rbind
+#' @aliases rbind,intData-method
+setMethod("rbind",
+  signature("intData"),
+  function(..., deparse.level = 1)
+  {
+    dotarguments <- match.call(expand.dots=FALSE)$...
+    x <- eval(dotarguments[[1]])
+    if(length(dotarguments)==1) return(x)
+    for (nextarg in 2:length(dotarguments)) {
+      y <- eval(dotarguments[[nextarg]])
+      if (!inherits(y,"intData")) stop("Argument y is not an object of class intData\n")
+      if (x@NIVar != y@NIVar) stop("Arguments x and y have a different number of interval-valued variables\n")
+      if (x@LatentCase != y@LatentCase) stop("Arguments x and y have different LatentCase.")
+      if (any(x@LatentDist != y@LatentDist)) stop("Arguments x and y have different LatentDist.")
+      if (!identical(x@LatentParam,y@LatentParam)) stop("Arguments x and y have different LatentParam.")
+      dataDF <- rbind(cbind(x@Centers,x@Ranges),cbind(y@Centers,y@Ranges))
+      if (x@NIVar==1) {
+        ONames <- c(x@ObsNames,y@ObsNames)
+      } else {
+        ONames <- rownames(dataDF)
+      }
+      x <- intData(dataDF,Seq="AllCen_AllRng",LatentParam=x@LatentParam,ObsNames=ONames,
+                VarNames=x@VarNames,LatentCase=x@LatentCase,LatentDist=x@LatentDist)
+    }
+    x
   }
 )
 
