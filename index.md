@@ -32,6 +32,11 @@ remotes::install_github("catarinaploureiro/AIDA")
 ``` r
 
 library(AIDA)
+#> 
+#> Attaching package: 'AIDA'
+#> The following object is masked from 'package:base':
+#> 
+#>     rbind
 
 # Create an intData object from the iris dataset, using the Species column as 
 # grouping variable. We also specify the latent distribution as "General" to 

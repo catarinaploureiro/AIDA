@@ -32,6 +32,11 @@ remotes::install_github("catarinaploureiro/AIDA")
 ``` r
 
 library(AIDA)
+#> 
+#> Attaching package: 'AIDA'
+#> The following object is masked from 'package:base':
+#> 
+#>     rbind
 
 # Create an intData object from the iris dataset, using the Species column as 
 # grouping variable. We also specify the latent distribution as "General" to 
@@ -188,6 +193,8 @@ and association measures for interval data based on Mallows’ distance.”
   : Interval-Mahalanobis distance plot for interval-valued data.
 - [`print(`*`<summaryintData>`*`)`](https://catarinaploureiro.github.io/AIDA/reference/print.md)
   : Print Method for Summary intData
+- [`rbind()`](https://catarinaploureiro.github.io/AIDA/reference/rbind.md)
+  : Row Bind for intData
 - [`row.names(`*`<intData>`*`)`](https://catarinaploureiro.github.io/AIDA/reference/row.names.md)
   : Row.Names Method for intData
 - [`rownames(`*`<intData>`*`)`](https://catarinaploureiro.github.io/AIDA/reference/rownames.md)

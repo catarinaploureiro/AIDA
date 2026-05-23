@@ -91,6 +91,8 @@
   : Interval-Mahalanobis distance plot for interval-valued data.
 - [`print(`*`<summaryintData>`*`)`](https://catarinaploureiro.github.io/AIDA/reference/print.md)
   : Print Method for Summary intData
+- [`rbind()`](https://catarinaploureiro.github.io/AIDA/reference/rbind.md)
+  : Row Bind for intData
 - [`row.names(`*`<intData>`*`)`](https://catarinaploureiro.github.io/AIDA/reference/row.names.md)
   : Row.Names Method for intData
 - [`rownames(`*`<intData>`*`)`](https://catarinaploureiro.github.io/AIDA/reference/rownames.md)
