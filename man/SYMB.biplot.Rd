@@ -14,7 +14,7 @@ SYMB.biplot(
 )
 }
 \arguments{
-\item{data}{An \linkS4class{intData} object containing the macrodata/interval data. The first two variables are used for the x and y axes.}
+\item{data}{An \code{\linkS4class{intData}} object containing the macrodata/interval data. The first two variables are used for the x and y axes.}
 
 \item{type}{The type of plot to generate: "rectangles", "crosses" or "crosses2". Default is "rectangles".}
 
@@ -36,14 +36,20 @@ Create a biplot for interval-valued symbolic data, visualizing the symbolic data
 data(creditcard)
 credit_card_int <- creditcard$intData
 
-SYMB.biplot(credit_card_int[,c(3,5)])
+SYMB.biplot(credit_card_int[, c(3, 5)])
 
-# Highlight outliers in the biplot
-credit_card_IMCD <- IMCD(credit_card_int, floor(0.75*credit_card_int@NObs), "farness", 0.9)
-credit_card_outliers <- int_outliers(credit_card_IMCD$robust_dist, "farness", 0.9)
-outliers_colors<-rep('gray50',credit_card_int@NObs)
-names(outliers_colors)<-rownames(credit_card_int)
+# Alternatively, highlight outliers in the biplot
+# Compute robust distances using IMCD estimates of mean and covariance
+credit_card_dist <- IMah_dist(credit_card_int)
+
+# Detect outliers using farness cutoff
+credit_card_outliers <- int_outliers(credit_card_dist, "farness", 0.9)
+
+outliers_colors <- rep('gray50', credit_card_int@NObs)
+names(outliers_colors) <- rownames(credit_card_int)
 outliers_colors[credit_card_outliers$outliers_names] = 'red'
-SYMB.biplot(credit_card_int[,c(3,5)], palette = outliers_colors, 
+
+SYMB.biplot(credit_card_int[, c(3, 5)], 
+            palette = outliers_colors, 
             is_outlier = credit_card_outliers$is_outlier)
 }

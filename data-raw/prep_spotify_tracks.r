@@ -28,7 +28,7 @@ spotify[which(spotify$track_genre=="latino"),"track_genre"] <- "latin"
 spotify[which(spotify$track_genre=="songwriter"),"track_genre"] <- "singer-songwriter"
 spotify[which(spotify$track_genre=="kids"),"track_genre"] <- "children"
 
-#remove duplicates - keep most popular version of the song
+# remove duplicates - keep most popular version of the song
 spotify <- spotify %>%
   group_by(track_name, artists, track_genre) %>%        # columns to define duplicates
   slice_max(order_by = popularity, n = 1, with_ties = FALSE) %>%  # keep row with highest value
@@ -128,13 +128,13 @@ spotify <- spotify %>%
   select(-n_genres, -reassigned_genre)
 ##### ----------------------------------------------------------------------------------------- #####
 
-#remove remaining duplicates
+# remove remaining duplicates
 spotify <- spotify %>%
   group_by(artists,duration_ms,danceability,energy,loudness,speechiness,acousticness,instrumentalness,liveness,valence,tempo) %>%        # columns to define duplicates
   slice_max(order_by = popularity, n = 1, with_ties = FALSE) %>%  # keep row with highest value
   ungroup()
 
-#Handle 0 values in tempo and duration_ms
+# Handle 0 values in tempo and duration_ms
 spotify <- spotify %>%
   mutate(
     tempo = ifelse(tempo == 0, NA, tempo),
@@ -148,7 +148,7 @@ spotify_clean <- spotify
 spotify[,"popularity"] <- spotify[,"popularity"]/100
 spotify[,"loudness"] <- log10(spotify[,"loudness"]+60)
 spotify[,"tempo"] <- log10(spotify[,"tempo"]+1)
-spotify[,"duration_ms"] <- spotify[,"duration_ms"]/60000 #minutes
+spotify[,"duration_ms"] <- spotify[,"duration_ms"]/60000 # minutes
 colnames(spotify)[which(colnames(spotify)=="duration_ms")] <- "duration"
 
 ##### Create intData object

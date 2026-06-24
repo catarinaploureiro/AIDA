@@ -26,3 +26,12 @@
 ## AIDA 0.1.6
 
 * Add `rbind` method for `intData` class.
+
+# AIDA 0.2.0
+
+* Introduced functionality for explainable outlier detection using Shapley values.
+* Added functions to compute feature contributions and interaction effects: `int_Shapley()`, `int_Shapley_decomp()`, and `int_Shapley_interaction()`. 
+* Added visualization functions for Shapley values and Shapley interaction indices: `barplot_int_Shapley_decomp()`, `barplot_int_Shapley()`, `beeswarm_int_Shapley()`, `plot_int_Shapley_inter()`, and `radarplot_int_Shapley()`.
+* Improvements to documentation and usability.
+* Added a unit test suite.
+* Removed the dependency on the package `geigen`.

@@ -1,6 +1,7 @@
 library(AIDA)
 library(mvtnorm)
 source("./simulations/IMCD_sim_setup.r")
+source("./simulations/evaluation_metrics.r")
 
 # Set the seed for reproducibility
 set.seed(13)
@@ -37,11 +38,11 @@ for (Distance in c("IMah", "Mallows")) {
         for (P in P_values) {
             print(paste0(">>>>>Initializing new combination: N = ", N, ", P = ", P))
 
-            #centers
+            # centers
             mu.c <- rep(0,P)
             sigma.cc <- (1:P)^2/(P*4/3)^2
 
-            #ranges
+            # ranges
             mu.r <- rep(3,P)
             sigma.rr <- (1:P)^2/(P*4/3)^2
 
@@ -51,10 +52,10 @@ for (Distance in c("IMah", "Mallows")) {
                 cor_fim[i+P, i] <- ifelse(i %% 2 == 1, 0.1, -0.1)
             }
             if(Corr=="correlated"){
-                cor_fim[1,2] <- cor_fim[2,1] <- 0.8 #C_1 and C_2
-                cor_fim[1,2+P] <- cor_fim[2+P,1] <- 0.1 #C_1 and R_2
-                cor_fim[2,1+P] <- cor_fim[1+P,2] <- 0.1 #C_2 and R_1
-                cor_fim[1+P,2+P] <- cor_fim[2+P,1+P] <- 0.8 #R_1 and R_2
+                cor_fim[1,2] <- cor_fim[2,1] <- 0.8 # C_1 and C_2
+                cor_fim[1,2+P] <- cor_fim[2+P,1] <- 0.1 # C_1 and R_2
+                cor_fim[2,1+P] <- cor_fim[1+P,2] <- 0.1 # C_2 and R_1
+                cor_fim[1+P,2+P] <- cor_fim[2+P,1+P] <- 0.8 # R_1 and R_2
             }
 
             D <- diag(sqrt(c(sigma.cc,sigma.rr)))
@@ -64,7 +65,7 @@ for (Distance in c("IMah", "Mallows")) {
             sigma.rr <- cov_fim[(P+1):(2*P),(P+1):(2*P)]
 
             if(Case=="U_id_symmetric"){
-                DELTA<-1/24#1/12
+                DELTA <- 1/24#1/12
                 latent_dist <- "Triang"#"Unif"
                 latent_param <- list(DELTA)
             }else {

@@ -15,34 +15,35 @@
 #' credit_card_int <- creditcard$intData
 #' 
 #' # Compute squared Interval-Mahalanobis distance
-#' z <- rep(1, nrow(credit_card_int))
-#' credit_card_dist<-IMah_dist(credit_card_int,z)
+#' credit_card_dist <- IMah_dist(credit_card_int)
 #' 
-#' credit_card_farness <- farness(credit_card_dist, 0.9)
+#' credit_card_farness <- farness(credit_card_dist, cutoff_value = 0.9)
 farness <- function(dist, cutoff_value=NULL) {
     indnz <- which(dist > 1e-10)
     farnz <- dist[indnz]
 
-    #scale the distances
+    # scale the distances
     farloc <- median(farnz, na.rm = TRUE)
     farsca <- mad(farnz, na.rm = TRUE)
     if (farsca < 1e-10) {farsca <- sd(farnz, na.rm = TRUE)}
     sfar <- scale(farnz, center = farloc, scale = farsca)
 
-    #apply Yeo-Johnson transformation
+    # apply Yeo-Johnson transformation
     YJout  <- cellWise::transfo(X = sfar, type = "YJ", robust = TRUE, standardize = FALSE, checkPars = list(silent = TRUE))
     xt <- YJout$Y
 
-    #scale the transformed distances
+    # scale the transformed distances
     tfarloc <- median(xt, na.rm = TRUE)
     tfarsca <- mad(xt, na.rm = TRUE)
     zt <- scale(xt, tfarloc, tfarsca)
     
-    #obtain final probabilities
+    # obtain final probabilities
     probs <- rep(0, length(dist))
     probs[indnz] <- pnorm(zt)
     
-    #cutoff value
+    names(probs) <- names(dist)
+
+    # cutoff value
     if (!is.null(cutoff_value)) {
         if (cutoff_value>1||cutoff_value<0) stop("cutoff_value must be between 0 and 1")
         cutoff_value <- qnorm(cutoff_value)

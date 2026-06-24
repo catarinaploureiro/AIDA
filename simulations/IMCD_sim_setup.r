@@ -28,7 +28,6 @@ IMCD_raw <- function(data, m = 0){
         z <- res$updated_z
         d2 <- res$robust_dist
         cov_IMCD <- res$S
-        #S <- median(d2) * res$S / qchisq(p = 0.5, df = p)
     }
 
     return(list("cov_IMCD"=cov_IMCD, "robust_dist"=d2, "final_z"=z, "m"=m))
@@ -47,9 +46,9 @@ IMCD_raw <- function(data, m = 0){
 #' @return A list with the reweighted IMCD covariance matrix estimate, the final z values, the cutoff method used, the cutoff value, the reweighted squared Interval-Mahalanobis distances, and the farness probabilities if the "farness" cutoff method is used.
 #' @export
 reweight_IMCD <- function(d2, z, data, m=0, cutoff=c("farness","adjbox","chi-squared","F-dist","raw"), cutoff_lvl=NULL){
-    cutoff<-match.arg(cutoff)
-    C<-as.matrix(data@Centers)
-    R<-as.matrix(data@Ranges)
+    cutoff <- match.arg(cutoff)
+    C <- as.matrix(data@Centers)
+    R <- as.matrix(data@Ranges)
     n <- data@NObs; p <- data@NIVar
 
     # Set m
@@ -80,7 +79,6 @@ reweight_IMCD <- function(d2, z, data, m=0, cutoff=c("farness","adjbox","chi-squ
         w <- ifelse((d2 >= cutoff_value[1])&(d2 <= cutoff_value[2]), 1, 0)
     }else if (cutoff=="F-dist"){
         delta <- 1-cutoff_lvl
-        #hrdf.method <- c("GM14","HR05")
         hr05 <- hr05CutoffMvnormal(n, p, m/n, delta)
         dfz <- hr05$m.pred - p + 1
         cutoff_value <- hr05$m.pred * p * qf(1 - delta, df1 = p, df2 = dfz) / dfz
@@ -103,10 +101,10 @@ reweight_IMCD <- function(d2, z, data, m=0, cutoff=c("farness","adjbox","chi-squ
                 "cutoff_value"=cutoff_value, "robust_dist"=reweighted_d2, "farness_probs"=farness_probs))
 }
 
-#' Covariance Matrix Estimation and Mallows' Distances for Interval-Valued Data
+#' Covariance Matrix Estimation and Mallows Distances for Interval-Valued Data
 #' 
 #' @param data An object of class \code{intData}.
-#' @return A list with the covariance matrix estimate (non robust), the Mallows' distances, and the final z values.
+#' @return A list with the covariance matrix estimate (non robust), the Mallows distances, and the final z values.
 #' @export
 int_cov_Mallows <- function(data){
 
@@ -127,11 +125,11 @@ int_cov_Mallows <- function(data){
 pb_new <- function(n){
     pb <- progress::progress_bar$new(format = " :current/:total (:percent) [Elapsed: :elapsedfull || ETA: :eta]",
                        total = n,
-                       #complete = "=",   # Completion bar character
-                       #incomplete = "-", # Incomplete bar character
-                       #current = ">",    # Current bar character
+                       # complete = "=",   # Completion bar character
+                       # incomplete = "-", # Incomplete bar character
+                       # current = ">",    # Current bar character
                        clear = FALSE)    # If TRUE, clears the bar when finish
-                       #width = 100)      # Width of the progress bar
+                       # width = 100)      # Width of the progress bar
     return(pb)
 }
 
@@ -162,7 +160,7 @@ compare_cov_matrix <- function(est_cov, ground_truth_cov){
 #' @importFrom pROC roc
 #' @export
 #' @examples
-#' ground_truth <- c(rep(1,10),rep(0,5))
+#' ground_truth <- c(rep(1, 10), rep(0, 5))
 #' predictions <- sample(ground_truth)
 #' evaluate_outlier_detection(predictions, ground_truth)
 evaluate_outlier_detection <- function(predictions, ground_truth) {

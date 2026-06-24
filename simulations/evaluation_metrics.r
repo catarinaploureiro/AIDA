@@ -27,11 +27,10 @@ frobenius_error <- function(est_cov, ground_truth_cov) {
 #' @param est_cov Estimated covariance matrix.
 #' @param ground_truth_cov Ground truth covariance matrix.
 #' @return Angle error between eigenvalues.
-#' @importFrom geigen geigen
 #' @export
 angle_error <- function(est_cov, ground_truth_cov){
-    a_est <- sort(geigen::geigen(est_cov, diag(nrow(est_cov)), only.values=TRUE)$values)
-    a <- sort(geigen::geigen(ground_truth_cov, diag(nrow(ground_truth_cov)), only.values=TRUE)$values)
+    a_est <- sort(eigen(est_cov, symmetric = TRUE, only.values = TRUE)$values)
+    a <- sort(eigen(ground_truth_cov, only.values = TRUE)$values)
 
     return(as.numeric(1-(t(a_est)%*%a)/(sqrt(t(a_est)%*%a_est)*sqrt(t(a)%*%a))))
 }

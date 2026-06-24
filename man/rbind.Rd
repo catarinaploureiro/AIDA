@@ -3,20 +3,20 @@
 \name{rbind}
 \alias{rbind}
 \alias{rbind,intData-method}
-\title{Row Bind for \linkS4class{intData}}
+\title{Row Bind for \code{\linkS4class{intData}}}
 \usage{
 rbind(..., deparse.level = 1)
 
 \S4method{rbind}{intData}(..., deparse.level = 1)
 }
 \arguments{
-\item{...}{\linkS4class{intData} objects to combine.}
+\item{...}{\code{\linkS4class{intData}} objects to combine.}
 
 \item{deparse.level}{An integer controlling the construction of labels in the result (default is \code{1}).}
 }
 \value{
-An \linkS4class{intData} object with rows combined from the input \linkS4class{intData} objects.
+An \code{\linkS4class{intData}} object with rows combined from the input \code{\linkS4class{intData}} objects.
 }
 \description{
-Combine multiple \linkS4class{intData} objects by rows.
+Combine multiple \code{\linkS4class{intData}} objects by rows.
 }

@@ -8,7 +8,9 @@
 status](https://www.r-pkg.org/badges/version/AIDA)](https://CRAN.R-project.org/package=AIDA)
 [![CRAN
 checks](https://badges.cranchecks.info/worst/AIDA.svg)](https://cran.r-project.org/web/checks/check_results_AIDA.html)
-[![GitHub Version](https://img.shields.io/badge/GitHub-v0.1.6-blue)]()
+[![GitHub
+Version](https://img.shields.io/badge/GitHub-v0.2.0-blue)](https://github.com/catarinaploureiro/AIDA)
+[![codecov](https://codecov.io/gh/catarinaploureiro/AIDA/branch/main/graph/badge.svg)](https://app.codecov.io/gh/catarinaploureiro/AIDA)
 [![License:
 MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![arXiv](https://img.shields.io/badge/arXiv-2604.26769-b31b1b.svg)](https://arxiv.org/abs/2604.26769)
@@ -29,6 +31,7 @@ AIDA currently includes functionality for:
 - Interval Minimum Covariance Determinant (IMCD) estimator
 - Robust squared Interval-Mahalanobis distance
 - Outlier detection based on robust distances
+- Explainable outlier detection using Shapley values
 - Visualization tools for interval data
 
 ## Installation
@@ -93,11 +96,18 @@ vignette("intData_examples", package = "AIDA")
 ```
 
 For examples on the IMCD estimator and outlier detection based on the
-robust squared Interval-Mahalanobis distance (Loureiro et al. (2026)),
+robust squared Interval-Mahalanobis distance (Loureiro et al. (2026b)),
 see:
 
 ``` r
 vignette("IMCD_examples", package = "AIDA")
+```
+
+For examples on explainable outlier detection using Shapley values
+(Loureiro et al. (2026a)), see:
+
+``` r
+vignette("Shapley_examples", package = "AIDA")
 ```
 
 ## References
@@ -105,10 +115,17 @@ vignette("IMCD_examples", package = "AIDA")
 <div id="refs" class="references csl-bib-body hanging-indent"
 entry-spacing="0">
 
-<div id="ref-loureiro2026" class="csl-entry">
+<div id="ref-loureiro2026b" class="csl-entry">
 
 Loureiro, Catarina P., M. Rosário Oliveira, Paula Brito, and Lina
-Oliveira. 2026. “<span class="nocase">Minimum Covariance Determinant
+Oliveira. 2026a. “<span class="nocase">Explainable Outlier Detection for
+Interval-valued Data</span>.”
+
+</div>
+
+<div id="ref-loureiro2026" class="csl-entry">
+
+———. 2026b. “<span class="nocase">Minimum Covariance Determinant
 Estimator and Outlier Detection for Interval-valued Data</span>.”
 <https://arxiv.org/abs/2604.26769>.
 
@@ -118,7 +135,7 @@ Estimator and Outlier Detection for Interval-valued Data</span>.”
 
 Oliveira, M. Rosário, Diogo Pinheiro, and Lina Oliveira. 2025.
 “<span class="nocase">Location and association measures for interval
-data based on Mallows’ distance</span>.”
+data based on Mallows distance</span>.”
 <https://arxiv.org/abs/2407.05105>.
 
 </div>

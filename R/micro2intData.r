@@ -5,16 +5,17 @@
 #' @param MicDtDF A data frame containing the microdata. All columns should be numeric.
 #' @param agrby A factor used to specify the grouping of the microdata for aggregation.
 #' @param agrcrt A string or numeric vector of length 2 specifying the aggregation criterion. The default is \code{"minmax"}, which takes the minimum and maximum values for each variable. If a numeric vector is provided, it should specify the lower and upper percentiles for aggregation (e.g., \code{c(0.05, 0.95)}).
-#' @param LatentParam Optional latent parameter used for certain types of latent distributions.
+#' @param LatentParam (Optional) A list with the parameters of the latent variables. 
+#'  Expects a list with a single number if `LatentCase` is `"U_id_symmetric"`, a list of two numbers if `LatentCase` is `"U_id"`, and a list of two matrices if `LatentCase` is `"General"`.
 #' @param LatentCase A string specifying which of the three scenarios applies to the latent variables:
 #' \itemize{
-#'   \item \code{"General"}: The case where the latent variables do not have any nice properties.
-#'   \item \code{"U_id"}: The case where the latent variables are identically distributed.
 #'   \item \code{"U_id_symmetric"}: The case where the latent variables are identically distributed and symmetric.
+#'   \item \code{"U_id"}: The case where the latent variables are identically distributed.
+#'   \item \code{"General"}: The case where the latent variables do not have any nice properties.
 #' }
 #' Defaults to \code{"U_id_symmetric"}.
-#' @param LatentDist A string or vector of strings specifying the distribution(s) of the latent variables. If the variables are identically distributed it can be one of (\code{"Unif"},\code{"Triang"},\code{"TNorm"},\code{"InvTri"},\code{"Beta"},\code{"KDE"},\code{"Degenerated"}), if not a vector must be provided with the distribution for each variable.
-#' The default is \code{"KDE"} if \code{LatentCase="General"}.
+#' @param LatentDist A string or vector of strings specifying the distribution(s) of the latent variables. If the variables are identically distributed it can be one of (\code{"Unif"}, \code{"Triang"}, \code{"TNorm"}, \code{"InvTri"}, \code{"Beta"}, \code{"KDE"}, \code{"Degenerated"}), if not a vector must be provided with the distribution for each variable.
+#' The default is \code{"Unif"} if \code{LatentCase="U_id_symmetric"}, and \code{"KDE"} if \code{LatentCase="General"}.
 #' @param TriangParam Mode of the triangular distribution. If the latent variables are identically distributed, it is only necessary to provide a number, if not a vector is needed.
 #' The default is \code{0}.
 #' @param BetaParam.a Parameter alpha of the Beta distribution. If the latent variables are identically distributed, it is only necessary to provide a number, if not a vector is needed.
@@ -24,7 +25,7 @@
 #' @param estimate.DistParam Logical parameter indicating if estimation of the parameters of the latent distributions should be performed. Can only be set to TRUE if \code{LatentCase="General"}.
 #' The default is \code{FALSE}.
 #'
-#' @return An \linkS4class{intData} object containing the aggregated interval-valued data, or \code{NULL} if all units lead to degenerate intervals.
+#' @return An \code{\linkS4class{intData}} object containing the aggregated interval-valued data, or \code{NULL} if all units lead to degenerate intervals.
 #'
 #' @importFrom assertthat is.number
 #' @importFrom stats quantile
@@ -40,8 +41,15 @@
 #' @examples
 #' data(creditcard)
 #' CreditCard_microdata <- creditcard$microdata
-#' credit_agrby<-factor(paste(CreditCard_microdata$Name,CreditCard_microdata$Month,sep = "_"))
-#' credit_agr<-micro2intData(CreditCard_microdata[,3:7],credit_agrby,LatentCase = "General")
+#' 
+#' # Define grouping variable for microdata aggregation
+#' credit_agrby <- factor(paste(CreditCard_microdata$Name, CreditCard_microdata$Month, sep = "_"))
+#' 
+#' # Create intData object by aggregating microdata using the default minmax criterion 
+#' # and using KDE for estimation of the latent distribution in the general case
+#' credit_agr <- micro2intData(CreditCard_microdata[,3:7],
+#'                             agrby = credit_agrby,
+#'                             LatentCase = "General")
 #' 
 #' @export
 micro2intData <- function(MicDtDF,
@@ -79,7 +87,7 @@ micro2intData <- function(MicDtDF,
     stop(paste("Wrong value for the agrcrt argument\n( it should be either the string minmax or a two-dim vector",
                "\nof a prob. value for the lower percentile, followed by the prob. value for the upper percentile - \nex:c(0.05,0.95) ).\n")) 
   
-  #Trim microdata, if applicable
+  # Trim microdata, if applicable
   if (agrcrt[1] != "minmax") {
     MicDtDF_trim <- MicDtDF
     split_idx <- split(seq_len(nrow(MicDtDF)), agrby)
@@ -139,21 +147,15 @@ micro2intData <- function(MicDtDF,
       bndsDF[r,nvar+c] <- max(MicDtDF[rind,c], na.rm = TRUE)
     }
   }
-  rownames(bndsDF)<-grplvls
-  if (!identical(LatentCase, c("U_id_symmetric","U_id","General"))){LatentCase <- match.arg(LatentCase)}
-    else {
-      if (is.null(LatentParam)||length(LatentParam)==1) {LatentCase <- "U_id_symmetric"}
-      else if (assertthat::is.number(LatentParam[[1]])) {LatentCase <- "U_id"}
-      else {LatentCase <- "General"}
-    }
-  if(LatentCase=="General"&&identical(LatentDist, c("Unif","Triang","TNorm","InvTri","Beta","KDE","Degenerated"))) LatentDist<-"KDE"
-  Umicro<-get_latent_var(MicDtDF,bndsDF,agrby,agrlevels=grplvls,Seq="AllLb_AllUb")
+  rownames(bndsDF) <- grplvls
+  
+  Umicro <- get_latent_var(MicDtDF,bndsDF,agrby,agrlevels=grplvls,Seq="AllLb_AllUb")
   res <- intData(bndsDF,Seq="AllLb_AllUb",LatentParam,LatentCase,LatentDist,TriangParam,BetaParam.a,BetaParam.b,Umicro,estimate.DistParam,VarNames=names(MicDtDF),ObsNames=grplvls)
-  DegInT <- which(apply(res@Ranges,1,function(v) any(!is.finite(v))))
+  DegInT <- which(apply(res@Ranges,1,function(v) any(v==0)))
   nDegInT <- length(DegInT)
   if (nDegInT>0) {
     if (nDegInT==res@NObs) {
-      warning("No Idata object was created because all units had some degenerate intervals")
+      warning("No intData object was created because all units had some degenerate intervals")
       return(NULL)
     }
     if (nDegInT<10) {

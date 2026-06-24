@@ -21,11 +21,16 @@
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
+0 errors | 0 warnings | 0 note
 
-* New submission.
+## Changes in this version
 
-This is a new submission for a new package.
+* Introduced new functionality for explainable outlier detection based on Shapley values.
+* Added several plotting functions to visualize Shapley values and interaction indices.
+* Added `rbind` method for `intData` class.
+* Improvements to documentation and usability.
+* Introduced a unit test suite to improve package reliability.
+* Removed the dependency on the package `geigen`, which is scheduled for archival on CRAN.
 
 ## Notes
 

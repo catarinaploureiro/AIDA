@@ -17,7 +17,8 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/catarinaploureiro/AIDA/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/catarinaploureiro/AIDA/actions/workflows/R-CMD-check.yaml)
 [![CRAN status](https://www.r-pkg.org/badges/version/AIDA)](https://CRAN.R-project.org/package=AIDA)
 [![CRAN checks](https://badges.cranchecks.info/worst/AIDA.svg)](https://cran.r-project.org/web/checks/check_results_AIDA.html)
-[![GitHub Version](https://img.shields.io/badge/GitHub-v0.1.6-blue)]()
+[![GitHub Version](https://img.shields.io/badge/GitHub-v0.2.0-blue)](https://github.com/catarinaploureiro/AIDA)
+[![codecov](https://codecov.io/gh/catarinaploureiro/AIDA/branch/main/graph/badge.svg)](https://app.codecov.io/gh/catarinaploureiro/AIDA)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![arXiv](https://img.shields.io/badge/arXiv-2604.26769-b31b1b.svg)](https://arxiv.org/abs/2604.26769)
 <!-- badges: end -->
@@ -33,6 +34,7 @@ AIDA currently includes functionality for:
 - Interval Minimum Covariance Determinant (IMCD) estimator
 - Robust squared Interval-Mahalanobis distance
 - Outlier detection based on robust distances
+- Explainable outlier detection using Shapley values
 - Visualization tools for interval data
 
 ## Installation
@@ -79,6 +81,12 @@ For examples on the IMCD estimator and outlier detection based on the robust squ
 
 ```{r eval=FALSE}
 vignette("IMCD_examples", package = "AIDA")
+```
+
+For examples on explainable outlier detection using Shapley values (@loureiro2026b), see:
+
+```{r eval=FALSE}
+vignette("Shapley_examples", package = "AIDA")
 ```
 
 ## References
