@@ -34,7 +34,7 @@ A list with the following components:
 - `intData_minmax`:
 
   An
-  [intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+  [`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
   object with `111` interval-valued observations and `11` variables,
   constructed using min-max aggregation based on the transformed
   microdata.
@@ -42,7 +42,7 @@ A list with the following components:
 - `intData_trimmed`:
 
   An
-  [intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+  [`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
   object with `111` interval-valued observations and `11` variables,
   constructed using trimmed aggregation (`1\%` trimming) based on the
   transformed microdata.

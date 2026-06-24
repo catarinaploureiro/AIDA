@@ -1,7 +1,7 @@
-# Summary Method for [intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+# Summary Method for [`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
 
 Summary Method for
-[intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+[`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
 
 ## Usage
 
@@ -15,7 +15,7 @@ summary(object)
 - object:
 
   An object of class
-  [intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md).
+  [`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md).
 
 ## Value
 

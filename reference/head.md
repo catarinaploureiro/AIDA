@@ -1,7 +1,7 @@
-# Head Method for [intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+# Head Method for [`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
 
 Returns the first `n` rows of an
-[intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+[`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
 object.
 
 ## Usage
@@ -16,7 +16,7 @@ head(x, n = min(nrow(x), 6L))
 - x:
 
   An
-  [intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+  [`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
   object.
 
 - n:
@@ -26,5 +26,5 @@ head(x, n = min(nrow(x), 6L))
 ## Value
 
 A subset of the
-[intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+[`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
 object.

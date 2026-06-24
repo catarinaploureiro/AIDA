@@ -1,7 +1,7 @@
-# Lower Bounds Method for [intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+# Lower Bounds Method for [`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
 
 Lower Bounds Method for
-[intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+[`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
 
 ## Usage
 
@@ -17,7 +17,7 @@ LowerBounds(Sdt)
 - Sdt:
 
   An object of class
-  [intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md).
+  [`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md).
 
 ## Value
 

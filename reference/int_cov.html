@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">AIDA</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,6 +20,7 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/IMCD_examples.html">IMCD estimator examples</a></li>
     <li><a class="dropdown-item" href="../articles/intData_examples.html">Class `intData` examples</a></li>
+    <li><a class="dropdown-item" href="../articles/Shapley_examples.html">Shapley value examples</a></li>
   </ul></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
@@ -40,7 +41,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Interval-valued Covariance</h1>
-      <small class="dont-index">Source: <a href="https://github.com/catarinaploureiro/AIDA/blob/v0.1.6/R/int_cov.r" class="external-link"><code>R/int_cov.r</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/catarinaploureiro/AIDA/blob/main/R/int_cov.r" class="external-link"><code>R/int_cov.r</code></a></small>
       <div class="d-none name"><code>int_cov.Rd</code></div>
     </div>
 
@@ -65,7 +66,9 @@
 
 
 <dl><dt id="arg-data">data<a class="anchor" aria-label="anchor" href="#arg-data"></a></dt>
-<dd><p>An <a href="intData-class.html">intData</a> object containing the macrodata/interval data.</p></dd>
+<dd><p>An <code><a href="intData-class.html">intData</a></code> object containing the macrodata/interval data.
+If <code>data</code> is provided, the covariance matrix is calculated based on the the sample covariance of the centers and ranges and the sample covariance between centers and ranges, and the parameters of the latent variables contained in the <code>intData</code> object.
+If <code>data</code> is not provided, the covariance matrix is calculated based on <code>sigma_cc</code>, <code>sigma_rr</code>, <code>sigma_cr</code>, <code>LatentParam</code>, and <code>LatentCase</code>.</p></dd>
 
 
 <dt id="arg-sigma-cc">sigma_cc<a class="anchor" aria-label="anchor" href="#arg-sigma-cc"></a></dt>
@@ -81,13 +84,14 @@
 
 
 <dt id="arg-latentparam">LatentParam<a class="anchor" aria-label="anchor" href="#arg-latentparam"></a></dt>
-<dd><p>A list with the parameters of the latent variables.</p></dd>
+<dd><p>A list with the parameters of the latent variables.
+Expects a list with a single number if <code>LatentCase</code> is <code>"U_id_symmetric"</code>, a list of two numbers if <code>LatentCase</code> is <code>"U_id"</code>, and a list of two matrices if <code>LatentCase</code> is <code>"General"</code>.</p></dd>
 
 
 <dt id="arg-latentcase">LatentCase<a class="anchor" aria-label="anchor" href="#arg-latentcase"></a></dt>
-<dd><p>A string specifying which of the three scenarios applies to the latent variables:</p><ul><li><p><code>"General"</code>: The case where the latent variables do not have any nice properties.</p></li>
+<dd><p>A string specifying which of the three scenarios applies to the latent variables:</p><ul><li><p><code>"U_id_symmetric"</code>: The case where the latent variables are identically distributed and symmetric.</p></li>
 <li><p><code>"U_id"</code>: The case where the latent variables are identically distributed.</p></li>
-<li><p><code>"U_id_symmetric"</code>: The case where the latent variables are identically distributed and symmetric.</p></li>
+<li><p><code>"General"</code>: The case where the latent variables do not have any nice properties.</p></li>
 </ul><p>Defaults to <code>"U_id_symmetric"</code>.</p></dd>
 
 </dl></div>
@@ -107,11 +111,13 @@ where \(\delta=\mathbb{E}(U^2)/4\) and \(\mathbb{E}(U)\) are the parameters of t
 <li><p><code>"General"</code>: The latent variables do not have any nice properties:
 $$\boldsymbol{\Sigma}_B=\boldsymbol{\Sigma}_{CC}+\dfrac{1}{4}\boldsymbol{\mathfrak{E}}_{UU}\bullet\boldsymbol{\Sigma}_{RR}+\dfrac{1}{2}\boldsymbol{\Sigma}_{CR}\boldsymbol{\Psi}+\dfrac{1}{2}\boldsymbol{\Psi}\boldsymbol{\Sigma}_{RC}$$
 where:</p><ul><li><p>\(\boldsymbol{\Psi}=\text{diag}(\mathbb{E}(U_1),\dots,\mathbb{E}(U_p))\),</p></li>
-<li><p>\([\boldsymbol{\mathfrak{E}}_{UU}]_{ij}=\mathcal{E}(U_i,U_j)\), \(i\neq j\), with \(\mathcal{E}(U_i,U_j)=\int_0^1 F_{U_i}^{-1}(t) F_{U_j}^{-1}(t) \, dt\),</p></li>
-<li><p>\([\boldsymbol{\mathfrak{E}}_{UU}]_{ii}=\mathbb{E}(U_i^2)\), \(i,j=1,\dots,p\),</p></li>
+<li><p>\([\boldsymbol{\mathfrak{E}}_{UU}]_{j\ell}=\mathcal{E}(U_j,U_\ell)\), \(j\neq \ell\), with \(\mathcal{E}(U_j,U_\ell)=\int_0^1 F_{U_j}^{-1}(t) F_{U_\ell}^{-1}(t) \, dt\),</p></li>
+<li><p>\([\boldsymbol{\mathfrak{E}}_{UU}]_{jj}=\mathbb{E}(U_j^2)\), \(j,\ell=1,\dots,p\),</p></li>
 <li><p>\(\bullet\) denotes the Schur (or entrywise) product of matrices.</p></li>
 </ul></li>
-</ul></div>
+</ul><p>The covariance matrix can be calculated either based on the covariance matrices of the centers and ranges or based on the data. If the data is provided, the covariance matrices are calculated using the sample covariance of the centers and ranges and the sample covariance between centers and ranges.
+For the robust estimation of the covariance matrix, see <code><a href="IMCD.html">IMCD</a></code>.</p>
+    </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
     <p>Oliveira, M. R., Pinheiro, D., &amp; Oliveira, L. (2025).
@@ -124,7 +130,7 @@ arXiv preprint arXiv:2407.05105. <a href="https://arxiv.org/abs/2407.05105" clas
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">creditcard</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">credit_card_int</span> <span class="op">&lt;-</span> <span class="va">creditcard</span><span class="op">$</span><span class="va">intData</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">credit_card_cov</span><span class="op">&lt;-</span><span class="fu">int_cov</span><span class="op">(</span><span class="va">credit_card_int</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">credit_card_cov</span> <span class="op">&lt;-</span> <span class="fu">int_cov</span><span class="op">(</span><span class="va">credit_card_int</span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

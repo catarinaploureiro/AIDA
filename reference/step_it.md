@@ -22,13 +22,13 @@ step_it(z, m, data, it = 0)
 - data:
 
   An
-  [intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+  [`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
   object containing the macrodata/interval data
 
 - it:
 
   An optional integer specifying the number of C-steps to perform. With
-  it = 0, C-step will be performed until convergence
+  `it = 0`, C-step will be performed until convergence
 
 ## Value
 

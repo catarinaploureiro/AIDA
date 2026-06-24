@@ -25,7 +25,7 @@ bigIMCD(m, p, n, data)
 - data:
 
   An
-  [intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+  [`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
   object containing the macrodata/interval data
 
 ## Value

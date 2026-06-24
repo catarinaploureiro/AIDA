@@ -14,16 +14,19 @@ Mallows_dist(data, mean_c = NULL, mean_r = NULL)
 - data:
 
   An
-  [intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+  [`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
   object containing the macrodata/interval data
 
 - mean_c:
 
-  The mean vector of the centers
+  (Optional) A vector specifying the mean of centers. Defaults to
+  `NULL`, in which case it will be computed using the sample mean of
+  centers.
 
 - mean_r:
 
-  The mean vector of the ranges
+  (Optional) A vector specifying the mean of ranges Defaults to `NULL`,
+  in which case it will be computed using the sample mean of ranges.
 
 ## Value
 
@@ -35,18 +38,18 @@ The squared Mallows distance is defined according to the `LatentCase`:
 
 - `"U_id_symmetric"`: The latent variables are identically distributed
   and symmetric:
-  \$\$d\_{M}(\boldsymbol{x})^2=(\boldsymbol{c}-\boldsymbol{\mu}\_C)^{\top}(\boldsymbol{c}-\boldsymbol{\mu}\_C)+\delta(\boldsymbol{r}-\boldsymbol{\mu}\_R)^{\top}(\boldsymbol{r}-\boldsymbol{\mu}\_R),\$\$
+  \$\$d\_\mathrm{M}(\boldsymbol{x})^2=(\boldsymbol{c}-\boldsymbol{\mu}\_C)^{\top}(\boldsymbol{c}-\boldsymbol{\mu}\_C)+\delta(\boldsymbol{r}-\boldsymbol{\mu}\_R)^{\top}(\boldsymbol{r}-\boldsymbol{\mu}\_R),\$\$
   where \\\delta=\mathbb{E}(U^2)/4\\ is the parameter of the latent
   variables.
 
 - `"U_id"`: The latent variables are identically distributed:
-  \$\$d\_{M}(\boldsymbol{x})^2=(\boldsymbol{c}-\boldsymbol{\mu}\_C)^{\top}(\boldsymbol{c}-\boldsymbol{\mu}\_C)+\delta(\boldsymbol{r}-\boldsymbol{\mu}\_R)^{\top}(\boldsymbol{r}-\boldsymbol{\mu}\_R)
+  \$\$d\_\mathrm{M}(\boldsymbol{x})^2=(\boldsymbol{c}-\boldsymbol{\mu}\_C)^{\top}(\boldsymbol{c}-\boldsymbol{\mu}\_C)+\delta(\boldsymbol{r}-\boldsymbol{\mu}\_R)^{\top}(\boldsymbol{r}-\boldsymbol{\mu}\_R)
   +\mathbb{E}(U)(\boldsymbol{c}-\boldsymbol{\mu}\_C)^\top(\boldsymbol{r}-\boldsymbol{\mu}\_R),\$\$
   where \\\delta=\mathbb{E}(U^2)/4\\ and \\\mathbb{E}(U)\\ are the
   parameter of the latent variables.
 
 - `"General"`: The latent variables do not have any nice properties:
-  \$\$d\_{M}(\boldsymbol{x})^2=(\boldsymbol{c}-\boldsymbol{\mu}\_C)^{\top}(\boldsymbol{c}-\boldsymbol{\mu}\_C)+(\boldsymbol{r}-\boldsymbol{\mu}\_R)^{\top}\boldsymbol{\Delta}(\boldsymbol{r}-\boldsymbol{\mu}\_R)
+  \$\$d\_\mathrm{M}(\boldsymbol{x})^2=(\boldsymbol{c}-\boldsymbol{\mu}\_C)^{\top}(\boldsymbol{c}-\boldsymbol{\mu}\_C)+(\boldsymbol{r}-\boldsymbol{\mu}\_R)^{\top}\boldsymbol{\Delta}(\boldsymbol{r}-\boldsymbol{\mu}\_R)
   +(\boldsymbol{c}-\boldsymbol{\mu}\_C)^{\top}\boldsymbol{\Psi}(\boldsymbol{r}-\boldsymbol{\mu}\_R),\$\$
   where:
 
@@ -67,5 +70,5 @@ distance. arXiv preprint arXiv:2407.05105.
 data(creditcard)
 credit_card_int <- creditcard$intData
 
-credit_card_dist<-Mallows_dist(credit_card_int)
+credit_card_dist <- Mallows_dist(credit_card_int)
 ```

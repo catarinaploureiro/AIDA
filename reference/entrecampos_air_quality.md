@@ -44,7 +44,7 @@ A list with the following components:
 - `intData`:
 
   An
-  [intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+  [`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
   object, constructed using KDE for estimating the parameters of the
   latent distributions.
 

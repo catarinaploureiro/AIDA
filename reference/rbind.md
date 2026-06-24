@@ -1,7 +1,7 @@
-# Row Bind for [intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+# Row Bind for [`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
 
 Combine multiple
-[intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+[`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
 objects by rows.
 
 ## Usage
@@ -17,7 +17,7 @@ rbind(..., deparse.level = 1)
 
 - ...:
 
-  [intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+  [`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
   objects to combine.
 
 - deparse.level:
@@ -28,7 +28,7 @@ rbind(..., deparse.level = 1)
 ## Value
 
 An
-[intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+[`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
 object with rows combined from the input
-[intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+[`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
 objects.

@@ -15,6 +15,7 @@ AIDA currently includes functionality for:
 - Interval Minimum Covariance Determinant (IMCD) estimator
 - Robust squared Interval-Mahalanobis distance
 - Outlier detection based on robust distances
+- Explainable outlier detection using Shapley values
 - Visualization tools for interval data
 
 ## Installation
@@ -82,7 +83,7 @@ vignette("intData_examples", package = "AIDA")
 ```
 
 For examples on the IMCD estimator and outlier detection based on the
-robust squared Interval-Mahalanobis distance (Loureiro et al. (2026)),
+robust squared Interval-Mahalanobis distance (Loureiro et al. (2026b)),
 see:
 
 ``` r
@@ -90,12 +91,23 @@ see:
 vignette("IMCD_examples", package = "AIDA")
 ```
 
+For examples on explainable outlier detection using Shapley values
+(Loureiro et al. (2026a)), see:
+
+``` r
+
+vignette("Shapley_examples", package = "AIDA")
+```
+
 ## References
 
 Loureiro, Catarina P., M. Rosário Oliveira, Paula Brito, and Lina
-Oliveira. 2026. “Minimum Covariance Determinant Estimator and Outlier
+Oliveira. 2026a. “Explainable Outlier Detection for Interval-valued
+Data.”
+
+———. 2026b. “Minimum Covariance Determinant Estimator and Outlier
 Detection for Interval-valued Data.” <https://arxiv.org/abs/2604.26769>.
 
 Oliveira, M. Rosário, Diogo Pinheiro, and Lina Oliveira. 2025. “Location
-and association measures for interval data based on Mallows’ distance.”
+and association measures for interval data based on Mallows distance.”
 <https://arxiv.org/abs/2407.05105>.

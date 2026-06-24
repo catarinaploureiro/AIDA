@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">AIDA</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,6 +20,7 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/IMCD_examples.html">IMCD estimator examples</a></li>
     <li><a class="dropdown-item" href="../articles/intData_examples.html">Class `intData` examples</a></li>
+    <li><a class="dropdown-item" href="../articles/Shapley_examples.html">Shapley value examples</a></li>
   </ul></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
@@ -40,7 +41,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Compute Latent Variables</h1>
-      <small class="dont-index">Source: <a href="https://github.com/catarinaploureiro/AIDA/blob/v0.1.6/R/intData_utils.r" class="external-link"><code>R/intData_utils.r</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/catarinaploureiro/AIDA/blob/main/R/intData_utils.r" class="external-link"><code>R/intData_utils.r</code></a></small>
       <div class="d-none name"><code>get_latent_var.Rd</code></div>
     </div>
 
@@ -68,7 +69,7 @@
 
 
 <dt id="arg-macrodata">macrodata<a class="anchor" aria-label="anchor" href="#arg-macrodata"></a></dt>
-<dd><p>A data frame, matrix or <a href="intData-class.html">intData</a> object containing the macrodata/interval data.</p></dd>
+<dd><p>A data frame, matrix or <code><a href="intData-class.html">intData</a></code> object containing the macrodata/interval data.</p></dd>
 
 
 <dt id="arg-agrby">agrby<a class="anchor" aria-label="anchor" href="#arg-agrby"></a></dt>
@@ -93,10 +94,10 @@
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>The latent variables, \(U_{ij}\), are defined according to the following model:</p>
+    <p>The latent variables, \(U_{j}\), are defined according to the following model:</p>
 <p>Let \(X_j=(C_j,R_j)^\top=\left[C_j-\dfrac{R_j}{2}, C_j+\dfrac{R_j}{2}\right]\) represent the <strong>macrodata</strong> and
-$$V_{ij}=C_j+U_{ij}\dfrac{R_j}{2},\quad j=1,\dots,p,\ i=1,\dots,m_j$$
-the <strong>microdata</strong> with \(U_{ij}\) being random variables with support on \([-1,1]\), uncorrelated with \((C_j,R_j)\).</p>
+$$V_{j}=C_j+U_{j}\dfrac{R_j}{2},\quad j=1,\dots,p,$$
+the <strong>microdata</strong> with \(U_{j}\) being random variables with support on \([-1,1]\), uncorrelated with \((C_j,R_j)\).</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
@@ -108,9 +109,16 @@ the <strong>microdata</strong> with \(U_{ij}\) being random variables with suppo
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">creditcard</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">CreditCard_min_max</span> <span class="op">&lt;-</span> <span class="va">creditcard</span><span class="op">$</span><span class="va">min_max</span></span></span>
 <span class="r-in"><span><span class="va">CreditCard_microdata</span> <span class="op">&lt;-</span> <span class="va">creditcard</span><span class="op">$</span><span class="va">microdata</span></span></span>
-<span class="r-in"><span><span class="va">credit_agrby</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">CreditCard_microdata</span><span class="op">$</span><span class="va">Name</span>,<span class="va">CreditCard_microdata</span><span class="op">$</span><span class="va">Month</span>,sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">credit_card_U</span><span class="op">&lt;-</span><span class="fu">get_latent_var</span><span class="op">(</span><span class="va">CreditCard_microdata</span><span class="op">[</span>,<span class="fl">3</span><span class="op">:</span><span class="fl">7</span><span class="op">]</span>, <span class="va">CreditCard_min_max</span>, <span class="va">credit_agrby</span>, </span></span>
-<span class="r-in"><span>                              agrlevels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/row.names.html" class="external-link">row.names</a></span><span class="op">(</span><span class="va">CreditCard_min_max</span><span class="op">)</span>, Seq<span class="op">=</span><span class="st">"LbUb_VarbyVar"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Define grouping variable for microdata aggregation</span></span></span>
+<span class="r-in"><span><span class="va">credit_agrby</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">CreditCard_microdata</span><span class="op">$</span><span class="va">Name</span>, <span class="va">CreditCard_microdata</span><span class="op">$</span><span class="va">Month</span>, sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Obtain latent variables inherent to the macrodata (standardized to [-1,1])</span></span></span>
+<span class="r-in"><span><span class="va">credit_card_U</span> <span class="op">&lt;-</span> <span class="fu">get_latent_var</span><span class="op">(</span>microdata <span class="op">=</span> <span class="va">CreditCard_microdata</span><span class="op">[</span>,<span class="fl">3</span><span class="op">:</span><span class="fl">7</span><span class="op">]</span>, </span></span>
+<span class="r-in"><span>                                macrodata <span class="op">=</span> <span class="va">CreditCard_min_max</span>, </span></span>
+<span class="r-in"><span>                                agrby <span class="op">=</span> <span class="va">credit_agrby</span>, </span></span>
+<span class="r-in"><span>                                agrlevels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/row.names.html" class="external-link">row.names</a></span><span class="op">(</span><span class="va">CreditCard_min_max</span><span class="op">)</span>, </span></span>
+<span class="r-in"><span>                                Seq <span class="op">=</span> <span class="st">"LbUb_VarbyVar"</span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

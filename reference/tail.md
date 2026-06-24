@@ -1,7 +1,7 @@
-# Tail Method for [intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+# Tail Method for [`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
 
 Returns the last `n` rows of an
-[intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+[`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
 object.
 
 ## Usage
@@ -16,7 +16,7 @@ tail(x, n = min(nrow(x), 6L))
 - x:
 
   An
-  [intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+  [`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
   object.
 
 - n:
@@ -26,5 +26,5 @@ tail(x, n = min(nrow(x), 6L))
 ## Value
 
 A subset of the
-[intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+[`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
 object.

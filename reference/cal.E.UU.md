@@ -22,10 +22,9 @@ cal.E.UU(
 
   A string or vector of strings specifying the distribution(s) of the
   latent variables. If the variables are identically distributed it can
-  be one of
-  (`"Unif"`,`"Triang"`,`"TNorm"`,`"InvTri"`,`"Beta"`,`"KDE"`,`"Degenerated"`),
-  if not a vector must be provided with the distribution for each
-  variable.
+  be one of (`"Unif"`, `"Triang"`, `"TNorm"`, `"InvTri"`, `"Beta"`,
+  `"KDE"`, `"Degenerated"`), if not a vector must be provided with the
+  distribution for each variable.
 
 - TriangParam:
 
@@ -61,9 +60,9 @@ A \\p\times p\\ matrix.
 
 The matrix \\\boldsymbol{\mathfrak{E}}\_{UU}\\ is defined as follows:
 
-- \\\[\boldsymbol{\mathfrak{E}}\_{UU}\]\_{ij}=\mathcal{E}(U_i,U_j)\\ ,
-  \\i\neq j\\, with \\\mathcal{E}(U_i,U_j)=\int_0^1 F\_{U_i}^{-1}(t)
-  F\_{U_j}^{-1}(t) \\ dt\\
+- \\\[\boldsymbol{\mathfrak{E}}\_{UU}\]\_{j\ell}=\mathcal{E}(U_j,U\_\ell)\\,
+  \\j\neq \ell\\, with \\\mathcal{E}(U_j,U\_\ell)=\int_0^1
+  F\_{U_j}^{-1}(t) F\_{U\_\ell}^{-1}(t) \\ dt\\
 
-- \\\[\boldsymbol{\mathfrak{E}}\_{UU}\]\_{ii}=\mathbb{E}(U_i^2)\\,
-  \\i,j=1,\dots,p\\.
+- \\\[\boldsymbol{\mathfrak{E}}\_{UU}\]\_{jj}=\mathbb{E}(U_j^2)\\,
+  \\j,\ell=1,\dots,p\\.

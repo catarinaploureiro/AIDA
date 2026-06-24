@@ -26,7 +26,7 @@ SYMB.pairs.panels(
 - data:
 
   An
-  [intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+  [`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
   object containing the macrodata/interval data
 
 - type:
@@ -75,18 +75,34 @@ off diagonal reports all the symbolic correlations.
 data(creditcard)
 credit_card_int <- creditcard$intData
 
-credit_card_cov<-int_cov(credit_card_int)
-credit_card_cor<-cov2cor(credit_card_cov)
-SYMB.pairs.panels(credit_card_int,corr=credit_card_cor,labels=colnames(credit_card_int))
+# Compute covariance and correlation matrices
+credit_card_cov <- int_cov(credit_card_int)
+credit_card_cor <- cov2cor(credit_card_cov)
+SYMB.pairs.panels(credit_card_int,
+                  corr = credit_card_cor,
+                  labels = colnames(credit_card_int))
 
 
-# Highlight outliers in the biplot
-credit_card_IMCD <- IMCD(credit_card_int, floor(0.75*credit_card_int@NObs), "farness", 0.9)
-credit_card_outliers <- int_outliers(credit_card_IMCD$robust_dist, "farness", 0.9)
-outliers_colors<-rep('gray50',credit_card_int@NObs)
-names(outliers_colors)<-rownames(credit_card_int)
+# Alternatively, highlight outliers in the biplot and use the robust correlation matrix
+# Obtain reweighted IMCD estimates using farness cutoff
+credit_card_IMCD <- IMCD(credit_card_int, 
+                         m = floor(nrow(credit_card_int)*0.75), 
+                         cutoff = "farness", 
+                         cutoff_lvl = 0.9)
+
+# Detect outliers using farness cutoff
+credit_card_outliers <- int_outliers(credit_card_IMCD$robust_dist, 
+                                     cutoff = "farness", 
+                                     cutoff_lvl = 0.9)
+
+outliers_colors <- rep('gray50',credit_card_int@NObs)
+names(outliers_colors) <- rownames(credit_card_int)
 outliers_colors[credit_card_outliers$outliers_names] = 'red'
-SYMB.pairs.panels(credit_card_int,corr=cov2cor(credit_card_IMCD$cov_IMCD), 
-                 palette = outliers_colors,labels=colnames(credit_card_int),
-                 type = "rectangles",is_outlier = credit_card_outliers$is_outlier)
+
+SYMB.pairs.panels(credit_card_int, 
+                  corr = cov2cor(credit_card_IMCD$cov_IMCD), 
+                  palette = outliers_colors,
+                  labels = colnames(credit_card_int),
+                  type = "rectangles",
+                  is_outlier = credit_card_outliers$is_outlier)
 ```

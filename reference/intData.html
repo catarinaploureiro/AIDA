@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">AIDA</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,6 +20,7 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/IMCD_examples.html">IMCD estimator examples</a></li>
     <li><a class="dropdown-item" href="../articles/intData_examples.html">Class `intData` examples</a></li>
+    <li><a class="dropdown-item" href="../articles/Shapley_examples.html">Shapley value examples</a></li>
   </ul></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
@@ -40,7 +41,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Interval Data Constructor</h1>
-      <small class="dont-index">Source: <a href="https://github.com/catarinaploureiro/AIDA/blob/v0.1.6/R/intData_class.r" class="external-link"><code>R/intData_class.r</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/catarinaploureiro/AIDA/blob/main/R/intData_class.r" class="external-link"><code>R/intData_class.r</code></a></small>
       <div class="d-none name"><code>intData.Rd</code></div>
     </div>
 
@@ -84,18 +85,20 @@
 
 
 <dt id="arg-latentparam">LatentParam<a class="anchor" aria-label="anchor" href="#arg-latentparam"></a></dt>
-<dd><p>A list with the parameters of the latent variables.</p></dd>
+<dd><p>A list with the parameters of the latent variables.
+Expects a list with a single number if <code>LatentCase</code> is <code>"U_id_symmetric"</code>, a list of two numbers if <code>LatentCase</code> is <code>"U_id"</code>, and a list of two matrices if <code>LatentCase</code> is <code>"General"</code>.</p></dd>
 
 
 <dt id="arg-latentcase">LatentCase<a class="anchor" aria-label="anchor" href="#arg-latentcase"></a></dt>
-<dd><p>A string specifying which of the three scenarios applies to the latent variables:</p><ul><li><p><code>"General"</code>: The case where the latent variables do not have any nice properties.</p></li>
+<dd><p>A string specifying which of the three scenarios applies to the latent variables:</p><ul><li><p><code>"U_id_symmetric"</code>: The case where the latent variables are identically distributed and symmetric.</p></li>
 <li><p><code>"U_id"</code>: The case where the latent variables are identically distributed.</p></li>
-<li><p><code>"U_id_symmetric"</code>: The case where the latent variables are identically distributed and symmetric.</p></li>
+<li><p><code>"General"</code>: The case where the latent variables do not have any nice properties.</p></li>
 </ul><p>Defaults to <code>"U_id_symmetric"</code>.</p></dd>
 
 
 <dt id="arg-latentdist">LatentDist<a class="anchor" aria-label="anchor" href="#arg-latentdist"></a></dt>
-<dd><p>A string or vector of strings specifying the distribution(s) of the latent variables. If the variables are identically distributed it can be one of (<code>"Unif"</code>,<code>"Triang"</code>,<code>"TNorm"</code>,<code>"InvTri"</code>,<code>"Beta"</code>,<code>"KDE"</code>,<code>"Degenerated"</code>), if not a vector must be provided with the distribution for each variable.</p></dd>
+<dd><p>A string or vector of strings specifying the distribution(s) of the latent variables. If the variables are identically distributed it can be one of (<code>"Unif"</code>, <code>"Triang"</code>, <code>"TNorm"</code>, <code>"InvTri"</code>, <code>"Beta"</code>, <code>"KDE"</code>, <code>"Degenerated"</code>), if not a vector must be provided with the distribution for each variable.
+The default is <code>"Unif"</code> if <code>LatentCase="U_id_symmetric"</code> or if <code>Umicro</code> is not provided, and <code>"KDE"</code> if <code>LatentCase="General"</code>.</p></dd>
 
 
 <dt id="arg-triangparam">TriangParam<a class="anchor" aria-label="anchor" href="#arg-triangparam"></a></dt>
@@ -114,7 +117,8 @@ The default is <code>1</code>.</p></dd>
 
 
 <dt id="arg-umicro">Umicro<a class="anchor" aria-label="anchor" href="#arg-umicro"></a></dt>
-<dd><p>Latent microdata observations. Needed if <code>LatentDist="KDE"</code> or <code>estimate.DistParam=TRUE</code>.</p></dd>
+<dd><p>Latent microdata observations.
+Needed if <code>estimate.DistParam</code> is <code>TRUE</code> or <code>LatentDist</code> is <code>"KDE"</code>.</p></dd>
 
 
 <dt id="arg-estimate-distparam">estimate.DistParam<a class="anchor" aria-label="anchor" href="#arg-estimate-distparam"></a></dt>
@@ -136,7 +140,7 @@ The default is <code>FALSE</code>.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>An object of class <a href="intData-class.html">intData</a>.</p>
+    <p>An object of class <code><a href="intData-class.html">intData</a></code>.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
@@ -146,6 +150,22 @@ arXiv preprint arXiv:2407.05105. <a href="https://arxiv.org/abs/2407.05105" clas
 <p>Adapted from package <code>MAINT.Data</code> (<a href="https://cran.r-project.org/package=MAINT.Data" class="external-link">https://cran.r-project.org/package=MAINT.Data</a>).</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Load microdat and macrodata</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">creditcard</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">CreditCard_microdata</span> <span class="op">&lt;-</span> <span class="va">creditcard</span><span class="op">$</span><span class="va">microdata</span></span></span>
+<span class="r-in"><span><span class="va">CreditCard_min_max</span> <span class="op">&lt;-</span> <span class="va">creditcard</span><span class="op">$</span><span class="va">min_max</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Create an intData object using the min_max component of the dataset </span></span></span>
+<span class="r-in"><span><span class="co"># Assume a continuous uniform distribution for the latent variables </span></span></span>
+<span class="r-in"><span><span class="co"># This corresponds to LatentCase="U_id_symmetric"</span></span></span>
+<span class="r-in"><span><span class="co"># This is the default setting for the intData class</span></span></span>
+<span class="r-in"><span><span class="va">credit_card_int_unif</span> <span class="op">&lt;-</span> <span class="fu">intData</span><span class="op">(</span><span class="va">CreditCard_min_max</span>, </span></span>
+<span class="r-in"><span>                                Seq <span class="op">=</span> <span class="st">"LbUb_VarbyVar"</span>, </span></span>
+<span class="r-in"><span>                                VarNames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">CreditCard_microdata</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">7</span><span class="op">]</span><span class="op">)</span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

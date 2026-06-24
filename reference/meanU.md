@@ -21,10 +21,9 @@ meanU(
 
   A string or vector of strings specifying the distribution(s) of the
   latent variables. If the variables are identically distributed it can
-  be one of
-  (`"Unif"`,`"Triang"`,`"TNorm"`,`"InvTri"`,`"Beta"`,`"KDE"`,`"Degenerated"`),
-  if not a vector must be provided with the distribution for each
-  variable.
+  be one of (`"Unif"`, `"Triang"`, `"TNorm"`, `"InvTri"`, `"Beta"`,
+  `"KDE"`, `"Degenerated"`), if not a vector must be provided with the
+  distribution for each variable.
 
 - TriangParam:
 

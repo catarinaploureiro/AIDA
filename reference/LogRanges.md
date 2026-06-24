@@ -1,7 +1,7 @@
-# LogRanges Method for [intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+# LogRanges Method for [`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
 
 LogRanges Method for
-[intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+[`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
 
 ## Usage
 
@@ -17,7 +17,7 @@ LogRanges(Sdt)
 - Sdt:
 
   An object of class
-  [intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md).
+  [`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md).
 
 ## Value
 

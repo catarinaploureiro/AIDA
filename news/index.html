@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">AIDA</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,6 +20,7 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/IMCD_examples.html">IMCD estimator examples</a></li>
     <li><a class="dropdown-item" href="../articles/intData_examples.html">Class `intData` examples</a></li>
+    <li><a class="dropdown-item" href="../articles/Shapley_examples.html">Shapley value examples</a></li>
   </ul></li>
 <li class="active nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
@@ -40,7 +41,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/catarinaploureiro/AIDA/blob/v0.1.6/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/catarinaploureiro/AIDA/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
     <div class="section level2">
@@ -72,6 +73,15 @@
 <ul><li>Add <code>rbind</code> method for <code>intData</code> class.</li>
 </ul></div>
 </div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.2.0" id="aida-020">AIDA 0.2.0<a class="anchor" aria-label="anchor" href="#aida-020"></a></h2>
+<ul><li>Introduced functionality for explainable outlier detection using Shapley values.</li>
+<li>Added functions to compute feature contributions and interaction effects: <code><a href="../reference/int_Shapley.html">int_Shapley()</a></code>, <code><a href="../reference/int_Shapley_decomp.html">int_Shapley_decomp()</a></code>, and <code><a href="../reference/int_Shapley_interaction.html">int_Shapley_interaction()</a></code>.</li>
+<li>Added visualization functions for Shapley values and Shapley interaction indices: <code><a href="../reference/barplot_int_Shapley_decomp.html">barplot_int_Shapley_decomp()</a></code>, <code><a href="../reference/barplot_int_Shapley.html">barplot_int_Shapley()</a></code>, <code><a href="../reference/beeswarm_int_Shapley.html">beeswarm_int_Shapley()</a></code>, <code><a href="../reference/plot_int_Shapley_inter.html">plot_int_Shapley_inter()</a></code>, and <code><a href="../reference/radarplot_int_Shapley.html">radarplot_int_Shapley()</a></code>.</li>
+<li>Improvements to documentation and usability.</li>
+<li>Added a unit test suite.</li>
+<li>Removed the dependency on the package <code>geigen</code>.</li>
+</ul></div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

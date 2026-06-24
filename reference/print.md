@@ -1,7 +1,7 @@
-# Print Method for Summary [intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+# Print Method for Summary [`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
 
 Print Method for Summary
-[intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+[`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
 
 ## Usage
 

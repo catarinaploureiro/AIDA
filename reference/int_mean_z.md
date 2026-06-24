@@ -38,10 +38,11 @@ mean is calculated for the \\m\\ observations that are equal to 1:
 n <- 100
 p <- 4
 X <- matrix(rnorm(n * p), ncol = p)
-#if we consider all the observations the result obtained is the same as colMeans()
+
+# if we consider all the observations the result obtained is the same as colMeans()
 z <- c(rep(1, n))
 int_mean_z(z, X)
-#> [1]  0.1329703 -0.2032027  0.0440559  0.0096461
+#> [1]  0.11373089  0.07907752 -0.07217108  0.09724216
 colMeans(X)
-#> [1]  0.1329703 -0.2032027  0.0440559  0.0096461
+#> [1]  0.11373089  0.07907752 -0.07217108  0.09724216
 ```

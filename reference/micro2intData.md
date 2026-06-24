@@ -41,22 +41,24 @@ micro2intData(
 
 - LatentParam:
 
-  Optional latent parameter used for certain types of latent
-  distributions.
+  (Optional) A list with the parameters of the latent variables. Expects
+  a list with a single number if `LatentCase` is `"U_id_symmetric"`, a
+  list of two numbers if `LatentCase` is `"U_id"`, and a list of two
+  matrices if `LatentCase` is `"General"`.
 
 - LatentCase:
 
   A string specifying which of the three scenarios applies to the latent
   variables:
 
-  - `"General"`: The case where the latent variables do not have any
-    nice properties.
+  - `"U_id_symmetric"`: The case where the latent variables are
+    identically distributed and symmetric.
 
   - `"U_id"`: The case where the latent variables are identically
     distributed.
 
-  - `"U_id_symmetric"`: The case where the latent variables are
-    identically distributed and symmetric.
+  - `"General"`: The case where the latent variables do not have any
+    nice properties.
 
   Defaults to `"U_id_symmetric"`.
 
@@ -64,10 +66,10 @@ micro2intData(
 
   A string or vector of strings specifying the distribution(s) of the
   latent variables. If the variables are identically distributed it can
-  be one of
-  (`"Unif"`,`"Triang"`,`"TNorm"`,`"InvTri"`,`"Beta"`,`"KDE"`,`"Degenerated"`),
-  if not a vector must be provided with the distribution for each
-  variable. The default is `"KDE"` if `LatentCase="General"`.
+  be one of (`"Unif"`, `"Triang"`, `"TNorm"`, `"InvTri"`, `"Beta"`,
+  `"KDE"`, `"Degenerated"`), if not a vector must be provided with the
+  distribution for each variable. The default is `"Unif"` if
+  `LatentCase="U_id_symmetric"`, and `"KDE"` if `LatentCase="General"`.
 
 - TriangParam:
 
@@ -96,7 +98,7 @@ micro2intData(
 ## Value
 
 An
-[intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+[`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
 object containing the aggregated interval-valued data, or `NULL` if all
 units lead to degenerate intervals.
 
@@ -122,6 +124,13 @@ Adapted from package `MAINT.Data`
 ``` r
 data(creditcard)
 CreditCard_microdata <- creditcard$microdata
-credit_agrby<-factor(paste(CreditCard_microdata$Name,CreditCard_microdata$Month,sep = "_"))
-credit_agr<-micro2intData(CreditCard_microdata[,3:7],credit_agrby,LatentCase = "General")
+
+# Define grouping variable for microdata aggregation
+credit_agrby <- factor(paste(CreditCard_microdata$Name, CreditCard_microdata$Month, sep = "_"))
+
+# Create intData object by aggregating microdata using the default minmax criterion 
+# and using KDE for estimation of the latent distribution in the general case
+credit_agr <- micro2intData(CreditCard_microdata[,3:7],
+                            agrby = credit_agrby,
+                            LatentCase = "General")
 ```

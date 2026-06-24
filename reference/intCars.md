@@ -23,7 +23,7 @@ A list with the following components:
 - `intData`:
 
   An
-  [intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+  [`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
   object with `27` interval-valued observations and `4` variables. The
   variable "Price" was log-transformed into "lnPrice". The microdata are
   not available, thus the default parameters of the latent distributions

@@ -2,7 +2,7 @@
 
 This dataset contains interval data of credit card expenses, including
 min-max values, centers and ranges, microdata, and an
-[intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+[`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
 object. It is composed of 5 variables: Food, Social, Travel, Gas, and
 Clothes. It was aggregated by person-month.
 
@@ -36,7 +36,7 @@ A list with the following components:
 - `intData`:
 
   An
-  [intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+  [`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
   object with `36` interval-valued observations and `5` variables,
   constructed assuming the microdata follow symmetric triangular
   distributions.

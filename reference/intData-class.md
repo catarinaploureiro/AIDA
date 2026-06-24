@@ -21,14 +21,14 @@ A class to represent interval data.
   A string specifying which of the three scenarios applies to the latent
   variables:
 
-  - `"General"`: The case where the latent variables do not have any
-    nice properties.
+  - `"U_id_symmetric"`: The case where the latent variables are
+    identically distributed and symmetric.
 
   - `"U_id"`: The case where the latent variables are identically
     distributed.
 
-  - `"U_id_symmetric"`: The case where the latent variables are
-    identically distributed and symmetric.
+  - `"General"`: The case where the latent variables do not have any
+    nice properties.
 
   Defaults to `"U_id_symmetric"`.
 
@@ -36,9 +36,9 @@ A class to represent interval data.
 
   A string or vector of strings specifying the distribution(s) of the
   latent variables. If the variables are identically distributed it can
-  be one of
-  (`"Unif"`,`"Triang"`,`"TNorm"`,`"InvTri"`,`"Beta"`,`"KDE"`,`"Degenerated"`),
-  if not, it is a vector with the distribution for each variable.
+  be one of (`"Unif"`, `"Triang"`, `"TNorm"`, `"InvTri"`, `"Beta"`,
+  `"KDE"`, `"Degenerated"`), if not, it is a vector with the
+  distribution for each variable.
 
 - `ObsNames`:
 

@@ -19,7 +19,7 @@ IMCD(
 - data:
 
   An
-  [intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+  [`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
   object containing the interval-valued dataset (macrodata).
 
 - m:
@@ -128,5 +128,9 @@ The case `cutoff=="F-dist"` is adapted from package
 data(creditcard)
 credit_card_int <- creditcard$intData
 
-credit_card_IMCD <- IMCD(credit_card_int, floor(0.75*credit_card_int@NObs), "farness", 0.9)
+# Obtain reweighted IMCD estimates using farness cutoff
+credit_card_IMCD <- IMCD(credit_card_int, 
+                         m = floor(nrow(credit_card_int)*0.75), 
+                         cutoff = "farness", 
+                         cutoff_lvl = 0.9)
 ```

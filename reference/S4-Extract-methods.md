@@ -1,7 +1,7 @@
-# Subset an [intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md) Object
+# Subset an [`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md) Object
 
 Extract a subset of rows and columns from an
-[intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+[`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
 object.
 
 ## Usage
@@ -16,7 +16,7 @@ x[i, j, ..., drop = TRUE]
 - x:
 
   An
-  [intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+  [`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
   object.
 
 - i:
@@ -38,5 +38,5 @@ x[i, j, ..., drop = TRUE]
 ## Value
 
 An
-[intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+[`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
 object containing the specified subset of rows and columns.

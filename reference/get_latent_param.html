@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">AIDA</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,6 +20,7 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/IMCD_examples.html">IMCD estimator examples</a></li>
     <li><a class="dropdown-item" href="../articles/intData_examples.html">Class `intData` examples</a></li>
+    <li><a class="dropdown-item" href="../articles/Shapley_examples.html">Shapley value examples</a></li>
   </ul></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
@@ -40,7 +41,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Compute Latent Variables Parameters</h1>
-      <small class="dont-index">Source: <a href="https://github.com/catarinaploureiro/AIDA/blob/v0.1.6/R/intData_utils.r" class="external-link"><code>R/intData_utils.r</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/catarinaploureiro/AIDA/blob/main/R/intData_utils.r" class="external-link"><code>R/intData_utils.r</code></a></small>
       <div class="d-none name"><code>get_latent_param.Rd</code></div>
     </div>
 
@@ -67,14 +68,15 @@
 
 
 <dl><dt id="arg-latentcase">LatentCase<a class="anchor" aria-label="anchor" href="#arg-latentcase"></a></dt>
-<dd><p>A string specifying which of the three scenarios applies to the latent variables:</p><ul><li><p><code>"General"</code>: The case where the latent variables do not have any nice properties.</p></li>
+<dd><p>A string specifying which of the three scenarios applies to the latent variables:</p><ul><li><p><code>"U_id_symmetric"</code>: The case where the latent variables are identically distributed and symmetric.</p></li>
 <li><p><code>"U_id"</code>: The case where the latent variables are identically distributed.</p></li>
-<li><p><code>"U_id_symmetric"</code>: The case where the latent variables are identically distributed and symmetric.</p></li>
+<li><p><code>"General"</code>: The case where the latent variables do not have any nice properties.</p></li>
 </ul><p>Defaults to <code>"U_id_symmetric"</code>.</p></dd>
 
 
 <dt id="arg-latentdist">LatentDist<a class="anchor" aria-label="anchor" href="#arg-latentdist"></a></dt>
-<dd><p>A string or vector of strings specifying the distribution(s) of the latent variables. If the variables are identically distributed it can be one of (<code>"Unif"</code>,<code>"Triang"</code>,<code>"TNorm"</code>,<code>"InvTri"</code>,<code>"Beta"</code>,<code>"KDE"</code>,<code>"Degenerated"</code>), if not a vector must be provided with the distribution for each variable.</p></dd>
+<dd><p>A string or vector of strings specifying the distribution(s) of the latent variables. If the variables are identically distributed it can be one of (<code>"Unif"</code>, <code>"Triang"</code>, <code>"TNorm"</code>, <code>"InvTri"</code>, <code>"Beta"</code>, <code>"KDE"</code>, <code>"Degenerated"</code>), if not a vector must be provided with the distribution for each variable.
+The default is <code>"Unif"</code> if <code>LatentCase="U_id_symmetric"</code> or if <code>Umicro</code> is not provided, and <code>"KDE"</code> if <code>LatentCase="General"</code>.</p></dd>
 
 
 <dt id="arg-triangparam">TriangParam<a class="anchor" aria-label="anchor" href="#arg-triangparam"></a></dt>
@@ -93,7 +95,8 @@ The default is <code>1</code>.</p></dd>
 
 
 <dt id="arg-umicro">Umicro<a class="anchor" aria-label="anchor" href="#arg-umicro"></a></dt>
-<dd><p>Latent microdata observations. Needed if <code>LatentDist="KDE"</code> or <code>estimate.DistParam=TRUE</code>.</p></dd>
+<dd><p>Latent microdata observations.
+Needed if <code>estimate.DistParam</code> is <code>TRUE</code> or <code>LatentDist</code> is <code>"KDE"</code>.</p></dd>
 
 
 <dt id="arg-p">p<a class="anchor" aria-label="anchor" href="#arg-p"></a></dt>
@@ -116,7 +119,7 @@ The default is <code>FALSE</code>.</p></dd>
 <li><p><code>"U_id"</code>: The latent variables are identically distributed, so its parameters are:</p><ul><li><p>\(\delta=\mathbb{E}(U^2)/4\)</p></li>
 <li><p>\(\mathbb{E}(U)\)</p></li>
 </ul></li>
-<li><p><code>"General"</code>: The latent variables do not have any nice properties, so its parameters are:</p><ul><li><p>\([\boldsymbol{\mathfrak{E}}_{UU}]_{ij}=\mathcal{E}(U_i,U_j)\), \(i\neq j\), with \(\mathcal{E}(U_i,U_j)=\int_0^1 F_{U_i}^{-1}(t) F_{U_j}^{-1}(t) \, dt\), and \([\boldsymbol{\mathfrak{E}}_{UU}]_{ii}=\mathbb{E}(U_i^2)\), \(i,j=1,\dots,p\)</p></li>
+<li><p><code>"General"</code>: The latent variables do not have any nice properties, so its parameters are:</p><ul><li><p>\([\boldsymbol{\mathfrak{E}}_{UU}]_{j\ell}=\mathcal{E}(U_j,U_\ell)\), \(j\neq \ell\), with \(\mathcal{E}(U_j,U_\ell)=\int_0^1 F_{U_j}^{-1}(t) F_{U_\ell}^{-1}(t) \, dt\), and \([\boldsymbol{\mathfrak{E}}_{UU}]_{jj}=\mathbb{E}(U_j^2)\), \(j,\ell=1,\dots,p\)</p></li>
 <li><p>\(\boldsymbol{\Psi}=\text{Diag}(\mathbb{E}(U_1),\dots,\mathbb{E}(U_p))\)</p></li>
 </ul></li>
 </ul></div>
@@ -132,10 +135,21 @@ arXiv preprint arXiv:2407.05105. <a href="https://arxiv.org/abs/2407.05105" clas
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">creditcard</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">CreditCard_min_max</span> <span class="op">&lt;-</span> <span class="va">creditcard</span><span class="op">$</span><span class="va">min_max</span></span></span>
 <span class="r-in"><span><span class="va">CreditCard_microdata</span> <span class="op">&lt;-</span> <span class="va">creditcard</span><span class="op">$</span><span class="va">microdata</span></span></span>
-<span class="r-in"><span><span class="va">credit_agrby</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">CreditCard_microdata</span><span class="op">$</span><span class="va">Name</span>,<span class="va">CreditCard_microdata</span><span class="op">$</span><span class="va">Month</span>,sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">credit_card_U</span><span class="op">&lt;-</span><span class="fu"><a href="get_latent_var.html">get_latent_var</a></span><span class="op">(</span><span class="va">CreditCard_microdata</span><span class="op">[</span>,<span class="fl">3</span><span class="op">:</span><span class="fl">7</span><span class="op">]</span>, <span class="va">CreditCard_min_max</span>, <span class="va">credit_agrby</span>, </span></span>
-<span class="r-in"><span>                              agrlevels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/row.names.html" class="external-link">row.names</a></span><span class="op">(</span><span class="va">CreditCard_min_max</span><span class="op">)</span>, Seq<span class="op">=</span><span class="st">"LbUb_VarbyVar"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">credit_card_param</span><span class="op">&lt;-</span><span class="fu">get_latent_param</span><span class="op">(</span>LatentCase<span class="op">=</span><span class="st">"General"</span>,LatentDist<span class="op">=</span><span class="st">"KDE"</span>,Umicro<span class="op">=</span><span class="va">credit_card_U</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Define grouping variable for microdata aggregation</span></span></span>
+<span class="r-in"><span><span class="va">credit_agrby</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">CreditCard_microdata</span><span class="op">$</span><span class="va">Name</span>, <span class="va">CreditCard_microdata</span><span class="op">$</span><span class="va">Month</span>, sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Obtain latent variables inherent to the macrodata (standardized to [-1,1])</span></span></span>
+<span class="r-in"><span><span class="va">credit_card_U</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_latent_var.html">get_latent_var</a></span><span class="op">(</span>microdata <span class="op">=</span> <span class="va">CreditCard_microdata</span><span class="op">[</span>,<span class="fl">3</span><span class="op">:</span><span class="fl">7</span><span class="op">]</span>, </span></span>
+<span class="r-in"><span>                                macrodata <span class="op">=</span> <span class="va">CreditCard_min_max</span>, </span></span>
+<span class="r-in"><span>                                agrby <span class="op">=</span> <span class="va">credit_agrby</span>, </span></span>
+<span class="r-in"><span>                                agrlevels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/row.names.html" class="external-link">row.names</a></span><span class="op">(</span><span class="va">CreditCard_min_max</span><span class="op">)</span>, </span></span>
+<span class="r-in"><span>                                Seq <span class="op">=</span> <span class="st">"LbUb_VarbyVar"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Obtain parameters of the latent variables</span></span></span>
+<span class="r-in"><span><span class="va">credit_card_param</span> <span class="op">&lt;-</span> <span class="fu">get_latent_param</span><span class="op">(</span>LatentCase <span class="op">=</span> <span class="st">"General"</span>,</span></span>
+<span class="r-in"><span>                                      LatentDist <span class="op">=</span> <span class="st">"KDE"</span>,</span></span>
+<span class="r-in"><span>                                      Umicro <span class="op">=</span> <span class="va">credit_card_U</span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

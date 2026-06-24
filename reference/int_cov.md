@@ -21,8 +21,14 @@ int_cov(
 - data:
 
   An
-  [intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
-  object containing the macrodata/interval data.
+  [`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+  object containing the macrodata/interval data. If `data` is provided,
+  the covariance matrix is calculated based on the the sample covariance
+  of the centers and ranges and the sample covariance between centers
+  and ranges, and the parameters of the latent variables contained in
+  the `intData` object. If `data` is not provided, the covariance matrix
+  is calculated based on `sigma_cc`, `sigma_rr`, `sigma_cr`,
+  `LatentParam`, and `LatentCase`.
 
 - sigma_cc:
 
@@ -38,21 +44,24 @@ int_cov(
 
 - LatentParam:
 
-  A list with the parameters of the latent variables.
+  A list with the parameters of the latent variables. Expects a list
+  with a single number if `LatentCase` is `"U_id_symmetric"`, a list of
+  two numbers if `LatentCase` is `"U_id"`, and a list of two matrices if
+  `LatentCase` is `"General"`.
 
 - LatentCase:
 
   A string specifying which of the three scenarios applies to the latent
   variables:
 
-  - `"General"`: The case where the latent variables do not have any
-    nice properties.
+  - `"U_id_symmetric"`: The case where the latent variables are
+    identically distributed and symmetric.
 
   - `"U_id"`: The case where the latent variables are identically
     distributed.
 
-  - `"U_id_symmetric"`: The case where the latent variables are
-    identically distributed and symmetric.
+  - `"General"`: The case where the latent variables do not have any
+    nice properties.
 
   Defaults to `"U_id_symmetric"`.
 
@@ -87,14 +96,22 @@ covariance matrix is defined according to the `LatentCase`:
 
   - \\\boldsymbol{\Psi}=\text{diag}(\mathbb{E}(U_1),\dots,\mathbb{E}(U_p))\\,
 
-  - \\\[\boldsymbol{\mathfrak{E}}\_{UU}\]\_{ij}=\mathcal{E}(U_i,U_j)\\,
-    \\i\neq j\\, with \\\mathcal{E}(U_i,U_j)=\int_0^1 F\_{U_i}^{-1}(t)
-    F\_{U_j}^{-1}(t) \\ dt\\,
+  - \\\[\boldsymbol{\mathfrak{E}}\_{UU}\]\_{j\ell}=\mathcal{E}(U_j,U\_\ell)\\,
+    \\j\neq \ell\\, with \\\mathcal{E}(U_j,U\_\ell)=\int_0^1
+    F\_{U_j}^{-1}(t) F\_{U\_\ell}^{-1}(t) \\ dt\\,
 
-  - \\\[\boldsymbol{\mathfrak{E}}\_{UU}\]\_{ii}=\mathbb{E}(U_i^2)\\,
-    \\i,j=1,\dots,p\\,
+  - \\\[\boldsymbol{\mathfrak{E}}\_{UU}\]\_{jj}=\mathbb{E}(U_j^2)\\,
+    \\j,\ell=1,\dots,p\\,
 
   - \\\bullet\\ denotes the Schur (or entrywise) product of matrices.
+
+The covariance matrix can be calculated either based on the covariance
+matrices of the centers and ranges or based on the data. If the data is
+provided, the covariance matrices are calculated using the sample
+covariance of the centers and ranges and the sample covariance between
+centers and ranges. For the robust estimation of the covariance matrix,
+see
+[`IMCD`](https://catarinaploureiro.github.io/AIDA/reference/IMCD.md).
 
 ## References
 
@@ -109,5 +126,5 @@ distance. arXiv preprint arXiv:2407.05105.
 data(creditcard)
 credit_card_int <- creditcard$intData
 
-credit_card_cov<-int_cov(credit_card_int)
+credit_card_cov <- int_cov(credit_card_int)
 ```

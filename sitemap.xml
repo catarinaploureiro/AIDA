@@ -3,6 +3,7 @@
 <url><loc>https://catarinaploureiro.github.io/AIDA/LICENSE-text.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/LICENSE.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/articles/IMCD_examples.html</loc></url>
+<url><loc>https://catarinaploureiro.github.io/AIDA/articles/Shapley_examples.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/articles/index.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/articles/intData_examples.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/authors.html</loc></url>
@@ -16,7 +17,6 @@
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/IMCD.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/IMah_dist.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/IMah_dist_pairs.html</loc></url>
-<url><loc>https://catarinaploureiro.github.io/AIDA/reference/KL_divergence.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/LatentCase.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/LatentDist.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/LatentParam.html</loc></url>
@@ -29,7 +29,9 @@
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/SYMB.biplot.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/SYMB.pairs.panels.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/UpperBounds.html</loc></url>
-<url><loc>https://catarinaploureiro.github.io/AIDA/reference/angle_error.html</loc></url>
+<url><loc>https://catarinaploureiro.github.io/AIDA/reference/barplot_int_Shapley.html</loc></url>
+<url><loc>https://catarinaploureiro.github.io/AIDA/reference/barplot_int_Shapley_decomp.html</loc></url>
+<url><loc>https://catarinaploureiro.github.io/AIDA/reference/beeswarm_int_Shapley.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/bigIMCD.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/c_step.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/cal.E.UU.html</loc></url>
@@ -40,7 +42,6 @@
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/draw_z.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/entrecampos_air_quality.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/farness.html</loc></url>
-<url><loc>https://catarinaploureiro.github.io/AIDA/reference/frobenius_error.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/get_latent_param.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/get_latent_var.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/head.html</loc></url>
@@ -48,6 +49,9 @@
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/intCars.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/intData-class.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/intData.html</loc></url>
+<url><loc>https://catarinaploureiro.github.io/AIDA/reference/int_Shapley.html</loc></url>
+<url><loc>https://catarinaploureiro.github.io/AIDA/reference/int_Shapley_decomp.html</loc></url>
+<url><loc>https://catarinaploureiro.github.io/AIDA/reference/int_Shapley_interaction.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/int_cov.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/int_cov_z.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/int_mean_z.html</loc></url>
@@ -61,11 +65,14 @@
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/pick10.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/plot.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/plot_dist_dist.html</loc></url>
+<url><loc>https://catarinaploureiro.github.io/AIDA/reference/plot_int_Shapley_inter.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/plot_interval_dist.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/print.html</loc></url>
+<url><loc>https://catarinaploureiro.github.io/AIDA/reference/radarplot_int_Shapley.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/rbind.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/row.names.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/rownames.html</loc></url>
+<url><loc>https://catarinaploureiro.github.io/AIDA/reference/safe_solve_cov.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/show.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/smallIMCD.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/spotify_tracks.html</loc></url>
@@ -73,5 +80,6 @@
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/summary.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/summaryintData-class.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/tail.html</loc></url>
+<url><loc>https://catarinaploureiro.github.io/AIDA/reference/tileplot_int_Shapley.html</loc></url>
 </urlset>
 

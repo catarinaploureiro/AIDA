@@ -24,14 +24,14 @@ get_latent_param(
   A string specifying which of the three scenarios applies to the latent
   variables:
 
-  - `"General"`: The case where the latent variables do not have any
-    nice properties.
+  - `"U_id_symmetric"`: The case where the latent variables are
+    identically distributed and symmetric.
 
   - `"U_id"`: The case where the latent variables are identically
     distributed.
 
-  - `"U_id_symmetric"`: The case where the latent variables are
-    identically distributed and symmetric.
+  - `"General"`: The case where the latent variables do not have any
+    nice properties.
 
   Defaults to `"U_id_symmetric"`.
 
@@ -39,10 +39,11 @@ get_latent_param(
 
   A string or vector of strings specifying the distribution(s) of the
   latent variables. If the variables are identically distributed it can
-  be one of
-  (`"Unif"`,`"Triang"`,`"TNorm"`,`"InvTri"`,`"Beta"`,`"KDE"`,`"Degenerated"`),
-  if not a vector must be provided with the distribution for each
-  variable.
+  be one of (`"Unif"`, `"Triang"`, `"TNorm"`, `"InvTri"`, `"Beta"`,
+  `"KDE"`, `"Degenerated"`), if not a vector must be provided with the
+  distribution for each variable. The default is `"Unif"` if
+  `LatentCase="U_id_symmetric"` or if `Umicro` is not provided, and
+  `"KDE"` if `LatentCase="General"`.
 
 - TriangParam:
 
@@ -64,8 +65,8 @@ get_latent_param(
 
 - Umicro:
 
-  Latent microdata observations. Needed if `LatentDist="KDE"` or
-  `estimate.DistParam=TRUE`.
+  Latent microdata observations. Needed if `estimate.DistParam` is
+  `TRUE` or `LatentDist` is `"KDE"`.
 
 - p:
 
@@ -101,11 +102,11 @@ defined according to the `LatentCase`:
 - `"General"`: The latent variables do not have any nice properties, so
   its parameters are:
 
-  - \\\[\boldsymbol{\mathfrak{E}}\_{UU}\]\_{ij}=\mathcal{E}(U_i,U_j)\\,
-    \\i\neq j\\, with \\\mathcal{E}(U_i,U_j)=\int_0^1 F\_{U_i}^{-1}(t)
-    F\_{U_j}^{-1}(t) \\ dt\\, and
-    \\\[\boldsymbol{\mathfrak{E}}\_{UU}\]\_{ii}=\mathbb{E}(U_i^2)\\,
-    \\i,j=1,\dots,p\\
+  - \\\[\boldsymbol{\mathfrak{E}}\_{UU}\]\_{j\ell}=\mathcal{E}(U_j,U\_\ell)\\,
+    \\j\neq \ell\\, with \\\mathcal{E}(U_j,U\_\ell)=\int_0^1
+    F\_{U_j}^{-1}(t) F\_{U\_\ell}^{-1}(t) \\ dt\\, and
+    \\\[\boldsymbol{\mathfrak{E}}\_{UU}\]\_{jj}=\mathbb{E}(U_j^2)\\,
+    \\j,\ell=1,\dots,p\\
 
   - \\\boldsymbol{\Psi}=\text{Diag}(\mathbb{E}(U_1),\dots,\mathbb{E}(U_p))\\
 
@@ -122,8 +123,19 @@ distance. arXiv preprint arXiv:2407.05105.
 data(creditcard)
 CreditCard_min_max <- creditcard$min_max
 CreditCard_microdata <- creditcard$microdata
-credit_agrby<-paste(CreditCard_microdata$Name,CreditCard_microdata$Month,sep = "_")
-credit_card_U<-get_latent_var(CreditCard_microdata[,3:7], CreditCard_min_max, credit_agrby, 
-                              agrlevels = row.names(CreditCard_min_max), Seq="LbUb_VarbyVar")
-credit_card_param<-get_latent_param(LatentCase="General",LatentDist="KDE",Umicro=credit_card_U)
+
+# Define grouping variable for microdata aggregation
+credit_agrby <- paste(CreditCard_microdata$Name, CreditCard_microdata$Month, sep = "_")
+
+# Obtain latent variables inherent to the macrodata (standardized to [-1,1])
+credit_card_U <- get_latent_var(microdata = CreditCard_microdata[,3:7], 
+                                macrodata = CreditCard_min_max, 
+                                agrby = credit_agrby, 
+                                agrlevels = row.names(CreditCard_min_max), 
+                                Seq = "LbUb_VarbyVar")
+
+# Obtain parameters of the latent variables
+credit_card_param <- get_latent_param(LatentCase = "General",
+                                      LatentDist = "KDE",
+                                      Umicro = credit_card_U)
 ```

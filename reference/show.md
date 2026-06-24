@@ -1,10 +1,10 @@
-# Show Method for [intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+# Show Method for [`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
 
 Show Method for
-[intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+[`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
 
 Show Method for Summary
-[intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+[`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
 
 ## Usage
 

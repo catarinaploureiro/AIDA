@@ -47,21 +47,24 @@ intData(
 
 - LatentParam:
 
-  A list with the parameters of the latent variables.
+  A list with the parameters of the latent variables. Expects a list
+  with a single number if `LatentCase` is `"U_id_symmetric"`, a list of
+  two numbers if `LatentCase` is `"U_id"`, and a list of two matrices if
+  `LatentCase` is `"General"`.
 
 - LatentCase:
 
   A string specifying which of the three scenarios applies to the latent
   variables:
 
-  - `"General"`: The case where the latent variables do not have any
-    nice properties.
+  - `"U_id_symmetric"`: The case where the latent variables are
+    identically distributed and symmetric.
 
   - `"U_id"`: The case where the latent variables are identically
     distributed.
 
-  - `"U_id_symmetric"`: The case where the latent variables are
-    identically distributed and symmetric.
+  - `"General"`: The case where the latent variables do not have any
+    nice properties.
 
   Defaults to `"U_id_symmetric"`.
 
@@ -69,10 +72,11 @@ intData(
 
   A string or vector of strings specifying the distribution(s) of the
   latent variables. If the variables are identically distributed it can
-  be one of
-  (`"Unif"`,`"Triang"`,`"TNorm"`,`"InvTri"`,`"Beta"`,`"KDE"`,`"Degenerated"`),
-  if not a vector must be provided with the distribution for each
-  variable.
+  be one of (`"Unif"`, `"Triang"`, `"TNorm"`, `"InvTri"`, `"Beta"`,
+  `"KDE"`, `"Degenerated"`), if not a vector must be provided with the
+  distribution for each variable. The default is `"Unif"` if
+  `LatentCase="U_id_symmetric"` or if `Umicro` is not provided, and
+  `"KDE"` if `LatentCase="General"`.
 
 - TriangParam:
 
@@ -94,8 +98,8 @@ intData(
 
 - Umicro:
 
-  Latent microdata observations. Needed if `LatentDist="KDE"` or
-  `estimate.DistParam=TRUE`.
+  Latent microdata observations. Needed if `estimate.DistParam` is
+  `TRUE` or `LatentDist` is `"KDE"`.
 
 - estimate.DistParam:
 
@@ -118,7 +122,7 @@ intData(
 ## Value
 
 An object of class
-[intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md).
+[`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md).
 
 ## References
 
@@ -129,3 +133,20 @@ distance. arXiv preprint arXiv:2407.05105.
 
 Adapted from package `MAINT.Data`
 (<https://cran.r-project.org/package=MAINT.Data>).
+
+## Examples
+
+``` r
+# Load microdat and macrodata
+data(creditcard)
+CreditCard_microdata <- creditcard$microdata
+CreditCard_min_max <- creditcard$min_max
+
+# Create an intData object using the min_max component of the dataset 
+# Assume a continuous uniform distribution for the latent variables 
+# This corresponds to LatentCase="U_id_symmetric"
+# This is the default setting for the intData class
+credit_card_int_unif <- intData(CreditCard_min_max, 
+                                Seq = "LbUb_VarbyVar", 
+                                VarNames = colnames(CreditCard_microdata)[3:7])
+```

@@ -1,7 +1,7 @@
-# Row.Names Method for [intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+# Row.Names Method for [`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
 
 Row.Names Method for
-[intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+[`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
 
 ## Usage
 
@@ -15,7 +15,7 @@ row.names(x)
 - x:
 
   An object of class
-  [intData](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md).
+  [`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md).
 
 ## Value
 
