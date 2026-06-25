@@ -67,4 +67,4 @@ metrics <- c("Pr(1)", "Pr(0)", "Re(1)", "Re(0)", "Gmean", "F1", "Accuracy", "AUC
 # Create boxplots for each metric
 lapply(metrics, function(metric){create_boxplot(melted_metrics_data, metric, filename)})
 
-create_boxplot(melted_metrics_data, "Recall", filename)
+create_boxplot(melted_metrics_data, "Re(1)", filename)

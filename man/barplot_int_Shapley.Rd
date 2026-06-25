@@ -11,7 +11,6 @@ barplot_int_Shapley(
   palette = NULL,
   abbrev.var = 20,
   abbrev.obs = 20,
-  sort.var = TRUE,
   sort.obs = TRUE,
   plot_IMah = TRUE,
   IMah_label = expression(Robust ~ d[IMah]^2 * (bold(x))),
@@ -30,8 +29,6 @@ barplot_int_Shapley(
 \item{abbrev.var}{Integer. If \code{abbrev.var} \eqn{> 0}, column names are abbreviated using abbreviate with \code{minlenght = abrev.var}.}
 
 \item{abbrev.obs}{Integer. If \code{abbrev.obs} \eqn{> 0}, row names are abbreviated using abbreviate with \code{minlenght = abrev.obs}.}
-
-\item{sort.var}{Logical. If \code{TRUE} (default), variables are sorted according to the  distance.}
 
 \item{sort.obs}{Logical. If \code{TRUE} (default), observations are sorted according to their squared (robust) Interval-Mahalanobis distance.}
 

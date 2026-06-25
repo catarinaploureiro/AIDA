@@ -27,8 +27,6 @@
 #'
 #' @return An \code{\linkS4class{intData}} object containing the aggregated interval-valued data, or \code{NULL} if all units lead to degenerate intervals.
 #'
-#' @importFrom assertthat is.number
-#' @importFrom stats quantile
 #' 
 #' @details
 #' This function processes a data frame of microdata and aggregates it into interval-valued data according to the specified grouping factor and aggregation criteria. 

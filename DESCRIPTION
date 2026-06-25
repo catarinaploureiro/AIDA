@@ -29,31 +29,26 @@ LazyDataCompression: xz
 VignetteBuilder: knitr
 Language: en-US
 Imports: 
-    ggplot2,
-    ggrepel,
-    CerioliOutlierDetection,
     cellWise,
-    kde1d,
-    plotly,
-    robustbase,
-    MASS,
-    assertthat,
-    methods,
-    RColorBrewer,
+    CerioliOutlierDetection,
     cowplot,
-    dplyr (>= 1.0.0),
     fmsb,
     ggbeeswarm,
-    reshape2,
-    scales,
-    tibble,
-    tidyr
+    ggplot2,
+    kde1d,
+    MASS,
+    methods,
+    robustbase
 Depends: 
     R (>= 3.6)
 Suggests: 
+    corrplot,
+    ggrepel,
     knitr,
+    plotly,
+    RColorBrewer,
     rmarkdown,
-    testthat (>= 3.0.0),
-    corrplot
+    scales,
+    testthat (>= 3.0.0)
 Config/roxygen2/version: 8.0.0
 Config/testthat/edition: 3

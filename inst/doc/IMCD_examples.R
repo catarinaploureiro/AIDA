@@ -59,7 +59,7 @@ spotify_outliers$outliers_names
 spotify_outliers_2 <- int_outliers(spotify_IMCD$robust_dist, cutoff = "farness", cutoff_lvl = 0.9)
 spotify_outliers_2$outliers_names[!spotify_outliers_2$outliers_names%in%spotify_outliers$outliers_names]
 
-## ----fig.width=9--------------------------------------------------------------
+## ----eval = requireNamespace("corrplot", quietly = TRUE), fig.width=9---------
 # Compute correlation matrix from the robust covariance matrix
 spotify_corr <- cov2cor(spotify_IMCD$cov_IMCD)
 

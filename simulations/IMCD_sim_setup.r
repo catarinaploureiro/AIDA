@@ -79,7 +79,7 @@ reweight_IMCD <- function(d2, z, data, m=0, cutoff=c("farness","adjbox","chi-squ
         w <- ifelse((d2 >= cutoff_value[1])&(d2 <= cutoff_value[2]), 1, 0)
     }else if (cutoff=="F-dist"){
         delta <- 1-cutoff_lvl
-        hr05 <- hr05CutoffMvnormal(n, p, m/n, delta)
+        hr05 <- CerioliOutlierDetection::hr05CutoffMvnormal(n, p, m/n, delta)
         dfz <- hr05$m.pred - p + 1
         cutoff_value <- hr05$m.pred * p * qf(1 - delta, df1 = p, df2 = dfz) / dfz
         w <- ifelse(d2 <= cutoff_value, 1, 0)
@@ -120,7 +120,6 @@ int_cov_Mallows <- function(data){
 #' 
 #' @param n Total number of ticks to complete.
 #' @return  New progress bar. See package \code{progress}.
-#' @importFrom progress progress_bar
 #' @export
 pb_new <- function(n){
     pb <- progress::progress_bar$new(format = " :current/:total (:percent) [Elapsed: :elapsedfull || ETA: :eta]",
@@ -133,99 +132,35 @@ pb_new <- function(n){
     return(pb)
 }
 
-#' Compare Covariance Matrices
-#' 
-#' Computes the Frobenius error, angle error, and Kullback-Leibler (KL) divergence between an estimated covariance matrix and the ground truth. Assumes normal multivariate distributions.
-#' 
-#' @param est_cov Estimated covariance matrix.
-#' @param ground_truth_cov Ground truth covariance matrix.
-#' @return A vector with the evaluation metrics calculated.
-#' @export
-compare_cov_matrix <- function(est_cov, ground_truth_cov){
-    result <- c(frobenius=frobenius_error(est_cov, ground_truth_cov),
-                angle=angle_error(est_cov, ground_truth_cov),
-                kl=KL_divergence(est_cov, ground_truth_cov))
-    names(result) <- c("Frobenius Error", "Angle Error", "KL Divergence")
-    return(result)
-}
-
-#' Classification Evaluation Metrics For Outlier Detection
-#' 
-#' Calculate classification evaluation metrics for outlier detection, namely: precision, negative predictive value (NPV), recall, specificity, geometric mean, F1 score, accuracy, area under the curve (AUC), true positives (TP), true negatives (TN), false positives (FP), false negatives (FN)
-#' 
-#' @param ground_truth A vector of 0 and 1, indicating the ground truth of which observations are outliers or not.
-#' @param predictions A vector of 0 and 1, indicating the predictions of which observations are outliers or not.
-#' @return A vector with the evaluation metrics calculated.
-#' @importFrom caret confusionMatrix
-#' @importFrom pROC roc
-#' @export
-#' @examples
-#' ground_truth <- c(rep(1, 10), rep(0, 5))
-#' predictions <- sample(ground_truth)
-#' evaluate_outlier_detection(predictions, ground_truth)
-evaluate_outlier_detection <- function(predictions, ground_truth) {
-    predictions_factor <- factor(predictions, levels = c("0", "1"))
-    ground_truth_factor <- factor(ground_truth, levels = c("0", "1"))
-
-    cm <- caret::confusionMatrix(predictions_factor, ground_truth_factor, positive="1")
-    gmean <- sqrt(cm$byClass["Recall"] * cm$byClass["Specificity"])
-
-    if (length(unique(ground_truth)) < 2) {
-        auc <- NA
-    } else {
-        auc <- pROC::roc(as.numeric(ground_truth == "1"), as.numeric(predictions == "1"), quiet=TRUE)$auc
-    }
-    
-    result <- c(precision = cm$byClass["Precision"], 
-                npv = cm$byClass["Neg Pred Value"], 
-                recall = cm$byClass["Recall"], 
-                specificity = cm$byClass["Specificity"], 
-                gmean = gmean, 
-                f1 = cm$byClass["F1"], 
-                accuracy = cm$overall["Accuracy"], 
-                auc = auc,
-                tp = cm$table[2, 2],
-                tn = cm$table[1, 1],
-                fp = cm$table[1, 2],
-                fn = cm$table[2, 1])
-    
-    names(result) <- c("Precision", "NPV", "Recall", 
-                        "Specificity", "Gmean", "F1", 
-                        "Accuracy", "AUC", "TP", "TN", 
-                        "FP", "FN")
-    return(result)
-}
-
 #' Create Boxplot for Evaluation Metrics
 #'
 #' Create a boxplot for a specified evaluation metric, faceted by the number of observations (N) and the number of variables (P), and colored by the combination of cutoff method and M value.
 #' @param data A data frame containing the evaluation metrics, with columns for N, P, epsilon, cutoff, M, variable (metric name), and value (metric value).
 #' @param metric The name of the evaluation metric to plot (e.g., "Precision", "Recall", "F1", "Frobenius Error").
 #' @return A ggplot object representing the boxplot for the specified metric.
-#' @import ggplot2
 #' @export
 create_boxplot <- function(data, metric, plot_title=NULL) {
     epsilon <- cutoff <- M <- value <- NULL  
-    ggplot(data[data$variable == metric, ], 
+    ggplot2::ggplot(data[data$variable == metric, ], 
            aes(x = factor(epsilon), y = value, fill = interaction(cutoff, M))) + 
-        geom_boxplot() +
-        labs(x = "Contamination ε", y = metric, fill = "cutoff.Classic/IMCD", title = plot_title) +
-        facet_grid(N ~ P, labeller = label_both) +  # Facet for N and P
-        geom_vline(aes(xintercept = as.numeric(factor(epsilon)) + 0.5), 
-                   color = "white", linetype = "solid", size = 1) +  # Add separation lines
-        theme(
-            plot.title = element_text(size = 16, face = "bold"),   # Larger title font
-            axis.title = element_text(size = 14, face = "bold"),   # Larger axis titles
-            axis.text = element_text(size = 12),                   # Larger tick labels
-            legend.title = element_text(size = 14),                # Larger legend title
-            legend.text = element_text(size = 12),                 # Larger legend text
-            strip.text = element_text(size = 14, face = "bold"),   # Larger facet labels
-            panel.grid.major.x = element_blank(),  # Remove default vertical grid lines
-            panel.grid.minor.x = element_blank(),   # Remove minor vertical grid lines
+        ggplot2::geom_boxplot() +
+        ggplot2::labs(x = "Contamination ε", y = metric, fill = "cutoff.Classic/IMCD", title = plot_title) +
+        ggplot2::facet_grid(N ~ P, labeller = label_both) +  # Facet for N and P
+        ggplot2::geom_vline(aes(xintercept = as.numeric(factor(epsilon)) + 0.5), 
+                   color = "white", linetype = "solid", linewidth = 1) +  # Add separation lines
+        ggplot2::theme(
+            plot.title = ggplot2::element_text(size = 16, face = "bold"),   # Larger title font
+            axis.title = ggplot2::element_text(size = 14, face = "bold"),   # Larger axis titles
+            axis.text = ggplot2::element_text(size = 12),                   # Larger tick labels
+            legend.title = ggplot2::element_text(size = 14),                # Larger legend title
+            legend.text = ggplot2::element_text(size = 12),                 # Larger legend text
+            strip.text = ggplot2::element_text(size = 14, face = "bold"),   # Larger facet labels
+            panel.grid.major.x = ggplot2::element_blank(),  # Remove default vertical grid lines
+            panel.grid.minor.x = ggplot2::element_blank(),   # Remove minor vertical grid lines
             legend.position = "bottom", # Position legend at the bottom
-            legend.background = element_rect(fill = "gray92", color = NA) # Lighter background for legend
+            legend.background = ggplot2::element_rect(fill = "gray92", color = NA) # Lighter background for legend
         ) + 
-        scale_fill_manual(
+        ggplot2::scale_fill_manual(
           values = c(
             "adjbox.Classic" = "#F8766D",
             "adjbox.Classic_Mallows" = "#CD9600",

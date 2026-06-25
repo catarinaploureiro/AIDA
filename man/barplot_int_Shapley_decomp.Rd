@@ -16,7 +16,7 @@ barplot_int_Shapley_decomp(
 \arguments{
 \item{shapley_decomp}{A list of matrices containing the Shapley value decomposition into contributions of (Centers, Ranges, and CrossCentersRanges) for each observation.}
 
-\item{palette}{A vector with colors for each feature. Default is NULL.}
+\item{palette}{A vector with colors for each feature. If \code{palette} is \code{NULL} (default), the colors are generated using \code{RColorBrewer}.}
 
 \item{rotate_x}{Logical. If \code{TRUE} (default), the x-axis labels are rotated.}
 

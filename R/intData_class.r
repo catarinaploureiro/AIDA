@@ -1,3 +1,8 @@
+#' @importFrom methods new show is setClass setMethod
+#' @importFrom stats cov dnorm integrate mad mahalanobis median
+#' @importFrom stats pnorm qbeta qchisq qf qnorm quantile runif sd setNames
+NULL
+
 #' Interval Data Class
 #'
 #' A class to represent interval data.
@@ -18,7 +23,6 @@
 #' @slot NObs A numeric value indicating the number of observations.
 #' @slot NIVar A numeric value indicating the number of interval variables.
 #' @slot NbMicroUnits An integer indicating the number of micro units.
-#' @import methods
 #' @references Oliveira, M. R., Pinheiro, D., & Oliveira, L. (2025). 
 #' Location and association measures for interval-valued data based on Mallows' distance. 
 #' arXiv preprint arXiv:2407.05105. \url{https://arxiv.org/abs/2407.05105}
@@ -43,7 +47,6 @@ setClass("intData",slots=c(
 #'
 #' @slot Centersumar A table summarizing the centers.
 #' @slot Rngsumar A table summarizing the ranges.
-#' @import methods
 #' @export
 setClass("summaryintData",slots=c(
   Centersumar="table",
@@ -138,8 +141,6 @@ setGeneric("LatentDist",function(Sdt) standardGeneric("LatentDist"))
 #' @param ObsNames A character vector of observation names.
 #' @param NbMicroUnits An integer specifying the number of micro units.
 #' 
-#' @importFrom assertthat is.number
-#' 
 #' @return An object of class \code{\linkS4class{intData}}.
 #' 
 #' @references Oliveira, M. R., Pinheiro, D., & Oliveira, L. (2025). 
@@ -219,7 +220,7 @@ intData <- function(Data,
     if (identical(LatentDist, c("Unif","Triang","TNorm","InvTri","Beta","KDE","Degenerated"))) stop("Error: If LatentParam is provided, LatentDist must also be provided.")
     if (identical(LatentCase, c("U_id_symmetric","U_id","General"))){
       if (length(LatentParam)==1) {LatentCase <- "U_id_symmetric"}
-      else if (assertthat::is.number(LatentParam[[1]])) {LatentCase <- "U_id"}
+      else if (is.numeric(LatentParam[[1]])) {LatentCase <- "U_id"}
       else {LatentCase <- "General"}
     }
   }
@@ -232,7 +233,6 @@ intData <- function(Data,
 #'
 #' @param object An object of class \code{\linkS4class{intData}}.
 #' @return An object of class \code{summaryintData}.
-#' @import methods
 #' @export
 #' @rdname summary
 setMethod("summary",
@@ -247,7 +247,6 @@ setMethod("summary",
 #'
 #' @param object An object of class \code{\linkS4class{intData}}.
 #' @return The object itself, returned invisibly. Called for its side effects (printing).
-#' @import methods
 #' @export
 #' @rdname show
 setMethod("show",
@@ -286,7 +285,6 @@ setMethod("show",
 #'
 #' @param x An object of class \code{\linkS4class{intData}}.
 #' @return The number of rows.
-#' @import methods
 #' @export
 #' @rdname nrow
 setMethod("nrow",signature(x = "intData"),function(x) x@NObs)
@@ -295,7 +293,6 @@ setMethod("nrow",signature(x = "intData"),function(x) x@NObs)
 #'
 #' @param x An object of class \code{\linkS4class{intData}}.
 #' @return The number of columns.
-#' @import methods
 #' @export
 #' @rdname ncol
 setMethod("ncol",signature(x = "intData"),function(x) x@NIVar)
@@ -304,7 +301,6 @@ setMethod("ncol",signature(x = "intData"),function(x) x@NIVar)
 #'
 #' @param x An object of class \code{\linkS4class{intData}}.
 #' @return A vector of the number of rows and columns.
-#' @import methods
 #' @export
 #' @rdname dim
 setMethod("dim",signature(x = "intData"),function(x) c(nrow(x),ncol(x)))
@@ -313,7 +309,6 @@ setMethod("dim",signature(x = "intData"),function(x) c(nrow(x),ncol(x)))
 #'
 #' @param x An object of class \code{\linkS4class{intData}}.
 #' @return A character vector of row names.
-#' @import methods
 #' @export
 #' @rdname rownames
 setMethod("rownames",signature(x = "intData"),function(x) x@ObsNames)
@@ -322,7 +317,6 @@ setMethod("rownames",signature(x = "intData"),function(x) x@ObsNames)
 #'
 #' @param x An object of class \code{\linkS4class{intData}}.
 #' @return A character vector of row names.
-#' @import methods
 #' @export
 #' @rdname row.names
 setMethod("row.names",signature(x = "intData"),function(x) x@ObsNames)
@@ -331,7 +325,6 @@ setMethod("row.names",signature(x = "intData"),function(x) x@ObsNames)
 #'
 #' @param x An object of class \code{\linkS4class{intData}}.
 #' @return A character vector of column names.
-#' @import methods
 #' @export
 #' @rdname colnames
 setMethod("colnames",signature(x = "intData"),function(x) x@VarNames)
@@ -340,7 +333,6 @@ setMethod("colnames",signature(x = "intData"),function(x) x@VarNames)
 #'
 #' @param x An object of class \code{\linkS4class{intData}}.
 #' @return A character vector of variable names.
-#' @import methods
 #' @export
 #' @rdname names
 setMethod("names",signature(x = "intData"),function(x) x@VarNames)
@@ -349,7 +341,6 @@ setMethod("names",signature(x = "intData"),function(x) x@VarNames)
 #'
 #' @param Sdt An object of class \code{\linkS4class{intData}}.
 #' @return A \code{data.frame} containing the centers of the intervals.
-#' @import methods
 #' @export
 #' @rdname Centers
 setMethod("Centers",signature(Sdt = "intData"),function(Sdt) Sdt@Centers)
@@ -358,7 +349,6 @@ setMethod("Centers",signature(Sdt = "intData"),function(Sdt) Sdt@Centers)
 #'
 #' @param Sdt An object of class \code{\linkS4class{intData}}.
 #' @return A \code{data.frame} containing the logarithms of the ranges.
-#' @import methods
 #' @export
 #' @rdname LogRanges
 setMethod("LogRanges",signature(Sdt = "intData"),function(Sdt) log(Sdt@Ranges))
@@ -367,7 +357,6 @@ setMethod("LogRanges",signature(Sdt = "intData"),function(Sdt) log(Sdt@Ranges))
 #'
 #' @param Sdt An object of class \code{\linkS4class{intData}}.
 #' @return A \code{data.frame} containing the ranges of the intervals.
-#' @import methods
 #' @export
 #' @rdname Ranges
 setMethod("Ranges",signature(Sdt = "intData"),function(Sdt) Sdt@Ranges)
@@ -376,7 +365,6 @@ setMethod("Ranges",signature(Sdt = "intData"),function(Sdt) Sdt@Ranges)
 #'
 #' @param Sdt An object of class \code{\linkS4class{intData}}.
 #' @return A \code{data.frame} containing the lower bounds of the intervals.
-#' @import methods
 #' @export
 #' @rdname LowerBounds
 setMethod("LowerBounds",signature(Sdt = "intData"),function(Sdt){
@@ -389,7 +377,6 @@ setMethod("LowerBounds",signature(Sdt = "intData"),function(Sdt){
 #'
 #' @param Sdt An object of class \code{\linkS4class{intData}}.
 #' @return A \code{data.frame} containing the upper bounds of the intervals.
-#' @import methods
 #' @export
 #' @rdname UpperBounds
 setMethod("UpperBounds",signature(Sdt = "intData"),function(Sdt){
@@ -402,7 +389,6 @@ setMethod("UpperBounds",signature(Sdt = "intData"),function(Sdt){
 #'
 #' @param Sdt An object of class \code{\linkS4class{intData}}.
 #' @return A list with the latent parameters.
-#' @import methods
 #' @export
 #' @rdname LatentParam
 setMethod("LatentParam",signature(Sdt = "intData"),function(Sdt) Sdt@LatentParam)
@@ -411,7 +397,6 @@ setMethod("LatentParam",signature(Sdt = "intData"),function(Sdt) Sdt@LatentParam
 #'
 #' @param Sdt An object of class \code{\linkS4class{intData}}.
 #' @return A character with the latent case.
-#' @import methods
 #' @export
 #' @rdname LatentCase
 setMethod("LatentCase",signature(Sdt = "intData"),function(Sdt) Sdt@LatentCase)
@@ -420,7 +405,6 @@ setMethod("LatentCase",signature(Sdt = "intData"),function(Sdt) Sdt@LatentCase)
 #'
 #' @param Sdt An object of class \code{\linkS4class{intData}}.
 #' @return A character with the latent distribution(s).
-#' @import methods
 #' @export
 #' @rdname LatentDist
 setMethod("LatentDist",signature(Sdt = "intData"),function(Sdt) Sdt@LatentDist)
@@ -429,7 +413,6 @@ setMethod("LatentDist",signature(Sdt = "intData"),function(Sdt) Sdt@LatentDist)
 #'
 #' @param x An object of class \code{\linkS4class{intData}}.
 #' @return An integer specifying the number of micro units.
-#' @import methods
 #' @export
 #' @rdname NbMicroUnits
 setMethod("NbMicroUnits",
@@ -447,7 +430,6 @@ setMethod("NbMicroUnits",
 #' @param x An \code{\linkS4class{intData}} object.
 #' @param n The number of rows to return.
 #' @return A subset of the \code{\linkS4class{intData}} object.
-#' @import methods
 #' @export
 #' @rdname head
 setMethod("head",
@@ -470,7 +452,6 @@ setMethod("head",
 #' @param x An \code{\linkS4class{intData}} object.
 #' @param n The number of rows to return.
 #' @return A subset of the \code{\linkS4class{intData}} object.
-#' @import methods
 #' @export
 #' @rdname tail
 setMethod("tail",
@@ -496,8 +477,6 @@ setMethod("tail",
 #' @param palette A vector with colors for each observation.
 #' @param ... Additional graphical parameters.
 #' @return A plot showing the relationship between the two \code{\linkS4class{intData}} objects.
-#' @import methods
-#' @importFrom graphics plot.default lines rect
 #' @export
 #' @rdname plot
 setMethod("plot",
@@ -571,9 +550,6 @@ setMethod("plot",
 #' @param append Logical, if \code{TRUE}, the plot is added to the current plot.
 #' @param ... Additional graphical parameters.
 #' @return A plot showing the intervals of the \code{\linkS4class{intData}} object.
-#' @import methods
-#' @importFrom stats runif
-#' @importFrom graphics plot.default segments
 #' @export
 #' @rdname plot
 setMethod("plot",
@@ -644,7 +620,6 @@ setMethod("plot",
 #' Show Method for Summary \code{\linkS4class{intData}}
 #'
 #' @param object An object of class \code{summaryintData}.
-#' @import methods
 #' @export
 #' @rdname show
 setMethod("show",
@@ -662,7 +637,6 @@ setMethod("show",
 #' @param x An object of class \code{summaryintData}.
 #' @param ... Additional arguments passed to print.
 #' @return The object itself, returned invisibly. Called for its side effects (printing).
-#' @import methods
 #' @export
 #' @rdname print
 setMethod("print", signature(x="summaryintData"), function(x,...) invisible(x) )
@@ -681,7 +655,6 @@ setMethod("print", signature(x="summaryintData"), function(x,...) invisible(x) )
 #' @param ... Additional arguments (not used).
 #' @param drop Logical, passed to the underlying \code{[}. Defaults to \code{TRUE}.
 #' @return An \code{\linkS4class{intData}} object containing the specified subset of rows and columns.
-#' @import methods
 #' @export
 #' @rdname S4-Extract-methods
 #' @method [ intData
@@ -715,7 +688,6 @@ setMethod("[",
 #' @param ... \code{\linkS4class{intData}} objects to combine.
 #' @param deparse.level An integer controlling the construction of labels in the result (default is \code{1}).
 #' @return An \code{\linkS4class{intData}} object with rows combined from the input \code{\linkS4class{intData}} objects.
-#' @import methods
 #' @export
 #' @rdname rbind
 setMethod("rbind",
@@ -754,7 +726,6 @@ setMethod("rbind",
 #' @param e1 First \code{\linkS4class{intData}} object.
 #' @param e2 Second \code{\linkS4class{intData}} object.
 #' @return A logical matrix indicating which elements are equal between the two \code{\linkS4class{intData}} objects.
-#' @import methods
 #' @export
 #' @rdname comparison-methods
 setMethod("==",
@@ -787,7 +758,6 @@ setMethod("==",
 #' @param e1 An \code{\linkS4class{intData}} object.
 #' @param e2 An \code{\linkS4class{intData}} object.
 #' @return A logical matrix indicating element-wise inequality of the two \code{\linkS4class{intData}} objects.
-#' @import methods
 #' @export
 #' @rdname comparison-methods
 setMethod("!=",

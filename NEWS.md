@@ -34,4 +34,4 @@
 * Added visualization functions for Shapley values and Shapley interaction indices: `barplot_int_Shapley_decomp()`, `barplot_int_Shapley()`, `beeswarm_int_Shapley()`, `plot_int_Shapley_inter()`, and `radarplot_int_Shapley()`.
 * Improvements to documentation and usability.
 * Added a unit test suite.
-* Removed the dependency on the package `geigen`.
+* Minimized package dependencies.

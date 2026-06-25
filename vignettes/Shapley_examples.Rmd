@@ -88,11 +88,11 @@ cars_shapley2 <- int_Shapley(cars_int)
 
 Barplot of the Shapley value decomposition of the squared robust Interval-Mahalanobis distances. Only the six observations with the largest squared distances are shown, ordered from greatest to smallest squared distance represented by the black line, with the dotted line representing the $0.9$ farness cutoff.
 
-```{r}
+```{r eval = requireNamespace("scales", quietly = TRUE)}
 barplot_int_Shapley(cars_shapley[c(cars_outliers$outliers_names,"Bmwserie7"),], 
                     cutoff_value = cars_outliers$cutoff_value, 
                     cutoff_label = "0.9 Farness Cutoff", 
-                    palette = scales::hue_pal()(4), sort.var = TRUE)
+                    palette = scales::hue_pal()(4))
 ```
 
 Beeswarm of the Shapley value decomposition of the squared robust Interval-Mahalanobis distances. The outlying observations are marked in blue and the shape represents the car model class.
@@ -132,7 +132,7 @@ plot_int_Shapley_inter(cars_shapley_inter[["Ferrari"]], abbrev = 15, title = "Fe
 
 Barplot of the decomposition of the Shapley values by centers and ranges. Only the six observations with the largest squared distances are shown.
 
-```{r fig.width=9.5, fig.height=5}
+```{r eval = requireNamespace("scales", quietly = TRUE), fig.width=9.5, fig.height=5}
 cars_shapley_decomp <- int_Shapley_decomp(cars_int, mean_c = cars_IMCD$mean_IMCD_c,
                                           mean_r = cars_IMCD$mean_IMCD_r, cov = cars_IMCD$cov_IMCD)
 

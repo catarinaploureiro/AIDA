@@ -43,11 +43,11 @@ cars_shapley <- int_Shapley(cars_int, mean_c = cars_IMCD$mean_IMCD_c,
 
 cars_shapley2 <- int_Shapley(cars_int)
 
-## -----------------------------------------------------------------------------
+## ----eval = requireNamespace("scales", quietly = TRUE)------------------------
 barplot_int_Shapley(cars_shapley[c(cars_outliers$outliers_names,"Bmwserie7"),], 
                     cutoff_value = cars_outliers$cutoff_value, 
                     cutoff_label = "0.9 Farness Cutoff", 
-                    palette = scales::hue_pal()(4), sort.var = TRUE)
+                    palette = scales::hue_pal()(4))
 
 ## -----------------------------------------------------------------------------
 beeswarm_int_Shapley(cars_shapley, cars_is_outliers, color_label = NULL, 
@@ -72,7 +72,7 @@ cars_shapley_inter <- int_Shapley_interaction(cars_int, mean_c = cars_IMCD$mean_
 
 plot_int_Shapley_inter(cars_shapley_inter[["Ferrari"]], abbrev = 15, title = "Ferrari")
 
-## ----fig.width=9.5, fig.height=5----------------------------------------------
+## ----eval = requireNamespace("scales", quietly = TRUE), fig.width=9.5, fig.height=5----
 cars_shapley_decomp <- int_Shapley_decomp(cars_int, mean_c = cars_IMCD$mean_IMCD_c,
                                           mean_r = cars_IMCD$mean_IMCD_r, cov = cars_IMCD$cov_IMCD)
 

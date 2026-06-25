@@ -115,7 +115,6 @@ Mallows_dist <- function(data,mean_c=NULL,mean_r=NULL){
 #' @param cov (Optional) A covariance matrix. Defaults to `NULL`, in which case it will be computed 
 #' using the \code{\link{IMCD}} function, if `z` is also `NULL`.
 #' @return A vector with the squared Interval-Mahalanobis distance of each observation.
-#' @importFrom stats mahalanobis
 #' @export
 #' @examples
 #' data(creditcard)

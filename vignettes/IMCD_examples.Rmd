@@ -123,7 +123,7 @@ spotify_outliers_2$outliers_names[!spotify_outliers_2$outliers_names%in%spotify_
 
 Interval correlation matrix plot based on the IMCD estimates.
 
-```{r, fig.width=9}
+```{r, eval = requireNamespace("corrplot", quietly = TRUE), fig.width=9}
 # Compute correlation matrix from the robust covariance matrix
 spotify_corr <- cov2cor(spotify_IMCD$cov_IMCD)
 

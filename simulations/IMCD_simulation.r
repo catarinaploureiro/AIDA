@@ -1,5 +1,4 @@
 library(AIDA)
-library(mvtnorm)
 source("./simulations/IMCD_sim_setup.r")
 source("./simulations/evaluation_metrics.r")
 
@@ -77,7 +76,7 @@ for (Distance in c("IMah", "Mallows")) {
 
             # Generate datasets
             datasets <- replicate(T, {
-                CR <- rmvnorm(N,mean=c(mu.c,mu.r),sigma=cov_fim)
+                CR <- mvtnorm::rmvnorm(N,mean=c(mu.c,mu.r),sigma=cov_fim)
             }, simplify = FALSE)
 
             for (epsilon in EPSILONS) {

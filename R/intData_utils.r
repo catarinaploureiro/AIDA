@@ -115,8 +115,6 @@ get_latent_var <- function(microdata,
 #' @param estimate.DistParam Logical parameter indicating if estimation of the parameters of the latent distributions should be performed. Can only be set to TRUE if \code{LatentCase="General"}.
 #' The default is \code{FALSE}.
 #' @return A list with the parameters of the latent variables.
-#' @importFrom MASS fitdistr
-#' @importFrom stats dnorm pnorm
 #' @export
 #' @examples
 #' data(creditcard)
@@ -369,7 +367,6 @@ cal.E.UU <- function(LatentDist=c("Unif","Triang","TNorm","InvTri","Beta","KDE",
 #' @param a2 Parameter alpha of the second Beta distribution.
 #' @param b1 Parameter beta of the first Beta distribution.
 #' @param b2 Parameter beta of the second Beta distribution.
-#' @importFrom stats integrate qbeta
 #' @return  Value
 #' @keywords internal
 CalE.beta.beta <- function(a1,b1,a2,b2){
@@ -386,8 +383,6 @@ CalE.beta.beta <- function(a1,b1,a2,b2){
 #' @param a1 Parameter alpha of the Beta distribution.
 #' @param b1 Parameter beta of the Beta distribution.
 #' @return  Value
-#' @importFrom kde1d qkde1d
-#' @importFrom stats integrate qbeta
 #' @keywords internal
 CalE.beta.kde <- function(micro,a1,b1){
     fit3 <- kde1d::kde1d(micro) # estimate density
@@ -403,8 +398,6 @@ CalE.beta.kde <- function(micro,a1,b1){
 #' @param micro1 Latent microdata observations of the first latent variable.
 #' @param micro2 Latent microdata observations of the second latent variable.
 #' @return  Value
-#' @importFrom kde1d qkde1d
-#' @importFrom stats integrate
 #' @keywords internal
 CalE.kde.kde <- function(micro1,micro2){
     fit3 <- kde1d::kde1d(micro1) # estimate density
@@ -420,7 +413,6 @@ CalE.kde.kde <- function(micro1,micro2){
 #' @param mo1 Mode of the triangular distribution of the first latent variable.
 #' @param mo2 Mode of the triangular distribution of the second latent variable.
 #' @return  Value
-#' @importFrom stats integrate
 #' @keywords internal
 CalE.triang.triang <- function(mo1=0,mo2=0){
     md1 <- min(mo1,mo2)

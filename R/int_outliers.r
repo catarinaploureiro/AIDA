@@ -40,8 +40,6 @@
 #'   \item{\code{cutoff_value}}{Cutoff value used for detecting outliers.}
 #'   \item{\code{farness_probs}}{Numeric vector of farness probabilities for each observation (only if \code{cutoff} is set to \code{"farness"}).}
 #' 
-#' @importFrom robustbase adjboxStats
-#' @importFrom stats qchisq qf qbeta
 #' @references Loureiro, C. P., Oliveira, M. R., Brito, P., & Oliveira, L. (2026). 
 #' Minimum Covariance Determinant Estimator and Outlier Detection for Interval-valued Data. 
 #' arXiv preprint arXiv:2604.26769. \url{https://arxiv.org/abs/2604.26769}
@@ -89,7 +87,7 @@ int_outliers <- function(robust_dist,
         cutoff_value <- qchisq(cutoff_lvl, df = p)
         w <- ifelse(robust_dist <= cutoff_value, FALSE, TRUE)
     }else if (cutoff=="adjbox"){
-        cutoff_value <- adjboxStats(robust_dist, coef=cutoff_lvl, doScale = FALSE)$fence
+        cutoff_value <- robustbase::adjboxStats(robust_dist, coef=cutoff_lvl, doScale = FALSE)$fence
         w <- ifelse((robust_dist >= cutoff_value[1])&(robust_dist <= cutoff_value[2]), FALSE, TRUE)
     }else if (cutoff=="F-dist"){
         critfcn <- function(mm, vv, ww) {

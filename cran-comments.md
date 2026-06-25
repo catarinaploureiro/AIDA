@@ -30,7 +30,7 @@
 * Added `rbind` method for `intData` class.
 * Improvements to documentation and usability.
 * Introduced a unit test suite to improve package reliability.
-* Removed the dependency on the package `geigen`, which is scheduled for archival on CRAN.
+* Minimized package dependencies.
 
 ## Notes
 

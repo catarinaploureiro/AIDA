@@ -66,7 +66,6 @@ int_mean_z <- function(z,X){
 #' }
 #' Defaults to \code{"U_id_symmetric"}.
 #' @return The symbolic covariance matrix.
-#' @importFrom stats cov
 #' @references Oliveira, M. R., Pinheiro, D., & Oliveira, L. (2025). 
 #' Location and association measures for interval-valued data based on Mallows' distance. 
 #' arXiv preprint arXiv:2407.05105. \url{https://arxiv.org/abs/2407.05105}

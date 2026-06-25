@@ -1,3 +1,11 @@
+#' @importFrom grDevices adjustcolor colorRampPalette rainbow
+#' @importFrom graphics par pairs rect lines text plot.default
+#' @importFrom ggplot2 ggplot aes theme theme_light theme_bw theme_minimal labs facet_wrap
+#' @importFrom ggplot2 element_text element_blank element_rect margin guides guide_legend
+#' @importFrom ggplot2 geom_point geom_tile geom_hline geom_vline geom_col geom_bar geom_segment geom_text
+#' @importFrom ggplot2 scale_fill_manual scale_fill_gradient2 scale_linetype_manual scale_color_manual scale_y_discrete scale_alpha_manual
+NULL
+
 #' Symbolic Biplot for Interval-valued Data
 #' 
 #' Create a biplot for interval-valued symbolic data, visualizing the symbolic data as rectangles or crosses, with the first two variables on the x and y axes. The function allows customization of colors, fill colors, and outlier representation.
@@ -9,8 +17,6 @@
 #' @param is_outlier A vector with logical values indicating if the observation is an outlier or not. It makes the line width of the outlying observations thicker. Default is NULL.
 #' @param ... Additional graphical parameters.
 #' @return A biplot is drawn in the graphic window. The biplot shows the symbolic data as rectangles or crosses, with the first two variables on the x and y axes.
-#' @importFrom graphics rect lines
-#' @importFrom grDevices adjustcolor rainbow
 #' @examples
 #' data(creditcard)
 #' credit_card_int <- creditcard$intData
@@ -103,8 +109,6 @@ SYMB.biplot <- function(data,
 #' @param is_outlier A vector with logical values indicating if the observation is an outlier or not. It makes the line width of the outlying observations thicker. Default is NULL.
 #' @param ... Additional graphical parameters.
 #' @return A scatter plot matrix is drawn in the graphic window. The lower off diagonal draws scatter plots, the diagonal variables' names, the upper off diagonal reports  all the symbolic correlations.
-#' @importFrom graphics pairs rect lines text par
-#' @importFrom grDevices adjustcolor colorRampPalette rainbow
 #' @examples
 #' data(creditcard)
 #' credit_card_int <- creditcard$intData
@@ -233,9 +237,6 @@ SYMB.pairs.panels <- function (data,
 #' @param shape_class A vector indicating the shape class of each observation. If NULL (default), all points have the same shape.
 #' @param shape_label Character. Label for the shape class. If NULL (default), no legend for the shape class is shown.
 #' @param label_obs A vector with the names of the observations to be labeled in the plot when \code{ggplotly = FALSE}. Default is NULL.
-#' @import ggplot2
-#' @importFrom plotly ggplotly
-#' @importFrom ggrepel geom_text_repel
 #' @return Returns a Distance-Distance plot that displays the classical distances against the robust distances for each observation, highlighting outliers.
 #' @export
 #' @examples
@@ -420,6 +421,9 @@ plot_dist_dist <- function(class_dist,
 
   # Optional labeling of specific observations
   if (!ggplotly && !is.null(label_obs)) {
+    if (!requireNamespace("ggrepel", quietly = TRUE)) {
+      stop("Package 'ggrepel' is required for labeling functionality.")
+    }
     df_labeled <- subset(df, Name %in% label_obs)
     if (nrow(df_labeled) > 0) {
       p <- p +
@@ -436,6 +440,9 @@ plot_dist_dist <- function(class_dist,
 
   # Convert to plotly if requested
   if (ggplotly) {
+    if (!requireNamespace("plotly", quietly = TRUE)) {
+      stop("Package 'plotly' is required for interactive output.")
+    }
     plotly::ggplotly(p, tooltip = c("label", "x", "y"))
   } else {
     p
@@ -458,9 +465,6 @@ plot_dist_dist <- function(class_dist,
 #' @param label_obs A vector with the names of the observations to be labeled in the plot. If NULL (default), no labels are shown and x-axis labels are displayed.
 #' @return Returns a plot that displays the Interval-Mahalanobis distances for each observation, highlighting outliers based on specified cutoffs.
 #' @export
-#' @import ggplot2
-#' @importFrom ggrepel geom_text_repel
-#' @importFrom stats setNames
 #' @examples
 #' # Create intData object
 #' data(creditcard)
@@ -596,8 +600,10 @@ plot_interval_dist <- function(
 
   # Optional ggrepel labels
   if (!is.null(label_obs)) {
+    if (!requireNamespace("ggrepel", quietly = TRUE)) {
+      stop("Package 'ggrepel' is required for labeling functionality.")
+    }
     label_df <- df[df$obs %in% label_obs, , drop = FALSE]
-
     if (nrow(label_df) > 0) {
       p <- p +
         ggrepel::geom_text_repel(

@@ -56,3 +56,64 @@ KL_divergence <- function(est_cov, ground_truth_cov) {
     S <- est_cov %*% solve(ground_truth_cov)
     return(sum(diag(S))-log(det(S))-nrow(ground_truth_cov))
 }
+
+#' Compare Covariance Matrices
+#' 
+#' Computes the Frobenius error, angle error, and Kullback-Leibler (KL) divergence between an estimated covariance matrix and the ground truth. Assumes normal multivariate distributions.
+#' 
+#' @param est_cov Estimated covariance matrix.
+#' @param ground_truth_cov Ground truth covariance matrix.
+#' @return A vector with the evaluation metrics calculated.
+#' @export
+compare_cov_matrix <- function(est_cov, ground_truth_cov){
+    result <- c(frobenius=frobenius_error(est_cov, ground_truth_cov),
+                angle=angle_error(est_cov, ground_truth_cov),
+                kl=KL_divergence(est_cov, ground_truth_cov))
+    names(result) <- c("Frobenius Error", "Angle Error", "KL Divergence")
+    return(result)
+}
+
+#' Classification Evaluation Metrics For Outlier Detection
+#' 
+#' Calculate classification evaluation metrics for outlier detection, namely: precision, negative predictive value (NPV), recall, specificity, geometric mean, F1 score, accuracy, area under the curve (AUC), true positives (TP), true negatives (TN), false positives (FP), false negatives (FN)
+#' 
+#' @param ground_truth A vector of 0 and 1, indicating the ground truth of which observations are outliers or not.
+#' @param predictions A vector of 0 and 1, indicating the predictions of which observations are outliers or not.
+#' @return A vector with the evaluation metrics calculated.
+#' @export
+#' @examples
+#' ground_truth <- c(rep(1, 10), rep(0, 5))
+#' predictions <- sample(ground_truth)
+#' evaluate_outlier_detection(predictions, ground_truth)
+evaluate_outlier_detection <- function(predictions, ground_truth) {
+    predictions_factor <- factor(predictions, levels = c("0", "1"))
+    ground_truth_factor <- factor(ground_truth, levels = c("0", "1"))
+
+    cm <- caret::confusionMatrix(predictions_factor, ground_truth_factor, positive="1")
+    gmean <- sqrt(cm$byClass["Recall"] * cm$byClass["Specificity"])
+
+    if (length(unique(ground_truth)) < 2) {
+        auc <- NA
+    } else {
+        auc <- pROC::roc(as.numeric(ground_truth == "1"), as.numeric(predictions == "1"), quiet=TRUE)$auc
+    }
+    
+    result <- c(precision = cm$byClass["Precision"], 
+                npv = cm$byClass["Neg Pred Value"], 
+                recall = cm$byClass["Recall"], 
+                specificity = cm$byClass["Specificity"], 
+                gmean = gmean, 
+                f1 = cm$byClass["F1"], 
+                accuracy = cm$overall["Accuracy"], 
+                auc = auc,
+                tp = cm$table[2, 2],
+                tn = cm$table[1, 1],
+                fp = cm$table[1, 2],
+                fn = cm$table[2, 1])
+    
+    names(result) <- c("Precision", "NPV", "Recall", 
+                        "Specificity", "Gmean", "F1", 
+                        "Accuracy", "AUC", "TP", "TN", 
+                        "FP", "FN")
+    return(result)
+}

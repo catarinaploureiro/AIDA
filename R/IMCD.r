@@ -242,9 +242,6 @@ bigIMCD <- function(m, p, n, data){
 #'   \item{\code{robust_dist}}{Robust distances (\code{\link{IMah_dist}}) for each observation.}
 #'   \item{\code{farness_probs}}{Farness probabilities (if \code{cutoff} is set to \code{"farness"}).}
 #' @export
-#' @importFrom robustbase adjboxStats
-#' @importFrom CerioliOutlierDetection hr05CutoffMvnormal
-#' @importFrom stats qchisq qf
 #' @references Loureiro, C. P., Oliveira, M. R., Brito, P., & Oliveira, L. (2026). 
 #' Minimum Covariance Determinant Estimator and Outlier Detection for Interval-valued Data. 
 #' arXiv preprint arXiv:2604.26769. \url{https://arxiv.org/abs/2604.26769}
@@ -312,11 +309,11 @@ IMCD <- function(data,
         cutoff_value <- NA
         w <- z
     }else if (cutoff=="adjbox"){
-        cutoff_value <- adjboxStats(d2, coef=cutoff_lvl, doScale = FALSE)$fence
+        cutoff_value <- robustbase::adjboxStats(d2, coef=cutoff_lvl, doScale = FALSE)$fence
         w <- ifelse((d2 >= cutoff_value[1])&(d2 <= cutoff_value[2]), 1, 0)
     }else if (cutoff=="F-dist"){
         delta <- 1-cutoff_lvl
-        hr05 <- hr05CutoffMvnormal(n, p, m/n, delta)
+        hr05 <- CerioliOutlierDetection::hr05CutoffMvnormal(n, p, m/n, delta)
         dfz <- hr05$m.pred - p + 1
         cutoff_value <- hr05$m.pred * p * qf(1 - delta, df1 = p, df2 = dfz) / dfz
         w <- ifelse(d2 <= cutoff_value, 1, 0)
