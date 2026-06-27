@@ -70,7 +70,8 @@ credit_card_shapley <- int_Shapley(credit_card_int,
 # Plot Shapley values with cutoff line and Interval-Mahalanobis distance
 barplot_int_Shapley(credit_card_shapley, 
                     cutoff_value = credit_card_outliers$cutoff_value,
-                    cutoff_label = "Farness 0.9")
+                    cutoff_label = "Farness 0.9",
+                    palette = rainbow(credit_card_int@NIVar))
 }
 \references{
 Adapted from package \code{ShapleyOutlier} (\url{https://CRAN.R-project.org/package=ShapleyOutlier}).

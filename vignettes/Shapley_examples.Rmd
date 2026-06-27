@@ -97,7 +97,7 @@ barplot_int_Shapley(cars_shapley[c(cars_outliers$outliers_names,"Bmwserie7"),],
 
 Beeswarm of the Shapley value decomposition of the squared robust Interval-Mahalanobis distances. The outlying observations are marked in blue and the shape represents the car model class.
 
-```{r}
+```{r eval = requireNamespace("ggrepel", quietly = TRUE)}
 beeswarm_int_Shapley(cars_shapley, cars_is_outliers, color_label = NULL, 
                       shape_class = cars_microdata$class, shape_label = "Class",
                       palette = c("gray50","dodgerblue"), ggplotly = FALSE, 
@@ -179,7 +179,7 @@ spotify_outliers_2$outliers_names[!spotify_outliers_2$outliers_names%in%spotify_
 
 Plot of the robust squared Interval-Mahalanobis distances for the Spotify dataset. The horizontal lines correspond to the $0.9$ and $0.95$ farness cutoff values, and the mild and strong outliers are marked in green and blue, respectively.
 
-```{r fig.width=7, fig.height=4}
+```{r eval = requireNamespace("ggrepel", quietly = TRUE), fig.width=7, fig.height=4}
 spotify_is_outliers <- as.character(spotify_outliers$is_outlier)
 spotify_is_outliers[!spotify_outliers_2$is_outlier] <- "Regular"
 spotify_is_outliers[spotify_outliers_2$is_outlier] <- "Mild Outlier"
@@ -203,7 +203,7 @@ plot_interval_dist(
 
 Barplot of the Shapley value decomposition of the squared robust Interval-Mahalanobis distances for the $12$ observations with the largest squared distances, ordered from greatest to smallest squared distance represented by the black line, with the dotted lines representing the $0.9$ and $0.95$ farness cutoff values.
 
-```{r}
+```{r eval = requireNamespace("ggrepel", quietly = TRUE) && requireNamespace("RColorBrewer", quietly = TRUE)}
 spotify_Shapley <- int_Shapley(spotify_int, mean_c = spotify_IMCD$mean_IMCD_c, 
                               mean_r = spotify_IMCD$mean_IMCD_r, cov = spotify_IMCD$cov_IMCD)
 
@@ -212,7 +212,7 @@ high_dist_12 <- names(spotify_IMCD$robust_dist[order(spotify_IMCD$robust_dist, d
 barplot_int_Shapley(spotify_Shapley[high_dist_12,], 
                     cutoff_value = c(spotify_outliers$cutoff_value, spotify_outliers_2$cutoff_value),
                     cutoff_label = c("0.95 Farness Cutoff", "0.90 Farness Cutoff"),
-                    sort.obs = TRUE,abbrev.obs = 20)
+                    sort.obs = TRUE, abbrev.obs = 20)
 ```
 
 Beeswarm plot of the Shapley value decomposition of the squared robust Interval-Mahalanobis distances for the Spotify dataset. The extreme outliers are marked in blue and the mild ones in green.
@@ -241,7 +241,7 @@ plot_int_Shapley_inter(spotify_shapley_inter[["grindcore"]], abbrev = 20, title 
 
 Barplot of the decomposition of the Shapley values by centers, ranges, and cross centers-ranges. The four extreme outliers and the four mild outliers are shown, ordered from greatest to smallest squared Interval-Mahalanobis distance.
 
-```{r fig.width=9.5, fig.height=5}
+```{r eval = requireNamespace("RColorBrewer", quietly = TRUE), fig.width=9.5, fig.height=5}
 spotify_shapley_decomp <- int_Shapley_decomp(spotify_int, mean_c = spotify_IMCD$mean_IMCD_c, 
                                               mean_r = spotify_IMCD$mean_IMCD_r, 
                                               cov = spotify_IMCD$cov_IMCD)

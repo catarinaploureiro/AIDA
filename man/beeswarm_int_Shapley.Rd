@@ -12,7 +12,7 @@ beeswarm_int_Shapley(
   rotate_x = TRUE,
   shape_class = NULL,
   shape_label = NULL,
-  ggplotly = TRUE,
+  ggplotly = FALSE,
   label_obs = NULL
 )
 }

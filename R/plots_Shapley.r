@@ -146,7 +146,8 @@ plot_int_Shapley_inter <- function(x,
 #' # Plot Shapley values with cutoff line and Interval-Mahalanobis distance
 #' barplot_int_Shapley(credit_card_shapley, 
 #'                     cutoff_value = credit_card_outliers$cutoff_value,
-#'                     cutoff_label = "Farness 0.9")
+#'                     cutoff_label = "Farness 0.9",
+#'                     palette = rainbow(credit_card_int@NIVar))
 barplot_int_Shapley <- function(x, 
                                 cutoff_value = NULL, 
                                 cutoff_label = NULL, 
@@ -596,7 +597,7 @@ beeswarm_int_Shapley <- function(shapley,
                                  rotate_x = TRUE,
                                  shape_class = NULL, 
                                  shape_label = NULL, 
-                                 ggplotly = TRUE, 
+                                 ggplotly = FALSE, 
                                  label_obs = NULL) {
 
   if(!is.matrix(shapley)) stop("`shapley` must be a matrix.")
@@ -783,7 +784,7 @@ beeswarm_int_Shapley <- function(shapley,
 #' credit_card_shap_decomp <- int_Shapley_decomp(credit_card_int)
 #'
 #' # Plot Shapley decomposition with contributions of Centers, Ranges, and CrossCentersRanges
-#' barplot_int_Shapley_decomp(credit_card_shap_decomp)
+#' barplot_int_Shapley_decomp(credit_card_shap_decomp, palette = rainbow(credit_card_int@NIVar))
 barplot_int_Shapley_decomp <- function(shapley_decomp, 
                                        palette = NULL, 
                                        rotate_x = TRUE, 

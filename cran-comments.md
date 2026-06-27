@@ -30,7 +30,6 @@
 * Added `rbind` method for `intData` class.
 * Improvements to documentation and usability.
 * Introduced a unit test suite to improve package reliability.
-* Minimized package dependencies.
 
 ## Notes
 

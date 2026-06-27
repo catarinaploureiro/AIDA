@@ -49,7 +49,7 @@ barplot_int_Shapley(cars_shapley[c(cars_outliers$outliers_names,"Bmwserie7"),],
                     cutoff_label = "0.9 Farness Cutoff", 
                     palette = scales::hue_pal()(4))
 
-## -----------------------------------------------------------------------------
+## ----eval = requireNamespace("ggrepel", quietly = TRUE)-----------------------
 beeswarm_int_Shapley(cars_shapley, cars_is_outliers, color_label = NULL, 
                       shape_class = cars_microdata$class, shape_label = "Class",
                       palette = c("gray50","dodgerblue"), ggplotly = FALSE, 
@@ -95,7 +95,7 @@ spotify_outliers$outliers_names
 spotify_outliers_2 <- int_outliers(spotify_IMCD$robust_dist,cutoff="farness", cutoff_lvl = 0.9)
 spotify_outliers_2$outliers_names[!spotify_outliers_2$outliers_names%in%spotify_outliers$outliers_names]
 
-## ----fig.width=7, fig.height=4------------------------------------------------
+## ----eval = requireNamespace("ggrepel", quietly = TRUE), fig.width=7, fig.height=4----
 spotify_is_outliers <- as.character(spotify_outliers$is_outlier)
 spotify_is_outliers[!spotify_outliers_2$is_outlier] <- "Regular"
 spotify_is_outliers[spotify_outliers_2$is_outlier] <- "Mild Outlier"
@@ -116,7 +116,7 @@ plot_interval_dist(
   palette = palette_outliers,
   label_obs = spotify_outliers_2$outliers_names)
 
-## -----------------------------------------------------------------------------
+## ----eval = requireNamespace("ggrepel", quietly = TRUE) && requireNamespace("RColorBrewer", quietly = TRUE)----
 spotify_Shapley <- int_Shapley(spotify_int, mean_c = spotify_IMCD$mean_IMCD_c, 
                               mean_r = spotify_IMCD$mean_IMCD_r, cov = spotify_IMCD$cov_IMCD)
 
@@ -125,7 +125,7 @@ high_dist_12 <- names(spotify_IMCD$robust_dist[order(spotify_IMCD$robust_dist, d
 barplot_int_Shapley(spotify_Shapley[high_dist_12,], 
                     cutoff_value = c(spotify_outliers$cutoff_value, spotify_outliers_2$cutoff_value),
                     cutoff_label = c("0.95 Farness Cutoff", "0.90 Farness Cutoff"),
-                    sort.obs = TRUE,abbrev.obs = 20)
+                    sort.obs = TRUE, abbrev.obs = 20)
 
 ## -----------------------------------------------------------------------------
 beeswarm_int_Shapley(spotify_Shapley, spotify_is_outliers, "Outlier Status", 
@@ -142,7 +142,7 @@ spotify_shapley_inter <- int_Shapley_interaction(spotify_int, mean_c = spotify_I
 
 plot_int_Shapley_inter(spotify_shapley_inter[["grindcore"]], abbrev = 20, title = "grindcore")
 
-## ----fig.width=9.5, fig.height=5----------------------------------------------
+## ----eval = requireNamespace("RColorBrewer", quietly = TRUE), fig.width=9.5, fig.height=5----
 spotify_shapley_decomp <- int_Shapley_decomp(spotify_int, mean_c = spotify_IMCD$mean_IMCD_c, 
                                               mean_r = spotify_IMCD$mean_IMCD_r, 
                                               cov = spotify_IMCD$cov_IMCD)

@@ -72,6 +72,7 @@ test_that("plot_dist_dist errors on mismatched lengths", {
 
 test_that("plot_dist_dist supports label_obs and cutoff lines", {
   testthat::skip_if_not_installed("ggplot2")
+  testthat::skip_if_not_installed("ggrepel")
   class_dist <- c(1, 2, 3)
   rob_dist <- c(1, 4, 9)
   obs_names <- c("one", "two", "three")
@@ -90,16 +91,6 @@ test_that("plot_dist_dist supports label_obs and cutoff lines", {
 
   expect_s3_class(res, "ggplot")
   expect_true(any(vapply(res$layers, function(x) class(x$geom)[1] %in% c("GeomVline", "GeomHline"), logical(1))))
-})
-
-test_that("plot_interval_dist returns ggplot and supports label_obs", {
-  testthat::skip_if_not_installed("ggplot2")
-  dist <- c(1, 2, 3)
-  obs <- c("a", "b", "c")
-
-  res <- plot_interval_dist(dist, obs_names = obs, label_obs = "b")
-  expect_s3_class(res, "ggplot")
-  expect_true(any(vapply(res$layers, function(x) inherits(x$geom, "GeomTextRepel"), logical(1))))
 })
 
 test_that("plot_interval_dist returns plotly", {
@@ -137,6 +128,7 @@ test_that("plot_dist_dist supports color_class, shape_class, cutoffs, and palett
 
 test_that("plot_interval_dist returns ggplot and supports label_obs", {
   testthat::skip_if_not_installed("ggplot2")
+  testthat::skip_if_not_installed("ggrepel")
   dist <- c(1, 2, 3)
   obs <- c("a", "b", "c")
 
@@ -180,8 +172,7 @@ test_that("plot_interval_dist supports color_class and shape_class with custom p
     shape_class = c("A", "B", "A"),
     color_label = "Group",
     shape_label = "Symbol",
-    palette = c("red" = "green", "blue" = "yellow"),
-    label_obs = c("x", "y")
+    palette = c("red" = "green", "blue" = "yellow")
   )
 
   expect_s3_class(res, "ggplot")

@@ -12,7 +12,7 @@ plot_dist_dist(
   rob_cutoff = NULL,
   rob_cutoff_label = NULL,
   obs_names = NULL,
-  ggplotly = TRUE,
+  ggplotly = FALSE,
   color_class = NULL,
   color_label = NULL,
   palette = NULL,

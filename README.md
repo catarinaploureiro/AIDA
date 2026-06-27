@@ -14,6 +14,7 @@ Version](https://img.shields.io/badge/GitHub-v0.2.0-blue)](https://github.com/ca
 [![License:
 MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![arXiv](https://img.shields.io/badge/arXiv-2604.26769-b31b1b.svg)](https://arxiv.org/abs/2604.26769)
+[![arXiv](https://img.shields.io/badge/arXiv-2606.26307-b31b1b.svg)](https://arxiv.org/abs/2606.26307)
 <!-- badges: end -->
 
 ## Overview
@@ -119,7 +120,7 @@ entry-spacing="0">
 
 Loureiro, Catarina P., M. Rosário Oliveira, Paula Brito, and Lina
 Oliveira. 2026a. “<span class="nocase">Explainable Outlier Detection for
-Interval-valued Data</span>.”
+Interval-valued Data</span>.” <https://arxiv.org/abs/2606.26307>.
 
 </div>
 

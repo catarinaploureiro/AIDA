@@ -68,4 +68,5 @@ credit_card_shapley <- int_Shapley(credit_card_int)
 \references{
 Loureiro, C. P., Oliveira, M. R., Brito, P., & Oliveira, L. (2026).
 Explainable Outlier Detection for Interval-valued Data.
+arXiv preprint arXiv:2606.26307. \url{https://arxiv.org/abs/2606.26307}
 }

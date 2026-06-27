@@ -28,7 +28,7 @@ SYMB.pairs.panels(cars_int, palette = cars_outliers_colors, type = "rectangles",
                     corr = cov2cor(cars_IMCD$cov_IMCD), labels = colnames(cars_int),
                     is_outlier = cars_outliers$is_outlier, gap = 0)
 
-## -----------------------------------------------------------------------------
+## ----eval = requireNamespace("ggrepel", quietly = TRUE)-----------------------
 # Classical distances and outliers
 cars_class_dist <- IMah_dist(cars_int, z = rep(1,cars_int@NObs))
 cars_class_outliers <- int_outliers(cars_class_dist, cutoff = "adjbox", cutoff_lvl = 1.5)
@@ -79,7 +79,7 @@ corrplot::corrplot(
   number.cex = 1
 )
 
-## -----------------------------------------------------------------------------
+## ----eval = requireNamespace("ggrepel", quietly = TRUE)-----------------------
 # Classical distances and outliers
 spotify_class_dist <- IMah_dist(spotify_int, z = rep(1,spotify_int@NObs))
 spotify_class_outliers <- int_outliers(spotify_class_dist, cutoff = "adjbox")

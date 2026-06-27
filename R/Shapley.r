@@ -47,6 +47,7 @@
 #' 
 #' @references Loureiro, C. P., Oliveira, M. R., Brito, P., & Oliveira, L. (2026). 
 #' Explainable Outlier Detection for Interval-valued Data. 
+#' arXiv preprint arXiv:2606.26307. \url{https://arxiv.org/abs/2606.26307}
 #' 
 #' @examples
 #' # Create intData object
@@ -147,6 +148,7 @@ int_Shapley <- function(data,mean_c=NULL,mean_r=NULL,cov=NULL){
 #' 
 #' @references Loureiro, C. P., Oliveira, M. R., Brito, P., & Oliveira, L. (2026). 
 #' Explainable Outlier Detection for Interval-valued Data.
+#' arXiv preprint arXiv:2606.26307. \url{https://arxiv.org/abs/2606.26307}
 #' 
 #' @export
 #' @examples
@@ -247,6 +249,7 @@ int_Shapley_decomp <- function(data,mean_c=NULL,mean_r=NULL,cov=NULL){
 #' 
 #' @references Loureiro, C. P., Oliveira, M. R., Brito, P., & Oliveira, L. (2026). 
 #' Explainable Outlier Detection for Interval-valued Data.
+#' arXiv preprint arXiv:2606.26307. \url{https://arxiv.org/abs/2606.26307}
 #' 
 #' @examples
 #' # Create intData object

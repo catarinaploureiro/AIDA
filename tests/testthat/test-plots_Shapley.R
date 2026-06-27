@@ -25,10 +25,10 @@ test_that("plot_int_Shapley_inter draws without error", {
 test_that("barplot_int_Shapley returns ggplot and errors on bad cutoff", {
   testthat::skip_if_not_installed("ggplot2")
   shp <- make_shapley_matrix(4, 3)
-  res <- barplot_int_Shapley(shp)
+  res <- barplot_int_Shapley(shp, palette = rainbow(ncol(shp)))
   expect_s3_class(res, "ggplot")
 
-  expect_error(barplot_int_Shapley(shp, cutoff_value = "bad"), "cutoff_value must be numeric")
+  expect_error(barplot_int_Shapley(shp, cutoff_value = "bad", palette = rainbow(ncol(shp))), "cutoff_value must be numeric")
 })
 
 test_that("tileplot_int_Shapley and radarplot_int_Shapley run", {
@@ -55,7 +55,7 @@ test_that("beeswarm_int_Shapley and barplot_decomp produce plots when deps prese
   decomp <- list(obs1 = matrix(1:6, nrow = 2, byrow = TRUE), obs2 = matrix(2:7, nrow = 2, byrow = TRUE))
   colnames(decomp[[1]]) <- colnames(decomp[[2]]) <- c("Centers","Ranges","CentersRanges")[seq_len(ncol(decomp[[1]]))]
   rownames(decomp[[1]]) <- rownames(decomp[[2]]) <- c("X","Y")
-  res2 <- barplot_int_Shapley_decomp(decomp, plot_IMah = FALSE)
+  res2 <- barplot_int_Shapley_decomp(decomp, plot_IMah = FALSE, palette = rainbow(3))
   expect_s3_class(res2, "ggplot")
 })
 
@@ -81,10 +81,10 @@ test_that("plots error on clearly invalid inputs", {
 test_that("barplot_int_Shapley handles cutoff values and plot_IMah FALSE", {
   testthat::skip_if_not_installed("ggplot2")
   shp <- make_shapley_matrix(4, 3)
-  p <- barplot_int_Shapley(shp, plot_IMah = FALSE, cutoff_value = c(1, 2), cutoff_label = c("L1", "L2"), rotate_x = FALSE)
+  p <- barplot_int_Shapley(shp, plot_IMah = FALSE, cutoff_value = c(1, 2), cutoff_label = c("L1", "L2"), rotate_x = FALSE, palette = rainbow(ncol(shp)))
   expect_s3_class(p, "ggplot")
   expect_true(any(vapply(p$layers, function(l) inherits(l$geom, "GeomHline"), logical(1))))
-  expect_error(barplot_int_Shapley(shp, cutoff_value = c(1, 2), cutoff_label = "bad"), "same length")
+  expect_error(barplot_int_Shapley(shp, cutoff_value = c(1, 2), cutoff_label = "bad", palette = rainbow(ncol(shp))), "same length")
 })
 
 test_that("tileplot_int_Shapley highlights outliers and show_values", {
@@ -122,7 +122,7 @@ test_that("barplot_int_Shapley_decomp can plot IMah cutoff lines", {
   decomp <- list(obs1 = matrix(1:6, nrow = 2, byrow = TRUE), obs2 = matrix(2:7, nrow = 2, byrow = TRUE))
   colnames(decomp[[1]]) <- colnames(decomp[[2]]) <- c("Centers", "Ranges", "CentersRanges")[seq_len(ncol(decomp[[1]]))]
   rownames(decomp[[1]]) <- rownames(decomp[[2]]) <- c("X", "Y")
-  p <- barplot_int_Shapley_decomp(decomp, plot_IMah = TRUE)
+  p <- barplot_int_Shapley_decomp(decomp, plot_IMah = TRUE, palette = rainbow(3))
   expect_s3_class(p, "ggplot")
   expect_true(any(vapply(p$layers, function(l) inherits(l$geom, "GeomHline"), logical(1))))
 })
@@ -130,7 +130,7 @@ test_that("barplot_int_Shapley_decomp can plot IMah cutoff lines", {
 test_that("ggplot outputs contain layers and labels", {
   testthat::skip_if_not_installed("ggplot2")
   shp <- make_shapley_matrix(4, 3)
-  p <- barplot_int_Shapley(shp)
+  p <- barplot_int_Shapley(shp, palette = rainbow(ncol(shp)))
   expect_s3_class(p, "ggplot")
   expect_true(length(p$layers) >= 1)
 
