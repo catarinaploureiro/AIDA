@@ -103,7 +103,7 @@ vignette("Shapley_examples", package = "AIDA")
 
 Loureiro, Catarina P., M. Rosário Oliveira, Paula Brito, and Lina
 Oliveira. 2026a. “Explainable Outlier Detection for Interval-valued
-Data.”
+Data.” <https://arxiv.org/abs/2606.26307>.
 
 ———. 2026b. “Minimum Covariance Determinant Estimator and Outlier
 Detection for Interval-valued Data.” <https://arxiv.org/abs/2604.26769>.

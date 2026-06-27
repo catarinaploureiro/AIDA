@@ -12,7 +12,6 @@ barplot_int_Shapley(
   palette = NULL,
   abbrev.var = 20,
   abbrev.obs = 20,
-  sort.var = TRUE,
   sort.obs = TRUE,
   plot_IMah = TRUE,
   IMah_label = expression(Robust ~ d[IMah]^2 * (bold(x))),
@@ -51,11 +50,6 @@ barplot_int_Shapley(
 
   Integer. If `abbrev.obs` \\\> 0\\, row names are abbreviated using
   abbreviate with `minlenght = abrev.obs`.
-
-- sort.var:
-
-  Logical. If `TRUE` (default), variables are sorted according to the
-  distance.
 
 - sort.obs:
 
@@ -118,5 +112,6 @@ credit_card_shapley <- int_Shapley(credit_card_int,
 # Plot Shapley values with cutoff line and Interval-Mahalanobis distance
 barplot_int_Shapley(credit_card_shapley, 
                     cutoff_value = credit_card_outliers$cutoff_value,
-                    cutoff_label = "Farness 0.9")
+                    cutoff_label = "Farness 0.9",
+                    palette = rainbow(credit_card_int@NIVar))
 ```

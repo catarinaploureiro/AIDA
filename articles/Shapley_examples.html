@@ -195,7 +195,7 @@ farness cutoff.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/barplot_int_Shapley.html">barplot_int_Shapley</a></span><span class="op">(</span><span class="va">cars_shapley</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">cars_outliers</span><span class="op">$</span><span class="va">outliers_names</span>,<span class="st">"Bmwserie7"</span><span class="op">)</span>,<span class="op">]</span>, </span>
 <span>                    cutoff_value <span class="op">=</span> <span class="va">cars_outliers</span><span class="op">$</span><span class="va">cutoff_value</span>, </span>
 <span>                    cutoff_label <span class="op">=</span> <span class="st">"0.9 Farness Cutoff"</span>, </span>
-<span>                    palette <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/pal_hue.html" class="external-link">hue_pal</a></span><span class="op">(</span><span class="op">)</span><span class="op">(</span><span class="fl">4</span><span class="op">)</span>, sort.var <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span>                    palette <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/pal_hue.html" class="external-link">hue_pal</a></span><span class="op">(</span><span class="op">)</span><span class="op">(</span><span class="fl">4</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Shapley_examples_files/figure-html/unnamed-chunk-6-1.png" class="r-plt" alt="" width="576"></p>
 <p>Beeswarm of the Shapley value decomposition of the squared robust
 Interval-Mahalanobis distances. The outlying observations are marked in
@@ -345,7 +345,7 @@ farness cutoff values.</p>
 <span><span class="fu"><a href="../reference/barplot_int_Shapley.html">barplot_int_Shapley</a></span><span class="op">(</span><span class="va">spotify_Shapley</span><span class="op">[</span><span class="va">high_dist_12</span>,<span class="op">]</span>, </span>
 <span>                    cutoff_value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">spotify_outliers</span><span class="op">$</span><span class="va">cutoff_value</span>, <span class="va">spotify_outliers_2</span><span class="op">$</span><span class="va">cutoff_value</span><span class="op">)</span>,</span>
 <span>                    cutoff_label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"0.95 Farness Cutoff"</span>, <span class="st">"0.90 Farness Cutoff"</span><span class="op">)</span>,</span>
-<span>                    sort.obs <span class="op">=</span> <span class="cn">TRUE</span>,abbrev.obs <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></code></pre></div>
+<span>                    sort.obs <span class="op">=</span> <span class="cn">TRUE</span>, abbrev.obs <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Shapley_examples_files/figure-html/unnamed-chunk-15-1.png" class="r-plt" alt="" width="576"></p>
 <p>Beeswarm plot of the Shapley value decomposition of the squared
 robust Interval-Mahalanobis distances for the Spotify dataset. The
@@ -395,7 +395,7 @@ Duarte Silva, Pedro, and Paula Brito. 2025. <em><span class="nocase">MAINT.Data:
 <div id="ref-loureiro2026b" class="csl-entry">
 Loureiro, Catarina P., M. Rosário Oliveira, Paula Brito, and Lina
 Oliveira. 2026. <em><span class="nocase">Explainable Outlier Detection
-for Interval-valued Data</span></em>.
+for Interval-valued Data</span></em>. <a href="https://arxiv.org/abs/2606.26307" class="external-link">https://arxiv.org/abs/2606.26307</a>.
 </div>
 <div id="ref-kaggle.spotify2022" class="csl-entry">
 Pandya, Maharshi. 2022. <em><span>Spotify Tracks Dataset</span></em>. <a href="https://doi.org/10.34740/KAGGLE/DSV/4372070" class="external-link">https://doi.org/10.34740/KAGGLE/DSV/4372070</a>.

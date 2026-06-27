@@ -26,7 +26,8 @@ barplot_int_Shapley_decomp(
 
 - palette:
 
-  A vector with colors for each feature. Default is NULL.
+  A vector with colors for each feature. If `palette` is `NULL`
+  (default), the colors are generated using `RColorBrewer`.
 
 - rotate_x:
 
@@ -65,5 +66,5 @@ credit_card_int <- creditcard$intData
 credit_card_shap_decomp <- int_Shapley_decomp(credit_card_int)
 
 # Plot Shapley decomposition with contributions of Centers, Ranges, and CrossCentersRanges
-barplot_int_Shapley_decomp(credit_card_shap_decomp)
+barplot_int_Shapley_decomp(credit_card_shap_decomp, palette = rainbow(credit_card_int@NIVar))
 ```

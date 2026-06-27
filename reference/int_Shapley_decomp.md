@@ -113,7 +113,8 @@ variables. The decomposition is defined according to the `LatentCase`:
 ## References
 
 Loureiro, C. P., Oliveira, M. R., Brito, P., & Oliveira, L. (2026).
-Explainable Outlier Detection for Interval-valued Data.
+Explainable Outlier Detection for Interval-valued Data. arXiv preprint
+arXiv:2606.26307. <https://arxiv.org/abs/2606.26307>
 
 ## Examples
 

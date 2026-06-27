@@ -49,4 +49,3 @@
   [`radarplot_int_Shapley()`](https://catarinaploureiro.github.io/AIDA/reference/radarplot_int_Shapley.md).
 - Improvements to documentation and usability.
 - Added a unit test suite.
-- Removed the dependency on the package `geigen`.

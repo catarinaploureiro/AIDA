@@ -132,7 +132,7 @@ representing the $`0.9`$ farness cutoff.
 barplot_int_Shapley(cars_shapley[c(cars_outliers$outliers_names,"Bmwserie7"),], 
                     cutoff_value = cars_outliers$cutoff_value, 
                     cutoff_label = "0.9 Farness Cutoff", 
-                    palette = scales::hue_pal()(4), sort.var = TRUE)
+                    palette = scales::hue_pal()(4))
 ```
 
 ![](Shapley_examples_files/figure-html/unnamed-chunk-6-1.png)
@@ -306,7 +306,7 @@ high_dist_12 <- names(spotify_IMCD$robust_dist[order(spotify_IMCD$robust_dist, d
 barplot_int_Shapley(spotify_Shapley[high_dist_12,], 
                     cutoff_value = c(spotify_outliers$cutoff_value, spotify_outliers_2$cutoff_value),
                     cutoff_label = c("0.95 Farness Cutoff", "0.90 Farness Cutoff"),
-                    sort.obs = TRUE,abbrev.obs = 20)
+                    sort.obs = TRUE, abbrev.obs = 20)
 ```
 
 ![](Shapley_examples_files/figure-html/unnamed-chunk-15-1.png)
@@ -373,7 +373,7 @@ Analyse Interval Data*.
 
 Loureiro, Catarina P., M. Rosário Oliveira, Paula Brito, and Lina
 Oliveira. 2026. *Explainable Outlier Detection for Interval-valued
-Data*.
+Data*. <https://arxiv.org/abs/2606.26307>.
 
 Pandya, Maharshi. 2022. *Spotify Tracks Dataset*.
 <https://doi.org/10.34740/KAGGLE/DSV/4372070>.

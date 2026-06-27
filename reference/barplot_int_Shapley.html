@@ -58,7 +58,6 @@
 <span>  palette <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  abbrev.var <span class="op">=</span> <span class="fl">20</span>,</span>
 <span>  abbrev.obs <span class="op">=</span> <span class="fl">20</span>,</span>
-<span>  sort.var <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  sort.obs <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  plot_IMah <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  IMah_label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">Robust</span> <span class="op">~</span> <span class="va">d</span><span class="op">[</span><span class="va">IMah</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span> <span class="op">*</span> <span class="op">(</span><span class="fu">bold</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -92,10 +91,6 @@
 
 <dt id="arg-abbrev-obs">abbrev.obs<a class="anchor" aria-label="anchor" href="#arg-abbrev-obs"></a></dt>
 <dd><p>Integer. If <code>abbrev.obs</code> \(&gt; 0\), row names are abbreviated using abbreviate with <code>minlenght = abrev.obs</code>.</p></dd>
-
-
-<dt id="arg-sort-var">sort.var<a class="anchor" aria-label="anchor" href="#arg-sort-var"></a></dt>
-<dd><p>Logical. If <code>TRUE</code> (default), variables are sorted according to the  distance.</p></dd>
 
 
 <dt id="arg-sort-obs">sort.obs<a class="anchor" aria-label="anchor" href="#arg-sort-obs"></a></dt>
@@ -150,7 +145,8 @@ includes the squared (robust) Interval-Mahalanobis distance (<code><a href="IMah
 <span class="r-in"><span><span class="co"># Plot Shapley values with cutoff line and Interval-Mahalanobis distance</span></span></span>
 <span class="r-in"><span><span class="fu">barplot_int_Shapley</span><span class="op">(</span><span class="va">credit_card_shapley</span>, </span></span>
 <span class="r-in"><span>                    cutoff_value <span class="op">=</span> <span class="va">credit_card_outliers</span><span class="op">$</span><span class="va">cutoff_value</span>,</span></span>
-<span class="r-in"><span>                    cutoff_label <span class="op">=</span> <span class="st">"Farness 0.9"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>                    cutoff_label <span class="op">=</span> <span class="st">"Farness 0.9"</span>,</span></span>
+<span class="r-in"><span>                    palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">rainbow</a></span><span class="op">(</span><span class="va">credit_card_int</span><span class="op">@</span><span class="va">NIVar</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="barplot_int_Shapley-1.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
