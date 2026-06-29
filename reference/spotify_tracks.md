@@ -49,8 +49,8 @@ A list with the following components:
 
 ## References
 
-This data was retrieved from Kaggle, available at
-<https://www.kaggle.com/datasets/maharshipandya/-spotify-tracks-dataset>.
+This data was retrieved from Kaggle (DOI:10.34740/KAGGLE/DSV/4372070;
+Spotify Tracks Dataset by Maharshi Pandya).
 
 ## Examples
 
