@@ -45,7 +45,7 @@
 - [`Mallows_dist()`](https://catarinaploureiro.github.io/AIDA/reference/Mallows_dist.md)
   : Mallows Distance
 
-- [`NMicro()`](https://catarinaploureiro.github.io/AIDA/reference/NMicro.md)
+- [`NbMicroUnits()`](https://catarinaploureiro.github.io/AIDA/reference/NbMicroUnits.md)
   :
 
   Number of Micro Units Method for `intData`

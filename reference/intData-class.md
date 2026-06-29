@@ -52,11 +52,11 @@ A class to represent interval data.
 
   A numeric value indicating the number of observations.
 
-- `NVar`:
+- `NIVar`:
 
   A numeric value indicating the number of interval variables.
 
-- `NMicro`:
+- `NbMicroUnits`:
 
   An integer vector indicating the number of individual observations
   (microdata) aggregated by interval (macrodata).

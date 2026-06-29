@@ -66,5 +66,5 @@ credit_card_int <- creditcard$intData
 credit_card_shap_decomp <- int_Shapley_decomp(credit_card_int)
 
 # Plot Shapley decomposition with contributions of Centers, Ranges, and CrossCentersRanges
-plot_bar_int_Shapley_decomp(credit_card_shap_decomp, palette = rainbow(credit_card_int@NVar))
+plot_bar_int_Shapley_decomp(credit_card_shap_decomp, palette = rainbow(credit_card_int@NIVar))
 ```

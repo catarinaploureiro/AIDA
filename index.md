@@ -24,8 +24,8 @@ You can install the development version from GitHub:
 
 ``` r
 
-# install.packages("remotes")
-remotes::install_github("catarinaploureiro/AIDA")
+# install.packages("pak")
+pak::pak("catarinaploureiro/AIDA")
 ```
 
 ## Minimal Example
@@ -70,7 +70,7 @@ iris_corr <- cov2cor(iris_cov)
 plot_pairs_int(iris_int, corr = iris_corr, labels = colnames(iris_int))
 ```
 
-![](reference/figures/unnamed-chunk-2-1.png)
+![](reference/figures/README-iris_example-1.png)
 
 ## Vignettes
 

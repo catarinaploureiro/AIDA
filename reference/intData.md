@@ -18,7 +18,7 @@ intData(
   estimate.DistParam = FALSE,
   VarNames = NULL,
   ObsNames = row.names(macrodata),
-  NMicro = integer(0)
+  NbMicroUnits = integer(0)
 )
 ```
 
@@ -115,7 +115,7 @@ intData(
 
   A character vector of observation names.
 
-- NMicro:
+- NbMicroUnits:
 
   An integer vector indicating the number of individual observations
   (microdata) aggregated by interval (macrodata).

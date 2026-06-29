@@ -113,5 +113,5 @@ credit_card_shapley <- int_Shapley(credit_card_int,
 plot_bar_int_Shapley(credit_card_shapley, 
                     cutoff_value = credit_card_outliers$cutoff_value,
                     cutoff_label = "Farness 0.9",
-                    palette = rainbow(credit_card_int@NVar))
+                    palette = rainbow(credit_card_int@NIVar))
 ```

@@ -47,7 +47,13 @@
   [`plot_int_Shapley_inter()`](https://catarinaploureiro.github.io/AIDA/reference/plot_int_Shapley_inter.md),
   and
   [`plot_radar_int_Shapley()`](https://catarinaploureiro.github.io/AIDA/reference/plot_radar_int_Shapley.md).
-- Functions `SYMB.biplot` and `SYMB.pairs.panels` renamed to
-  `plot_scatter_int`and `plot_pairs_int`, respectively.
+- Functions `SYMB.biplot()` and `SYMB.pairs.panels()` renamed to
+  [`plot_scatter_int()`](https://catarinaploureiro.github.io/AIDA/reference/plot_scatter_int.md)
+  and
+  [`plot_pairs_int()`](https://catarinaploureiro.github.io/AIDA/reference/plot_pairs_int.md),
+  respectively.
+- Removed functions `angle_error()`, `frobenius_error()`, and
+  `KL_divergence()`.
 - Improvements to documentation and usability.
 - Added a unit test suite.
+- Reduced package dependencies.
