@@ -69,7 +69,7 @@
 #' @name spotify_tracks
 #' @usage data(spotify_tracks)
 #' 
-#' @references This data was retrieved from Kaggle, available at \url{https://www.kaggle.com/datasets/maharshipandya/-spotify-tracks-dataset}.
+#' @references This data was retrieved from Kaggle (DOI:10.34740/KAGGLE/DSV/4372070; Spotify Tracks Dataset by Maharshi Pandya).
 #' 
 #' @format A list with the following components:
 #' \describe{
