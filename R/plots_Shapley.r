@@ -144,11 +144,11 @@ plot_int_Shapley_inter <- function(x,
 #'                                    cov = credit_card_IMCD$cov_IMCD)
 #' 
 #' # Plot Shapley values with cutoff line and Interval-Mahalanobis distance
-#' barplot_int_Shapley(credit_card_shapley, 
+#' plot_bar_int_Shapley(credit_card_shapley, 
 #'                     cutoff_value = credit_card_outliers$cutoff_value,
 #'                     cutoff_label = "Farness 0.9",
-#'                     palette = rainbow(credit_card_int@NIVar))
-barplot_int_Shapley <- function(x, 
+#'                     palette = rainbow(credit_card_int@NVar))
+plot_bar_int_Shapley <- function(x, 
                                 cutoff_value = NULL, 
                                 cutoff_label = NULL, 
                                 palette = NULL,
@@ -341,11 +341,11 @@ barplot_int_Shapley <- function(x,
 #'                                    mean_r = credit_card_IMCD$mean_IMCD_r, 
 #'                                    cov = credit_card_IMCD$cov_IMCD)
 #' 
-#' tileplot_int_Shapley(credit_card_shapley, 
+#' plot_tile_int_Shapley(credit_card_shapley, 
 #'                      outliers = credit_card_outliers, 
 #'                      sort.var = TRUE, 
 #'                      sort.obs = TRUE)
-tileplot_int_Shapley <- function(shapley, 
+plot_tile_int_Shapley <- function(shapley, 
                                  outliers = NULL, 
                                  rotate_x = TRUE, 
                                  abbrev.var = FALSE, 
@@ -499,8 +499,8 @@ tileplot_int_Shapley <- function(shapley,
 #' names(outliers_colors) <- rownames(credit_card_int)
 #' outliers_colors[credit_card_outliers$outliers_names] = '#009de0'
 #' 
-#' radarplot_int_Shapley(credit_card_shapley, palette = outliers_colors)
-radarplot_int_Shapley <- function(shapley, 
+#' plot_radar_int_Shapley(credit_card_shapley, palette = outliers_colors)
+plot_radar_int_Shapley <- function(shapley, 
                                   palette = NULL, 
                                   sort.obs = FALSE) {
 
@@ -586,11 +586,11 @@ radarplot_int_Shapley <- function(shapley,
 #'                                    cov = credit_card_IMCD$cov_IMCD)
 #' 
 #' # Beeswarm plot of Shapley values colored by outlier status
-#' beeswarm_int_Shapley(credit_card_shapley, 
+#' plot_beeswarm_int_Shapley(credit_card_shapley, 
 #'                      color_class = credit_card_outliers$is_outlier, 
 #'                      palette = c("gray50", "darkred"), 
 #'                      color_label = "Outlier Status")
-beeswarm_int_Shapley <- function(shapley, 
+plot_beeswarm_int_Shapley <- function(shapley, 
                                  color_class, 
                                  color_label = NULL, 
                                  palette = NULL, 
@@ -784,8 +784,8 @@ beeswarm_int_Shapley <- function(shapley,
 #' credit_card_shap_decomp <- int_Shapley_decomp(credit_card_int)
 #'
 #' # Plot Shapley decomposition with contributions of Centers, Ranges, and CrossCentersRanges
-#' barplot_int_Shapley_decomp(credit_card_shap_decomp, palette = rainbow(credit_card_int@NIVar))
-barplot_int_Shapley_decomp <- function(shapley_decomp, 
+#' plot_bar_int_Shapley_decomp(credit_card_shap_decomp, palette = rainbow(credit_card_int@NVar))
+plot_bar_int_Shapley_decomp <- function(shapley_decomp, 
                                        palette = NULL, 
                                        rotate_x = TRUE, 
                                        abbrev.obs = 20,

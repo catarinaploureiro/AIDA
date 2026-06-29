@@ -30,24 +30,24 @@ VignetteBuilder: knitr
 Language: en-US
 Imports: 
     cellWise,
-    CerioliOutlierDetection,
     cowplot,
     fmsb,
     ggbeeswarm,
     ggplot2,
     kde1d,
     MASS,
-    methods,
-    robustbase
+    methods
 Depends: 
     R (>= 3.6)
 Suggests: 
+    CerioliOutlierDetection,
     corrplot,
     ggrepel,
     knitr,
     plotly,
     RColorBrewer,
     rmarkdown,
+    robustbase,
     scales,
     testthat (>= 3.0.0)
 Config/roxygen2/version: 8.0.0

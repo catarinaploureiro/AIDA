@@ -21,8 +21,8 @@ NULL
 #' @slot ObsNames A character vector of observation names.
 #' @slot VarNames A character vector of variable names.
 #' @slot NObs A numeric value indicating the number of observations.
-#' @slot NIVar A numeric value indicating the number of interval variables.
-#' @slot NbMicroUnits An integer indicating the number of micro units.
+#' @slot NVar A numeric value indicating the number of interval variables.
+#' @slot NMicro An integer vector indicating the number of individual observations (microdata) aggregated by interval (macrodata).
 #' @references Oliveira, M. R., Pinheiro, D., & Oliveira, L. (2025). 
 #' Location and association measures for interval-valued data based on Mallows' distance. 
 #' arXiv preprint arXiv:2407.05105. \url{https://arxiv.org/abs/2407.05105}
@@ -37,8 +37,8 @@ setClass("intData",slots=c(
   ObsNames="character",
   VarNames="character",
   NObs="numeric",
-  NIVar="numeric",
-  NbMicroUnits="integer"
+  NVar="numeric",
+  NMicro="integer"
 ))
 
 #' Summary Interval Data Class
@@ -89,8 +89,8 @@ setGeneric("LowerBounds",function(Sdt) standardGeneric("LowerBounds"))
 setGeneric("UpperBounds",function(Sdt) standardGeneric("UpperBounds"))
 
 #' @export
-#' @rdname NbMicroUnits
-setGeneric("NbMicroUnits",function(x) standardGeneric("NbMicroUnits"))
+#' @rdname NMicro
+setGeneric("NMicro",function(x) standardGeneric("NMicro"))
 
 #' @export
 #' @rdname LatentParam
@@ -108,7 +108,7 @@ setGeneric("LatentDist",function(Sdt) standardGeneric("LatentDist"))
 #'
 #' Constructs an interval data object.
 #'
-#' @param Data A data frame or matrix containing the data.
+#' @param macrodata A data frame or matrix containing the macrodata.
 #' @param Seq Format of macrodata if it is a data frame or matrix. Available options are:
 #' \itemize{
 #'   \item \code{"AllLb_AllUb"}: All lower bounds followed by all upper bounds, in the same variable order.
@@ -139,7 +139,7 @@ setGeneric("LatentDist",function(Sdt) standardGeneric("LatentDist"))
 #' The default is \code{FALSE}.
 #' @param VarNames A character vector of variable names.
 #' @param ObsNames A character vector of observation names.
-#' @param NbMicroUnits An integer specifying the number of micro units.
+#' @param NMicro An integer vector indicating the number of individual observations (microdata) aggregated by interval (macrodata).
 #' 
 #' @return An object of class \code{\linkS4class{intData}}.
 #' 
@@ -162,7 +162,7 @@ setGeneric("LatentDist",function(Sdt) standardGeneric("LatentDist"))
 #' credit_card_int_unif <- intData(CreditCard_min_max, 
 #'                                 Seq = "LbUb_VarbyVar", 
 #'                                 VarNames = colnames(CreditCard_microdata)[3:7])
-intData <- function(Data,
+intData <- function(macrodata,
                     Seq=c("AllLb_AllUb","AllCen_AllRng","LbUb_VarbyVar","CenRng_VarbyVar"),
                     LatentParam=NULL,
                     LatentCase=c("U_id_symmetric","U_id","General"),
@@ -173,30 +173,30 @@ intData <- function(Data,
                     Umicro=NULL,
                     estimate.DistParam=FALSE,
                     VarNames=NULL,
-                    ObsNames=row.names(Data),
-                    NbMicroUnits=integer(0)){
+                    ObsNames=row.names(macrodata),
+                    NMicro=integer(0)){
 
-  if ( !is.data.frame(Data) && !is.matrix(Data) ) stop("First argument of intData must be a data frame or a matrix\n")
-  if (!is.integer(NbMicroUnits)) {
-    unitnames <- names(NbMicroUnits)
-    NbMicroUnits <- as.integer(NbMicroUnits)
-    names(NbMicroUnits) <- unitnames
+  if ( !is.data.frame(macrodata) && !is.matrix(macrodata) ) stop("First argument of intData must be a data frame or a matrix\n")
+  if (!is.integer(NMicro)) {
+    unitnames <- names(NMicro)
+    NMicro <- as.integer(NMicro)
+    names(NMicro) <- unitnames
   }  
   
-  p <- ncol(Data)  # Total number of Interval variable bounds
+  p <- ncol(macrodata)  # Total number of Interval variable bounds
   q <- p/2	 # Number of Interval variables
-  if (floor(q) != q) stop("Number of columns of Data ( =",p,") must be an even number\n")
+  if (floor(q) != q) stop("Number of columns of macrodata ( =",p,") must be an even number\n")
   Seq <- match.arg(Seq)
   if (  (Seq == "LbUb_VarbyVar") || (Seq == "AllLb_AllUb") )
   {
-    if (Seq == "LbUb_VarbyVar") { Lbnd <- Data[,2*(0:(q-1))+1] ; Ubnd <- Data[,2*(1:q)] }
-    if (Seq == "AllLb_AllUb")   { Lbnd <- Data[,1:q] ; Ubnd <- Data[,(q+1):p] }
+    if (Seq == "LbUb_VarbyVar") { Lbnd <- macrodata[,2*(0:(q-1))+1] ; Ubnd <- macrodata[,2*(1:q)] }
+    if (Seq == "AllLb_AllUb")   { Lbnd <- macrodata[,1:q] ; Ubnd <- macrodata[,(q+1):p] }
     Centers <- (Lbnd+Ubnd)/2
     Ranges <- (Ubnd-Lbnd)
     if (any(is.na(Ranges))) stop("Invalid data")
   } else {
-    if (Seq == "CenRng_VarbyVar") { Centers <- Data[,2*(0:(q-1))+1] ; Ranges <- Data[,2*(1:q)] }
-    if (Seq == "AllCen_AllRng")   { Centers <- Data[,1:q] ; Ranges <- Data[,(q+1):p] }
+    if (Seq == "CenRng_VarbyVar") { Centers <- macrodata[,2*(0:(q-1))+1] ; Ranges <- macrodata[,2*(1:q)] }
+    if (Seq == "AllCen_AllRng")   { Centers <- macrodata[,1:q] ; Ranges <- macrodata[,(q+1):p] }
   }
   if (is.null(VarNames)) VarNames <- paste("I",1:q,sep="")
   if (!is.data.frame(Centers)) Centers <- as.data.frame(Centers)
@@ -226,7 +226,7 @@ intData <- function(Data,
   }
 
   new("intData",Centers=Centers,Ranges=Ranges,LatentParam=LatentParam,LatentCase=LatentCase,LatentDist=LatentDist,
-      ObsNames=ObsNames,VarNames=VarNames,NObs=nrow(Centers),NIVar=q,NbMicroUnits=NbMicroUnits)
+      ObsNames=ObsNames,VarNames=VarNames,NObs=nrow(Centers),NVar=q,NMicro=NMicro)
 }
 
 #' Summary Method for \code{\linkS4class{intData}}
@@ -253,12 +253,12 @@ setMethod("show",
   signature(object = "intData"),
   function (object) 
   {
-    printrow <- function(Bnds,NIVar) 
+    printrow <- function(Bnds,NVar) 
     { 
       cat(Bnds[1],"  ")
-      for (j in 2:(NIVar+1))
+      for (j in 2:(NVar+1))
         cat("[",format(Bnds[j],width=8,digits=5,justify="centre"),", ",
-          format(Bnds[NIVar+j],width=8,digits=5,justify="centre"),"]  ",sep="") 
+          format(Bnds[NVar+j],width=8,digits=5,justify="centre"),"]  ",sep="") 
       cat("\n")
     }
 
@@ -267,7 +267,7 @@ setMethod("show",
     UB <- object@Centers + HalfRange
     lobsname <- max(nchar(object@ObsNames))
     flength <- max(nchar(object@VarNames),nchar(format(LB[1,1],width=8,digits=5))+nchar(format(UB[1,1],width=8,digits=5))) + 6 
-    for (j in 1:object@NIVar) {
+    for (j in 1:object@NVar) {
       if (j>1) {
         nspaces <- flength-nchar(object@VarNames[j])
       } else {
@@ -276,7 +276,7 @@ setMethod("show",
       cat(rep(" ",nspaces),object@VarNames[j],sep="" )
     }  
     cat("\n") 
-    apply(cbind(format(object@ObsNames,width=lobsname),LB,UB),1,printrow,NIVar=object@NIVar)
+    apply(cbind(format(object@ObsNames,width=lobsname),LB,UB),1,printrow,NVar=object@NVar)
     invisible(object)
   }
 )
@@ -295,7 +295,7 @@ setMethod("nrow",signature(x = "intData"),function(x) x@NObs)
 #' @return The number of columns.
 #' @export
 #' @rdname ncol
-setMethod("ncol",signature(x = "intData"),function(x) x@NIVar)
+setMethod("ncol",signature(x = "intData"),function(x) x@NVar)
 
 #' Dimensions Method for \code{\linkS4class{intData}}
 #'
@@ -414,12 +414,12 @@ setMethod("LatentDist",signature(Sdt = "intData"),function(Sdt) Sdt@LatentDist)
 #' @param x An object of class \code{\linkS4class{intData}}.
 #' @return An integer specifying the number of micro units.
 #' @export
-#' @rdname NbMicroUnits
-setMethod("NbMicroUnits",
+#' @rdname NMicro
+setMethod("NMicro",
   signature(x = "intData"),
   function(x) {
-    if (length(x@NbMicroUnits)==0) return(NULL)
-    x@NbMicroUnits
+    if (length(x@NMicro)==0) return(NULL)
+    x@NMicro
   }
 )
 
@@ -438,9 +438,9 @@ setMethod("head",
   {
     
     if (n>0) {
-      x[1:n,1:x@NIVar] 
+      x[1:n,1:x@NVar] 
     } else {
-      x[-1:n,1:x@NIVar]
+      x[-1:n,1:x@NVar]
     }
   }
 )
@@ -459,9 +459,9 @@ setMethod("tail",
   function (x,n=min(nrow(x),6L)) 
   {
     if (n>0) {
-      x[(x@NObs-n+1):x@NObs,1:x@NIVar] 
+      x[(x@NObs-n+1):x@NObs,1:x@NVar] 
     } else {
-      x[(-x@NObs-n-1):-x@NObs,1:x@NIVar]
+      x[(-x@NObs-n-1):-x@NObs,1:x@NVar]
     }
   }
 )
@@ -483,8 +483,8 @@ setMethod("plot",
   signature(x = "intData",y = "intData"),
   function(x, y, type=c("crosses","rectangles","crosses2"), append=FALSE, palette=rainbow(x@NObs), ...)
   {
-    if (x@NIVar > 1) stop("Currently intData method plot can plot only one integer variable on the horizontal axis\n")
-    if (y@NIVar > 1) stop("Currently intData method plot can plot only one integer variable on the vertical axis\n")
+    if (x@NVar > 1) stop("Currently intData method plot can plot only one integer variable on the horizontal axis\n")
+    if (y@NVar > 1) stop("Currently intData method plot can plot only one integer variable on the vertical axis\n")
     if (x@NObs != y@NObs) stop("Arguments x and y have a different number of elements\n")
 
     type <- match.arg(type)
@@ -556,8 +556,8 @@ setMethod("plot",
   signature(x = "intData",y = "missing"),
   function(x, casen=NULL, layout=c("vertical","horizontal"), append=FALSE,  ...)
   {
-    if (x@NIVar > 1) {
-      if (x@NIVar==2) {
+    if (x@NVar > 1) {
+      if (x@NVar==2) {
         plot.default(x[,1],x[,2],...)
         return()
       } else {
@@ -700,12 +700,12 @@ setMethod("rbind",
     for (nextarg in 2:length(dotarguments)) {
       y <- eval(dotarguments[[nextarg]])
       if (!inherits(y,"intData")) stop("Argument y is not an object of class intData\n")
-      if (x@NIVar != y@NIVar) stop("Arguments x and y have a different number of interval-valued variables\n")
+      if (x@NVar != y@NVar) stop("Arguments x and y have a different number of interval-valued variables\n")
       if (x@LatentCase != y@LatentCase) stop("Arguments x and y have different LatentCase.")
       if (any(x@LatentDist != y@LatentDist)) stop("Arguments x and y have different LatentDist.")
       if (!identical(x@LatentParam,y@LatentParam)) stop("Arguments x and y have different LatentParam.")
       dataDF <- rbind(cbind(x@Centers,x@Ranges),cbind(y@Centers,y@Ranges))
-      if (x@NIVar==1) {
+      if (x@NVar==1) {
         ONames <- c(x@ObsNames,y@ObsNames)
       } else {
         ONames <- rownames(dataDF)
@@ -736,13 +736,13 @@ setMethod("==",
 
     if (!is(e2,"intData")) 
       stop("Trying to compare an intData object with an object of a diferent type\n")
-    if ( e1@NObs != e2@NObs || e1@NIVar != e2@NIVar )
+    if ( e1@NObs != e2@NObs || e1@NVar != e2@NVar )
       stop("== only defined for equally-sized intData objects\n")
     if (e1@LatentCase != e2@LatentCase) return(FALSE)
     if (any(e1@LatentDist!= e2@LatentDist)) return(FALSE)
     if (!identical(e1@LatentParam,e2@LatentParam)) return(FALSE)
-    TmpArray <- array(dim=c(e1@NObs,e1@NIVar,2,2))
-    for (j in 1:e1@NIVar)  {
+    TmpArray <- array(dim=c(e1@NObs,e1@NVar,2,2))
+    for (j in 1:e1@NVar)  {
       TmpArray[,j,,1] <- cbind(e1@Centers[,j],e1@Ranges[,j])
       TmpArray[,j,,2] <- cbind(e2@Centers[,j],e2@Ranges[,j])
     }
@@ -766,7 +766,7 @@ setMethod("!=",
   {
     if (!is(e2,"intData"))
       stop("Trying to compare an intData object with an object of a diferent type\n")
-    if ( e1@NObs != e2@NObs || e1@NIVar != e2@NIVar )
+    if ( e1@NObs != e2@NObs || e1@NVar != e2@NVar )
       stop("!= only defined for equally-sized intData objects\n")
     !(e1==e2)
   }

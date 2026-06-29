@@ -71,7 +71,9 @@ credit_card_outliers <- int_outliers(credit_card_dist,
 
 # Compute classical distances and outliers
 class_dist <- IMah_dist(credit_card_int, z = rep(1,credit_card_int@NObs))
-class_outliers <- int_outliers(class_dist, cutoff = "adjbox", p = p, cutoff_lvl = 1.5)
+class_outliers <- int_outliers(class_dist, 
+                               cutoff = "chi-squared", 
+                               p = credit_card_int@NVar)
 
 # Create a vector indicating if the observations are outliers or inliers 
 # based on the robust distance outlier detection
@@ -81,8 +83,8 @@ credit_card_is_outliers[!credit_card_outliers$is_outlier] <- "Inlier"
 
 # Plot Distance-Distance plot 
 plot_dist_dist(class_dist, 
-               class_cutoff = class_outliers$cutoff_value[2], 
-               class_cutoff_label = "1.5 adjusted boxplot",
+               class_cutoff = class_outliers$cutoff_value, 
+               class_cutoff_label = "0.975 chi-squared",
                rob_dist = credit_card_dist, 
                rob_cutoff = credit_card_outliers$cutoff_value, 
                rob_cutoff_label = "0.9 farness",

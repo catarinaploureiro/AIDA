@@ -20,7 +20,7 @@ test_that("int_Shapley returns matrix with observation and variable names", {
   shapley <- int_Shapley(obj, mean_c = mean_c, mean_r = mean_r, cov = cov)
 
   expect_true(is.matrix(shapley))
-  expect_equal(dim(shapley), c(obj@NObs, obj@NIVar))
+  expect_equal(dim(shapley), c(obj@NObs, obj@NVar))
   expect_equal(rownames(shapley), rownames(obj))
   expect_equal(colnames(shapley), colnames(obj))
 })
@@ -57,7 +57,7 @@ test_that("int_Shapley_decomp returns a list of matrices with expected component
   for (i in seq_len(obj@NObs)) {
     mat <- decomposed[[i]]
     expect_true(is.matrix(mat))
-    expect_equal(dim(mat), c(3, obj@NIVar))
+    expect_equal(dim(mat), c(3, obj@NVar))
     expect_equal(rownames(mat), c("Centers", "Ranges", "CentersRanges"))
     expect_equal(colnames(mat), colnames(obj))
     expect_equal(sum(mat), sum(shapley[i, ]), tolerance = 1e-8)
@@ -83,7 +83,7 @@ test_that("int_Shapley_interaction returns symmetric matrices with variable name
   for (i in seq_len(obj@NObs)) {
     mat <- interaction[[i]]
     expect_true(is.matrix(mat))
-    expect_equal(dim(mat), c(obj@NIVar, obj@NIVar))
+    expect_equal(dim(mat), c(obj@NVar, obj@NVar))
     expect_equal(rownames(mat), colnames(obj))
     expect_equal(colnames(mat), colnames(obj))
     expect_true(isTRUE(all.equal(mat, t(mat), tolerance = 1e-8)))
@@ -115,7 +115,7 @@ test_that("int_Shapley works with U_id_symmetric LatentCase", {
   shapley <- int_Shapley(obj, mean_c = mean_c, mean_r = mean_r, cov = cov)
   
   expect_true(is.matrix(shapley))
-  expect_equal(dim(shapley), c(obj@NObs, obj@NIVar))
+  expect_equal(dim(shapley), c(obj@NObs, obj@NVar))
   expect_false(any(is.na(shapley)))
   expect_false(any(is.infinite(shapley)))
 })
@@ -140,7 +140,7 @@ test_that("int_Shapley_decomp works with U_id_symmetric LatentCase", {
   expect_equal(length(decomposed), obj@NObs)
   for (i in seq_len(obj@NObs)) {
     mat <- decomposed[[i]]
-    expect_equal(dim(mat), c(2, obj@NIVar))
+    expect_equal(dim(mat), c(2, obj@NVar))
     expect_equal(rownames(mat), c("Centers", "Ranges"))
   }
 })
@@ -189,7 +189,7 @@ test_that("int_Shapley works with General LatentCase", {
   shapley <- int_Shapley(obj, mean_c = mean_c, mean_r = mean_r, cov = cov)
   
   expect_true(is.matrix(shapley))
-  expect_equal(dim(shapley), c(obj@NObs, obj@NIVar))
+  expect_equal(dim(shapley), c(obj@NObs, obj@NVar))
   expect_false(any(is.na(shapley)))
   expect_false(any(is.infinite(shapley)))
 })
@@ -215,7 +215,7 @@ test_that("int_Shapley_decomp works with General LatentCase", {
   expect_type(decomposed, "list")
   for (i in seq_len(obj@NObs)) {
     mat <- decomposed[[i]]
-    expect_equal(dim(mat), c(3, obj@NIVar))
+    expect_equal(dim(mat), c(3, obj@NVar))
     expect_equal(rownames(mat), c("Centers", "Ranges", "CentersRanges"))
   }
 })
@@ -251,7 +251,7 @@ test_that("int_Shapley computes missing parameters with IMCD", {
   # Without any parameters
   shapley_full <- int_Shapley(obj)
   expect_true(is.matrix(shapley_full))
-  expect_equal(dim(shapley_full), c(obj@NObs, obj@NIVar))
+  expect_equal(dim(shapley_full), c(obj@NObs, obj@NVar))
 })
 
 test_that("int_Shapley_decomp computes missing parameters with IMCD", {

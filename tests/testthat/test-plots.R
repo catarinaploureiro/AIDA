@@ -15,39 +15,39 @@ with_null_device <- function(code) {
   force(code)
 }
 
-test_that("SYMB.biplot works for all supported types", {
+test_that("plot_scatter_int works for all supported types", {
   obj <- setup_plot_data()
-  expect_error(with_null_device(SYMB.biplot(obj[, 1:2])), NA)
-  expect_error(with_null_device(SYMB.biplot(obj[, 1:2], type = "crosses")), NA)
-  expect_error(with_null_device(SYMB.biplot(obj[, 1:2], type = "crosses2")), NA)
+  expect_error(with_null_device(plot_scatter_int(obj[, 1:2])), NA)
+  expect_error(with_null_device(plot_scatter_int(obj[, 1:2], type = "crosses")), NA)
+  expect_error(with_null_device(plot_scatter_int(obj[, 1:2], type = "crosses2")), NA)
 })
 
-test_that("SYMB.biplot highlights outliers without error", {
+test_that("plot_scatter_int highlights outliers without error", {
   obj <- setup_plot_data()
   outliers <- c(TRUE, FALSE, TRUE)
-  expect_error(with_null_device(SYMB.biplot(obj[, 1:2], is_outlier = outliers)), NA)
+  expect_error(with_null_device(plot_scatter_int(obj[, 1:2], is_outlier = outliers)), NA)
 })
 
-test_that("SYMB.pairs.panels works with and without corr", {
+test_that("plot_pairs_int works with and without corr", {
   obj <- setup_plot_data()
   cov_mat <- int_cov(obj)
   corr_mat <- cov2cor(cov_mat)
 
-  expect_error(with_null_device(SYMB.pairs.panels(obj, type = "rectangles")), NA)
-  expect_error(with_null_device(SYMB.pairs.panels(obj, type = "crosses", corr = corr_mat)), NA)
+  expect_error(with_null_device(plot_pairs_int(obj, type = "rectangles")), NA)
+  expect_error(with_null_device(plot_pairs_int(obj, type = "crosses", corr = corr_mat)), NA)
 })
 
-test_that("SYMB.biplot and SYMB.pairs.panels validate intData input", {
-  expect_error(SYMB.biplot(mtcars), "Argument data is not an object of class intData")
-  expect_error(SYMB.pairs.panels(mtcars), "Argument data is not an object of class intData")
+test_that("plot_scatter_int and plot_pairs_int validate intData input", {
+  expect_error(plot_scatter_int(mtcars), "Argument data is not an object of class intData")
+  expect_error(plot_pairs_int(mtcars), "Argument data is not an object of class intData")
 })
 
-test_that("SYMB.pairs.panels supports crosses2 and corr matrix", {
+test_that("plot_pairs_int supports crosses2 and corr matrix", {
   obj <- setup_plot_data()
   cov_mat <- int_cov(obj)
   corr_mat <- cov2cor(cov_mat)
 
-  expect_error(with_null_device(SYMB.pairs.panels(obj, type = "crosses2", corr = corr_mat)), NA)
+  expect_error(with_null_device(plot_pairs_int(obj, type = "crosses2", corr = corr_mat)), NA)
 })
 
 test_that("plot_dist_dist returns a ggplot object when ggplotly is FALSE", {

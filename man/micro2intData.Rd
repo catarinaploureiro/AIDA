@@ -5,7 +5,7 @@
 \title{Aggregate Microdata into Interval-Valued Data}
 \usage{
 micro2intData(
-  MicDtDF,
+  microdata,
   agrby,
   agrcrt = "minmax",
   LatentParam = NULL,
@@ -18,7 +18,7 @@ micro2intData(
 )
 }
 \arguments{
-\item{MicDtDF}{A data frame containing the microdata. All columns should be numeric.}
+\item{microdata}{A data frame containing the microdata. All columns should be numeric.}
 
 \item{agrby}{A factor used to specify the grouping of the microdata for aggregation.}
 

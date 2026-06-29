@@ -24,7 +24,7 @@ c_step <- function(z,m,data){
 #' @param data An \code{\linkS4class{intData}} object containing the macrodata/interval data
 #' @return A vector representing an m-length subset of X
 draw_z <- function(m,data){
-    n <- data@NObs; p <- data@NIVar
+    n <- data@NObs; p <- data@NVar
     C <- as.matrix(data@Centers)
     R <- as.matrix(data@Ranges)
     z <- rep(0, n)
@@ -267,7 +267,7 @@ IMCD <- function(data,
     cutoff <- match.arg(cutoff)
     C <- as.matrix(data@Centers)
     R <- as.matrix(data@Ranges)
-    n <- data@NObs; p <- data@NIVar
+    n <- data@NObs; p <- data@NVar
 
     if(p==1){stop("data needs to have at least 2 variables.")}
 
@@ -309,9 +309,15 @@ IMCD <- function(data,
         cutoff_value <- NA
         w <- z
     }else if (cutoff=="adjbox"){
+        if (!requireNamespace("robustbase", quietly = TRUE)) {
+            stop("Package 'robustbase' is required for cutoff=='adjbox'.")
+        }
         cutoff_value <- robustbase::adjboxStats(d2, coef=cutoff_lvl, doScale = FALSE)$fence
         w <- ifelse((d2 >= cutoff_value[1])&(d2 <= cutoff_value[2]), 1, 0)
     }else if (cutoff=="F-dist"){
+        if (!requireNamespace("CerioliOutlierDetection", quietly = TRUE)) {
+            stop("Package 'CerioliOutlierDetection' is required for cutoff=='F-dist'.")
+        }
         delta <- 1-cutoff_lvl
         hr05 <- CerioliOutlierDetection::hr05CutoffMvnormal(n, p, m/n, delta)
         dfz <- hr05$m.pred - p + 1

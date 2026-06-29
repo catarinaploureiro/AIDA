@@ -5,7 +5,7 @@
 \title{Interval Data Constructor}
 \usage{
 intData(
-  Data,
+  macrodata,
   Seq = c("AllLb_AllUb", "AllCen_AllRng", "LbUb_VarbyVar", "CenRng_VarbyVar"),
   LatentParam = NULL,
   LatentCase = c("U_id_symmetric", "U_id", "General"),
@@ -16,12 +16,12 @@ intData(
   Umicro = NULL,
   estimate.DistParam = FALSE,
   VarNames = NULL,
-  ObsNames = row.names(Data),
-  NbMicroUnits = integer(0)
+  ObsNames = row.names(macrodata),
+  NMicro = integer(0)
 )
 }
 \arguments{
-\item{Data}{A data frame or matrix containing the data.}
+\item{macrodata}{A data frame or matrix containing the macrodata.}
 
 \item{Seq}{Format of macrodata if it is a data frame or matrix. Available options are:
 \itemize{
@@ -64,7 +64,7 @@ The default is \code{FALSE}.}
 
 \item{ObsNames}{A character vector of observation names.}
 
-\item{NbMicroUnits}{An integer specifying the number of micro units.}
+\item{NMicro}{An integer vector indicating the number of individual observations (microdata) aggregated by interval (macrodata).}
 }
 \value{
 An object of class \code{\linkS4class{intData}}.

@@ -33,7 +33,7 @@ test_that("int_outliers adjbox returns fence when robustbase installed", {
 })
 
 test_that("int_outliers F-dist requires z and p and returns expected fields when provided", {
-  testthat::skip_if_not_installed("stats")
+  testthat::skip_if_not_installed("CerioliOutlierDetection")
   robust_dist <- abs(rnorm(8))
   names(robust_dist) <- paste0("o", seq_along(robust_dist))
   z <- rep(c(1,0), length.out = length(robust_dist))

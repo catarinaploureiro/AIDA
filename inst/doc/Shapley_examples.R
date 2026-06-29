@@ -16,7 +16,7 @@ cars_int <- intCars$intData
 
 ## -----------------------------------------------------------------------------
 cars_IMCD <- IMCD(cars_int, m=floor(0.75*cars_int@NObs), cutoff = "farness", cutoff_lvl = 0.9)
-cars_outliers <- int_outliers(cars_IMCD$robust_dist, p = cars_int@NIVar,
+cars_outliers <- int_outliers(cars_IMCD$robust_dist, p = cars_int@NVar,
                                     cutoff = "farness", cutoff_lvl = 0.9)
 cars_outliers$outliers_names
 
@@ -44,26 +44,26 @@ cars_shapley <- int_Shapley(cars_int, mean_c = cars_IMCD$mean_IMCD_c,
 cars_shapley2 <- int_Shapley(cars_int)
 
 ## ----eval = requireNamespace("scales", quietly = TRUE)------------------------
-barplot_int_Shapley(cars_shapley[c(cars_outliers$outliers_names,"Bmwserie7"),], 
+plot_bar_int_Shapley(cars_shapley[c(cars_outliers$outliers_names,"Bmwserie7"),], 
                     cutoff_value = cars_outliers$cutoff_value, 
                     cutoff_label = "0.9 Farness Cutoff", 
                     palette = scales::hue_pal()(4))
 
 ## ----eval = requireNamespace("ggrepel", quietly = TRUE)-----------------------
-beeswarm_int_Shapley(cars_shapley, cars_is_outliers, color_label = NULL, 
+plot_beeswarm_int_Shapley(cars_shapley, cars_is_outliers, color_label = NULL, 
                       shape_class = cars_microdata$class, shape_label = "Class",
                       palette = c("gray50","dodgerblue"), ggplotly = FALSE, 
                       label_obs = c(cars_outliers$outliers_names), rotate_x = FALSE)
 
 ## ----fig.width=9.5, fig.height=4----------------------------------------------
-tileplot_int_Shapley(cars_shapley, abbrev.var = 15, sort.obs = TRUE)
+plot_tile_int_Shapley(cars_shapley, abbrev.var = 15, sort.obs = TRUE)
 
 ## ----fig.width=9.5------------------------------------------------------------
 outliers_colors <- rep('gray50', cars_int@NObs)
 names(outliers_colors) <- rownames(cars_int)
 outliers_colors[cars_outliers$outliers_names] = 'dodgerblue'
 
-radarplot_int_Shapley(cars_shapley,outliers_colors)
+plot_radar_int_Shapley(cars_shapley,outliers_colors)
 
 ## ----fig.width=7--------------------------------------------------------------
 cars_shapley_inter <- int_Shapley_interaction(cars_int, mean_c = cars_IMCD$mean_IMCD_c,
@@ -76,7 +76,7 @@ plot_int_Shapley_inter(cars_shapley_inter[["Ferrari"]], abbrev = 15, title = "Fe
 cars_shapley_decomp <- int_Shapley_decomp(cars_int, mean_c = cars_IMCD$mean_IMCD_c,
                                           mean_r = cars_IMCD$mean_IMCD_r, cov = cars_IMCD$cov_IMCD)
 
-barplot_int_Shapley_decomp(cars_shapley_decomp[c(cars_outliers$outliers_names,"Bmwserie7")],
+plot_bar_int_Shapley_decomp(cars_shapley_decomp[c(cars_outliers$outliers_names,"Bmwserie7")],
                           rotate_x = FALSE, palette = scales::hue_pal()(4))
 
 ## -----------------------------------------------------------------------------
@@ -122,18 +122,18 @@ spotify_Shapley <- int_Shapley(spotify_int, mean_c = spotify_IMCD$mean_IMCD_c,
 
 high_dist_12 <- names(spotify_IMCD$robust_dist[order(spotify_IMCD$robust_dist, decreasing = TRUE)[1:12]])
 
-barplot_int_Shapley(spotify_Shapley[high_dist_12,], 
+plot_bar_int_Shapley(spotify_Shapley[high_dist_12,], 
                     cutoff_value = c(spotify_outliers$cutoff_value, spotify_outliers_2$cutoff_value),
                     cutoff_label = c("0.95 Farness Cutoff", "0.90 Farness Cutoff"),
                     sort.obs = TRUE, abbrev.obs = 20)
 
 ## -----------------------------------------------------------------------------
-beeswarm_int_Shapley(spotify_Shapley, spotify_is_outliers, "Outlier Status", 
+plot_beeswarm_int_Shapley(spotify_Shapley, spotify_is_outliers, "Outlier Status", 
                       palette = palette_outliers, ggplotly = FALSE, 
                       label_obs = c("sleep","classical"))
 
 ## ----fig.width=7--------------------------------------------------------------
-tileplot_int_Shapley(spotify_Shapley[high_dist_12,], sort.obs = TRUE, abbrev.var = 15)
+plot_tile_int_Shapley(spotify_Shapley[high_dist_12,], sort.obs = TRUE, abbrev.var = 15)
 
 ## ----fig.width=7--------------------------------------------------------------
 spotify_shapley_inter <- int_Shapley_interaction(spotify_int, mean_c = spotify_IMCD$mean_IMCD_c,
@@ -147,5 +147,5 @@ spotify_shapley_decomp <- int_Shapley_decomp(spotify_int, mean_c = spotify_IMCD$
                                               mean_r = spotify_IMCD$mean_IMCD_r, 
                                               cov = spotify_IMCD$cov_IMCD)
 
-barplot_int_Shapley_decomp(spotify_shapley_decomp[spotify_outliers_2$outliers_names])
+plot_bar_int_Shapley_decomp(spotify_shapley_decomp[spotify_outliers_2$outliers_names])
 

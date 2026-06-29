@@ -87,6 +87,9 @@ int_outliers <- function(robust_dist,
         cutoff_value <- qchisq(cutoff_lvl, df = p)
         w <- ifelse(robust_dist <= cutoff_value, FALSE, TRUE)
     }else if (cutoff=="adjbox"){
+        if (!requireNamespace("robustbase", quietly = TRUE)) {
+            stop("Package 'robustbase' is required for cutoff=='adjbox'.")
+        }
         cutoff_value <- robustbase::adjboxStats(robust_dist, coef=cutoff_lvl, doScale = FALSE)$fence
         w <- ifelse((robust_dist >= cutoff_value[1])&(robust_dist <= cutoff_value[2]), FALSE, TRUE)
     }else if (cutoff=="F-dist"){

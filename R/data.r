@@ -103,13 +103,13 @@
 #' 
 #' @format A list with the following components:
 #' \describe{
-#'  \item{\code{min_max}}{A data frame with `27` rows and `9` columns. It contains the lower and upper bounds for each variable.}
+#'  \item{\code{microdata}}{A data frame with `27` rows and `9` columns. It contains the lower and upper bounds for each variable.}
 #'  \item{\code{intData}}{An \code{\linkS4class{intData}} object with `27` interval-valued observations and `4` variables. The variable "Price" was log-transformed into "lnPrice". The microdata are not available, thus the default parameters of the latent distributions were used assuming a uniform distribution.}
 #' }
 #' 
 #' @examples
 #' data(intCars)
-#' head(intCars$min_max)
+#' head(intCars$microdata)
 #' head(intCars$intData)
 #' 
 #' @keywords datasets

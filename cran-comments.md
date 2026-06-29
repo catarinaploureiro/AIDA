@@ -28,6 +28,7 @@
 * Introduced new functionality for explainable outlier detection based on Shapley values.
 * Added several plotting functions to visualize Shapley values and interaction indices.
 * Added `rbind` method for `intData` class.
+* Functions `SYMB.biplot` and `SYMB.pairs.panels` renamed to `plot_scatter_int`and `plot_pairs_int`, respectively.
 * Improvements to documentation and usability.
 * Introduced a unit test suite to improve package reliability.
 

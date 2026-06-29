@@ -63,7 +63,7 @@ test_that("IMCD uses bigIMCD for large samples and returns correct chi-squared c
   res <- IMCD(obj, m = floor(0.75 * n), cutoff = "chi-squared", cutoff_lvl = 0.5)
   expect_equal(res$cutoff, "chi-squared")
 
-  expect_equal(res$cutoff_value, qchisq(0.5, df = obj@NIVar))
+  expect_equal(res$cutoff_value, qchisq(0.5, df = obj@NVar))
   expect_equal(length(res$robust_dist), obj@NObs)
   expect_true(is.numeric(res$robust_dist))
 })

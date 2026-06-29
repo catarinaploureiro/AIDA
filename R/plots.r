@@ -6,9 +6,9 @@
 #' @importFrom ggplot2 scale_fill_manual scale_fill_gradient2 scale_linetype_manual scale_color_manual scale_y_discrete scale_alpha_manual
 NULL
 
-#' Symbolic Biplot for Interval-valued Data
+#' Scatter Plot for Interval-valued Data
 #' 
-#' Create a biplot for interval-valued symbolic data, visualizing the symbolic data as rectangles or crosses, with the first two variables on the x and y axes. The function allows customization of colors, fill colors, and outlier representation.
+#' Create a scatter plot for interval-valued symbolic data, visualizing the symbolic data as rectangles or crosses, with the first two variables on the x and y axes. The function allows customization of colors, fill colors, and outlier representation.
 #' 
 #' @param data An \code{\linkS4class{intData}} object containing the macrodata/interval data. The first two variables are used for the x and y axes.
 #' @param type The type of plot to generate: "rectangles", "crosses" or "crosses2". Default is "rectangles".
@@ -16,14 +16,14 @@ NULL
 #' @param fill_col If \code{type="rectangles"}, a vector with colors for the fill of each observation, or a single color for all observations. Default is "gray50".
 #' @param is_outlier A vector with logical values indicating if the observation is an outlier or not. It makes the line width of the outlying observations thicker. Default is NULL.
 #' @param ... Additional graphical parameters.
-#' @return A biplot is drawn in the graphic window. The biplot shows the symbolic data as rectangles or crosses, with the first two variables on the x and y axes.
+#' @return A scatter plot is drawn in the graphic window. The scatter plot shows the symbolic data as rectangles or crosses, with the first two variables on the x and y axes.
 #' @examples
 #' data(creditcard)
 #' credit_card_int <- creditcard$intData
 #' 
-#' SYMB.biplot(credit_card_int[, c(3, 5)])
+#' plot_scatter_int(credit_card_int[, c(3, 5)])
 #' 
-#' # Alternatively, highlight outliers in the biplot
+#' # Alternatively, highlight outliers in the scatter plot
 #' # Compute robust distances using IMCD estimates of mean and covariance
 #' credit_card_dist <- IMah_dist(credit_card_int)
 #' 
@@ -34,11 +34,11 @@ NULL
 #' names(outliers_colors) <- rownames(credit_card_int)
 #' outliers_colors[credit_card_outliers$outliers_names] = 'red'
 #' 
-#' SYMB.biplot(credit_card_int[, c(3, 5)], 
+#' plot_scatter_int(credit_card_int[, c(3, 5)], 
 #'             palette = outliers_colors, 
 #'             is_outlier = credit_card_outliers$is_outlier)
 #' @export
-SYMB.biplot <- function(data,
+plot_scatter_int <- function(data,
                         type = c("rectangles", "crosses", "crosses2"),
                         palette = rainbow(nrow(data)),
                         fill_col = "gray50",
@@ -116,11 +116,11 @@ SYMB.biplot <- function(data,
 #' # Compute covariance and correlation matrices
 #' credit_card_cov <- int_cov(credit_card_int)
 #' credit_card_cor <- cov2cor(credit_card_cov)
-#' SYMB.pairs.panels(credit_card_int,
+#' plot_pairs_int(credit_card_int,
 #'                   corr = credit_card_cor,
 #'                   labels = colnames(credit_card_int))
 #' 
-#' # Alternatively, highlight outliers in the biplot and use the robust correlation matrix
+#' # Alternatively, highlight outliers in the scatter plot and use the robust correlation matrix
 #' # Obtain reweighted IMCD estimates using farness cutoff
 #' credit_card_IMCD <- IMCD(credit_card_int, 
 #'                          m = floor(nrow(credit_card_int)*0.75), 
@@ -136,14 +136,14 @@ SYMB.biplot <- function(data,
 #' names(outliers_colors) <- rownames(credit_card_int)
 #' outliers_colors[credit_card_outliers$outliers_names] = 'red'
 #' 
-#' SYMB.pairs.panels(credit_card_int, 
+#' plot_pairs_int(credit_card_int, 
 #'                   corr = cov2cor(credit_card_IMCD$cov_IMCD), 
 #'                   palette = outliers_colors,
 #'                   labels = colnames(credit_card_int),
 #'                   type = "rectangles",
 #'                   is_outlier = credit_card_outliers$is_outlier)
 #' @export
-SYMB.pairs.panels <- function (data,
+plot_pairs_int <- function (data,
                               type=c("rectangles","crosses","crosses2"),
                               cex.cor=2.0,
                               corr=NULL,
@@ -254,7 +254,9 @@ SYMB.pairs.panels <- function (data,
 #' 
 #' # Compute classical distances and outliers
 #' class_dist <- IMah_dist(credit_card_int, z = rep(1,credit_card_int@NObs))
-#' class_outliers <- int_outliers(class_dist, cutoff = "adjbox", p = p, cutoff_lvl = 1.5)
+#' class_outliers <- int_outliers(class_dist, 
+#'                                cutoff = "chi-squared", 
+#'                                p = credit_card_int@NVar)
 #' 
 #' # Create a vector indicating if the observations are outliers or inliers 
 #' # based on the robust distance outlier detection
@@ -264,8 +266,8 @@ SYMB.pairs.panels <- function (data,
 #' 
 #' # Plot Distance-Distance plot 
 #' plot_dist_dist(class_dist, 
-#'                class_cutoff = class_outliers$cutoff_value[2], 
-#'                class_cutoff_label = "1.5 adjusted boxplot",
+#'                class_cutoff = class_outliers$cutoff_value, 
+#'                class_cutoff_label = "0.975 chi-squared",
 #'                rob_dist = credit_card_dist, 
 #'                rob_cutoff = credit_card_outliers$cutoff_value, 
 #'                rob_cutoff_label = "0.9 farness",

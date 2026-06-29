@@ -56,6 +56,9 @@ safe_mcd <- function(df) {
   
   res <- tryCatch(
     {
+      if (!requireNamespace("robustbase", quietly = TRUE)) {
+          stop("Package 'robustbase' is required for MCD estimator.")
+      }
       mcd <- robustbase::covMcd(df)
       list(center = mcd$center, cov = mcd$cov, method = "MCD")
     },

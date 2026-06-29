@@ -7,7 +7,7 @@
 #' @return A list with the raw IMCD covariance matrix estimate, the squared Interval-Mahalanobis distances, the final z values, and the m value used.
 #' @export
 IMCD_raw <- function(data, m = 0){
-    n <- data@NObs; p <- data@NIVar
+    n <- data@NObs; p <- data@NVar
     
     # Set m
     if (!m) {
@@ -49,7 +49,7 @@ reweight_IMCD <- function(d2, z, data, m=0, cutoff=c("farness","adjbox","chi-squ
     cutoff <- match.arg(cutoff)
     C <- as.matrix(data@Centers)
     R <- as.matrix(data@Ranges)
-    n <- data@NObs; p <- data@NIVar
+    n <- data@NObs; p <- data@NVar
 
     # Set m
     if (!m) {
@@ -75,9 +75,15 @@ reweight_IMCD <- function(d2, z, data, m=0, cutoff=c("farness","adjbox","chi-squ
         cutoff_value <- NA
         w <- z
     }else if (cutoff=="adjbox"){
+        if (!requireNamespace("robustbase", quietly = TRUE)) {
+            stop("Package 'robustbase' is required for cutoff=='adjbox'.")
+        }
         cutoff_value <- robustbase::adjboxStats(d2, coef=cutoff_lvl, doScale = FALSE)$fence
         w <- ifelse((d2 >= cutoff_value[1])&(d2 <= cutoff_value[2]), 1, 0)
     }else if (cutoff=="F-dist"){
+        if (!requireNamespace("CerioliOutlierDetection", quietly = TRUE)) {
+            stop("Package 'CerioliOutlierDetection' is required for cutoff=='F-dist'.")
+        }
         delta <- 1-cutoff_lvl
         hr05 <- CerioliOutlierDetection::hr05CutoffMvnormal(n, p, m/n, delta)
         dfz <- hr05$m.pred - p + 1
