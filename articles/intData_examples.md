@@ -10,7 +10,7 @@ related functions for handling interval-valued data. The `intData` class
 is designed to represent interval-valued data. The examples included
 here demonstrate how to create `intData` objects, compute summary
 statistics, and visualize interval-valued data using the
-`SYMB.pairs.panels` function. The dataset used in these examples is the
+`plot_pairs_int` function. The dataset used in these examples is the
 *Credit Card* dataset, which is available in the package and can be
 loaded using `data("creditcard")`. The examples illustrate the basic
 functionalities of the `intData` class and how to work with
@@ -268,15 +268,14 @@ credit_card_cov
 #> Clothes 54.408201  3.6618540 -136.381036 -85.6047285  576.922703
 ```
 
-Finally, we can visualize the interval data using the
-`SYMB.pairs.panels` function, which creates a pairs plot for
-interval-valued data. The lower triangular shows scatter plots of the
-variables, while the upper triangular shows the interval correlation
-matrix.
+Finally, we can visualize the interval data using the `plot_pairs_int`
+function, which creates a pairs plot for interval-valued data. The lower
+triangular shows scatter plots of the variables, while the upper
+triangular shows the interval correlation matrix.
 
 ``` r
 
-SYMB.pairs.panels(credit_card_int_agr, type = "rectangles", 
+plot_pairs_int(credit_card_int_agr, type = "rectangles", 
                     corr = credit_card_cor, labels = colnames(credit_card_int_agr))
 ```
 

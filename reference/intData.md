@@ -6,7 +6,7 @@ Constructs an interval data object.
 
 ``` r
 intData(
-  Data,
+  macrodata,
   Seq = c("AllLb_AllUb", "AllCen_AllRng", "LbUb_VarbyVar", "CenRng_VarbyVar"),
   LatentParam = NULL,
   LatentCase = c("U_id_symmetric", "U_id", "General"),
@@ -17,16 +17,16 @@ intData(
   Umicro = NULL,
   estimate.DistParam = FALSE,
   VarNames = NULL,
-  ObsNames = row.names(Data),
-  NbMicroUnits = integer(0)
+  ObsNames = row.names(macrodata),
+  NMicro = integer(0)
 )
 ```
 
 ## Arguments
 
-- Data:
+- macrodata:
 
-  A data frame or matrix containing the data.
+  A data frame or matrix containing the macrodata.
 
 - Seq:
 
@@ -115,9 +115,10 @@ intData(
 
   A character vector of observation names.
 
-- NbMicroUnits:
+- NMicro:
 
-  An integer specifying the number of micro units.
+  An integer vector indicating the number of individual observations
+  (microdata) aggregated by interval (macrodata).
 
 ## Value
 

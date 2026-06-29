@@ -15,7 +15,7 @@ data(intCars)
 
 A list with the following components:
 
-- `min_max`:
+- `microdata`:
 
   A data frame with `27` rows and `9` columns. It contains the lower and
   upper bounds for each variable.
@@ -38,8 +38,21 @@ This data was retrieved from the `MAINT.Data` package, available at
 
 ``` r
 data(intCars)
-head(intCars$min_max)
-#> NULL
+head(intCars$microdata)
+#>         LB_Price UB_Price LB_EngCap UB_EngCap LB_TopSpeed UB_TopSpeed
+#> Alfa145    27806    33596      1370      1910         185         211
+#> Alfa156    41593    62291      1598      2492         200         227
+#> Alfa166    64499    88760      1970      2959         204         211
+#> AudiA3     40230    68838      1595      1781         189         238
+#> AudiA6     68216   140265      1781      4172         216         250
+#> AudiA8    123849   171417      2771      4172         232         250
+#>         LB_Acceleration UB_Acceleration       class
+#> Alfa145             8.3            11.2 Utilitarian
+#> Alfa156             8.5            10.5     Berlina
+#> Alfa166             9.8             9.9    Sportive
+#> AudiA3              6.8            10.9 Utilitarian
+#> AudiA6              6.7             9.7     Berlina
+#> AudiA8              5.4            10.1    Sportive
 head(intCars$intData)
 #>                  lnPrice                EngCap             Top Speed          Acceleration
 #> Alfa145   [10.23301, 10.42216]  [  1370  ,   1910  ]  [  185   ,   211   ]  [  8.3   ,   11.2  ]  

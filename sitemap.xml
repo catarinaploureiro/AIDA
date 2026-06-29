@@ -23,15 +23,10 @@
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/LogRanges.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/LowerBounds.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/Mallows_dist.html</loc></url>
-<url><loc>https://catarinaploureiro.github.io/AIDA/reference/NbMicroUnits.html</loc></url>
+<url><loc>https://catarinaploureiro.github.io/AIDA/reference/NMicro.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/Ranges.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/S4-Extract-methods.html</loc></url>
-<url><loc>https://catarinaploureiro.github.io/AIDA/reference/SYMB.biplot.html</loc></url>
-<url><loc>https://catarinaploureiro.github.io/AIDA/reference/SYMB.pairs.panels.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/UpperBounds.html</loc></url>
-<url><loc>https://catarinaploureiro.github.io/AIDA/reference/barplot_int_Shapley.html</loc></url>
-<url><loc>https://catarinaploureiro.github.io/AIDA/reference/barplot_int_Shapley_decomp.html</loc></url>
-<url><loc>https://catarinaploureiro.github.io/AIDA/reference/beeswarm_int_Shapley.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/bigIMCD.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/c_step.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/cal.E.UU.html</loc></url>
@@ -64,11 +59,17 @@
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/nrow.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/pick10.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/plot.html</loc></url>
+<url><loc>https://catarinaploureiro.github.io/AIDA/reference/plot_bar_int_Shapley.html</loc></url>
+<url><loc>https://catarinaploureiro.github.io/AIDA/reference/plot_bar_int_Shapley_decomp.html</loc></url>
+<url><loc>https://catarinaploureiro.github.io/AIDA/reference/plot_beeswarm_int_Shapley.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/plot_dist_dist.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/plot_int_Shapley_inter.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/plot_interval_dist.html</loc></url>
+<url><loc>https://catarinaploureiro.github.io/AIDA/reference/plot_pairs_int.html</loc></url>
+<url><loc>https://catarinaploureiro.github.io/AIDA/reference/plot_radar_int_Shapley.html</loc></url>
+<url><loc>https://catarinaploureiro.github.io/AIDA/reference/plot_scatter_int.html</loc></url>
+<url><loc>https://catarinaploureiro.github.io/AIDA/reference/plot_tile_int_Shapley.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/print.html</loc></url>
-<url><loc>https://catarinaploureiro.github.io/AIDA/reference/radarplot_int_Shapley.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/rbind.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/row.names.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/rownames.html</loc></url>
@@ -80,6 +81,5 @@
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/summary.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/summaryintData-class.html</loc></url>
 <url><loc>https://catarinaploureiro.github.io/AIDA/reference/tail.html</loc></url>
-<url><loc>https://catarinaploureiro.github.io/AIDA/reference/tileplot_int_Shapley.html</loc></url>
 </urlset>
 

@@ -79,7 +79,7 @@ cars_outliers_colors <- rep('gray50', cars_int@NObs)
 names(cars_outliers_colors) <- rownames(cars_int)
 cars_outliers_colors[cars_outliers$outliers_names] <- 'red'
 
-SYMB.pairs.panels(cars_int, palette = cars_outliers_colors, type = "rectangles", 
+plot_pairs_int(cars_int, palette = cars_outliers_colors, type = "rectangles", 
                     corr = cov2cor(cars_IMCD$cov_IMCD), labels = colnames(cars_int),
                     is_outlier = cars_outliers$is_outlier, gap = 0)
 ```

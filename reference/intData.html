@@ -41,7 +41,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Interval Data Constructor</h1>
-      <small class="dont-index">Source: <a href="https://github.com/catarinaploureiro/AIDA/blob/main/R/intData_class.r" class="external-link"><code>R/intData_class.r</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/catarinaploureiro/AIDA/blob/v0.2.0/R/intData_class.r" class="external-link"><code>R/intData_class.r</code></a></small>
       <div class="d-none name"><code>intData.Rd</code></div>
     </div>
 
@@ -52,7 +52,7 @@
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">intData</span><span class="op">(</span></span>
-<span>  <span class="va">Data</span>,</span>
+<span>  <span class="va">macrodata</span>,</span>
 <span>  Seq <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"AllLb_AllUb"</span>, <span class="st">"AllCen_AllRng"</span>, <span class="st">"LbUb_VarbyVar"</span>, <span class="st">"CenRng_VarbyVar"</span><span class="op">)</span>,</span>
 <span>  LatentParam <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  LatentCase <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"U_id_symmetric"</span>, <span class="st">"U_id"</span>, <span class="st">"General"</span><span class="op">)</span>,</span>
@@ -63,8 +63,8 @@
 <span>  Umicro <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  estimate.DistParam <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  VarNames <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  ObsNames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/row.names.html" class="external-link">row.names</a></span><span class="op">(</span><span class="va">Data</span><span class="op">)</span>,</span>
-<span>  NbMicroUnits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">integer</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span></span>
+<span>  ObsNames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/row.names.html" class="external-link">row.names</a></span><span class="op">(</span><span class="va">macrodata</span><span class="op">)</span>,</span>
+<span>  NMicro <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">integer</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -72,8 +72,8 @@
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
 
 
-<dl><dt id="arg-data">Data<a class="anchor" aria-label="anchor" href="#arg-data"></a></dt>
-<dd><p>A data frame or matrix containing the data.</p></dd>
+<dl><dt id="arg-macrodata">macrodata<a class="anchor" aria-label="anchor" href="#arg-macrodata"></a></dt>
+<dd><p>A data frame or matrix containing the macrodata.</p></dd>
 
 
 <dt id="arg-seq">Seq<a class="anchor" aria-label="anchor" href="#arg-seq"></a></dt>
@@ -134,8 +134,8 @@ The default is <code>FALSE</code>.</p></dd>
 <dd><p>A character vector of observation names.</p></dd>
 
 
-<dt id="arg-nbmicrounits">NbMicroUnits<a class="anchor" aria-label="anchor" href="#arg-nbmicrounits"></a></dt>
-<dd><p>An integer specifying the number of micro units.</p></dd>
+<dt id="arg-nmicro">NMicro<a class="anchor" aria-label="anchor" href="#arg-nmicro"></a></dt>
+<dd><p>An integer vector indicating the number of individual observations (microdata) aggregated by interval (macrodata).</p></dd>
 
 </dl></div>
     <div class="section level2">

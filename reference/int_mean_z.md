@@ -42,7 +42,7 @@ X <- matrix(rnorm(n * p), ncol = p)
 # if we consider all the observations the result obtained is the same as colMeans()
 z <- c(rep(1, n))
 int_mean_z(z, X)
-#> [1]  0.11373089  0.07907752 -0.07217108  0.09724216
+#> [1] -0.133657206 -0.021465456  0.005533771  0.052823144
 colMeans(X)
-#> [1]  0.11373089  0.07907752 -0.07217108  0.09724216
+#> [1] -0.133657206 -0.021465456  0.005533771  0.052823144
 ```

@@ -71,7 +71,7 @@
 Loureiro</h4>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/catarinaploureiro/AIDA/blob/main/vignettes/Shapley_examples.Rmd" class="external-link"><code>vignettes/Shapley_examples.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/catarinaploureiro/AIDA/blob/v0.2.0/vignettes/Shapley_examples.Rmd" class="external-link"><code>vignettes/Shapley_examples.Rmd</code></a></small>
       <div class="d-none name"><code>Shapley_examples.Rmd</code></div>
     </div>
 
@@ -94,12 +94,13 @@ squared Interval-Mahalanobis distances. The
 interaction values for pairs of variables. The
 <code>int_Shapley_decomp</code> function decomposes the Shapley values
 into centers, ranges, and their interactions’ contributions. The
-functions <code>barplot_int_Shapley</code>,
-<code>beeswarm_int_Shapley</code>, <code>tileplot_int_Shapley</code>,
-and <code>radarplot_int_Shapley</code> are used to visualize the Shapley
+functions <code>plot_bar_int_Shapley</code>,
+<code>plot_beeswarm_int_Shapley</code>,
+<code>plot_tile_int_Shapley</code>, and
+<code>plot_radar_int_Shapley</code> are used to visualize the Shapley
 values in different ways. The functions
 <code>plot_int_Shapley_inter</code> and
-<code>barplot_int_Shapley_decomp</code> are used to visualize the
+<code>plot_bar_int_Shapley_decomp</code> are used to visualize the
 Shapley interaction values and the decomposition of the Shapley values,
 respectively. The examples provided here demonstrate how to apply these
 methods to real datasets, and the results can be compared to those
@@ -145,7 +146,7 @@ function identifies potential outliers based on the robust distances
 obtained from the IMCD estimates.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cars_IMCD</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/IMCD.html">IMCD</a></span><span class="op">(</span><span class="va">cars_int</span>, m<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">floor</a></span><span class="op">(</span><span class="fl">0.75</span><span class="op">*</span><span class="va">cars_int</span><span class="op">@</span><span class="va">NObs</span><span class="op">)</span>, cutoff <span class="op">=</span> <span class="st">"farness"</span>, cutoff_lvl <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span>
-<span><span class="va">cars_outliers</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/int_outliers.html">int_outliers</a></span><span class="op">(</span><span class="va">cars_IMCD</span><span class="op">$</span><span class="va">robust_dist</span>, p <span class="op">=</span> <span class="va">cars_int</span><span class="op">@</span><span class="va">NIVar</span>,</span>
+<span><span class="va">cars_outliers</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/int_outliers.html">int_outliers</a></span><span class="op">(</span><span class="va">cars_IMCD</span><span class="op">$</span><span class="va">robust_dist</span>, p <span class="op">=</span> <span class="va">cars_int</span><span class="op">@</span><span class="va">NVar</span>,</span>
 <span>                                    cutoff <span class="op">=</span> <span class="st">"farness"</span>, cutoff_lvl <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span>
 <span><span class="va">cars_outliers</span><span class="op">$</span><span class="va">outliers_names</span></span>
 <span><span class="co">#&gt; [1] "Ferrari"         "HondaNSK"        "MercedesSL"      "MercedesClasseS"</span></span>
@@ -192,7 +193,7 @@ representing the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>0.9</mn><annotation encoding="application/x-tex">0.9</annotation></semantics></math>
 farness cutoff.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/barplot_int_Shapley.html">barplot_int_Shapley</a></span><span class="op">(</span><span class="va">cars_shapley</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">cars_outliers</span><span class="op">$</span><span class="va">outliers_names</span>,<span class="st">"Bmwserie7"</span><span class="op">)</span>,<span class="op">]</span>, </span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_bar_int_Shapley.html">plot_bar_int_Shapley</a></span><span class="op">(</span><span class="va">cars_shapley</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">cars_outliers</span><span class="op">$</span><span class="va">outliers_names</span>,<span class="st">"Bmwserie7"</span><span class="op">)</span>,<span class="op">]</span>, </span>
 <span>                    cutoff_value <span class="op">=</span> <span class="va">cars_outliers</span><span class="op">$</span><span class="va">cutoff_value</span>, </span>
 <span>                    cutoff_label <span class="op">=</span> <span class="st">"0.9 Farness Cutoff"</span>, </span>
 <span>                    palette <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/pal_hue.html" class="external-link">hue_pal</a></span><span class="op">(</span><span class="op">)</span><span class="op">(</span><span class="fl">4</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -201,7 +202,7 @@ farness cutoff.</p>
 Interval-Mahalanobis distances. The outlying observations are marked in
 blue and the shape represents the car model class.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/beeswarm_int_Shapley.html">beeswarm_int_Shapley</a></span><span class="op">(</span><span class="va">cars_shapley</span>, <span class="va">cars_is_outliers</span>, color_label <span class="op">=</span> <span class="cn">NULL</span>, </span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_beeswarm_int_Shapley.html">plot_beeswarm_int_Shapley</a></span><span class="op">(</span><span class="va">cars_shapley</span>, <span class="va">cars_is_outliers</span>, color_label <span class="op">=</span> <span class="cn">NULL</span>, </span>
 <span>                      shape_class <span class="op">=</span> <span class="va">cars_microdata</span><span class="op">$</span><span class="va">class</span>, shape_label <span class="op">=</span> <span class="st">"Class"</span>,</span>
 <span>                      palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"gray50"</span>,<span class="st">"dodgerblue"</span><span class="op">)</span>, ggplotly <span class="op">=</span> <span class="cn">FALSE</span>, </span>
 <span>                      label_obs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">cars_outliers</span><span class="op">$</span><span class="va">outliers_names</span><span class="op">)</span>, rotate_x <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
@@ -210,7 +211,7 @@ blue and the shape represents the car model class.</p>
 Interval-Mahalanobis distances. The observations are ordered from
 largest to smallest squared distance.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/tileplot_int_Shapley.html">tileplot_int_Shapley</a></span><span class="op">(</span><span class="va">cars_shapley</span>, abbrev.var <span class="op">=</span> <span class="fl">15</span>, sort.obs <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_tile_int_Shapley.html">plot_tile_int_Shapley</a></span><span class="op">(</span><span class="va">cars_shapley</span>, abbrev.var <span class="op">=</span> <span class="fl">15</span>, sort.obs <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Shapley_examples_files/figure-html/unnamed-chunk-8-1.png" class="r-plt" alt="" width="912"></p>
 <p>Radar plot of the Shapley value decomposition of the squared robust
 Interval-Mahalanobis distances. The outlying observations are marked in
@@ -220,7 +221,7 @@ blue.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">outliers_colors</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">cars_int</span><span class="op">)</span></span>
 <span><span class="va">outliers_colors</span><span class="op">[</span><span class="va">cars_outliers</span><span class="op">$</span><span class="va">outliers_names</span><span class="op">]</span> <span class="op">=</span> <span class="st">'dodgerblue'</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/radarplot_int_Shapley.html">radarplot_int_Shapley</a></span><span class="op">(</span><span class="va">cars_shapley</span>,<span class="va">outliers_colors</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/plot_radar_int_Shapley.html">plot_radar_int_Shapley</a></span><span class="op">(</span><span class="va">cars_shapley</span>,<span class="va">outliers_colors</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Shapley_examples_files/figure-html/unnamed-chunk-9-1.png" class="r-plt" alt="" width="912"></p>
 <p>Tile plot of the Shapley interaction index for observation
 <em>Ferrari</em>.</p>
@@ -238,7 +239,7 @@ shown.</p>
 <code class="sourceCode R"><span><span class="va">cars_shapley_decomp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/int_Shapley_decomp.html">int_Shapley_decomp</a></span><span class="op">(</span><span class="va">cars_int</span>, mean_c <span class="op">=</span> <span class="va">cars_IMCD</span><span class="op">$</span><span class="va">mean_IMCD_c</span>,</span>
 <span>                                          mean_r <span class="op">=</span> <span class="va">cars_IMCD</span><span class="op">$</span><span class="va">mean_IMCD_r</span>, cov <span class="op">=</span> <span class="va">cars_IMCD</span><span class="op">$</span><span class="va">cov_IMCD</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/barplot_int_Shapley_decomp.html">barplot_int_Shapley_decomp</a></span><span class="op">(</span><span class="va">cars_shapley_decomp</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">cars_outliers</span><span class="op">$</span><span class="va">outliers_names</span>,<span class="st">"Bmwserie7"</span><span class="op">)</span><span class="op">]</span>,</span>
+<span><span class="fu"><a href="../reference/plot_bar_int_Shapley_decomp.html">plot_bar_int_Shapley_decomp</a></span><span class="op">(</span><span class="va">cars_shapley_decomp</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">cars_outliers</span><span class="op">$</span><span class="va">outliers_names</span>,<span class="st">"Bmwserie7"</span><span class="op">)</span><span class="op">]</span>,</span>
 <span>                          rotate_x <span class="op">=</span> <span class="cn">FALSE</span>, palette <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/pal_hue.html" class="external-link">hue_pal</a></span><span class="op">(</span><span class="op">)</span><span class="op">(</span><span class="fl">4</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Shapley_examples_files/figure-html/unnamed-chunk-11-1.png" class="r-plt" alt="" width="912"></p>
 </div>
@@ -342,7 +343,7 @@ farness cutoff values.</p>
 <span></span>
 <span><span class="va">high_dist_12</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">spotify_IMCD</span><span class="op">$</span><span class="va">robust_dist</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="va">spotify_IMCD</span><span class="op">$</span><span class="va">robust_dist</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/barplot_int_Shapley.html">barplot_int_Shapley</a></span><span class="op">(</span><span class="va">spotify_Shapley</span><span class="op">[</span><span class="va">high_dist_12</span>,<span class="op">]</span>, </span>
+<span><span class="fu"><a href="../reference/plot_bar_int_Shapley.html">plot_bar_int_Shapley</a></span><span class="op">(</span><span class="va">spotify_Shapley</span><span class="op">[</span><span class="va">high_dist_12</span>,<span class="op">]</span>, </span>
 <span>                    cutoff_value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">spotify_outliers</span><span class="op">$</span><span class="va">cutoff_value</span>, <span class="va">spotify_outliers_2</span><span class="op">$</span><span class="va">cutoff_value</span><span class="op">)</span>,</span>
 <span>                    cutoff_label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"0.95 Farness Cutoff"</span>, <span class="st">"0.90 Farness Cutoff"</span><span class="op">)</span>,</span>
 <span>                    sort.obs <span class="op">=</span> <span class="cn">TRUE</span>, abbrev.obs <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></code></pre></div>
@@ -351,7 +352,7 @@ farness cutoff values.</p>
 robust Interval-Mahalanobis distances for the Spotify dataset. The
 extreme outliers are marked in blue and the mild ones in green.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/beeswarm_int_Shapley.html">beeswarm_int_Shapley</a></span><span class="op">(</span><span class="va">spotify_Shapley</span>, <span class="va">spotify_is_outliers</span>, <span class="st">"Outlier Status"</span>, </span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_beeswarm_int_Shapley.html">plot_beeswarm_int_Shapley</a></span><span class="op">(</span><span class="va">spotify_Shapley</span>, <span class="va">spotify_is_outliers</span>, <span class="st">"Outlier Status"</span>, </span>
 <span>                      palette <span class="op">=</span> <span class="va">palette_outliers</span>, ggplotly <span class="op">=</span> <span class="cn">FALSE</span>, </span>
 <span>                      label_obs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sleep"</span>,<span class="st">"classical"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Shapley_examples_files/figure-html/unnamed-chunk-16-1.png" class="r-plt" alt="" width="576"></p>
@@ -361,7 +362,7 @@ Interval-Mahalanobis distances for the
 observations with largest squared distances. The observations are
 ordered from largest to smallest squared distance.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/tileplot_int_Shapley.html">tileplot_int_Shapley</a></span><span class="op">(</span><span class="va">spotify_Shapley</span><span class="op">[</span><span class="va">high_dist_12</span>,<span class="op">]</span>, sort.obs <span class="op">=</span> <span class="cn">TRUE</span>, abbrev.var <span class="op">=</span> <span class="fl">15</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_tile_int_Shapley.html">plot_tile_int_Shapley</a></span><span class="op">(</span><span class="va">spotify_Shapley</span><span class="op">[</span><span class="va">high_dist_12</span>,<span class="op">]</span>, sort.obs <span class="op">=</span> <span class="cn">TRUE</span>, abbrev.var <span class="op">=</span> <span class="fl">15</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Shapley_examples_files/figure-html/unnamed-chunk-17-1.png" class="r-plt" alt="" width="672"></p>
 <p>Tile plot of the Shapley interaction index for observation
 <em>grindcore</em>.</p>
@@ -381,7 +382,7 @@ Interval-Mahalanobis distance.</p>
 <span>                                              mean_r <span class="op">=</span> <span class="va">spotify_IMCD</span><span class="op">$</span><span class="va">mean_IMCD_r</span>, </span>
 <span>                                              cov <span class="op">=</span> <span class="va">spotify_IMCD</span><span class="op">$</span><span class="va">cov_IMCD</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/barplot_int_Shapley_decomp.html">barplot_int_Shapley_decomp</a></span><span class="op">(</span><span class="va">spotify_shapley_decomp</span><span class="op">[</span><span class="va">spotify_outliers_2</span><span class="op">$</span><span class="va">outliers_names</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/plot_bar_int_Shapley_decomp.html">plot_bar_int_Shapley_decomp</a></span><span class="op">(</span><span class="va">spotify_shapley_decomp</span><span class="op">[</span><span class="va">spotify_outliers_2</span><span class="op">$</span><span class="va">outliers_names</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Shapley_examples_files/figure-html/unnamed-chunk-19-1.png" class="r-plt" alt="" width="912"></p>
 </div>
 <div class="section level2 unnumbered">

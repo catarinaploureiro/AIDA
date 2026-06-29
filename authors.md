@@ -8,7 +8,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/catarinaploureiro/AIDA/blob/main/inst/CITATION)
+[`inst/CITATION`](https://github.com/catarinaploureiro/AIDA/blob/v0.2.0/inst/CITATION)
 
 Loureiro C. P. (2026). AIDA: Analysis of Interval DAta. R package
 version 0.2.0. https://cran.r-project.org/package=AIDA.

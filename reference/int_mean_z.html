@@ -41,7 +41,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Sample Mean</h1>
-      <small class="dont-index">Source: <a href="https://github.com/catarinaploureiro/AIDA/blob/main/R/int_cov.r" class="external-link"><code>R/int_cov.r</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/catarinaploureiro/AIDA/blob/v0.2.0/R/int_cov.r" class="external-link"><code>R/int_cov.r</code></a></small>
       <div class="d-none name"><code>int_mean_z.Rd</code></div>
     </div>
 
@@ -85,9 +85,9 @@ $$\bar{\boldsymbol{x}}(\boldsymbol{z}) = \dfrac{1}{m} \boldsymbol{X}^\top \bolds
 <span class="r-in"><span><span class="co"># if we consider all the observations the result obtained is the same as colMeans()</span></span></span>
 <span class="r-in"><span><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">n</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">int_mean_z</span><span class="op">(</span><span class="va">z</span>, <span class="va">X</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  0.11373089  0.07907752 -0.07217108  0.09724216</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.133657206 -0.021465456  0.005533771  0.052823144</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">colMeans</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  0.11373089  0.07907752 -0.07217108  0.09724216</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.133657206 -0.021465456  0.005533771  0.052823144</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

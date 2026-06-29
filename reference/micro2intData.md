@@ -7,7 +7,7 @@ various criteria and latent distribution settings.
 
 ``` r
 micro2intData(
-  MicDtDF,
+  microdata,
   agrby,
   agrcrt = "minmax",
   LatentParam = NULL,
@@ -22,7 +22,7 @@ micro2intData(
 
 ## Arguments
 
-- MicDtDF:
+- microdata:
 
   A data frame containing the microdata. All columns should be numeric.
 

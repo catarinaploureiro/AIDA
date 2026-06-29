@@ -71,7 +71,7 @@
 Loureiro</h4>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/catarinaploureiro/AIDA/blob/main/vignettes/IMCD_examples.Rmd" class="external-link"><code>vignettes/IMCD_examples.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/catarinaploureiro/AIDA/blob/v0.2.0/vignettes/IMCD_examples.Rmd" class="external-link"><code>vignettes/IMCD_examples.Rmd</code></a></small>
       <div class="d-none name"><code>IMCD_examples.Rmd</code></div>
     </div>
 
@@ -148,7 +148,7 @@ upper triangular shows the interval correlation matrix.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">cars_outliers_colors</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">cars_int</span><span class="op">)</span></span>
 <span><span class="va">cars_outliers_colors</span><span class="op">[</span><span class="va">cars_outliers</span><span class="op">$</span><span class="va">outliers_names</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">'red'</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/SYMB.pairs.panels.html">SYMB.pairs.panels</a></span><span class="op">(</span><span class="va">cars_int</span>, palette <span class="op">=</span> <span class="va">cars_outliers_colors</span>, type <span class="op">=</span> <span class="st">"rectangles"</span>, </span>
+<span><span class="fu"><a href="../reference/plot_pairs_int.html">plot_pairs_int</a></span><span class="op">(</span><span class="va">cars_int</span>, palette <span class="op">=</span> <span class="va">cars_outliers_colors</span>, type <span class="op">=</span> <span class="st">"rectangles"</span>, </span>
 <span>                    corr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cov2cor</a></span><span class="op">(</span><span class="va">cars_IMCD</span><span class="op">$</span><span class="va">cov_IMCD</span><span class="op">)</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">cars_int</span><span class="op">)</span>,</span>
 <span>                    is_outlier <span class="op">=</span> <span class="va">cars_outliers</span><span class="op">$</span><span class="va">is_outlier</span>, gap <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
 <p><img src="IMCD_examples_files/figure-html/unnamed-chunk-4-1.png" class="r-plt" alt="" width="576"></p>

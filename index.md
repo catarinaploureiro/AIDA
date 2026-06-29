@@ -67,7 +67,7 @@ iris_corr <- cov2cor(iris_cov)
 
 # Pairs plot, the lower triangular shows scatter plots of the four variables, 
 # while the upper triangular shows the interval correlation matrix.
-SYMB.pairs.panels(iris_int, corr = iris_corr, labels = colnames(iris_int))
+plot_pairs_int(iris_int, corr = iris_corr, labels = colnames(iris_int))
 ```
 
 ![](reference/figures/unnamed-chunk-2-1.png)

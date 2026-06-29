@@ -45,7 +45,7 @@
 - [`Mallows_dist()`](https://catarinaploureiro.github.io/AIDA/reference/Mallows_dist.md)
   : Mallows Distance
 
-- [`NbMicroUnits()`](https://catarinaploureiro.github.io/AIDA/reference/NbMicroUnits.md)
+- [`NMicro()`](https://catarinaploureiro.github.io/AIDA/reference/NMicro.md)
   :
 
   Number of Micro Units Method for `intData`
@@ -60,26 +60,10 @@
 
   Subset an `intData` Object
 
-- [`SYMB.biplot()`](https://catarinaploureiro.github.io/AIDA/reference/SYMB.biplot.md)
-  : Symbolic Biplot for Interval-valued Data
-
-- [`SYMB.pairs.panels()`](https://catarinaploureiro.github.io/AIDA/reference/SYMB.pairs.panels.md)
-  : Pairs-plot for Interval-valued Symbolic data.
-
 - [`UpperBounds()`](https://catarinaploureiro.github.io/AIDA/reference/UpperBounds.md)
   :
 
   Upper Bounds Method for `intData`
-
-- [`barplot_int_Shapley()`](https://catarinaploureiro.github.io/AIDA/reference/barplot_int_Shapley.md)
-  : Barplot of Shapley values for Interval-valued Data
-
-- [`barplot_int_Shapley_decomp()`](https://catarinaploureiro.github.io/AIDA/reference/barplot_int_Shapley_decomp.md)
-  : Barplot of Shapley value decomposition into contributions of
-  (Centers, Ranges, and CrossCentersRanges) for interval-valued data.
-
-- [`beeswarm_int_Shapley()`](https://catarinaploureiro.github.io/AIDA/reference/beeswarm_int_Shapley.md)
-  : Beeswarm plot of Shapley values for interval-valued data.
 
 - [`colnames(`*`<intData>`*`)`](https://catarinaploureiro.github.io/AIDA/reference/colnames.md)
   :
@@ -172,6 +156,16 @@
 
   Plot Method for Two `intData` Objects
 
+- [`plot_bar_int_Shapley()`](https://catarinaploureiro.github.io/AIDA/reference/plot_bar_int_Shapley.md)
+  : Barplot of Shapley values for Interval-valued Data
+
+- [`plot_bar_int_Shapley_decomp()`](https://catarinaploureiro.github.io/AIDA/reference/plot_bar_int_Shapley_decomp.md)
+  : Barplot of Shapley value decomposition into contributions of
+  (Centers, Ranges, and CrossCentersRanges) for interval-valued data.
+
+- [`plot_beeswarm_int_Shapley()`](https://catarinaploureiro.github.io/AIDA/reference/plot_beeswarm_int_Shapley.md)
+  : Beeswarm plot of Shapley values for interval-valued data.
+
 - [`plot_dist_dist()`](https://catarinaploureiro.github.io/AIDA/reference/plot_dist_dist.md)
   : Distance-Distance plot for interval-valued data.
 
@@ -181,13 +175,22 @@
 - [`plot_interval_dist()`](https://catarinaploureiro.github.io/AIDA/reference/plot_interval_dist.md)
   : Interval-Mahalanobis distance plot for interval-valued data.
 
+- [`plot_pairs_int()`](https://catarinaploureiro.github.io/AIDA/reference/plot_pairs_int.md)
+  : Pairs-plot for Interval-valued Symbolic data.
+
+- [`plot_radar_int_Shapley()`](https://catarinaploureiro.github.io/AIDA/reference/plot_radar_int_Shapley.md)
+  : Radar plot of Shapley values for interval-valued data.
+
+- [`plot_scatter_int()`](https://catarinaploureiro.github.io/AIDA/reference/plot_scatter_int.md)
+  : Scatter Plot for Interval-valued Data
+
+- [`plot_tile_int_Shapley()`](https://catarinaploureiro.github.io/AIDA/reference/plot_tile_int_Shapley.md)
+  : Tileplot of Shapley values for interval-valued data.
+
 - [`print(`*`<summaryintData>`*`)`](https://catarinaploureiro.github.io/AIDA/reference/print.md)
   :
 
   Print Method for Summary `intData`
-
-- [`radarplot_int_Shapley()`](https://catarinaploureiro.github.io/AIDA/reference/radarplot_int_Shapley.md)
-  : Radar plot of Shapley values for interval-valued data.
 
 - [`rbind()`](https://catarinaploureiro.github.io/AIDA/reference/rbind.md)
   :
@@ -225,6 +228,3 @@
   :
 
   Tail Method for `intData`
-
-- [`tileplot_int_Shapley()`](https://catarinaploureiro.github.io/AIDA/reference/tileplot_int_Shapley.md)
-  : Tileplot of Shapley values for interval-valued data.

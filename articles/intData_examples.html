@@ -71,7 +71,7 @@
 Loureiro</h4>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/catarinaploureiro/AIDA/blob/main/vignettes/intData_examples.Rmd" class="external-link"><code>vignettes/intData_examples.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/catarinaploureiro/AIDA/blob/v0.2.0/vignettes/intData_examples.Rmd" class="external-link"><code>vignettes/intData_examples.Rmd</code></a></small>
       <div class="d-none name"><code>intData_examples.Rmd</code></div>
     </div>
 
@@ -84,13 +84,12 @@ Loureiro</h4>
 interval-valued data. The <code>intData</code> class is designed to
 represent interval-valued data. The examples included here demonstrate
 how to create <code>intData</code> objects, compute summary statistics,
-and visualize interval-valued data using the
-<code>SYMB.pairs.panels</code> function. The dataset used in these
-examples is the <em>Credit Card</em> dataset, which is available in the
-package and can be loaded using <code>data("creditcard")</code>. The
-examples illustrate the basic functionalities of the
-<code>intData</code> class and how to work with interval-valued data in
-R.</p>
+and visualize interval-valued data using the <code>plot_pairs_int</code>
+function. The dataset used in these examples is the <em>Credit Card</em>
+dataset, which is available in the package and can be loaded using
+<code>data("creditcard")</code>. The examples illustrate the basic
+functionalities of the <code>intData</code> class and how to work with
+interval-valued data in R.</p>
 <p>For more details on the interval-valued data framework implemented in
 the package, please refer to <span class="citation">Oliveira et al. (<a href="#ref-oliveira2025">2025</a>)</span>.</p>
 <div class="section level2">
@@ -334,12 +333,12 @@ the interval data using the <code>int_cov</code> function.</p>
 <span><span class="co">#&gt; Gas     -9.300162  0.8241657   21.272264  28.0447659  -85.604729</span></span>
 <span><span class="co">#&gt; Clothes 54.408201  3.6618540 -136.381036 -85.6047285  576.922703</span></span></code></pre></div>
 <p>Finally, we can visualize the interval data using the
-<code>SYMB.pairs.panels</code> function, which creates a pairs plot for
+<code>plot_pairs_int</code> function, which creates a pairs plot for
 interval-valued data. The lower triangular shows scatter plots of the
 variables, while the upper triangular shows the interval correlation
 matrix.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/SYMB.pairs.panels.html">SYMB.pairs.panels</a></span><span class="op">(</span><span class="va">credit_card_int_agr</span>, type <span class="op">=</span> <span class="st">"rectangles"</span>, </span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_pairs_int.html">plot_pairs_int</a></span><span class="op">(</span><span class="va">credit_card_int_agr</span>, type <span class="op">=</span> <span class="st">"rectangles"</span>, </span>
 <span>                    corr <span class="op">=</span> <span class="va">credit_card_cor</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">credit_card_int_agr</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="intData_examples_files/figure-html/unnamed-chunk-10-1.png" class="r-plt" alt="" width="576"></p>
 </div>

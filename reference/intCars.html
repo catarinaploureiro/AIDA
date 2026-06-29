@@ -45,7 +45,7 @@ The aggregation of the microdata was done by car model."></head><body>
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Cars Dataset</h1>
-      <small class="dont-index">Source: <a href="https://github.com/catarinaploureiro/AIDA/blob/main/R/data.r" class="external-link"><code>R/data.r</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/catarinaploureiro/AIDA/blob/v0.2.0/R/data.r" class="external-link"><code>R/data.r</code></a></small>
       <div class="d-none name"><code>intCars.Rd</code></div>
     </div>
 
@@ -62,7 +62,7 @@ The aggregation of the microdata was done by car model.</p>
 
     <div class="section level2">
     <h2 id="format">Format<a class="anchor" aria-label="anchor" href="#format"></a></h2>
-    <p>A list with the following components:</p><dl><dt><code>min_max</code></dt>
+    <p>A list with the following components:</p><dl><dt><code>microdata</code></dt>
 <dd><p>A data frame with <code>27</code> rows and <code>9</code> columns. It contains the lower and upper bounds for each variable.</p></dd>
 
 <dt><code>intData</code></dt>
@@ -78,8 +78,21 @@ The aggregation of the microdata was done by car model.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">intCars</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">intCars</span><span class="op">$</span><span class="va">min_max</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">intCars</span><span class="op">$</span><span class="va">microdata</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         LB_Price UB_Price LB_EngCap UB_EngCap LB_TopSpeed UB_TopSpeed</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Alfa145    27806    33596      1370      1910         185         211</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Alfa156    41593    62291      1598      2492         200         227</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Alfa166    64499    88760      1970      2959         204         211</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AudiA3     40230    68838      1595      1781         189         238</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AudiA6     68216   140265      1781      4172         216         250</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AudiA8    123849   171417      2771      4172         232         250</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         LB_Acceleration UB_Acceleration       class</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Alfa145             8.3            11.2 Utilitarian</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Alfa156             8.5            10.5     Berlina</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Alfa166             9.8             9.9    Sportive</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AudiA3              6.8            10.9 Utilitarian</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AudiA6              6.7             9.7     Berlina</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AudiA8              5.4            10.1    Sportive</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">intCars</span><span class="op">$</span><span class="va">intData</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                  lnPrice                EngCap             Top Speed          Acceleration</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Alfa145   [10.23301, 10.42216]  [  1370  ,   1910  ]  [  185   ,   211   ]  [  8.3   ,   11.2  ]  </span>
