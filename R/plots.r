@@ -256,7 +256,7 @@ plot_pairs_int <- function (data,
 #' class_dist <- IMah_dist(credit_card_int, z = rep(1,credit_card_int@NObs))
 #' class_outliers <- int_outliers(class_dist, 
 #'                                cutoff = "chi-squared", 
-#'                                p = credit_card_int@NVar)
+#'                                p = credit_card_int@NIVar)
 #' 
 #' # Create a vector indicating if the observations are outliers or inliers 
 #' # based on the robust distance outlier detection

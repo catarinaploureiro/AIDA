@@ -32,9 +32,9 @@ Defaults to \code{"U_id_symmetric"}.}
 
 \item{\code{NObs}}{A numeric value indicating the number of observations.}
 
-\item{\code{NVar}}{A numeric value indicating the number of interval variables.}
+\item{\code{NIVar}}{A numeric value indicating the number of interval variables.}
 
-\item{\code{NMicro}}{An integer vector indicating the number of individual observations (microdata) aggregated by interval (macrodata).}
+\item{\code{NbMicroUnits}}{An integer vector indicating the number of individual observations (microdata) aggregated by interval (macrodata).}
 }}
 
 \references{

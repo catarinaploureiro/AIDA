@@ -147,7 +147,7 @@ plot_int_Shapley_inter <- function(x,
 #' plot_bar_int_Shapley(credit_card_shapley, 
 #'                     cutoff_value = credit_card_outliers$cutoff_value,
 #'                     cutoff_label = "Farness 0.9",
-#'                     palette = rainbow(credit_card_int@NVar))
+#'                     palette = rainbow(credit_card_int@NIVar))
 plot_bar_int_Shapley <- function(x, 
                                 cutoff_value = NULL, 
                                 cutoff_label = NULL, 
@@ -784,7 +784,7 @@ plot_beeswarm_int_Shapley <- function(shapley,
 #' credit_card_shap_decomp <- int_Shapley_decomp(credit_card_int)
 #'
 #' # Plot Shapley decomposition with contributions of Centers, Ranges, and CrossCentersRanges
-#' plot_bar_int_Shapley_decomp(credit_card_shap_decomp, palette = rainbow(credit_card_int@NVar))
+#' plot_bar_int_Shapley_decomp(credit_card_shap_decomp, palette = rainbow(credit_card_int@NIVar))
 plot_bar_int_Shapley_decomp <- function(shapley_decomp, 
                                        palette = NULL, 
                                        rotate_x = TRUE, 

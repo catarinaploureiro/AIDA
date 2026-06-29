@@ -17,7 +17,7 @@ intData(
   estimate.DistParam = FALSE,
   VarNames = NULL,
   ObsNames = row.names(macrodata),
-  NMicro = integer(0)
+  NbMicroUnits = integer(0)
 )
 }
 \arguments{
@@ -64,7 +64,7 @@ The default is \code{FALSE}.}
 
 \item{ObsNames}{A character vector of observation names.}
 
-\item{NMicro}{An integer vector indicating the number of individual observations (microdata) aggregated by interval (macrodata).}
+\item{NbMicroUnits}{An integer vector indicating the number of individual observations (microdata) aggregated by interval (macrodata).}
 }
 \value{
 An object of class \code{\linkS4class{intData}}.

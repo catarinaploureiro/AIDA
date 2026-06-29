@@ -16,7 +16,7 @@ cars_int <- intCars$intData
 
 ## -----------------------------------------------------------------------------
 cars_IMCD <- IMCD(cars_int, m=floor(0.75*cars_int@NObs), cutoff = "farness", cutoff_lvl = 0.9)
-cars_outliers <- int_outliers(cars_IMCD$robust_dist, p = cars_int@NVar,
+cars_outliers <- int_outliers(cars_IMCD$robust_dist, p = cars_int@NIVar,
                                     cutoff = "farness", cutoff_lvl = 0.9)
 cars_outliers$outliers_names
 

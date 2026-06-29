@@ -266,12 +266,12 @@ test_that("intData LatentParam validation", {
   expect_equal(LatentCase(obj), "U_id_symmetric")
 })
 
-test_that("NMicro handling", {
+test_that("NbMicroUnits handling", {
   Data <- data.frame(L1 = 1:3, U1 = 2:4)
-  obj <- intData(Data, VarNames = "X", NMicro = 3)
-  expect_identical(NMicro(obj), as.integer(3))
+  obj <- intData(Data, VarNames = "X", NbMicroUnits = 3)
+  expect_identical(NbMicroUnits(obj), as.integer(3))
   obj2 <- intData(Data, VarNames = "X")
-  expect_null(NMicro(obj2))
+  expect_null(NbMicroUnits(obj2))
 })
 
 test_that("bounds and log ranges", {
@@ -339,7 +339,7 @@ test_that("plotting branches run without error (two-object and single-object)", 
   Data <- data.frame(L1 = c(1,2,3), U1 = c(2,3,4))
   x <- intData(Data, VarNames = "X")
   y <- intData(Data, VarNames = "Y")
-  # two-object plots (NVar must be 1)
+  # two-object plots (NIVar must be 1)
   png(filename = tempfile(fileext = ".png"))
   expect_silent(plot(x, x, type = "crosses"))
   expect_silent(plot(x, x, type = "rectangles"))

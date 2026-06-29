@@ -105,12 +105,12 @@ micro2intData <- function(microdata,
 
   if (length(unique(agrby))!=length(levels(agrby)))  agrby <- factor(agrby)
   grplvls <- levels(agrby)
-  nvar <- ncol(microdata)
+  NIVar <- ncol(microdata)
 
   # logical vector: TRUE = group is valid; FALSE = group has at least one variable all NA
   keep_group <- sapply(grplvls, function(g) {
     rind <- which(agrby == g)
-    all_na_in_any_var <- any(sapply(1:nvar, function(c) all(is.na(microdata[rind, c]))))
+    all_na_in_any_var <- any(sapply(1:NIVar, function(c) all(is.na(microdata[rind, c]))))
     !all_na_in_any_var  # keep if FALSE
   })
 
@@ -130,19 +130,19 @@ micro2intData <- function(microdata,
     microdata <- microdata[valid_idx, , drop = FALSE]
     agrby   <- droplevels(agrby[valid_idx])
     grplvls <- valid_grplvls
-    nvar <- ncol(microdata)
+    NIVar <- ncol(microdata)
   }
 
   ngrps <- length(grplvls)
-  bndsDF <- as.data.frame(matrix(NA_real_, nrow = ngrps, ncol = 2 * nvar))
-  NMicro <- integer(ngrps)
+  bndsDF <- as.data.frame(matrix(NA_real_, nrow = ngrps, ncol = 2 * NIVar))
+  NbMicroUnits <- integer(ngrps)
   for (r in 1:ngrps) { 
     grp <- grplvls[r]
     rind <- which(agrby==grp)
-    NMicro[r] <- length(rind)
-    for (c in 1:nvar) {
+    NbMicroUnits[r] <- length(rind)
+    for (c in 1:NIVar) {
       bndsDF[r,c] <- min(microdata[rind,c], na.rm = TRUE)
-      bndsDF[r,nvar+c] <- max(microdata[rind,c], na.rm = TRUE)
+      bndsDF[r,NIVar+c] <- max(microdata[rind,c], na.rm = TRUE)
     }
   }
   rownames(bndsDF) <- grplvls
@@ -169,10 +169,10 @@ micro2intData <- function(microdata,
     }
     warning(wmsg)
     res <- res[-DegInT,]
-    res@NMicro <- NMicro[-DegInT]
+    res@NbMicroUnits <- NbMicroUnits[-DegInT]
   } else {
-    res@NMicro <- NMicro
+    res@NbMicroUnits <- NbMicroUnits
   }  
-  names(res@NMicro) <- res@ObsNames
+  names(res@NbMicroUnits) <- res@ObsNames
   res
 }

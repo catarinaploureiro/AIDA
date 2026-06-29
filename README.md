@@ -40,8 +40,8 @@ AIDA currently includes functionality for:
 You can install the development version from GitHub:
 
 ``` r
-# install.packages("remotes")
-remotes::install_github("catarinaploureiro/AIDA")
+# install.packages("pak")
+pak::pak("catarinaploureiro/AIDA")
 ```
 
 ## Minimal Example
@@ -85,7 +85,7 @@ iris_corr <- cov2cor(iris_cov)
 plot_pairs_int(iris_int, corr = iris_corr, labels = colnames(iris_int))
 ```
 
-![](man/figures/unnamed-chunk-2-1.png)<!-- -->
+<img src="man/figures/README-iris_example-1.png" alt="" width="100%" />
 
 ## Vignettes
 

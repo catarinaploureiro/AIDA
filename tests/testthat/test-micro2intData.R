@@ -6,7 +6,7 @@ test_that("micro2intData (with min-max default) creates an microintData object w
   expect_s4_class(Idt,"intData")
   expect_equal(nrow(Idt),3)
   expect_equal(ncol(Idt),2)
-  expect_equal(NMicro(Idt),c(A=4,B=3,C=2))
+  expect_equal(NbMicroUnits(Idt),c(A=4,B=3,C=2))
   expect_equal(names(Idt),c("X","Y"))
 } )
 
@@ -16,7 +16,7 @@ test_that("micro2intData performs a correct agregation into (min-max based) intD
   Idt <- micro2intData(MicroDt,agrfct)
   TrueIDt <- intData(data.frame(list(c(1,2,4),c(9,7,6),c(1,3,4),c(9,8,6))),
                    VarNames=c("X","Y"),ObsNames = c("A","B","C"),
-                   NMicro=c(A=4,B=3,C=2), Seq = "LbUb_VarbyVar")
+                   NbMicroUnits=c(A=4,B=3,C=2), Seq = "LbUb_VarbyVar")
   
   expect_identical(Idt,TrueIDt)
 } )
@@ -29,7 +29,7 @@ test_that("quantile based micro2intData creates an intData object with the corre
   expect_s4_class(Idt,"intData")
   expect_equal(nrow(Idt),3)
   expect_equal(ncol(Idt),2)
-  expect_equal(NMicro(Idt),c(A=11,B=11,C=11))
+  expect_equal(NbMicroUnits(Idt),c(A=11,B=11,C=11))
   expect_equal(names(Idt),c("X","Y"))
 } )
 
@@ -39,7 +39,7 @@ test_that("micro2intData performs a correct agregation into quantile based intDa
   Idt <- micro2intData(MicroDt,agrby=agrfct,agrcrt=c(0.1,0.9))
   TrueIDt <- intData(data.frame(list(rep(1,3),rep(9,3),rep(10,3),rep(90,3))),
                    VarNames=c("X","Y"),ObsNames = c("A","B","C"),
-                   NMicro=c(A=11,B=11,C=11), Seq = "LbUb_VarbyVar")
+                   NbMicroUnits=c(A=11,B=11,C=11), Seq = "LbUb_VarbyVar")
   
   expect_identical(Idt,TrueIDt)
 } )
@@ -314,10 +314,10 @@ test_that("micro2intData with quantiles correctly trims outliers", {
   expect_true(result@Ranges[1,1] == 5)
 })
 
-test_that("micro2intData with quantiles creates correct NMicro", {
+test_that("micro2intData with quantiles creates correct NbMicroUnits", {
   MicroDt <- data.frame(X=rep(1:10, 2), Y=rep(1:10, 2))
   agrby <- factor(rep(c("A", "B"), each=10))
   
   result <- micro2intData(MicroDt, agrby, agrcrt=c(0.1, 0.9))
-  expect_equal(NMicro(result), c(A=10, B=10))
+  expect_equal(NbMicroUnits(result), c(A=10, B=10))
 })

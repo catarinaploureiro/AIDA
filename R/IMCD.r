@@ -24,7 +24,7 @@ c_step <- function(z,m,data){
 #' @param data An \code{\linkS4class{intData}} object containing the macrodata/interval data
 #' @return A vector representing an m-length subset of X
 draw_z <- function(m,data){
-    n <- data@NObs; p <- data@NVar
+    n <- data@NObs; p <- data@NIVar
     C <- as.matrix(data@Centers)
     R <- as.matrix(data@Ranges)
     z <- rep(0, n)
@@ -267,7 +267,7 @@ IMCD <- function(data,
     cutoff <- match.arg(cutoff)
     C <- as.matrix(data@Centers)
     R <- as.matrix(data@Ranges)
-    n <- data@NObs; p <- data@NVar
+    n <- data@NObs; p <- data@NIVar
 
     if(p==1){stop("data needs to have at least 2 variables.")}
 

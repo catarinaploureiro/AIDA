@@ -21,8 +21,8 @@ NULL
 #' @slot ObsNames A character vector of observation names.
 #' @slot VarNames A character vector of variable names.
 #' @slot NObs A numeric value indicating the number of observations.
-#' @slot NVar A numeric value indicating the number of interval variables.
-#' @slot NMicro An integer vector indicating the number of individual observations (microdata) aggregated by interval (macrodata).
+#' @slot NIVar A numeric value indicating the number of interval variables.
+#' @slot NbMicroUnits An integer vector indicating the number of individual observations (microdata) aggregated by interval (macrodata).
 #' @references Oliveira, M. R., Pinheiro, D., & Oliveira, L. (2025). 
 #' Location and association measures for interval-valued data based on Mallows' distance. 
 #' arXiv preprint arXiv:2407.05105. \url{https://arxiv.org/abs/2407.05105}
@@ -37,8 +37,8 @@ setClass("intData",slots=c(
   ObsNames="character",
   VarNames="character",
   NObs="numeric",
-  NVar="numeric",
-  NMicro="integer"
+  NIVar="numeric",
+  NbMicroUnits="integer"
 ))
 
 #' Summary Interval Data Class
@@ -89,8 +89,8 @@ setGeneric("LowerBounds",function(Sdt) standardGeneric("LowerBounds"))
 setGeneric("UpperBounds",function(Sdt) standardGeneric("UpperBounds"))
 
 #' @export
-#' @rdname NMicro
-setGeneric("NMicro",function(x) standardGeneric("NMicro"))
+#' @rdname NbMicroUnits
+setGeneric("NbMicroUnits",function(x) standardGeneric("NbMicroUnits"))
 
 #' @export
 #' @rdname LatentParam
@@ -139,7 +139,7 @@ setGeneric("LatentDist",function(Sdt) standardGeneric("LatentDist"))
 #' The default is \code{FALSE}.
 #' @param VarNames A character vector of variable names.
 #' @param ObsNames A character vector of observation names.
-#' @param NMicro An integer vector indicating the number of individual observations (microdata) aggregated by interval (macrodata).
+#' @param NbMicroUnits An integer vector indicating the number of individual observations (microdata) aggregated by interval (macrodata).
 #' 
 #' @return An object of class \code{\linkS4class{intData}}.
 #' 
@@ -174,13 +174,13 @@ intData <- function(macrodata,
                     estimate.DistParam=FALSE,
                     VarNames=NULL,
                     ObsNames=row.names(macrodata),
-                    NMicro=integer(0)){
+                    NbMicroUnits=integer(0)){
 
   if ( !is.data.frame(macrodata) && !is.matrix(macrodata) ) stop("First argument of intData must be a data frame or a matrix\n")
-  if (!is.integer(NMicro)) {
-    unitnames <- names(NMicro)
-    NMicro <- as.integer(NMicro)
-    names(NMicro) <- unitnames
+  if (!is.integer(NbMicroUnits)) {
+    unitnames <- names(NbMicroUnits)
+    NbMicroUnits <- as.integer(NbMicroUnits)
+    names(NbMicroUnits) <- unitnames
   }  
   
   p <- ncol(macrodata)  # Total number of Interval variable bounds
@@ -226,7 +226,7 @@ intData <- function(macrodata,
   }
 
   new("intData",Centers=Centers,Ranges=Ranges,LatentParam=LatentParam,LatentCase=LatentCase,LatentDist=LatentDist,
-      ObsNames=ObsNames,VarNames=VarNames,NObs=nrow(Centers),NVar=q,NMicro=NMicro)
+      ObsNames=ObsNames,VarNames=VarNames,NObs=nrow(Centers),NIVar=q,NbMicroUnits=NbMicroUnits)
 }
 
 #' Summary Method for \code{\linkS4class{intData}}
@@ -253,12 +253,12 @@ setMethod("show",
   signature(object = "intData"),
   function (object) 
   {
-    printrow <- function(Bnds,NVar) 
+    printrow <- function(Bnds,NIVar) 
     { 
       cat(Bnds[1],"  ")
-      for (j in 2:(NVar+1))
+      for (j in 2:(NIVar+1))
         cat("[",format(Bnds[j],width=8,digits=5,justify="centre"),", ",
-          format(Bnds[NVar+j],width=8,digits=5,justify="centre"),"]  ",sep="") 
+          format(Bnds[NIVar+j],width=8,digits=5,justify="centre"),"]  ",sep="") 
       cat("\n")
     }
 
@@ -267,7 +267,7 @@ setMethod("show",
     UB <- object@Centers + HalfRange
     lobsname <- max(nchar(object@ObsNames))
     flength <- max(nchar(object@VarNames),nchar(format(LB[1,1],width=8,digits=5))+nchar(format(UB[1,1],width=8,digits=5))) + 6 
-    for (j in 1:object@NVar) {
+    for (j in 1:object@NIVar) {
       if (j>1) {
         nspaces <- flength-nchar(object@VarNames[j])
       } else {
@@ -276,7 +276,7 @@ setMethod("show",
       cat(rep(" ",nspaces),object@VarNames[j],sep="" )
     }  
     cat("\n") 
-    apply(cbind(format(object@ObsNames,width=lobsname),LB,UB),1,printrow,NVar=object@NVar)
+    apply(cbind(format(object@ObsNames,width=lobsname),LB,UB),1,printrow,NIVar=object@NIVar)
     invisible(object)
   }
 )
@@ -295,7 +295,7 @@ setMethod("nrow",signature(x = "intData"),function(x) x@NObs)
 #' @return The number of columns.
 #' @export
 #' @rdname ncol
-setMethod("ncol",signature(x = "intData"),function(x) x@NVar)
+setMethod("ncol",signature(x = "intData"),function(x) x@NIVar)
 
 #' Dimensions Method for \code{\linkS4class{intData}}
 #'
@@ -414,12 +414,12 @@ setMethod("LatentDist",signature(Sdt = "intData"),function(Sdt) Sdt@LatentDist)
 #' @param x An object of class \code{\linkS4class{intData}}.
 #' @return An integer specifying the number of micro units.
 #' @export
-#' @rdname NMicro
-setMethod("NMicro",
+#' @rdname NbMicroUnits
+setMethod("NbMicroUnits",
   signature(x = "intData"),
   function(x) {
-    if (length(x@NMicro)==0) return(NULL)
-    x@NMicro
+    if (length(x@NbMicroUnits)==0) return(NULL)
+    x@NbMicroUnits
   }
 )
 
@@ -438,9 +438,9 @@ setMethod("head",
   {
     
     if (n>0) {
-      x[1:n,1:x@NVar] 
+      x[1:n,1:x@NIVar] 
     } else {
-      x[-1:n,1:x@NVar]
+      x[-1:n,1:x@NIVar]
     }
   }
 )
@@ -459,9 +459,9 @@ setMethod("tail",
   function (x,n=min(nrow(x),6L)) 
   {
     if (n>0) {
-      x[(x@NObs-n+1):x@NObs,1:x@NVar] 
+      x[(x@NObs-n+1):x@NObs,1:x@NIVar] 
     } else {
-      x[(-x@NObs-n-1):-x@NObs,1:x@NVar]
+      x[(-x@NObs-n-1):-x@NObs,1:x@NIVar]
     }
   }
 )
@@ -483,8 +483,8 @@ setMethod("plot",
   signature(x = "intData",y = "intData"),
   function(x, y, type=c("crosses","rectangles","crosses2"), append=FALSE, palette=rainbow(x@NObs), ...)
   {
-    if (x@NVar > 1) stop("Currently intData method plot can plot only one integer variable on the horizontal axis\n")
-    if (y@NVar > 1) stop("Currently intData method plot can plot only one integer variable on the vertical axis\n")
+    if (x@NIVar > 1) stop("Currently intData method plot can plot only one integer variable on the horizontal axis\n")
+    if (y@NIVar > 1) stop("Currently intData method plot can plot only one integer variable on the vertical axis\n")
     if (x@NObs != y@NObs) stop("Arguments x and y have a different number of elements\n")
 
     type <- match.arg(type)
@@ -556,8 +556,8 @@ setMethod("plot",
   signature(x = "intData",y = "missing"),
   function(x, casen=NULL, layout=c("vertical","horizontal"), append=FALSE,  ...)
   {
-    if (x@NVar > 1) {
-      if (x@NVar==2) {
+    if (x@NIVar > 1) {
+      if (x@NIVar==2) {
         plot.default(x[,1],x[,2],...)
         return()
       } else {
@@ -700,12 +700,12 @@ setMethod("rbind",
     for (nextarg in 2:length(dotarguments)) {
       y <- eval(dotarguments[[nextarg]])
       if (!inherits(y,"intData")) stop("Argument y is not an object of class intData\n")
-      if (x@NVar != y@NVar) stop("Arguments x and y have a different number of interval-valued variables\n")
+      if (x@NIVar != y@NIVar) stop("Arguments x and y have a different number of interval-valued variables\n")
       if (x@LatentCase != y@LatentCase) stop("Arguments x and y have different LatentCase.")
       if (any(x@LatentDist != y@LatentDist)) stop("Arguments x and y have different LatentDist.")
       if (!identical(x@LatentParam,y@LatentParam)) stop("Arguments x and y have different LatentParam.")
       dataDF <- rbind(cbind(x@Centers,x@Ranges),cbind(y@Centers,y@Ranges))
-      if (x@NVar==1) {
+      if (x@NIVar==1) {
         ONames <- c(x@ObsNames,y@ObsNames)
       } else {
         ONames <- rownames(dataDF)
@@ -736,13 +736,13 @@ setMethod("==",
 
     if (!is(e2,"intData")) 
       stop("Trying to compare an intData object with an object of a diferent type\n")
-    if ( e1@NObs != e2@NObs || e1@NVar != e2@NVar )
+    if ( e1@NObs != e2@NObs || e1@NIVar != e2@NIVar )
       stop("== only defined for equally-sized intData objects\n")
     if (e1@LatentCase != e2@LatentCase) return(FALSE)
     if (any(e1@LatentDist!= e2@LatentDist)) return(FALSE)
     if (!identical(e1@LatentParam,e2@LatentParam)) return(FALSE)
-    TmpArray <- array(dim=c(e1@NObs,e1@NVar,2,2))
-    for (j in 1:e1@NVar)  {
+    TmpArray <- array(dim=c(e1@NObs,e1@NIVar,2,2))
+    for (j in 1:e1@NIVar)  {
       TmpArray[,j,,1] <- cbind(e1@Centers[,j],e1@Ranges[,j])
       TmpArray[,j,,2] <- cbind(e2@Centers[,j],e2@Ranges[,j])
     }
@@ -766,7 +766,7 @@ setMethod("!=",
   {
     if (!is(e2,"intData"))
       stop("Trying to compare an intData object with an object of a diferent type\n")
-    if ( e1@NObs != e2@NObs || e1@NVar != e2@NVar )
+    if ( e1@NObs != e2@NObs || e1@NIVar != e2@NIVar )
       stop("!= only defined for equally-sized intData objects\n")
     !(e1==e2)
   }
