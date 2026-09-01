@@ -200,6 +200,7 @@ test_that("micro2intData accepts General LatentCase", {
   result <- suppressWarnings(micro2intData(MicroDt, agrby, LatentCase="General"))
   expect_s4_class(result, "intData")
   expect_equal(result@LatentCase, "General")
+  expect_equal(result@LatentParam[[1]], matrix(0, nrow = 2, ncol = 2))
 })
 
 test_that("micro2intData defaults LatentDist to KDE when LatentCase is General", {

@@ -385,6 +385,12 @@ CalE.beta.beta <- function(a1,b1,a2,b2){
 #' @return  Value
 #' @keywords internal
 CalE.beta.kde <- function(micro,a1,b1){
+    # A constant sample represents a degenerate distribution, for which the
+    # cross-moment is available directly.
+    if(length(unique(micro)) == 1L){
+        return(mean(micro)*(2*a1/(a1+b1)-1))
+    }
+
     fit3 <- kde1d::kde1d(micro) # estimate density
     integrandBetaBeta.kde <- function(x,fit3,a=a1,b=b1) {qbeta(x,a,b)*kde1d::qkde1d(x, fit3)}
 
@@ -400,6 +406,12 @@ CalE.beta.kde <- function(micro,a1,b1){
 #' @return  Value
 #' @keywords internal
 CalE.kde.kde <- function(micro1,micro2){
+    # A local-quadratic KDE is not identifiable for a constant sample. Its
+    # quantile is constant, so the cross-moment is the product of the means.
+    if(length(unique(micro1)) == 1L || length(unique(micro2)) == 1L){
+        return(mean(micro1)*mean(micro2))
+    }
+
     fit3 <- kde1d::kde1d(micro1) # estimate density
     fit4 <- kde1d::kde1d(micro2) # estimate density
     integrand.kde.kde <- function(x,fit3=fit3,fit4=fit4) {kde1d::qkde1d(x, fit3)*kde1d::qkde1d(x, fit4)}
