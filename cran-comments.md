@@ -25,14 +25,10 @@
 
 ## Changes in this version
 
-* Introduced new functionality for explainable outlier detection based on Shapley values.
-* Added several plotting functions to visualize Shapley values and interaction indices.
-* Added `rbind` method for `intData` class.
-* Functions `SYMB.biplot()` and `SYMB.pairs.panels()` renamed to `plot_scatter_int()` and `plot_pairs_int()`, respectively.
-* Removed three functions from the API. No reverse dependency impact expected.
-* Improvements to documentation and usability.
-* Introduced a unit test suite to improve package reliability.
-* Reduced package dependencies: some packages moved from Imports to Suggests, and unused dependencies removed.
+* Fixed handling of degenerate constant latent samples when computing KDE-based latent moments, improving compatibility with `kde1d 1.2.0` and later.
+* Added options and compatibility improvements to several functions.
+* Simplified the column names of the `entrecampos_air_quality` dataset.
+* Improved documentation.
 
 ## Notes
 

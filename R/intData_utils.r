@@ -31,7 +31,7 @@
 #' # Define grouping variable for microdata aggregation
 #' credit_agrby <- paste(CreditCard_microdata$Name, CreditCard_microdata$Month, sep = "_")
 #' 
-#' # Obtain latent variables inherent to the macrodata (standardized to [-1,1])
+#' # Obtain latent variables inherent to the macrodata (normalized to [-1,1])
 #' credit_card_U <- get_latent_var(microdata = CreditCard_microdata[,3:7], 
 #'                                 macrodata = CreditCard_min_max, 
 #'                                 agrby = credit_agrby, 
@@ -114,7 +114,13 @@ get_latent_var <- function(microdata,
 #' @param p Number of variables.
 #' @param estimate.DistParam Logical parameter indicating if estimation of the parameters of the latent distributions should be performed. Can only be set to TRUE if \code{LatentCase="General"}.
 #' The default is \code{FALSE}.
-#' @return A list with the parameters of the latent variables.
+#' @return A list composed by:
+#' \item{\code{LatentParam}}{A list with the parameters of the latent variables distribution.}
+#' \item{\code{TriangParam}}{The mode of the triangular distribution.}
+#' \item{\code{BetaParam.a}}{The alpha parameter of the Beta distribution.}
+#' \item{\code{BetaParam.b}}{The beta parameter of the Beta distribution.}
+#' \item{\code{LatentCase}}{The case of the latent variables.}
+#' \item{\code{LatentDist}}{The distribution of the latent variables.}
 #' @export
 #' @examples
 #' data(creditcard)
@@ -124,7 +130,7 @@ get_latent_var <- function(microdata,
 #' # Define grouping variable for microdata aggregation
 #' credit_agrby <- paste(CreditCard_microdata$Name, CreditCard_microdata$Month, sep = "_")
 #' 
-#' # Obtain latent variables inherent to the macrodata (standardized to [-1,1])
+#' # Obtain latent variables inherent to the macrodata (normalized to [-1,1])
 #' credit_card_U <- get_latent_var(microdata = CreditCard_microdata[,3:7], 
 #'                                 macrodata = CreditCard_min_max, 
 #'                                 agrby = credit_agrby, 

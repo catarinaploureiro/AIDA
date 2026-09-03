@@ -43,9 +43,9 @@ entrecampos <- rbind(entrecampos_2019,entrecampos_2020,entrecampos_2021)
 # Convert CO from mg/m3 to µg/m3
 entrecampos[,6] <- 1000*entrecampos[,6]
 
-colnames(entrecampos) <- c("Timestamp", "Sulphur Dioxide (µg/m3)", "Particles < 10 µm (µg/m3)",
-                    "Ozone (µg/m3)", "Nitrogen Dioxide (µg/m3)", "Carbon Monoxide (µg/m3)", "Benzene (µg/m3)",
-                    "Particles < 2.5 µm (µg/m3)", "Nitrogen Oxides (µg/m3)", "Nitrogen Monoxide (µg/m3)","Day")
+colnames(entrecampos) <- c("Timestamp", "Sulphur Dioxide", "Particles < 10 µm",
+                    "Ozone", "Nitrogen Dioxide", "Carbon Monoxide", "Benzene",
+                    "Particles < 2.5 µm", "Nitrogen Oxides", "Nitrogen Monoxide","Day")
 
 # Data transformation
 entrecampos_log10 <- entrecampos
