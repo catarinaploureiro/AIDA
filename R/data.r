@@ -11,7 +11,7 @@
 #' @usage data(entrecampos_air_quality)
 #' 
 #' @references This data was retrieved from the Portuguese Environment Agency database available at \url{https://qualar.apambiente.pt/}.
-#' @references Loureiro, C.P., Oliveira, M.R., Brito, P., Oliveira, L. (2025). Air Quality Data Analysis with Symbolic Principal Components. In: Henriques-Rodrigues, L., Menezes, R., Machado, L.M., Faria, S., de Carvalho, M. (eds) New Frontiers in Statistics and Data Science. SPE 2021. Springer Proceedings in Mathematics & Statistics, vol 469. Springer, Cham. \url{https://doi.org/10.1007/978-3-031-68949-9_25}
+#' @references Loureiro, C.P., Oliveira, M.R., Brito, P., Oliveira, L. (2025). Air Quality Data Analysis with Symbolic Principal Components. In: Henriques-Rodrigues, L., Menezes, R., Machado, L.M., Faria, S., de Carvalho, M. (eds) New Frontiers in Statistics and Data Science. SPE 2021. Springer Proceedings in Mathematics & Statistics, vol 469. Springer, Cham. \doi{10.1007/978-3-031-68949-9_25}
 #' 
 #' @format A list with the following components:
 #' \describe{
