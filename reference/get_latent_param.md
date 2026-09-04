@@ -80,7 +80,31 @@ get_latent_param(
 
 ## Value
 
-A list with the parameters of the latent variables.
+A list composed by:
+
+- `LatentParam`:
+
+  A list with the parameters of the latent variables distribution.
+
+- `TriangParam`:
+
+  The mode of the triangular distribution.
+
+- `BetaParam.a`:
+
+  The alpha parameter of the Beta distribution.
+
+- `BetaParam.b`:
+
+  The beta parameter of the Beta distribution.
+
+- `LatentCase`:
+
+  The case of the latent variables.
+
+- `LatentDist`:
+
+  The distribution of the latent variables.
 
 ## Details
 
@@ -127,7 +151,7 @@ CreditCard_microdata <- creditcard$microdata
 # Define grouping variable for microdata aggregation
 credit_agrby <- paste(CreditCard_microdata$Name, CreditCard_microdata$Month, sep = "_")
 
-# Obtain latent variables inherent to the macrodata (standardized to [-1,1])
+# Obtain latent variables inherent to the macrodata (normalized to [-1,1])
 credit_card_U <- get_latent_var(microdata = CreditCard_microdata[,3:7], 
                                 macrodata = CreditCard_min_max, 
                                 agrby = credit_agrby, 

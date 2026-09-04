@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">AIDA</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,7 +71,7 @@
 Loureiro</h4>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/catarinaploureiro/AIDA/blob/v0.2.0/vignettes/Shapley_examples.Rmd" class="external-link"><code>vignettes/Shapley_examples.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/catarinaploureiro/AIDA/blob/v0.2.1/vignettes/Shapley_examples.Rmd" class="external-link"><code>vignettes/Shapley_examples.Rmd</code></a></small>
       <div class="d-none name"><code>Shapley_examples.Rmd</code></div>
     </div>
 
@@ -87,20 +87,20 @@ the paper, respectively. The datasets are available in the package and
 can be loaded using <code>data("intCars")</code> and
 <code>data("spotify_tracks")</code>.</p>
 <p>The <code>intData</code> class is used to create objects that
-represent interval-valued data. The <code>int_Shapley</code> function
+represent interval-valued data. The <code><a href="../reference/int_Shapley.html">int_Shapley()</a></code> function
 computes the Shapley value for each observation, based on the robust
 squared Interval-Mahalanobis distances. The
-<code>int_Shapley_interaction</code> function computes the Shapley
+<code><a href="../reference/int_Shapley_interaction.html">int_Shapley_interaction()</a></code> function computes the Shapley
 interaction values for pairs of variables. The
-<code>int_Shapley_decomp</code> function decomposes the Shapley values
+<code><a href="../reference/int_Shapley_decomp.html">int_Shapley_decomp()</a></code> function decomposes the Shapley values
 into centers, ranges, and their interactions’ contributions. The
-functions <code>plot_bar_int_Shapley</code>,
-<code>plot_beeswarm_int_Shapley</code>,
-<code>plot_tile_int_Shapley</code>, and
-<code>plot_radar_int_Shapley</code> are used to visualize the Shapley
+functions <code><a href="../reference/plot_bar_int_Shapley.html">plot_bar_int_Shapley()</a></code>,
+<code><a href="../reference/plot_beeswarm_int_Shapley.html">plot_beeswarm_int_Shapley()</a></code>,
+<code><a href="../reference/plot_tile_int_Shapley.html">plot_tile_int_Shapley()</a></code>, and
+<code><a href="../reference/plot_radar_int_Shapley.html">plot_radar_int_Shapley()</a></code> are used to visualize the Shapley
 values in different ways. The functions
-<code>plot_int_Shapley_inter</code> and
-<code>plot_bar_int_Shapley_decomp</code> are used to visualize the
+<code><a href="../reference/plot_int_Shapley_inter.html">plot_int_Shapley_inter()</a></code> and
+<code><a href="../reference/plot_bar_int_Shapley_decomp.html">plot_bar_int_Shapley_decomp()</a></code> are used to visualize the
 Shapley interaction values and the decomposition of the Shapley values,
 respectively. The examples provided here demonstrate how to apply these
 methods to real datasets, and the results can be compared to those
@@ -108,10 +108,9 @@ presented in the paper for validation.</p>
 <p>For more details and examples on the <code>intData</code> class,
 please see the vignette: <a href="intData_examples.html"><em>Class
 <code>intData</code> examples</em></a>.</p>
-<p>For extra insight into the <code>IMCD</code> estimator and outlier
-detection methods’ application on the same two datasets, please see the
-vignette: <a href="IMCD_examples.html"><em>IMCD estimator
-examples</em></a>.</p>
+<p>For extra insight into the IMCD estimator and outlier detection
+methods’ application on the same two datasets, please see the vignette:
+<a href="IMCD_examples.html"><em>IMCD estimator examples</em></a>.</p>
 <div class="section level2">
 <h2 id="cars">Cars Dataset<a class="anchor" aria-label="anchor" href="#cars"></a>
 </h2>
@@ -139,11 +138,11 @@ This is the default setting for the <code>intData</code> class.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">intCars</span><span class="op">)</span></span>
 <span><span class="va">cars_microdata</span> <span class="op">&lt;-</span> <span class="va">intCars</span><span class="op">$</span><span class="va">microdata</span></span>
 <span><span class="va">cars_int</span> <span class="op">&lt;-</span> <span class="va">intCars</span><span class="op">$</span><span class="va">intData</span></span></code></pre></div>
-<p>The <code>IMCD</code> function is used to compute the reweighted IMCD
-estimates and the robust squared Interval-Mahalanobis distances of each
-observation from the estimated barycenter. The <code>int_outliers</code>
-function identifies potential outliers based on the robust distances
-obtained from the IMCD estimates.</p>
+<p>The <code><a href="../reference/IMCD.html">IMCD()</a></code> function is used to compute the reweighted
+IMCD estimates and the robust squared Interval-Mahalanobis distances of
+each observation from the estimated barycenter. The
+<code><a href="../reference/int_outliers.html">int_outliers()</a></code> function identifies potential outliers based
+on the robust distances obtained from the IMCD estimates.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cars_IMCD</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/IMCD.html">IMCD</a></span><span class="op">(</span><span class="va">cars_int</span>, m<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">floor</a></span><span class="op">(</span><span class="fl">0.75</span><span class="op">*</span><span class="va">cars_int</span><span class="op">@</span><span class="va">NObs</span><span class="op">)</span>, cutoff <span class="op">=</span> <span class="st">"farness"</span>, cutoff_lvl <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span>
 <span><span class="va">cars_outliers</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/int_outliers.html">int_outliers</a></span><span class="op">(</span><span class="va">cars_IMCD</span><span class="op">$</span><span class="va">robust_dist</span>, p <span class="op">=</span> <span class="va">cars_int</span><span class="op">@</span><span class="va">NIVar</span>,</span>
@@ -173,12 +172,12 @@ farness cutoff value, and the outliers being marked in blue.</p>
 <span>  sort.obs <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p><img src="Shapley_examples_files/figure-html/unnamed-chunk-4-1.png" class="r-plt" alt="" width="672"></p>
-<p>The <code>int_Shapley</code> function is used to compute the Shapley
-value decomposition of the squared robust Interval-Mahalanobis
+<p>The <code><a href="../reference/int_Shapley.html">int_Shapley()</a></code> function is used to compute the
+Shapley value decomposition of the squared robust Interval-Mahalanobis
 distances, using the IMCD estimates as the reference values for the mean
-and covariance parameters. The <code>int_Shapley</code> function can
+and covariance parameters. The <code><a href="../reference/int_Shapley.html">int_Shapley()</a></code> function can
 also be used without specifying the reference values, in which case it
-will run the <code>IMCD</code> estimator internally to obtain the
+will run the <code><a href="../reference/IMCD.html">IMCD()</a></code> estimator internally to obtain the
 necessary parameters for the Shapley value computation.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cars_shapley</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/int_Shapley.html">int_Shapley</a></span><span class="op">(</span><span class="va">cars_int</span>, mean_c <span class="op">=</span> <span class="va">cars_IMCD</span><span class="op">$</span><span class="va">mean_IMCD_c</span>, </span>
@@ -282,8 +281,8 @@ quantiles, respectively.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">spotify_tracks</span><span class="op">)</span></span>
 <span><span class="va">spotify_int</span> <span class="op">&lt;-</span> <span class="va">spotify_tracks</span><span class="op">$</span><span class="va">intData_trimmed</span></span></code></pre></div>
 <p>The IMCD estimates and robust squared Interval-Mahalanobis distance
-are computed using the <code>IMCD</code> function, while the
-<code>int_outliers</code> function applies the outlier detection rule
+are computed using the <code><a href="../reference/IMCD.html">IMCD()</a></code> function, while the
+<code><a href="../reference/int_outliers.html">int_outliers()</a></code> function applies the outlier detection rule
 identifying strong (<code>cutoff_lvl=0.95</code>) and mild outliers
 (<code>cutoff_lvl=0.9</code>).</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
@@ -414,7 +413,7 @@ Pandya, Maharshi. 2022. <em><span>Spotify Tracks Dataset</span></em>. <a href="h
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

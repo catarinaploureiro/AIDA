@@ -13,15 +13,18 @@ datasets are available in the package and can be loaded using
 `data("intCars")` and `data("spotify_tracks")`.
 
 The `intData` class is used to create objects that represent
-interval-valued data. The `IMCD` function computes the reweighted IMCD
-estimates, which are robust estimates of location and scatter for
-interval-valued data. The function allows for different cutoff methods
-and levels for a one-step reweighting process. The function
-`int_outliers` identifies potential outliers in interval-valued data
-using robust distance-based methods with customizable cutoff criteria.
-The examples provided here demonstrate how to apply these methods to
-real datasets, and the results can be compared to those presented in the
-paper for validation.
+interval-valued data. The
+[`IMCD()`](https://catarinaploureiro.github.io/AIDA/reference/IMCD.md)
+function computes the reweighted IMCD estimates, which are robust
+estimates of location and scatter for interval-valued data. The function
+allows for different cutoff methods and levels for a one-step
+reweighting process. The function
+[`int_outliers()`](https://catarinaploureiro.github.io/AIDA/reference/int_outliers.md)
+identifies potential outliers in interval-valued data using robust
+distance-based methods with customizable cutoff criteria. The examples
+provided here demonstrate how to apply these methods to real datasets,
+and the results can be compared to those presented in the paper for
+validation.
 
 For more details and examples on the `intData` class, please see the
 vignette: [*Class `intData`
@@ -52,13 +55,16 @@ cars_microdata <- intCars$microdata
 cars_int <- intCars$intData
 ```
 
-The `IMCD` function is used to compute the reweighted IMCD estimates and
-the robust squared Interval-Mahalanobis distances of each observation
-from the estimated barycenter. The subset size is set to
+The
+[`IMCD()`](https://catarinaploureiro.github.io/AIDA/reference/IMCD.md)
+function is used to compute the reweighted IMCD estimates and the robust
+squared Interval-Mahalanobis distances of each observation from the
+estimated barycenter. The subset size is set to
 $`\lfloor 0.75\times 27\rfloor=20`$, and the reweighting cutoff to
-“farness” with a cutoff level of $`0.9`$. The `int_outliers` function
-identifies potential outliers based on the robust distances obtained
-from the IMCD estimates, using the same cutoff criteria.
+`"farness"` with a cutoff level of $`0.9`$. The
+[`int_outliers()`](https://catarinaploureiro.github.io/AIDA/reference/int_outliers.md)
+function identifies potential outliers based on the robust distances
+obtained from the IMCD estimates, using the same cutoff criteria.
 
 ``` r
 
@@ -145,11 +151,14 @@ data(spotify_tracks)
 spotify_int <- spotify_tracks$intData_trimmed
 ```
 
-The IMCD estimates are computed using the `IMCD` function with a subset
-size of $`\lfloor 0.75\times 111\rfloor=83`$, and a reweighting cutoff
-based on “farness” with a cutoff level of $`0.95`$. The `int_outliers`
-function applies the outlier detection rule using a “farness” cutoff of
-$`0.95`$ to identify strong outliers and $`0.9`$ for mild outliers.
+The IMCD estimates are computed using the
+[`IMCD()`](https://catarinaploureiro.github.io/AIDA/reference/IMCD.md)
+function with a subset size of $`\lfloor 0.75\times 111\rfloor=83`$, and
+a reweighting cutoff based on `"farness"` with a cutoff level of
+$`0.95`$. The
+[`int_outliers()`](https://catarinaploureiro.github.io/AIDA/reference/int_outliers.md)
+function applies the outlier detection rule using a `"farness"` cutoff
+of $`0.95`$ to identify strong outliers and $`0.9`$ for mild outliers.
 
 ``` r
 

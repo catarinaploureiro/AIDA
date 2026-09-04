@@ -26,4 +26,4 @@ pick10(z_all, m, data)
 
 ## Value
 
-A list of z, covariance, barycenter and robust distances
+A list of z (`z`), covariance (`S`) and barycenter (`mean_c`, `mean_r`)

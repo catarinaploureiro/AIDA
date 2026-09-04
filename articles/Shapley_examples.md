@@ -14,28 +14,38 @@ of the paper, respectively. The datasets are available in the package
 and can be loaded using `data("intCars")` and `data("spotify_tracks")`.
 
 The `intData` class is used to create objects that represent
-interval-valued data. The `int_Shapley` function computes the Shapley
-value for each observation, based on the robust squared
-Interval-Mahalanobis distances. The `int_Shapley_interaction` function
-computes the Shapley interaction values for pairs of variables. The
-`int_Shapley_decomp` function decomposes the Shapley values into
-centers, ranges, and their interactions’ contributions. The functions
-`plot_bar_int_Shapley`, `plot_beeswarm_int_Shapley`,
-`plot_tile_int_Shapley`, and `plot_radar_int_Shapley` are used to
-visualize the Shapley values in different ways. The functions
-`plot_int_Shapley_inter` and `plot_bar_int_Shapley_decomp` are used to
-visualize the Shapley interaction values and the decomposition of the
-Shapley values, respectively. The examples provided here demonstrate how
-to apply these methods to real datasets, and the results can be compared
-to those presented in the paper for validation.
+interval-valued data. The
+[`int_Shapley()`](https://catarinaploureiro.github.io/AIDA/reference/int_Shapley.md)
+function computes the Shapley value for each observation, based on the
+robust squared Interval-Mahalanobis distances. The
+[`int_Shapley_interaction()`](https://catarinaploureiro.github.io/AIDA/reference/int_Shapley_interaction.md)
+function computes the Shapley interaction values for pairs of variables.
+The
+[`int_Shapley_decomp()`](https://catarinaploureiro.github.io/AIDA/reference/int_Shapley_decomp.md)
+function decomposes the Shapley values into centers, ranges, and their
+interactions’ contributions. The functions
+[`plot_bar_int_Shapley()`](https://catarinaploureiro.github.io/AIDA/reference/plot_bar_int_Shapley.md),
+[`plot_beeswarm_int_Shapley()`](https://catarinaploureiro.github.io/AIDA/reference/plot_beeswarm_int_Shapley.md),
+[`plot_tile_int_Shapley()`](https://catarinaploureiro.github.io/AIDA/reference/plot_tile_int_Shapley.md),
+and
+[`plot_radar_int_Shapley()`](https://catarinaploureiro.github.io/AIDA/reference/plot_radar_int_Shapley.md)
+are used to visualize the Shapley values in different ways. The
+functions
+[`plot_int_Shapley_inter()`](https://catarinaploureiro.github.io/AIDA/reference/plot_int_Shapley_inter.md)
+and
+[`plot_bar_int_Shapley_decomp()`](https://catarinaploureiro.github.io/AIDA/reference/plot_bar_int_Shapley_decomp.md)
+are used to visualize the Shapley interaction values and the
+decomposition of the Shapley values, respectively. The examples provided
+here demonstrate how to apply these methods to real datasets, and the
+results can be compared to those presented in the paper for validation.
 
 For more details and examples on the `intData` class, please see the
 vignette: [*Class `intData`
 examples*](https://catarinaploureiro.github.io/AIDA/articles/intData_examples.md).
 
-For extra insight into the `IMCD` estimator and outlier detection
-methods’ application on the same two datasets, please see the vignette:
-[*IMCD estimator
+For extra insight into the IMCD estimator and outlier detection methods’
+application on the same two datasets, please see the vignette: [*IMCD
+estimator
 examples*](https://catarinaploureiro.github.io/AIDA/articles/IMCD_examples.md).
 
 ## Cars Dataset
@@ -63,11 +73,14 @@ cars_microdata <- intCars$microdata
 cars_int <- intCars$intData
 ```
 
-The `IMCD` function is used to compute the reweighted IMCD estimates and
-the robust squared Interval-Mahalanobis distances of each observation
-from the estimated barycenter. The `int_outliers` function identifies
-potential outliers based on the robust distances obtained from the IMCD
-estimates.
+The
+[`IMCD()`](https://catarinaploureiro.github.io/AIDA/reference/IMCD.md)
+function is used to compute the reweighted IMCD estimates and the robust
+squared Interval-Mahalanobis distances of each observation from the
+estimated barycenter. The
+[`int_outliers()`](https://catarinaploureiro.github.io/AIDA/reference/int_outliers.md)
+function identifies potential outliers based on the robust distances
+obtained from the IMCD estimates.
 
 ``` r
 
@@ -105,13 +118,17 @@ plot_interval_dist(
 
 ![](Shapley_examples_files/figure-html/unnamed-chunk-4-1.png)
 
-The `int_Shapley` function is used to compute the Shapley value
-decomposition of the squared robust Interval-Mahalanobis distances,
-using the IMCD estimates as the reference values for the mean and
-covariance parameters. The `int_Shapley` function can also be used
-without specifying the reference values, in which case it will run the
-`IMCD` estimator internally to obtain the necessary parameters for the
-Shapley value computation.
+The
+[`int_Shapley()`](https://catarinaploureiro.github.io/AIDA/reference/int_Shapley.md)
+function is used to compute the Shapley value decomposition of the
+squared robust Interval-Mahalanobis distances, using the IMCD estimates
+as the reference values for the mean and covariance parameters. The
+[`int_Shapley()`](https://catarinaploureiro.github.io/AIDA/reference/int_Shapley.md)
+function can also be used without specifying the reference values, in
+which case it will run the
+[`IMCD()`](https://catarinaploureiro.github.io/AIDA/reference/IMCD.md)
+estimator internally to obtain the necessary parameters for the Shapley
+value computation.
 
 ``` r
 
@@ -240,8 +257,11 @@ spotify_int <- spotify_tracks$intData_trimmed
 ```
 
 The IMCD estimates and robust squared Interval-Mahalanobis distance are
-computed using the `IMCD` function, while the `int_outliers` function
-applies the outlier detection rule identifying strong
+computed using the
+[`IMCD()`](https://catarinaploureiro.github.io/AIDA/reference/IMCD.md)
+function, while the
+[`int_outliers()`](https://catarinaploureiro.github.io/AIDA/reference/int_outliers.md)
+function applies the outlier detection rule identifying strong
 (`cutoff_lvl=0.95`) and mild outliers (`cutoff_lvl=0.9`).
 
 ``` r

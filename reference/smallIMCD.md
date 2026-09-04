@@ -22,4 +22,5 @@ smallIMCD(m, data)
 
 ## Value
 
-A list of estimated barycenter and symbolic covariance matrix
+A list of z (`updated_z`), estimated symbolic covariance (`S`),
+barycenter (`mean_c`, `mean_r`) and robust distances (`robust_dist`)

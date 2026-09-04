@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">AIDA</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,7 +71,7 @@
 Loureiro</h4>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/catarinaploureiro/AIDA/blob/v0.2.0/vignettes/IMCD_examples.Rmd" class="external-link"><code>vignettes/IMCD_examples.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/catarinaploureiro/AIDA/blob/v0.2.1/vignettes/IMCD_examples.Rmd" class="external-link"><code>vignettes/IMCD_examples.Rmd</code></a></small>
       <div class="d-none name"><code>IMCD_examples.Rmd</code></div>
     </div>
 
@@ -86,12 +86,12 @@ datasets are available in the package and can be loaded using
 <code>data("intCars")</code> and
 <code>data("spotify_tracks")</code>.</p>
 <p>The <code>intData</code> class is used to create objects that
-represent interval-valued data. The <code>IMCD</code> function computes
-the reweighted IMCD estimates, which are robust estimates of location
-and scatter for interval-valued data. The function allows for different
-cutoff methods and levels for a one-step reweighting process. The
-function <code>int_outliers</code> identifies potential outliers in
-interval-valued data using robust distance-based methods with
+represent interval-valued data. The <code><a href="../reference/IMCD.html">IMCD()</a></code> function
+computes the reweighted IMCD estimates, which are robust estimates of
+location and scatter for interval-valued data. The function allows for
+different cutoff methods and levels for a one-step reweighting process.
+The function <code><a href="../reference/int_outliers.html">int_outliers()</a></code> identifies potential outliers
+in interval-valued data using robust distance-based methods with
 customizable cutoff criteria. The examples provided here demonstrate how
 to apply these methods to real datasets, and the results can be compared
 to those presented in the paper for validation.</p>
@@ -125,13 +125,15 @@ This is the default setting for the <code>intData</code> class.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">intCars</span><span class="op">)</span></span>
 <span><span class="va">cars_microdata</span> <span class="op">&lt;-</span> <span class="va">intCars</span><span class="op">$</span><span class="va">microdata</span></span>
 <span><span class="va">cars_int</span> <span class="op">&lt;-</span> <span class="va">intCars</span><span class="op">$</span><span class="va">intData</span></span></code></pre></div>
-<p>The <code>IMCD</code> function is used to compute the reweighted IMCD
-estimates and the robust squared Interval-Mahalanobis distances of each
-observation from the estimated barycenter. The subset size is set to
+<p>The <code><a href="../reference/IMCD.html">IMCD()</a></code> function is used to compute the reweighted
+IMCD estimates and the robust squared Interval-Mahalanobis distances of
+each observation from the estimated barycenter. The subset size is set
+to
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">⌊</mo><mn>0.75</mn><mo>×</mo><mn>27</mn><mo stretchy="false" form="postfix">⌋</mo><mo>=</mo><mn>20</mn></mrow><annotation encoding="application/x-tex">\lfloor 0.75\times 27\rfloor=20</annotation></semantics></math>,
-and the reweighting cutoff to “farness” with a cutoff level of
+and the reweighting cutoff to <code>"farness"</code> with a cutoff level
+of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>0.9</mn><annotation encoding="application/x-tex">0.9</annotation></semantics></math>.
-The <code>int_outliers</code> function identifies potential outliers
+The <code><a href="../reference/int_outliers.html">int_outliers()</a></code> function identifies potential outliers
 based on the robust distances obtained from the IMCD estimates, using
 the same cutoff criteria.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -211,13 +213,14 @@ quantiles, respectively.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">spotify_tracks</span><span class="op">)</span></span>
 <span><span class="va">spotify_int</span> <span class="op">&lt;-</span> <span class="va">spotify_tracks</span><span class="op">$</span><span class="va">intData_trimmed</span></span></code></pre></div>
-<p>The IMCD estimates are computed using the <code>IMCD</code> function
-with a subset size of
+<p>The IMCD estimates are computed using the <code><a href="../reference/IMCD.html">IMCD()</a></code>
+function with a subset size of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">⌊</mo><mn>0.75</mn><mo>×</mo><mn>111</mn><mo stretchy="false" form="postfix">⌋</mo><mo>=</mo><mn>83</mn></mrow><annotation encoding="application/x-tex">\lfloor 0.75\times 111\rfloor=83</annotation></semantics></math>,
-and a reweighting cutoff based on “farness” with a cutoff level of
+and a reweighting cutoff based on <code>"farness"</code> with a cutoff
+level of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>0.95</mn><annotation encoding="application/x-tex">0.95</annotation></semantics></math>.
-The <code>int_outliers</code> function applies the outlier detection
-rule using a “farness” cutoff of
+The <code><a href="../reference/int_outliers.html">int_outliers()</a></code> function applies the outlier detection
+rule using a <code>"farness"</code> cutoff of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>0.95</mn><annotation encoding="application/x-tex">0.95</annotation></semantics></math>
 to identify strong outliers and
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>0.9</mn><annotation encoding="application/x-tex">0.9</annotation></semantics></math>
@@ -318,7 +321,7 @@ Pandya, Maharshi. 2022. <em><span>Spotify Tracks Dataset</span></em>. <a href="h
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

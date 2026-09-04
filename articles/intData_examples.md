@@ -10,11 +10,11 @@ related functions for handling interval-valued data. The `intData` class
 is designed to represent interval-valued data. The examples included
 here demonstrate how to create `intData` objects, compute summary
 statistics, and visualize interval-valued data using the
-`plot_pairs_int` function. The dataset used in these examples is the
-*Credit Card* dataset, which is available in the package and can be
-loaded using `data("creditcard")`. The examples illustrate the basic
-functionalities of the `intData` class and how to work with
-interval-valued data in R.
+[`plot_pairs_int()`](https://catarinaploureiro.github.io/AIDA/reference/plot_pairs_int.md)
+function. The dataset used in these examples is the *Credit Card*
+dataset, which is available in the package and can be loaded using
+`data("creditcard")`. The examples illustrate the basic functionalities
+of the `intData` class and how to work with interval-valued data in R.
 
 For more details on the interval-valued data framework implemented in
 the package, please refer to Oliveira et al.
@@ -44,9 +44,9 @@ The `creditcard` dataset includes the following components:
   the minimum and maximum values for each variable.
 - `centers_ranges`: A data frame with $`36`$ rows and $`10`$ columns.
   Each row corresponds to the centers and ranges of the interval data.
-- `centers_logranges`: A data frame with $`36`$ rows and $`10`$ columns.
-  Each row corresponds to the centers and logranges of the interval
-  data.
+- `intData`: An `intData` object with $`36`$ interval-valued
+  observations and $`5`$ variables, constructed assuming the microdata
+  follow symmetric triangular distributions.
 
 ``` r
 
@@ -76,14 +76,15 @@ credit_card_int_unif@LatentParam
 ```
 
 Since the microdata are available, we can take a closer look at the
-distribution of the latent variables. The `get_latent_var` function can
-be used to obtain the latent variables observed values, by standardizing
-the microdata into the $`[-1,1]`$ interval. In this example, we will use
-the `min_max` component of the dataset to standardize the microdata. The
-aggregation criterion is by month and name, so we will create a new
-variable that combines the name and month to use as the grouping
-variable for the standardization process. We can then visualize the
-distribution of the latent variables using histograms and density plots.
+distribution of the latent variables. The
+[`get_latent_var()`](https://catarinaploureiro.github.io/AIDA/reference/get_latent_var.md)
+function can be used to obtain the latent variables observed values, by
+normalizing the microdata into the $`[-1,1]`$ interval. In this example,
+we will use the `min_max` component of the dataset to normalize the
+microdata. The aggregation criterion is by month and name, so we will
+create a new variable that combines the name and month to use as the
+grouping variable. We can then visualize the distribution of the latent
+variables using histograms and density plots.
 
 ``` r
 
@@ -110,7 +111,7 @@ par(oldpar)
 After examining the distribution of the latent variables, we can assume
 the distributions are approximately triangular and symmetric. Then, we
 can create an `intData` object using the `min_max` component of the
-dataset, specifying the latent distribution as “Triang”.
+dataset, specifying the latent distribution as `"Triang"`.
 
 ``` r
 
@@ -136,7 +137,10 @@ The `intData` object contains the centers and ranges of the interval
 data, as well as the parameters of the latent distribution. The centers
 and ranges can be accessed using the `@Centers` and `@Ranges` slots,
 respectively, while the lower and upper bounds can be obtained using the
-`LowerBounds` and `UpperBounds` functions.
+[`LowerBounds()`](https://catarinaploureiro.github.io/AIDA/reference/LowerBounds.md)
+and
+[`UpperBounds()`](https://catarinaploureiro.github.io/AIDA/reference/UpperBounds.md)
+functions.
 
 ``` r
 
@@ -178,11 +182,11 @@ estimate the parameters directly based on the microdata by setting
 `LatentCase = "General"` and `LatentDist = "KDE"` to use a kernel
 density estimation for the latent distribution. In this case, it is
 necessary to specify the `Umicro` argument, which contains the
-standardized microdata values.
+normalized microdata values.
 
 ``` r
 
-credit_card_int_KDE <- intData(CreditCard_CR, Seq = "LbUb_VarbyVar", 
+credit_card_int_KDE <- intData(CreditCard_CR, Seq = "AllCen_AllRng", 
                                 VarNames = colnames(CreditCard_microdata)[3:7], 
                                 LatentCase = "General", LatentDist = "KDE", Umicro = credit_card_U)
 
@@ -206,16 +210,17 @@ credit_card_int_KDE@LatentParam
 ```
 
 In the majority of the cases, the macrodata has to be constructed from
-the microdata. The `micro2intData` function can be used to create an
-`intData` object from the microdata, by aggregating the microdata
-according to a specified criterion. In this example, we will aggregate
-the microdata by month and name, using the same grouping variable
-created earlier. We will also specify the latent distribution as
-“General” to estimate the parameters based on the microdata. If the
-`LatentCase` argument is omitted, it assumes the latent distribution is
-uniform (i.d. and symmetric), which is the default setting for the
-`intData` class. It is also possible to specify the latent distribution,
-as seen in the previous examples.
+the microdata. The
+[`micro2intData()`](https://catarinaploureiro.github.io/AIDA/reference/micro2intData.md)
+function can be used to create an `intData` object from the microdata,
+by aggregating the microdata according to a specified criterion. In this
+example, we will aggregate the microdata by month and name, using the
+same grouping variable created earlier. We will also specify the latent
+distribution as `"General"` to estimate the parameters based on the
+microdata. If the `LatentCase` argument is omitted, it assumes the
+latent distribution is uniform (i.d. and symmetric), which is the
+default setting for the `intData` class. It is also possible to specify
+the latent distribution, as seen in the previous examples.
 
 ``` r
 
@@ -251,7 +256,9 @@ head(credit_card_int_agr)
 
 Now that we have created the `intData` object, we can, for instance,
 compute the symbolic covariance and correlation matrices of the interval
-data using the `int_cov` function.
+data using the
+[`int_cov()`](https://catarinaploureiro.github.io/AIDA/reference/int_cov.md)
+function.
 
 ``` r
 
@@ -268,7 +275,8 @@ credit_card_cov
 #> Clothes 54.408201  3.6618540 -136.381036 -85.6047285  576.922703
 ```
 
-Finally, we can visualize the interval data using the `plot_pairs_int`
+Finally, we can visualize the interval data using the
+[`plot_pairs_int()`](https://catarinaploureiro.github.io/AIDA/reference/plot_pairs_int.md)
 function, which creates a pairs plot for interval-valued data. The lower
 triangular shows scatter plots of the variables, while the upper
 triangular shows the interval correlation matrix.

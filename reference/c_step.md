@@ -27,4 +27,5 @@ c_step(z, m, data)
 
 ## Value
 
-A list of z, covariance, barycenter and robust distances
+A list of z (`updated_z`), covariance (`S`), barycenter (`mean_c`,
+`mean_r`) and robust distances (`robust_dist`)

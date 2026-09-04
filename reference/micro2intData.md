@@ -16,7 +16,8 @@ micro2intData(
   TriangParam = 0,
   BetaParam.a = 1,
   BetaParam.b = 1,
-  estimate.DistParam = FALSE
+  estimate.DistParam = FALSE,
+  removeDegenerate = FALSE
 )
 ```
 
@@ -95,12 +96,18 @@ micro2intData(
   latent distributions should be performed. Can only be set to TRUE if
   `LatentCase="General"`. The default is `FALSE`.
 
+- removeDegenerate:
+
+  Logical parameter indicating if observations with at least one
+  degenerate interval should be removed. The default is `FALSE`.
+
 ## Value
 
 An
 [`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
-object containing the aggregated interval-valued data, or `NULL` if all
-units lead to degenerate intervals.
+object containing the aggregated interval-valued data. If
+`removeDegenerate` is `TRUE`, observations with degenerate intervals are
+removed, and `NULL` is returned if all observations are removed.
 
 ## Details
 
@@ -110,9 +117,9 @@ aggregation criteria. It can handle different latent distribution cases
 and parameter settings.
 
 If some rows contain invalid (non-finite or missing) values, those rows
-are removed before aggregation. If all rows in the resulting
-interval-valued data are degenerate (i.e., the lower bound equals the
-upper bound), the function will return `NULL`.
+are removed before aggregation. Degenerate intervals (i.e., intervals
+whose lower and upper bounds are equal) can be removed by setting
+`removeDegenerate` to `TRUE`.
 
 ## References
 

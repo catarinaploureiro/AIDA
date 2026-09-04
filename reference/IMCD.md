@@ -32,7 +32,7 @@ IMCD(
   Indicates which cutoff should be considered for reweighting the
   estimates:
 
-  - `"chi-squared"`: The traditional 97.5\\
+  - `"chi-squared"`: The traditional 97.5% Chi-Squared quantile.
 
   - `"raw"`: No reweighting.
 

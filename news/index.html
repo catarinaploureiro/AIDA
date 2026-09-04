@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">AIDA</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,7 +41,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/catarinaploureiro/AIDA/blob/v0.2.0/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/catarinaploureiro/AIDA/blob/v0.2.1/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
     <div class="section level2">
@@ -74,7 +74,7 @@
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.2.0" id="aida-020">AIDA 0.2.0<a class="anchor" aria-label="anchor" href="#aida-020"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.2.0" id="aida-020">AIDA 0.2.0<a class="anchor" aria-label="anchor" href="#aida-020"></a></h2><p class="text-muted">CRAN release: 2026-06-30</p>
 <ul><li>Introduced functionality for explainable outlier detection using Shapley values.</li>
 <li>Added functions to compute feature contributions and interaction effects: <code><a href="../reference/int_Shapley.html">int_Shapley()</a></code>, <code><a href="../reference/int_Shapley_decomp.html">int_Shapley_decomp()</a></code>, and <code><a href="../reference/int_Shapley_interaction.html">int_Shapley_interaction()</a></code>.</li>
 <li>Added visualization functions for Shapley values and Shapley interaction indices: <code><a href="../reference/plot_bar_int_Shapley_decomp.html">plot_bar_int_Shapley_decomp()</a></code>, <code><a href="../reference/plot_bar_int_Shapley.html">plot_bar_int_Shapley()</a></code>, <code><a href="../reference/plot_beeswarm_int_Shapley.html">plot_beeswarm_int_Shapley()</a></code>, <code><a href="../reference/plot_int_Shapley_inter.html">plot_int_Shapley_inter()</a></code>, and <code><a href="../reference/plot_radar_int_Shapley.html">plot_radar_int_Shapley()</a></code>.</li>
@@ -83,7 +83,16 @@
 <li>Improvements to documentation and usability.</li>
 <li>Added a unit test suite.</li>
 <li>Reduced package dependencies.</li>
+</ul><div class="section level3">
+<h3 id="aida-0-2-0">AIDA 0.2.1<a class="anchor" aria-label="anchor" href="#aida-0-2-0"></a></h3>
+<ul><li>Fixed handling of degenerate constant latent samples when computing KDE-based latent moments, improving compatibility with <code>kde1d 1.2.0</code> and later.</li>
+<li>Added an option to retain or remove degenerate intervals in <code><a href="../reference/micro2intData.html">micro2intData()</a></code>.</li>
+<li>Added support for univariate datasets in <code><a href="../reference/IMCD.html">IMCD()</a></code>.</li>
+<li>Added an option to customize the y-axis limits in <code><a href="../reference/plot_beeswarm_int_Shapley.html">plot_beeswarm_int_Shapley()</a></code>.</li>
+<li>Simplified the column names of the <code>entrecampos_air_quality</code> dataset.</li>
+<li>Improved documentation.</li>
 </ul></div>
+</div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 
@@ -93,7 +102,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer></div>

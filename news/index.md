@@ -31,6 +31,8 @@
 
 ## AIDA 0.2.0
 
+CRAN release: 2026-06-30
+
 - Introduced functionality for explainable outlier detection using
   Shapley values.
 - Added functions to compute feature contributions and interaction
@@ -57,3 +59,17 @@
 - Improvements to documentation and usability.
 - Added a unit test suite.
 - Reduced package dependencies.
+
+### AIDA 0.2.1
+
+- Fixed handling of degenerate constant latent samples when computing
+  KDE-based latent moments, improving compatibility with `kde1d 1.2.0`
+  and later.
+- Added an option to retain or remove degenerate intervals in
+  [`micro2intData()`](https://catarinaploureiro.github.io/AIDA/reference/micro2intData.md).
+- Added support for univariate datasets in
+  [`IMCD()`](https://catarinaploureiro.github.io/AIDA/reference/IMCD.md).
+- Added an option to customize the y-axis limits in
+  [`plot_beeswarm_int_Shapley()`](https://catarinaploureiro.github.io/AIDA/reference/plot_beeswarm_int_Shapley.md).
+- Simplified the column names of the `entrecampos_air_quality` dataset.
+- Improved documentation.

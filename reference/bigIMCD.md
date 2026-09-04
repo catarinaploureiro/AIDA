@@ -30,4 +30,5 @@ bigIMCD(m, p, n, data)
 
 ## Value
 
-A list of estimated location and scatter
+A list of z (`updated_z`), estimated symbolic covariance (`S`),
+barycenter (`mean_c`, `mean_r`) and robust distances (`robust_dist`)

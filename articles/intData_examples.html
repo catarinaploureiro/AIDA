@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">AIDA</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,7 +71,7 @@
 Loureiro</h4>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/catarinaploureiro/AIDA/blob/v0.2.0/vignettes/intData_examples.Rmd" class="external-link"><code>vignettes/intData_examples.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/catarinaploureiro/AIDA/blob/v0.2.1/vignettes/intData_examples.Rmd" class="external-link"><code>vignettes/intData_examples.Rmd</code></a></small>
       <div class="d-none name"><code>intData_examples.Rmd</code></div>
     </div>
 
@@ -84,12 +84,13 @@ Loureiro</h4>
 interval-valued data. The <code>intData</code> class is designed to
 represent interval-valued data. The examples included here demonstrate
 how to create <code>intData</code> objects, compute summary statistics,
-and visualize interval-valued data using the <code>plot_pairs_int</code>
-function. The dataset used in these examples is the <em>Credit Card</em>
-dataset, which is available in the package and can be loaded using
-<code>data("creditcard")</code>. The examples illustrate the basic
-functionalities of the <code>intData</code> class and how to work with
-interval-valued data in R.</p>
+and visualize interval-valued data using the
+<code><a href="../reference/plot_pairs_int.html">plot_pairs_int()</a></code> function. The dataset used in these
+examples is the <em>Credit Card</em> dataset, which is available in the
+package and can be loaded using <code>data("creditcard")</code>. The
+examples illustrate the basic functionalities of the
+<code>intData</code> class and how to work with interval-valued data in
+R.</p>
 <p>For more details on the interval-valued data framework implemented in
 the package, please refer to <span class="citation">Oliveira et al. (<a href="#ref-oliveira2025">2025</a>)</span>.</p>
 <div class="section level2">
@@ -134,12 +135,12 @@ rows and
 columns. Each row corresponds to the centers and ranges of the interval
 data.</li>
 <li>
-<code>centers_logranges</code>: A data frame with
+<code>intData</code>: An <code>intData</code> object with
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>36</mn><annotation encoding="application/x-tex">36</annotation></semantics></math>
-rows and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>10</mn><annotation encoding="application/x-tex">10</annotation></semantics></math>
-columns. Each row corresponds to the centers and logranges of the
-interval data.</li>
+interval-valued observations and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>5</mn><annotation encoding="application/x-tex">5</annotation></semantics></math>
+variables, constructed assuming the microdata follow symmetric
+triangular distributions.</li>
 </ul>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">creditcard</span><span class="op">)</span></span>
@@ -163,16 +164,16 @@ This is the default setting for the <code>intData</code> class.</p>
 <span><span class="co">#&gt; [[1]]</span></span>
 <span><span class="co">#&gt; [1] 0.08333333</span></span></code></pre></div>
 <p>Since the microdata are available, we can take a closer look at the
-distribution of the latent variables. The <code>get_latent_var</code>
+distribution of the latent variables. The <code><a href="../reference/get_latent_var.html">get_latent_var()</a></code>
 function can be used to obtain the latent variables observed values, by
-standardizing the microdata into the
+normalizing the microdata into the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">[</mo><mi>−</mi><mn>1</mn><mo>,</mo><mn>1</mn><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">[-1,1]</annotation></semantics></math>
 interval. In this example, we will use the <code>min_max</code>
-component of the dataset to standardize the microdata. The aggregation
+component of the dataset to normalize the microdata. The aggregation
 criterion is by month and name, so we will create a new variable that
-combines the name and month to use as the grouping variable for the
-standardization process. We can then visualize the distribution of the
-latent variables using histograms and density plots.</p>
+combines the name and month to use as the grouping variable. We can then
+visualize the distribution of the latent variables using histograms and
+density plots.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">credit_agrby</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">CreditCard_microdata</span><span class="op">$</span><span class="va">Name</span>,<span class="va">CreditCard_microdata</span><span class="op">$</span><span class="va">Month</span>, sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">credit_card_U</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_latent_var.html">get_latent_var</a></span><span class="op">(</span><span class="va">CreditCard_microdata</span><span class="op">[</span>,<span class="fl">3</span><span class="op">:</span><span class="fl">7</span><span class="op">]</span>, <span class="va">CreditCard_min_max</span>, <span class="va">credit_agrby</span>,</span>
@@ -192,7 +193,7 @@ latent variables using histograms and density plots.</p>
 assume the distributions are approximately triangular and symmetric.
 Then, we can create an <code>intData</code> object using the
 <code>min_max</code> component of the dataset, specifying the latent
-distribution as “Triang”.</p>
+distribution as <code>"Triang"</code>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">credit_card_int_triang</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/intData.html">intData</a></span><span class="op">(</span><span class="va">CreditCard_min_max</span>, Seq <span class="op">=</span> <span class="st">"LbUb_VarbyVar"</span>, LatentDist <span class="op">=</span> <span class="st">"Triang"</span>, </span>
 <span>                                    VarNames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">CreditCard_microdata</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">7</span><span class="op">]</span><span class="op">)</span></span>
@@ -214,8 +215,8 @@ distribution as “Triang”.</p>
 the interval data, as well as the parameters of the latent distribution.
 The centers and ranges can be accessed using the <code>@Centers</code>
 and <code>@Ranges</code> slots, respectively, while the lower and upper
-bounds can be obtained using the <code>LowerBounds</code> and
-<code>UpperBounds</code> functions.</p>
+bounds can be obtained using the <code><a href="../reference/LowerBounds.html">LowerBounds()</a></code> and
+<code><a href="../reference/UpperBounds.html">UpperBounds()</a></code> functions.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">credit_card_int_triang</span><span class="op">@</span><span class="va">Centers</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="op">]</span></span>
 <span><span class="co">#&gt;     Food.Centers Social.Centers Travel.Centers Gas.Centers Clothes.Centers</span></span>
@@ -253,9 +254,9 @@ estimate the parameters directly based on the microdata by setting
 <code>LatentCase = "General"</code> and <code>LatentDist = "KDE"</code>
 to use a kernel density estimation for the latent distribution. In this
 case, it is necessary to specify the <code>Umicro</code> argument, which
-contains the standardized microdata values.</p>
+contains the normalized microdata values.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">credit_card_int_KDE</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/intData.html">intData</a></span><span class="op">(</span><span class="va">CreditCard_CR</span>, Seq <span class="op">=</span> <span class="st">"LbUb_VarbyVar"</span>, </span>
+<code class="sourceCode R"><span><span class="va">credit_card_int_KDE</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/intData.html">intData</a></span><span class="op">(</span><span class="va">CreditCard_CR</span>, Seq <span class="op">=</span> <span class="st">"AllCen_AllRng"</span>, </span>
 <span>                                VarNames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">CreditCard_microdata</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">7</span><span class="op">]</span>, </span>
 <span>                                LatentCase <span class="op">=</span> <span class="st">"General"</span>, LatentDist <span class="op">=</span> <span class="st">"KDE"</span>, Umicro <span class="op">=</span> <span class="va">credit_card_U</span><span class="op">)</span></span>
 <span></span>
@@ -277,13 +278,13 @@ contains the standardized microdata values.</p>
 <span><span class="co">#&gt; [4,] 0.00000000 0.0000000 0.0000000 -0.01665365 0.00000000</span></span>
 <span><span class="co">#&gt; [5,] 0.00000000 0.0000000 0.0000000  0.00000000 0.07370565</span></span></code></pre></div>
 <p>In the majority of the cases, the macrodata has to be constructed
-from the microdata. The <code>micro2intData</code> function can be used
-to create an <code>intData</code> object from the microdata, by
+from the microdata. The <code><a href="../reference/micro2intData.html">micro2intData()</a></code> function can be
+used to create an <code>intData</code> object from the microdata, by
 aggregating the microdata according to a specified criterion. In this
 example, we will aggregate the microdata by month and name, using the
 same grouping variable created earlier. We will also specify the latent
-distribution as “General” to estimate the parameters based on the
-microdata. If the <code>LatentCase</code> argument is omitted, it
+distribution as <code>"General"</code> to estimate the parameters based
+on the microdata. If the <code>LatentCase</code> argument is omitted, it
 assumes the latent distribution is uniform (i.d. and symmetric), which
 is the default setting for the <code>intData</code> class. It is also
 possible to specify the latent distribution, as seen in the previous
@@ -319,7 +320,7 @@ examples.</p>
 <span><span class="co">#&gt; 1_3    [ 20.78  ,  29.09  ]  [ 11.19  ,  19.87  ]  [ 183.12 ,  197.17 ]  [ 17.96  ,  27.65  ]  [ 42.97  ,  58.62  ]</span></span></code></pre></div>
 <p>Now that we have created the <code>intData</code> object, we can, for
 instance, compute the symbolic covariance and correlation matrices of
-the interval data using the <code>int_cov</code> function.</p>
+the interval data using the <code><a href="../reference/int_cov.html">int_cov()</a></code> function.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">credit_card_cov</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/int_cov.html">int_cov</a></span><span class="op">(</span><span class="va">credit_card_int_agr</span><span class="op">)</span></span>
 <span><span class="va">credit_card_cor</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cov2cor</a></span><span class="op">(</span><span class="va">credit_card_cov</span><span class="op">)</span></span>
@@ -333,7 +334,7 @@ the interval data using the <code>int_cov</code> function.</p>
 <span><span class="co">#&gt; Gas     -9.300162  0.8241657   21.272264  28.0447659  -85.604729</span></span>
 <span><span class="co">#&gt; Clothes 54.408201  3.6618540 -136.381036 -85.6047285  576.922703</span></span></code></pre></div>
 <p>Finally, we can visualize the interval data using the
-<code>plot_pairs_int</code> function, which creates a pairs plot for
+<code><a href="../reference/plot_pairs_int.html">plot_pairs_int()</a></code> function, which creates a pairs plot for
 interval-valued data. The lower triangular shows scatter plots of the
 variables, while the upper triangular shows the interval correlation
 matrix.</p>
@@ -368,7 +369,7 @@ on Mallows’ distance</span></em>. <a href="https://arxiv.org/abs/2407.05105" c
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

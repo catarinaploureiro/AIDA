@@ -23,9 +23,19 @@ farness(dist, cutoff_value = NULL)
 
 ## Value
 
-Farness of each observation. Values between 0 and 1. If `cutoff_value`
-is provided, a list with the farness probabilities and the cutoff
-distance value in the original distance scale is returned.
+Either a vector of farness probabilities for each observation (if
+`cutoff_value` is not provided) or a list containing (if `cutoff_value`
+is provided):
+
+- `farness_probs`:
+
+  A vector of farness probabilities for each observation. Values between
+  0 and 1.
+
+- `cutoff_value`:
+
+  The cutoff distance value in the original distance scale corresponding
+  to the specified `cutoff_value` probability.
 
 ## References
 

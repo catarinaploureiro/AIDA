@@ -14,7 +14,8 @@ plot_beeswarm_int_Shapley(
   shape_class = NULL,
   shape_label = NULL,
   ggplotly = FALSE,
-  label_obs = NULL
+  label_obs = NULL,
+  y_limits = NULL
 )
 ```
 
@@ -62,6 +63,11 @@ plot_beeswarm_int_Shapley(
 
   A vector with the names of the observations to be labeled in the plot
   when `ggplotly = FALSE`. Default is NULL.
+
+- y_limits:
+
+  A numeric vector of length 2 specifying the limits for the y-axis.
+  Default is NULL, so the limits are determined automatically.
 
 ## Value
 

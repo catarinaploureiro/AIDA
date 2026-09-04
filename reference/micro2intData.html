@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">AIDA</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,7 +41,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Aggregate Microdata into Interval-Valued Data</h1>
-      <small class="dont-index">Source: <a href="https://github.com/catarinaploureiro/AIDA/blob/v0.2.0/R/micro2intData.r" class="external-link"><code>R/micro2intData.r</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/catarinaploureiro/AIDA/blob/v0.2.1/R/micro2intData.r" class="external-link"><code>R/micro2intData.r</code></a></small>
       <div class="d-none name"><code>micro2intData.Rd</code></div>
     </div>
 
@@ -61,7 +61,8 @@
 <span>  TriangParam <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  BetaParam.a <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  BetaParam.b <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  estimate.DistParam <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  estimate.DistParam <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  removeDegenerate <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -117,16 +118,20 @@ The default is <code>1</code>.</p></dd>
 <dd><p>Logical parameter indicating if estimation of the parameters of the latent distributions should be performed. Can only be set to TRUE if <code>LatentCase="General"</code>.
 The default is <code>FALSE</code>.</p></dd>
 
+
+<dt id="arg-removedegenerate">removeDegenerate<a class="anchor" aria-label="anchor" href="#arg-removedegenerate"></a></dt>
+<dd><p>Logical parameter indicating if observations with at least one degenerate interval should be removed. The default is <code>FALSE</code>.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>An <code><a href="intData-class.html">intData</a></code> object containing the aggregated interval-valued data, or <code>NULL</code> if all units lead to degenerate intervals.</p>
+    <p>An <code><a href="intData-class.html">intData</a></code> object containing the aggregated interval-valued data. If <code>removeDegenerate</code> is <code>TRUE</code>, observations with degenerate intervals are removed, and <code>NULL</code> is returned if all observations are removed.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>This function processes a data frame of microdata and aggregates it into interval-valued data according to the specified grouping factor and aggregation criteria.
 It can handle different latent distribution cases and parameter settings.</p>
-<p>If some rows contain invalid (non-finite or missing) values, those rows are removed before aggregation. If all rows in the resulting interval-valued data are degenerate (i.e., the lower bound equals the upper bound), the function will return <code>NULL</code>.</p>
+<p>If some rows contain invalid (non-finite or missing) values, those rows are removed before aggregation. Degenerate intervals (i.e., intervals whose lower and upper bounds are equal) can be removed by setting <code>removeDegenerate</code> to <code>TRUE</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
@@ -158,7 +163,7 @@ It can handle different latent distribution cases and parameter settings.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer></div>
