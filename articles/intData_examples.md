@@ -194,11 +194,11 @@ credit_card_int_KDE <- intData(CreditCard_CR, Seq = "AllCen_AllRng",
 credit_card_int_KDE@LatentParam
 #> [[1]]
 #>           [,1]      [,2]      [,3]      [,4]      [,5]
-#> [1,] 0.2385710 0.2266593 0.2234636 0.2237180 0.2198639
-#> [2,] 0.2266593 0.2336648 0.2210776 0.2208769 0.2183596
-#> [3,] 0.2234636 0.2210776 0.2277094 0.2183420 0.2143626
-#> [4,] 0.2237180 0.2208769 0.2183420 0.2293551 0.2129321
-#> [5,] 0.2198639 0.2183596 0.2143626 0.2129321 0.2220598
+#> [1,] 0.2385710 0.2265902 0.2234733 0.2237311 0.2198649
+#> [2,] 0.2265902 0.2336648 0.2209984 0.2208022 0.2182729
+#> [3,] 0.2234733 0.2209984 0.2277094 0.2183425 0.2143535
+#> [4,] 0.2237311 0.2208022 0.2183425 0.2293551 0.2129250
+#> [5,] 0.2198649 0.2182729 0.2143535 0.2129250 0.2220598
 #> 
 #> [[2]]
 #>            [,1]      [,2]      [,3]        [,4]       [,5]
@@ -230,11 +230,11 @@ credit_card_int_agr <- micro2intData(CreditCard_microdata[,3:7], credit_agrby, L
 credit_card_int_agr@LatentParam
 #> [[1]]
 #>           [,1]      [,2]      [,3]      [,4]      [,5]
-#> [1,] 0.2385710 0.2266593 0.2234636 0.2237180 0.2198639
-#> [2,] 0.2266593 0.2336648 0.2210776 0.2208769 0.2183596
-#> [3,] 0.2234636 0.2210776 0.2277094 0.2183420 0.2143626
-#> [4,] 0.2237180 0.2208769 0.2183420 0.2293551 0.2129321
-#> [5,] 0.2198639 0.2183596 0.2143626 0.2129321 0.2220598
+#> [1,] 0.2385710 0.2265902 0.2234733 0.2237311 0.2198649
+#> [2,] 0.2265902 0.2336648 0.2209984 0.2208022 0.2182729
+#> [3,] 0.2234733 0.2209984 0.2277094 0.2183425 0.2143535
+#> [4,] 0.2237311 0.2208022 0.2183425 0.2293551 0.2129250
+#> [5,] 0.2198649 0.2182729 0.2143535 0.2129250 0.2220598
 #> 
 #> [[2]]
 #>            [,1]      [,2]      [,3]        [,4]       [,5]
@@ -255,24 +255,33 @@ head(credit_card_int_agr)
 ```
 
 Now that we have created the `intData` object, we can, for instance,
-compute the symbolic covariance and correlation matrices of the interval
-data using the
-[`int_cov()`](https://catarinaploureiro.github.io/AIDA/reference/int_cov.md)
-function.
+compute the sample barycenter and the symbolic covariance and
+correlation matrices of the interval data using the
+[`int_mean()`](https://catarinaploureiro.github.io/AIDA/reference/int_mean.md),
+[`int_cov()`](https://catarinaploureiro.github.io/AIDA/reference/int_cov.md),
+and
+[`int_cor()`](https://catarinaploureiro.github.io/AIDA/reference/int_cor.md)
+functions, respectively.
 
 ``` r
 
+credit_card_mean <- int_mean(credit_card_int_agr)
 credit_card_cov <- int_cov(credit_card_int_agr)
-credit_card_cor <- cov2cor(credit_card_cov)
+credit_card_cor <- int_cor(credit_card_int_agr)
+
+# Check the sample barycenter
+credit_card_mean
+#>                       Food                Social                Travel                   Gas               Clothes
+#> Barycenter   [21.51861, 30.66472]  [8.684167, 18.91889]  [177.4606, 190.4714]  [20.35944, 29.31944]  [43.37333, 55.26167]
 
 # Check the covariance matrix
 credit_card_cov
 #>              Food     Social      Travel         Gas     Clothes
-#> Food    19.311563  1.0362555    4.753931  -9.3001616   54.408201
-#> Social   1.036255  2.3969207   12.755943   0.8241657    3.661854
-#> Travel   4.753931 12.7559432  567.525646  21.2722637 -136.381036
-#> Gas     -9.300162  0.8241657   21.272264  28.0447659  -85.604729
-#> Clothes 54.408201  3.6618540 -136.381036 -85.6047285  576.922703
+#> Food    19.311563  1.0362499    4.753932  -9.3001623   54.408201
+#> Social   1.036250  2.3969207   12.755910   0.8241509    3.661841
+#> Travel   4.753932 12.7559103  567.525646  21.2722638 -136.381039
+#> Gas     -9.300162  0.8241509   21.272264  28.0447659  -85.604727
+#> Clothes 54.408201  3.6618412 -136.381039 -85.6047269  576.922703
 ```
 
 Finally, we can visualize the interval data using the
@@ -288,6 +297,33 @@ plot_pairs_int(credit_card_int_agr, type = "rectangles",
 ```
 
 ![](intData_examples_files/figure-html/unnamed-chunk-10-1.png)
+
+Considering the Mallows distance is a special case of the
+Interval-Mahalanobis distance when the covariance matrix is the identity
+matrix, we can compute both distances and check that they are equal
+using the
+[`Mallows_dist()`](https://catarinaploureiro.github.io/AIDA/reference/Mallows_dist.md)
+and
+[`IMah_dist()`](https://catarinaploureiro.github.io/AIDA/reference/IMah_dist.md)
+functions, respectively. We can also compute the pairwise Mallows
+distances using the
+[`IMah_dist_pairs()`](https://catarinaploureiro.github.io/AIDA/reference/IMah_dist_pairs.md)
+function, and applying the same logic.
+
+``` r
+
+creditcard_Mallows <- Mallows_dist(credit_card_int_agr)
+creditcard_Mallows2 <- IMah_dist(credit_card_int_agr, 
+                                 cov = diag(credit_card_int_agr@NIVar), 
+                                 mean = credit_card_mean)
+
+# Check that the Mallows distance is equal to the Interval-Mahalanobis distance 
+# when the covariance matrix is the identity matrix
+all.equal(creditcard_Mallows, creditcard_Mallows2)
+#> [1] TRUE
+
+creditcard_pairs <- IMah_dist_pairs(credit_card_int_agr, cov = diag(credit_card_int_agr@NIVar))
+```
 
 ## References
 

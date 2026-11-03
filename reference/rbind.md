@@ -2,7 +2,9 @@
 
 Combine multiple
 [`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
-objects by rows.
+objects by rows. Only works if the objects have the same number of
+interval-valued variables and the same `LatentCase`, `LatentDist`, and
+`LatentParam.`
 
 ## Usage
 

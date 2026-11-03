@@ -120,11 +120,17 @@
 - [`int_Shapley_interaction()`](https://catarinaploureiro.github.io/AIDA/reference/int_Shapley_interaction.md)
   : Compute Shapley interaction indices for Interval-valued Data
 
+- [`int_cor()`](https://catarinaploureiro.github.io/AIDA/reference/int_cor.md)
+  : Sample Correlation Matrix for Interval-valued Data
+
 - [`int_cov()`](https://catarinaploureiro.github.io/AIDA/reference/int_cov.md)
   : Interval-valued Covariance
 
 - [`int_cov_z()`](https://catarinaploureiro.github.io/AIDA/reference/int_cov_z.md)
   : Sample Interval-valued Covariance
+
+- [`int_mean()`](https://catarinaploureiro.github.io/AIDA/reference/int_mean.md)
+  : Sample Mean for Interval-valued Data
 
 - [`int_mean_z()`](https://catarinaploureiro.github.io/AIDA/reference/int_mean_z.md)
   : Sample Mean

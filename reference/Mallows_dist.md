@@ -6,7 +6,7 @@ barycenter.
 ## Usage
 
 ``` r
-Mallows_dist(data, mean_c = NULL, mean_r = NULL)
+Mallows_dist(data, mean_c = NULL, mean_r = NULL, mean = NULL)
 ```
 
 ## Arguments
@@ -27,6 +27,13 @@ Mallows_dist(data, mean_c = NULL, mean_r = NULL)
 
   (Optional) A vector specifying the mean of ranges Defaults to `NULL`,
   in which case it will be computed using the sample mean of ranges.
+
+- mean:
+
+  (Optional) An
+  [`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+  object containing the barycenter of the data. If provided, it will
+  override `mean_c` and `mean_r`.
 
 ## Value
 

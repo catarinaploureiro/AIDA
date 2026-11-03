@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">AIDA</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,7 +41,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Interval Data Class</h1>
-      <small class="dont-index">Source: <a href="https://github.com/catarinaploureiro/AIDA/blob/v0.2.1/R/intData_class.r" class="external-link"><code>R/intData_class.r</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/catarinaploureiro/AIDA/blob/v0.2.2/R/intData_class.r" class="external-link"><code>R/intData_class.r</code></a></small>
       <div class="d-none name"><code>intData-class.Rd</code></div>
     </div>
 
@@ -63,7 +63,15 @@
 
 
 <dt><code>LatentParam</code></dt>
-<dd><p>A list with the parameters of the latent variables.</p></dd>
+<dd><p>A list with the parameters of the latent variables' distribution defined according to the <code>LatentCase</code>:</p><ul><li><p><code>"U_id_symmetric"</code>: The latent variables are identically distributed and symmetric, so its parameters are:</p><ul><li><p>\(\delta=\mathbb{E}(U^2)/4\)</p></li>
+</ul></li>
+<li><p><code>"U_id"</code>: The latent variables are identically distributed, so its parameters are:</p><ul><li><p>\(\delta=\mathbb{E}(U^2)/4\)</p></li>
+<li><p>\(\mathbb{E}(U)\)</p></li>
+</ul></li>
+<li><p><code>"General"</code>: The latent variables do not have any nice properties, so its parameters are:</p><ul><li><p>\([\boldsymbol{\mathfrak{E}}_{UU}]_{j\ell}=\mathcal{E}(U_j,U_\ell)\), \(j\neq \ell\), with \(\mathcal{E}(U_j,U_\ell)=\int_0^1 F_{U_j}^{-1}(t) F_{U_\ell}^{-1}(t) \, dt\), and \([\boldsymbol{\mathfrak{E}}_{UU}]_{jj}=\mathbb{E}(U_j^2)\), \(j,\ell=1,\dots,p\)</p></li>
+<li><p>\(\boldsymbol{\Psi}=\text{Diag}(\mathbb{E}(U_1),\dots,\mathbb{E}(U_p))\)</p></li>
+</ul></li>
+</ul></dd>
 
 
 <dt><code>LatentCase</code></dt>

@@ -7,7 +7,7 @@ CrossCentersRanges) per variable for interval-valued data.
 ## Usage
 
 ``` r
-int_Shapley_decomp(data, mean_c = NULL, mean_r = NULL, cov = NULL)
+int_Shapley_decomp(data, mean_c = NULL, mean_r = NULL, cov = NULL, mean = NULL)
 ```
 
 ## Arguments
@@ -38,6 +38,13 @@ int_Shapley_decomp(data, mean_c = NULL, mean_r = NULL, cov = NULL)
   will be computed using the
   [`IMCD`](https://catarinaploureiro.github.io/AIDA/reference/IMCD.md)
   function.
+
+- mean:
+
+  (Optional) An
+  [`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+  object containing the barycenter of the data. If provided, it will
+  override `mean_c` and `mean_r`.
 
 ## Value
 

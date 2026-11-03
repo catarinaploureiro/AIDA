@@ -73,3 +73,22 @@ CRAN release: 2026-06-30
   [`plot_beeswarm_int_Shapley()`](https://catarinaploureiro.github.io/AIDA/reference/plot_beeswarm_int_Shapley.md).
 - Simplified the column names of the `entrecampos_air_quality` dataset.
 - Improved documentation.
+
+### AIDA 0.2.2
+
+- Added functions to compute the sample barycenter and correlation
+  matrix:
+  [`int_mean()`](https://catarinaploureiro.github.io/AIDA/reference/int_mean.md)
+  and
+  [`int_cor()`](https://catarinaploureiro.github.io/AIDA/reference/int_cor.md).
+- Added an option to compute the robust correlation matrix in
+  [`IMCD()`](https://catarinaploureiro.github.io/AIDA/reference/IMCD.md).
+- Added an option to supply the sample barycenter (as an `intData`
+  object) to
+  [`Mallows_dist()`](https://catarinaploureiro.github.io/AIDA/reference/Mallows_dist.md),
+  [`IMah_dist()`](https://catarinaploureiro.github.io/AIDA/reference/IMah_dist.md),
+  [`int_Shapley()`](https://catarinaploureiro.github.io/AIDA/reference/int_Shapley.md),
+  [`int_Shapley_decomp()`](https://catarinaploureiro.github.io/AIDA/reference/int_Shapley_decomp.md),
+  and
+  [`int_Shapley_interaction()`](https://catarinaploureiro.github.io/AIDA/reference/int_Shapley_interaction.md).
+- Improved documentation and usability.

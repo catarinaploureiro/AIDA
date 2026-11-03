@@ -47,7 +47,30 @@ int_cov(
   A list with the parameters of the latent variables. Expects a list
   with a single number if `LatentCase` is `"U_id_symmetric"`, a list of
   two numbers if `LatentCase` is `"U_id"`, and a list of two matrices if
-  `LatentCase` is `"General"`.
+  `LatentCase` is `"General"`, as in:
+
+  - `"U_id_symmetric"`: The latent variables are identically distributed
+    and symmetric, so its parameters are:
+
+    - \\\delta=\mathbb{E}(U^2)/4\\
+
+  - `"U_id"`: The latent variables are identically distributed, so its
+    parameters are:
+
+    - \\\delta=\mathbb{E}(U^2)/4\\
+
+    - \\\mathbb{E}(U)\\
+
+  - `"General"`: The latent variables do not have any nice properties,
+    so its parameters are:
+
+    - \\\[\boldsymbol{\mathfrak{E}}\_{UU}\]\_{j\ell}=\mathcal{E}(U_j,U\_\ell)\\,
+      \\j\neq \ell\\, with \\\mathcal{E}(U_j,U\_\ell)=\int_0^1
+      F\_{U_j}^{-1}(t) F\_{U\_\ell}^{-1}(t) \\ dt\\, and
+      \\\[\boldsymbol{\mathfrak{E}}\_{UU}\]\_{jj}=\mathbb{E}(U_j^2)\\,
+      \\j,\ell=1,\dots,p\\
+
+    - \\\boldsymbol{\Psi}=\text{Diag}(\mathbb{E}(U_1),\dots,\mathbb{E}(U_p))\\
 
 - LatentCase:
 
@@ -109,9 +132,13 @@ The covariance matrix can be calculated either based on the covariance
 matrices of the centers and ranges or based on the data. If the data is
 provided, the covariance matrices are calculated using the sample
 covariance of the centers and ranges and the sample covariance between
-centers and ranges. For the robust estimation of the covariance matrix,
-see
+centers and ranges (using [`cov`](https://rdrr.io/r/stats/cor.html) and
+so denominator \\n-1\\ is used), and the parameters of the latent
+variables contained in the `intData` object. For the robust estimation
+of the covariance matrix, see
 [`IMCD`](https://catarinaploureiro.github.io/AIDA/reference/IMCD.md).
+For the correlation matrix, see
+[`int_cor`](https://catarinaploureiro.github.io/AIDA/reference/int_cor.md).
 
 ## References
 

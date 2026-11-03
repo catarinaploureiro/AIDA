@@ -8,9 +8,10 @@ scatter for interval-valued data.
 ``` r
 IMCD(
   data,
-  m = 0,
+  m = NULL,
   cutoff = c("farness", "adjbox", "chi-squared", "F-dist", "raw"),
-  cutoff_lvl = NULL
+  cutoff_lvl = NULL,
+  cor = FALSE
 )
 ```
 
@@ -25,7 +26,7 @@ IMCD(
 - m:
 
   An integer specifying the subset size to use for the estimation.
-  Defaults to `floor(0.75*n)`.
+  Defaults to `floor(0.75*data@NObs)`.
 
 - cutoff:
 
@@ -67,6 +68,11 @@ IMCD(
   If no value is provided, the function uses the default values
   associated with each cutoff method.
 
+- cor:
+
+  A logical value indicating whether to return the correlation matrix.
+  Defaults to `FALSE`.
+
 ## Value
 
 A list containing the robustly estimated parameters:
@@ -107,6 +113,10 @@ A list containing the robustly estimated parameters:
 - `farness_probs`:
 
   Farness probabilities (if `cutoff` is set to `"farness"`).
+
+- `cor_IMCD`:
+
+  Estimated correlation matrix (if `cor` is set to `TRUE`).
 
 ## References
 

@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">AIDA</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -111,10 +111,10 @@
 <span><span class="va">iris_int</span><span class="op">@</span><span class="va">LatentParam</span></span>
 <span><span class="co">#&gt; [[1]]</span></span>
 <span><span class="co">#&gt;           [,1]      [,2]      [,3]      [,4]</span></span>
-<span><span class="co">#&gt; [1,] 0.1835903 0.1554921 0.1660354 0.1990067</span></span>
-<span><span class="co">#&gt; [2,] 0.1554921 0.1381013 0.1461729 0.1683492</span></span>
-<span><span class="co">#&gt; [3,] 0.1660354 0.1461729 0.1627440 0.1828199</span></span>
-<span><span class="co">#&gt; [4,] 0.1990067 0.1683492 0.1828199 0.2704900</span></span>
+<span><span class="co">#&gt; [1,] 0.1835903 0.1554868 0.1660030 0.1989812</span></span>
+<span><span class="co">#&gt; [2,] 0.1554868 0.1381013 0.1463002 0.1685136</span></span>
+<span><span class="co">#&gt; [3,] 0.1660030 0.1463002 0.1627440 0.1829350</span></span>
+<span><span class="co">#&gt; [4,] 0.1989812 0.1685136 0.1829350 0.2704900</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]</span></span>
 <span><span class="co">#&gt;            [,1]       [,2]       [,3]       [,4]</span></span>
@@ -123,9 +123,10 @@
 <span><span class="co">#&gt; [3,] 0.00000000 0.00000000 0.02913753  0.0000000</span></span>
 <span><span class="co">#&gt; [4,] 0.00000000 0.00000000 0.00000000 -0.1802821</span></span>
 <span></span>
-<span><span class="co"># Compute the classical covariance and correlation matrices</span></span>
+<span><span class="co"># Compute the classical sample barycenter, covariance and correlation matrices</span></span>
+<span><span class="va">iris_mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/int_mean.html">int_mean</a></span><span class="op">(</span><span class="va">iris_int</span><span class="op">)</span></span>
 <span><span class="va">iris_cov</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/int_cov.html">int_cov</a></span><span class="op">(</span><span class="va">iris_int</span><span class="op">)</span></span>
-<span><span class="va">iris_corr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cov2cor</a></span><span class="op">(</span><span class="va">iris_cov</span><span class="op">)</span></span>
+<span><span class="va">iris_corr</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/int_cor.html">int_cor</a></span><span class="op">(</span><span class="va">iris_int</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Pairs plot, the lower triangular shows scatter plots of the four variables, </span></span>
 <span><span class="co"># while the upper triangular shows the interval correlation matrix.</span></span>
@@ -199,7 +200,7 @@ Oliveira, M. Rosário, Diogo Pinheiro, and Lina Oliveira. 2025. “<span class="
 <li><a href="https://github.com/catarinaploureiro/AIDA/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/catarinaploureiro/AIDA/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://CRAN.R-project.org/package=AIDA" class="external-link"><img src="https://www.r-pkg.org/badges/version/AIDA" alt="CRAN status"></a></li>
 <li><a href="https://cran.r-project.org/web/checks/check_results_AIDA.html" class="external-link"><img src="https://badges.cranchecks.info/worst/AIDA.svg" alt="CRAN checks"></a></li>
-<li><a href="https://github.com/catarinaploureiro/AIDA" class="external-link"><img src="https://img.shields.io/badge/GitHub-v0.2.1-blue" alt="GitHub Version"></a></li>
+<li><a href="https://github.com/catarinaploureiro/AIDA" class="external-link"><img src="https://img.shields.io/badge/GitHub-v0.2.2-blue" alt="GitHub Version"></a></li>
 <li><a href="https://app.codecov.io/gh/catarinaploureiro/AIDA" class="external-link"><img src="https://codecov.io/gh/catarinaploureiro/AIDA/branch/main/graph/badge.svg" alt="codecov"></a></li>
 <li><a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT"></a></li>
 <li><a href="https://arxiv.org/abs/2604.26769" class="external-link"><img src="https://img.shields.io/badge/arXiv-2604.26769-b31b1b.svg" alt="arXiv"></a></li>

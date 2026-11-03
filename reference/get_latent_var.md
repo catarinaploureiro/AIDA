@@ -66,6 +66,11 @@ C_j+\dfrac{R_j}{2}\right\]\\ represent the **macrodata** and
 **microdata** with \\U\_{j}\\ being random variables with support on
 \\\[-1,1\]\\, uncorrelated with \\(C_j,R_j)\\.
 
+Thus, the latent variables are obtained by normalizing the microdata to
+the interval \\\[-1,1\]\\ using the macrodata. In order to prevent an
+accumulation of values at the boundaries of the interval, the values
+that are exactly equal to \\-1\\ or \\1\\ are set to `NA`.
+
 ## References
 
 Oliveira, M.R., Azeitona, M., Pacheco, A., Valadas, R.. Association

@@ -6,7 +6,14 @@ data and the barycenter.
 ## Usage
 
 ``` r
-IMah_dist(data, z = NULL, mean_c = NULL, mean_r = NULL, cov = NULL)
+IMah_dist(
+  data,
+  z = NULL,
+  mean_c = NULL,
+  mean_r = NULL,
+  cov = NULL,
+  mean = NULL
+)
 ```
 
 ## Arguments
@@ -26,6 +33,7 @@ IMah_dist(data, z = NULL, mean_c = NULL, mean_r = NULL, cov = NULL)
   [`int_mean_z`](https://catarinaploureiro.github.io/AIDA/reference/int_mean_z.md)
   and
   [`int_cov_z`](https://catarinaploureiro.github.io/AIDA/reference/int_cov_z.md)).
+  Overrules `mean_c`, `mean_r`, `cov`, and `mean` if they are provided.
   Defaults to `NULL`.
 
 - mean_c:
@@ -48,6 +56,13 @@ IMah_dist(data, z = NULL, mean_c = NULL, mean_r = NULL, cov = NULL)
   will be computed using the
   [`IMCD`](https://catarinaploureiro.github.io/AIDA/reference/IMCD.md)
   function, if `z` is also `NULL`.
+
+- mean:
+
+  (Optional) An
+  [`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
+  object containing the barycenter of the data. If provided, it will
+  override `mean_c` and `mean_r`.
 
 ## Value
 
@@ -110,4 +125,7 @@ credit_card_int <- creditcard$intData
 
 # Compute squared Interval-Mahalanobis distance using IMCD estimates of mean and covariance
 credit_card_dist <- IMah_dist(credit_card_int)
+
+# Compute non-robust squared Interval-Mahalanobis distance using sample mean and covariance
+credit_card_dist_nonrobust <- IMah_dist(credit_card_int, z = rep(1, credit_card_int@NObs))
 ```

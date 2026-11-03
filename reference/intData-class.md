@@ -14,7 +14,31 @@ A class to represent interval data.
 
 - `LatentParam`:
 
-  A list with the parameters of the latent variables.
+  A list with the parameters of the latent variables' distribution
+  defined according to the `LatentCase`:
+
+  - `"U_id_symmetric"`: The latent variables are identically distributed
+    and symmetric, so its parameters are:
+
+    - \\\delta=\mathbb{E}(U^2)/4\\
+
+  - `"U_id"`: The latent variables are identically distributed, so its
+    parameters are:
+
+    - \\\delta=\mathbb{E}(U^2)/4\\
+
+    - \\\mathbb{E}(U)\\
+
+  - `"General"`: The latent variables do not have any nice properties,
+    so its parameters are:
+
+    - \\\[\boldsymbol{\mathfrak{E}}\_{UU}\]\_{j\ell}=\mathcal{E}(U_j,U\_\ell)\\,
+      \\j\neq \ell\\, with \\\mathcal{E}(U_j,U\_\ell)=\int_0^1
+      F\_{U_j}^{-1}(t) F\_{U\_\ell}^{-1}(t) \\ dt\\, and
+      \\\[\boldsymbol{\mathfrak{E}}\_{UU}\]\_{jj}=\mathbb{E}(U_j^2)\\,
+      \\j,\ell=1,\dots,p\\
+
+    - \\\boldsymbol{\Psi}=\text{Diag}(\mathbb{E}(U_1),\dots,\mathbb{E}(U_p))\\
 
 - `LatentCase`:
 

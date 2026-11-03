@@ -48,13 +48,18 @@ A list with the following components:
   An
   [`intData`](https://catarinaploureiro.github.io/AIDA/reference/intData-class.md)
   object with `111` interval-valued observations and `11` variables,
-  constructed using trimmed aggregation (`1\%` trimming) based on the
-  transformed microdata.
+  constructed using trimmed aggregation (1% and 99% quantiles) based on
+  the transformed microdata.
 
 ## References
 
 This data was retrieved from Kaggle (DOI:10.34740/KAGGLE/DSV/4372070;
 Spotify Tracks Dataset by Maharshi Pandya).
+
+Loureiro, C. P., Oliveira, M. R., Brito, P., & Oliveira, L. (2026).
+Minimum Covariance Determinant Estimator and Outlier Detection for
+Interval-valued Data. arXiv preprint arXiv:2604.26769.
+<https://arxiv.org/abs/2604.26769>
 
 ## Examples
 
