@@ -20,8 +20,10 @@ export(intData)
 export(int_Shapley)
 export(int_Shapley_decomp)
 export(int_Shapley_interaction)
+export(int_cor)
 export(int_cov)
 export(int_cov_z)
+export(int_mean)
 export(int_mean_z)
 export(int_outliers)
 export(micro2intData)
@@ -118,6 +120,7 @@ importFrom(methods,
 )
 importFrom(stats,
   cov,
+  cov2cor,
   dnorm,
   integrate,
   mad,

@@ -41,6 +41,7 @@
 #' it will be computed using the \code{\link{IMCD}} function.
 #' @param cov (Optional) A covariance matrix. Defaults to `NULL`, in which case it will be computed 
 #' using the \code{\link{IMCD}} function.
+#' @param mean (Optional) An \code{\linkS4class{intData}} object containing the barycenter of the data. If provided, it will override `mean_c` and `mean_r`.
 #'
 #' @return A matrix of Shapley values with row and column names corresponding to the rows and 
 #' columns of the input data.
@@ -57,7 +58,7 @@
 #' # Compute Shapley values based on IMCD estimates of mean and covariance
 #' credit_card_shapley <- int_Shapley(credit_card_int)
 #' @export
-int_Shapley <- function(data,mean_c=NULL,mean_r=NULL,cov=NULL){
+int_Shapley <- function(data,mean_c=NULL,mean_r=NULL,cov=NULL,mean=NULL){
 
     if(!inherits(data,"intData")) stop("Argument data is not an object of class intData\n")
 
@@ -65,6 +66,12 @@ int_Shapley <- function(data,mean_c=NULL,mean_r=NULL,cov=NULL){
     R <- as.matrix(data@Ranges)
     param <- data@LatentParam
     case <- data@LatentCase
+
+    if (!is.null(mean)) {
+        if(!inherits(mean,"intData")) stop("Argument mean is not an object of class intData\n")
+        mean_c <- as.numeric(mean@Centers[1, ])
+        mean_r <- as.numeric(mean@Ranges[1, ])
+    }
 
     if(is.null(mean_c) || is.null(mean_r) || is.null(cov)){
         IMCD_res <- IMCD(data,m=floor(data@NObs*0.75))
@@ -143,6 +150,7 @@ int_Shapley <- function(data,mean_c=NULL,mean_r=NULL,cov=NULL){
 #' @param mean_c (Optional) A vector specifying the mean of centers. Defaults to `NULL`, in which case it will be computed using the \code{\link{IMCD}} function.
 #' @param mean_r (Optional) A vector specifying the mean of ranges. Defaults to `NULL`, in which case it will be computed using the \code{\link{IMCD}} function.
 #' @param cov (Optional) A covariance matrix. Defaults to `NULL`, in which case it will be computed using the \code{\link{IMCD}} function.
+#' @param mean (Optional) An \code{\linkS4class{intData}} object containing the barycenter of the data. If provided, it will override `mean_c` and `mean_r`.
 #' 
 #' @return A list containing the matrix of Shapley value decomposition into contributions of (Centers, Ranges, and CrossCentersRanges) per variable for each observation.
 #' 
@@ -159,7 +167,7 @@ int_Shapley <- function(data,mean_c=NULL,mean_r=NULL,cov=NULL){
 #' # Compute Shapley decomposition into contributions of (Centers, Ranges, and CrossCentersRanges) 
 #' # based on IMCD estimates of mean and covariance
 #' credit_card_shap_decomp <- int_Shapley_decomp(credit_card_int)
-int_Shapley_decomp <- function(data,mean_c=NULL,mean_r=NULL,cov=NULL){
+int_Shapley_decomp <- function(data,mean_c=NULL,mean_r=NULL,cov=NULL,mean=NULL){
 
     if(!inherits(data,"intData")) stop("Argument data is not an object of class intData\n")
 
@@ -167,6 +175,12 @@ int_Shapley_decomp <- function(data,mean_c=NULL,mean_r=NULL,cov=NULL){
     R <- as.matrix(data@Ranges)
     param <- data@LatentParam
     case <- data@LatentCase
+
+    if (!is.null(mean)) {
+        if(!inherits(mean,"intData")) stop("Argument mean is not an object of class intData\n")
+        mean_c <- as.numeric(mean@Centers[1, ])
+        mean_r <- as.numeric(mean@Ranges[1, ])
+    }
 
     if(is.null(mean_c) || is.null(mean_r) || is.null(cov)){
         IMCD_res <- IMCD(data,m=floor(data@NObs*0.75))
@@ -244,6 +258,7 @@ int_Shapley_decomp <- function(data,mean_c=NULL,mean_r=NULL,cov=NULL){
 #' it will be computed using the \code{\link{IMCD}} function.
 #' @param cov (Optional) A covariance matrix. Defaults to `NULL`, in which case it will be computed 
 #' using the \code{\link{IMCD}} function.
+#' @param mean (Optional) An \code{\linkS4class{intData}} object containing the barycenter of the data. If provided, it will override `mean_c` and `mean_r`.
 #'
 #' @return A list containing the matrix of Shapley interaction indices for each observation.
 #' 
@@ -259,7 +274,7 @@ int_Shapley_decomp <- function(data,mean_c=NULL,mean_r=NULL,cov=NULL){
 #' # Compute Shapley interaction indices based on the mean and covariance matrix estimated by IMCD
 #' credit_card_shap_inter <- int_Shapley_interaction(credit_card_int)
 #' @export
-int_Shapley_interaction <- function(data,mean_c=NULL,mean_r=NULL,cov=NULL){
+int_Shapley_interaction <- function(data,mean_c=NULL,mean_r=NULL,cov=NULL,mean=NULL){
 
     if(!inherits(data,"intData")) stop("Argument data is not an object of class intData\n")
 
@@ -267,6 +282,12 @@ int_Shapley_interaction <- function(data,mean_c=NULL,mean_r=NULL,cov=NULL){
     R <- as.matrix(data@Ranges)
     param <- data@LatentParam
     case <- data@LatentCase
+
+    if (!is.null(mean)) {
+        if(!inherits(mean,"intData")) stop("Argument mean is not an object of class intData\n")
+        mean_c <- as.numeric(mean@Centers[1, ])
+        mean_r <- as.numeric(mean@Ranges[1, ])
+    }
 
     if(is.null(mean_c) || is.null(mean_r) || is.null(cov)){
         IMCD_res <- IMCD(data,m=floor(data@NObs*0.75))

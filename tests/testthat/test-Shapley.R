@@ -98,6 +98,42 @@ test_that("Shapley functions error on non-intData input", {
   expect_error(int_Shapley_interaction(1:3), "Argument data is not an object of class intData")
 })
 
+test_that("Shapley functions use the supplied intData mean over mean_c and mean_r", {
+  obj <- setup_shapley_data()
+  mean_obj <- int_mean(obj)
+  cov <- int_cov(obj)
+  mean_c <- as.numeric(mean_obj@Centers[1, ])
+  mean_r <- as.numeric(mean_obj@Ranges[1, ])
+
+  expect_equal(
+    int_Shapley(obj, mean_c = c(100, 100), mean_r = c(100, 100),
+                cov = cov, mean = mean_obj),
+    int_Shapley(obj, mean_c = mean_c, mean_r = mean_r, cov = cov)
+  )
+  expect_equal(
+    int_Shapley_decomp(obj, mean_c = c(100, 100), mean_r = c(100, 100),
+                       cov = cov, mean = mean_obj),
+    int_Shapley_decomp(obj, mean_c = mean_c, mean_r = mean_r, cov = cov)
+  )
+  expect_equal(
+    int_Shapley_interaction(obj, mean_c = c(100, 100), mean_r = c(100, 100),
+                            cov = cov, mean = mean_obj),
+    int_Shapley_interaction(obj, mean_c = mean_c, mean_r = mean_r, cov = cov)
+  )
+})
+
+test_that("Shapley functions error for non-intData means", {
+  obj <- setup_shapley_data()
+  cov <- int_cov(obj)
+
+  expect_error(int_Shapley(obj, cov = cov, mean = data.frame(x = 1)),
+               "Argument mean is not an object of class intData")
+  expect_error(int_Shapley_decomp(obj, cov = cov, mean = data.frame(x = 1)),
+               "Argument mean is not an object of class intData")
+  expect_error(int_Shapley_interaction(obj, cov = cov, mean = data.frame(x = 1)),
+               "Argument mean is not an object of class intData")
+})
+
 test_that("int_Shapley works with U_id_symmetric LatentCase", {
   Data <- data.frame(
     L1 = c(1, 2, 3, 4), U1 = c(3, 4, 5, 6),

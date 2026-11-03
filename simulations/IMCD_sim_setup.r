@@ -3,14 +3,14 @@
 #' Calculate the raw IMCD estimates and squared Interval-Mahalanobis distances.
 #' 
 #' @param data An object of class \code{intData}.
-#' @param m Number of observations to use for the raw IMCD estimation. If 0, it will be set to \code{floor((n + p + 1) / 2)}, where n is the number of observations and p is the number of variables.
+#' @param m An integer specifying the subset size to use for the estimation. Defaults to `floor(0.75*data@NObs)`.
 #' @return A list with the raw IMCD covariance matrix estimate, the squared Interval-Mahalanobis distances, the final z values, and the m value used.
 #' @export
-IMCD_raw <- function(data, m = 0){
+IMCD_raw <- function(data, m = NULL){
     n <- data@NObs; p <- data@NIVar
     
     # Set m
-    if (!m) {
+    if (is.null(m)) {
         m <- floor(0.75*n)
     }
     
@@ -40,19 +40,19 @@ IMCD_raw <- function(data, m = 0){
 #' @param d2 Squared Interval-Mahalanobis distances from the raw IMCD estimation.
 #' @param z Final z values from the raw IMCD estimation.
 #' @param data An object of class \code{intData}.
-#' @param m Number of observations used for the raw IMCD estimation.
+#' @param m An integer specifying the subset size to use for the estimation. Defaults to `floor(0.75*data@NObs)`.
 #' @param cutoff Method to determine the cutoff for reweighting. Options are "farness", "adjbox", "chi-squared", "F-dist", and "raw". Default is "farness".
 #' @param cutoff_lvl Cutoff level to determine the cutoff value. If NULL, default values will be used based on the cutoff method.
 #' @return A list with the reweighted IMCD covariance matrix estimate, the final z values, the cutoff method used, the cutoff value, the reweighted squared Interval-Mahalanobis distances, and the farness probabilities if the "farness" cutoff method is used.
 #' @export
-reweight_IMCD <- function(d2, z, data, m=0, cutoff=c("farness","adjbox","chi-squared","F-dist","raw"), cutoff_lvl=NULL){
+reweight_IMCD <- function(d2, z, data, m=NULL, cutoff=c("farness","adjbox","chi-squared","F-dist","raw"), cutoff_lvl=NULL){
     cutoff <- match.arg(cutoff)
     C <- as.matrix(data@Centers)
     R <- as.matrix(data@Ranges)
     n <- data@NObs; p <- data@NIVar
 
     # Set m
-    if (!m) {
+    if (is.null(m)) {
         m <- floor(0.75*n)
     }
 

@@ -25,10 +25,10 @@
 
 ## Changes in this version
 
-* Fixed handling of degenerate constant latent samples when computing KDE-based latent moments, improving compatibility with `kde1d 1.2.0` and later.
-* Added options and compatibility improvements to several functions.
-* Simplified the column names of the `entrecampos_air_quality` dataset.
-* Improved documentation.
+* Added functions to compute the sample barycenter and correlation matrix (`int_mean()` and `int_cor()`).
+* Added an option to compute the robust correlation matrix in `IMCD()`.
+* Added support for supplying a barycenter to distance and Shapley-related functions.
+* Improved documentation and usability.
 
 ## Notes
 

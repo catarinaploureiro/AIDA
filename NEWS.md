@@ -46,3 +46,10 @@
 * Added an option to customize the y-axis limits in `plot_beeswarm_int_Shapley()`.
 * Simplified the column names of the `entrecampos_air_quality` dataset.
 * Improved documentation.
+
+## AIDA 0.2.2
+
+* Added functions to compute the sample barycenter and correlation matrix: `int_mean()` and `int_cor()`.
+* Added an option to compute the robust correlation matrix in `IMCD()`.
+* Added an option to supply the sample barycenter (as an `intData` object) to `Mallows_dist()`, `IMah_dist()`, `int_Shapley()`, `int_Shapley_decomp()`, and `int_Shapley_interaction()`.
+* Improved documentation and usability.

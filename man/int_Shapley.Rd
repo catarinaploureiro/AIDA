@@ -4,7 +4,7 @@
 \alias{int_Shapley}
 \title{Compute Shapley Values for Interval-valued Data}
 \usage{
-int_Shapley(data, mean_c = NULL, mean_r = NULL, cov = NULL)
+int_Shapley(data, mean_c = NULL, mean_r = NULL, cov = NULL, mean = NULL)
 }
 \arguments{
 \item{data}{An \code{\linkS4class{intData}} object containing the interval-valued dataset (macrodata).}
@@ -17,6 +17,8 @@ it will be computed using the \code{\link{IMCD}} function.}
 
 \item{cov}{(Optional) A covariance matrix. Defaults to \code{NULL}, in which case it will be computed
 using the \code{\link{IMCD}} function.}
+
+\item{mean}{(Optional) An \code{\linkS4class{intData}} object containing the barycenter of the data. If provided, it will override \code{mean_c} and \code{mean_r}.}
 }
 \value{
 A matrix of Shapley values with row and column names corresponding to the rows and

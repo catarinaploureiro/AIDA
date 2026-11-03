@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/catarinaploureiro/AIDA/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/catarinaploureiro/AIDA/actions/workflows/R-CMD-check.yaml)
 [![CRAN status](https://www.r-pkg.org/badges/version/AIDA)](https://CRAN.R-project.org/package=AIDA)
 [![CRAN checks](https://badges.cranchecks.info/worst/AIDA.svg)](https://cran.r-project.org/web/checks/check_results_AIDA.html)
-[![GitHub Version](https://img.shields.io/badge/GitHub-v0.2.1-blue)](https://github.com/catarinaploureiro/AIDA)
+[![GitHub Version](https://img.shields.io/badge/GitHub-v0.2.2-blue)](https://github.com/catarinaploureiro/AIDA)
 [![codecov](https://codecov.io/gh/catarinaploureiro/AIDA/branch/main/graph/badge.svg)](https://app.codecov.io/gh/catarinaploureiro/AIDA)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![arXiv](https://img.shields.io/badge/arXiv-2604.26769-b31b1b.svg)](https://arxiv.org/abs/2604.26769)
@@ -62,9 +62,10 @@ iris_int <- micro2intData(iris[,1:4], iris$Species, LatentCase = "General")
 # Check the parameters of the latent distribution
 iris_int@LatentParam
 
-# Compute the classical covariance and correlation matrices
+# Compute the classical sample barycenter, covariance and correlation matrices
+iris_mean <- int_mean(iris_int)
 iris_cov <- int_cov(iris_int)
-iris_corr <- cov2cor(iris_cov)
+iris_corr <- int_cor(iris_int)
 
 # Pairs plot, the lower triangular shows scatter plots of the four variables, 
 # while the upper triangular shows the interval correlation matrix.

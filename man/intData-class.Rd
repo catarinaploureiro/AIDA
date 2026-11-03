@@ -14,7 +14,23 @@ A class to represent interval data.
 
 \item{\code{Ranges}}{A data frame of ranges of the intervals.}
 
-\item{\code{LatentParam}}{A list with the parameters of the latent variables.}
+\item{\code{LatentParam}}{A list with the parameters of the latent variables' distribution defined according to the \code{LatentCase}:
+\itemize{
+\item \code{"U_id_symmetric"}: The latent variables are identically distributed and symmetric, so its parameters are:
+\itemize{
+\item  \eqn{\delta=\mathbb{E}(U^2)/4}
+}
+\item \code{"U_id"}: The latent variables are identically distributed, so its parameters are:
+\itemize{
+\item  \eqn{\delta=\mathbb{E}(U^2)/4}
+\item  \eqn{\mathbb{E}(U)}
+}
+\item \code{"General"}: The latent variables do not have any nice properties, so its parameters are:
+\itemize{
+\item \eqn{[\boldsymbol{\mathfrak{E}}_{UU}]_{j\ell}=\mathcal{E}(U_j,U_\ell)}, \eqn{j\neq \ell}, with \eqn{\mathcal{E}(U_j,U_\ell)=\int_0^1 F_{U_j}^{-1}(t) F_{U_\ell}^{-1}(t) \, dt}, and \eqn{[\boldsymbol{\mathfrak{E}}_{UU}]_{jj}=\mathbb{E}(U_j^2)}, \eqn{j,\ell=1,\dots,p}
+\item \eqn{\boldsymbol{\Psi}=\text{Diag}(\mathbb{E}(U_1),\dots,\mathbb{E}(U_p))}
+}
+}}
 
 \item{\code{LatentCase}}{A string specifying which of the three scenarios applies to the latent variables:
 \itemize{

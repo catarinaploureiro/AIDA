@@ -66,8 +66,12 @@ credit_card_int_agr@LatentParam
 head(credit_card_int_agr)
 
 ## -----------------------------------------------------------------------------
+credit_card_mean <- int_mean(credit_card_int_agr)
 credit_card_cov <- int_cov(credit_card_int_agr)
-credit_card_cor <- cov2cor(credit_card_cov)
+credit_card_cor <- int_cor(credit_card_int_agr)
+
+# Check the sample barycenter
+credit_card_mean
 
 # Check the covariance matrix
 credit_card_cov
@@ -75,4 +79,16 @@ credit_card_cov
 ## ----fig.width=6, fig.height=6------------------------------------------------
 plot_pairs_int(credit_card_int_agr, type = "rectangles", 
                     corr = credit_card_cor, labels = colnames(credit_card_int_agr))
+
+## -----------------------------------------------------------------------------
+creditcard_Mallows <- Mallows_dist(credit_card_int_agr)
+creditcard_Mallows2 <- IMah_dist(credit_card_int_agr, 
+                                 cov = diag(credit_card_int_agr@NIVar), 
+                                 mean = credit_card_mean)
+
+# Check that the Mallows distance is equal to the Interval-Mahalanobis distance 
+# when the covariance matrix is the identity matrix
+all.equal(creditcard_Mallows, creditcard_Mallows2)
+
+creditcard_pairs <- IMah_dist_pairs(credit_card_int_agr, cov = diag(credit_card_int_agr@NIVar))
 

@@ -213,7 +213,7 @@ bigIMCD <- function(m, p, n, data){
 #' Applies an adaptation of the FAST-MCD algorithm to estimate location and scatter for interval-valued data.
 #' 
 #' @param data An \code{\linkS4class{intData}} object containing the interval-valued dataset (macrodata).
-#' @param m An integer specifying the subset size to use for the estimation. Defaults to `floor(0.75*n)`.
+#' @param m An integer specifying the subset size to use for the estimation. Defaults to `floor(0.75*data@NObs)`.
 #' @param cutoff Indicates which cutoff should be considered for reweighting the estimates:
 #' \itemize{
 #'    \item \code{"chi-squared"}: The traditional 97.5% Chi-Squared quantile.
@@ -232,6 +232,7 @@ bigIMCD <- function(m, p, n, data){
 #'      \item If \code{cutoff="raw"}, \code{cutoff_lvl} is ignored.
 #' }
 #' If no value is provided, the function uses the default values associated with each cutoff method.
+#' @param cor A logical value indicating whether to return the correlation matrix. Defaults to \code{FALSE}.
 #' @return A list containing the robustly estimated parameters:
 #'   \item{\code{mean_IMCD_c}}{Estimated mean of the centers of the interval data.}
 #'   \item{\code{mean_IMCD_r}}{Estimated mean of the ranges of the interval data.}
@@ -241,6 +242,7 @@ bigIMCD <- function(m, p, n, data){
 #'   \item{\code{cutoff_value}}{Cutoff value used for reweighting.}
 #'   \item{\code{robust_dist}}{Robust distances (\code{\link{IMah_dist}}) for each observation.}
 #'   \item{\code{farness_probs}}{Farness probabilities (if \code{cutoff} is set to \code{"farness"}).}
+#'   \item{\code{cor_IMCD}}{Estimated correlation matrix (if \code{cor} is set to \code{TRUE}).}
 #' @export
 #' @references Loureiro, C. P., Oliveira, M. R., Brito, P., & Oliveira, L. (2026). 
 #' Minimum Covariance Determinant Estimator and Outlier Detection for Interval-valued Data. 
@@ -258,9 +260,10 @@ bigIMCD <- function(m, p, n, data){
 #'                          cutoff = "farness", 
 #'                          cutoff_lvl = 0.9)
 IMCD <- function(data, 
-                m = 0, 
+                m = NULL, 
                 cutoff=c("farness","adjbox","chi-squared","F-dist","raw"), 
-                cutoff_lvl=NULL){
+                cutoff_lvl=NULL,
+                cor=FALSE){
 
     if(!inherits(data,"intData")) stop("Argument data is not an object of class intData\n")
     
@@ -279,7 +282,7 @@ IMCD <- function(data,
     }
     
     # Set m
-    if (!m) {
+    if (is.null(m)) {
         m <- floor(0.75*n)
     }
     if(m <= p) stop("Subset size m must satisfy m > p for positive definiteness.")
@@ -335,8 +338,22 @@ IMCD <- function(data,
     reweighted_d2 <- IMah_dist(data,mean_c=reweighted_mu_c,mean_r=reweighted_mu_r,cov=reweighted_sigma)
     names(w) <- rownames(data)
 
-    return(list("mean_IMCD_c"=reweighted_mu_c, "mean_IMCD_r"=reweighted_mu_r, 
-                "cov_IMCD"=reweighted_sigma, "final_z"=w, "cutoff"=cutoff,
-                "cutoff_value"=cutoff_value, "robust_dist"=reweighted_d2, "farness_probs"=farness_probs))
+    if(cor){
+        cor_IMCD <- cov2cor(reweighted_sigma)
+    }
+
+    results <- list("mean_IMCD_c" = reweighted_mu_c, "mean_IMCD_r" = reweighted_mu_r, 
+                    "cov_IMCD" = reweighted_sigma, "final_z" = w, "cutoff" = cutoff,
+                    "cutoff_value" = cutoff_value, "robust_dist" = reweighted_d2)
+
+    if(cutoff == "farness"){
+        results$farness_probs <- farness_probs
+    }
+
+    if(cor){
+        results$cor_IMCD <- cor_IMCD
+    }
+
+    return(results)
 }
 

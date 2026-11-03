@@ -25,7 +25,23 @@ If \code{data} is not provided, the covariance matrix is calculated based on \co
 \item{sigma_cr}{Covariance matrix between the centers and ranges.}
 
 \item{LatentParam}{A list with the parameters of the latent variables.
-Expects a list with a single number if \code{LatentCase} is \code{"U_id_symmetric"}, a list of two numbers if \code{LatentCase} is \code{"U_id"}, and a list of two matrices if \code{LatentCase} is \code{"General"}.}
+Expects a list with a single number if \code{LatentCase} is \code{"U_id_symmetric"}, a list of two numbers if \code{LatentCase} is \code{"U_id"}, and a list of two matrices if \code{LatentCase} is \code{"General"}, as in:
+\itemize{
+\item \code{"U_id_symmetric"}: The latent variables are identically distributed and symmetric, so its parameters are:
+\itemize{
+\item  \eqn{\delta=\mathbb{E}(U^2)/4}
+}
+\item \code{"U_id"}: The latent variables are identically distributed, so its parameters are:
+\itemize{
+\item  \eqn{\delta=\mathbb{E}(U^2)/4}
+\item  \eqn{\mathbb{E}(U)}
+}
+\item \code{"General"}: The latent variables do not have any nice properties, so its parameters are:
+\itemize{
+\item \eqn{[\boldsymbol{\mathfrak{E}}_{UU}]_{j\ell}=\mathcal{E}(U_j,U_\ell)}, \eqn{j\neq \ell}, with \eqn{\mathcal{E}(U_j,U_\ell)=\int_0^1 F_{U_j}^{-1}(t) F_{U_\ell}^{-1}(t) \, dt}, and \eqn{[\boldsymbol{\mathfrak{E}}_{UU}]_{jj}=\mathbb{E}(U_j^2)}, \eqn{j,\ell=1,\dots,p}
+\item \eqn{\boldsymbol{\Psi}=\text{Diag}(\mathbb{E}(U_1),\dots,\mathbb{E}(U_p))}
+}
+}}
 
 \item{LatentCase}{A string specifying which of the three scenarios applies to the latent variables:
 \itemize{
@@ -61,8 +77,10 @@ where:
 \item \eqn{\bullet} denotes the Schur (or entrywise) product of matrices.
 }
 }
-The covariance matrix can be calculated either based on the covariance matrices of the centers and ranges or based on the data. If the data is provided, the covariance matrices are calculated using the sample covariance of the centers and ranges and the sample covariance between centers and ranges.
+The covariance matrix can be calculated either based on the covariance matrices of the centers and ranges or based on the data.
+If the data is provided, the covariance matrices are calculated using the sample covariance of the centers and ranges and the sample covariance between centers and ranges (using \code{\link{cov}} and so denominator \eqn{n-1} is used), and the parameters of the latent variables contained in the \code{intData} object.
 For the robust estimation of the covariance matrix, see \code{\link{IMCD}}.
+For the correlation matrix, see \code{\link{int_cor}}.
 }
 \examples{
 data(creditcard)

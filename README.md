@@ -9,7 +9,7 @@ status](https://www.r-pkg.org/badges/version/AIDA)](https://CRAN.R-project.org/p
 [![CRAN
 checks](https://badges.cranchecks.info/worst/AIDA.svg)](https://cran.r-project.org/web/checks/check_results_AIDA.html)
 [![GitHub
-Version](https://img.shields.io/badge/GitHub-v0.2.1-blue)](https://github.com/catarinaploureiro/AIDA)
+Version](https://img.shields.io/badge/GitHub-v0.2.2-blue)](https://github.com/catarinaploureiro/AIDA)
 [![codecov](https://codecov.io/gh/catarinaploureiro/AIDA/branch/main/graph/badge.svg)](https://app.codecov.io/gh/catarinaploureiro/AIDA)
 [![License:
 MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
@@ -64,10 +64,10 @@ iris_int <- micro2intData(iris[,1:4], iris$Species, LatentCase = "General")
 iris_int@LatentParam
 #> [[1]]
 #>           [,1]      [,2]      [,3]      [,4]
-#> [1,] 0.1835903 0.1554921 0.1660354 0.1990067
-#> [2,] 0.1554921 0.1381013 0.1461729 0.1683492
-#> [3,] 0.1660354 0.1461729 0.1627440 0.1828199
-#> [4,] 0.1990067 0.1683492 0.1828199 0.2704900
+#> [1,] 0.1835903 0.1554868 0.1660030 0.1989812
+#> [2,] 0.1554868 0.1381013 0.1463002 0.1685136
+#> [3,] 0.1660030 0.1463002 0.1627440 0.1829350
+#> [4,] 0.1989812 0.1685136 0.1829350 0.2704900
 #> 
 #> [[2]]
 #>            [,1]       [,2]       [,3]       [,4]
@@ -76,9 +76,10 @@ iris_int@LatentParam
 #> [3,] 0.00000000 0.00000000 0.02913753  0.0000000
 #> [4,] 0.00000000 0.00000000 0.00000000 -0.1802821
 
-# Compute the classical covariance and correlation matrices
+# Compute the classical sample barycenter, covariance and correlation matrices
+iris_mean <- int_mean(iris_int)
 iris_cov <- int_cov(iris_int)
-iris_corr <- cov2cor(iris_cov)
+iris_corr <- int_cor(iris_int)
 
 # Pairs plot, the lower triangular shows scatter plots of the four variables, 
 # while the upper triangular shows the interval correlation matrix.

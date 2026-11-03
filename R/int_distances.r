@@ -27,6 +27,7 @@
 #' it will be computed using the sample mean of centers.
 #' @param mean_r (Optional) A vector specifying the mean of ranges Defaults to `NULL`, in which case 
 #' it will be computed using the sample mean of ranges.
+#' @param mean (Optional) An \code{\linkS4class{intData}} object containing the barycenter of the data. If provided, it will override `mean_c` and `mean_r`.
 #' @return A vector with the squared Mallows distance of each observation.
 #' @export
 #' @examples
@@ -37,7 +38,7 @@
 #' @references Oliveira, M. R., Pinheiro, D., & Oliveira, L. (2025). 
 #' Location and association measures for interval-valued data based on Mallows' distance. 
 #' arXiv preprint arXiv:2407.05105. \url{https://arxiv.org/abs/2407.05105}
-Mallows_dist <- function(data,mean_c=NULL,mean_r=NULL){
+Mallows_dist <- function(data,mean_c=NULL,mean_r=NULL,mean=NULL){
 
     if(!inherits(data,"intData")) stop("Argument data is not an object of class intData\n")
 
@@ -46,10 +47,14 @@ Mallows_dist <- function(data,mean_c=NULL,mean_r=NULL){
     param <- data@LatentParam
     case <- data@LatentCase
 
-    if (is.null(mean_c) || is.null(mean_r)) {
-        mean_c <- colMeans(C)
-        mean_r <- colMeans(R)
+    if (!is.null(mean)) {
+        if(!inherits(mean,"intData")) stop("Argument mean is not an object of class intData\n")
+        mean_c <- as.numeric(mean@Centers[1, ])
+        mean_r <- as.numeric(mean@Ranges[1, ])
     }
+
+    if (is.null(mean_c)) mean_c <- colMeans(C)
+    if (is.null(mean_r)) mean_r <- colMeans(R)
 
     C_0 <- t(C)-mean_c
     R_0 <- t(R)-mean_r
@@ -107,6 +112,7 @@ Mallows_dist <- function(data,mean_c=NULL,mean_r=NULL){
 #' @param data An \code{\linkS4class{intData}} object containing the macrodata/interval data
 #' @param z (Optional) A vector of 0 and 1, indicating which observations should be considered for the calculation.
 #' If `z` is not `NULL`, `mean_c`, `mean_r`, and `cov` will be computed using only the observations with `z=1` (see \code{\link{int_mean_z}} and \code{\link{int_cov_z}}). 
+#' Overrules `mean_c`, `mean_r`, `cov`, and `mean` if they are provided.
 #' Defaults to `NULL`.
 #' @param mean_c (Optional) A vector specifying the mean of centers. Defaults to `NULL`, in which case 
 #' it will be computed using the \code{\link{IMCD}} function, if `z` is also `NULL`.
@@ -114,6 +120,7 @@ Mallows_dist <- function(data,mean_c=NULL,mean_r=NULL){
 #' it will be computed using the \code{\link{IMCD}} function, if `z` is also `NULL`.
 #' @param cov (Optional) A covariance matrix. Defaults to `NULL`, in which case it will be computed 
 #' using the \code{\link{IMCD}} function, if `z` is also `NULL`.
+#' @param mean (Optional) An \code{\linkS4class{intData}} object containing the barycenter of the data. If provided, it will override `mean_c` and `mean_r`.
 #' @return A vector with the squared Interval-Mahalanobis distance of each observation.
 #' @export
 #' @examples
@@ -122,10 +129,13 @@ Mallows_dist <- function(data,mean_c=NULL,mean_r=NULL){
 #' 
 #' # Compute squared Interval-Mahalanobis distance using IMCD estimates of mean and covariance
 #' credit_card_dist <- IMah_dist(credit_card_int)
+#' 
+#' # Compute non-robust squared Interval-Mahalanobis distance using sample mean and covariance
+#' credit_card_dist_nonrobust <- IMah_dist(credit_card_int, z = rep(1, credit_card_int@NObs))
 #' @references Loureiro, C. P., Oliveira, M. R., Brito, P., & Oliveira, L. (2026). 
 #' Minimum Covariance Determinant Estimator and Outlier Detection for Interval-valued Data. 
 #' arXiv preprint arXiv:2604.26769. \url{https://arxiv.org/abs/2604.26769}
-IMah_dist <- function(data,z=NULL,mean_c=NULL,mean_r=NULL,cov=NULL){
+IMah_dist <- function(data,z=NULL,mean_c=NULL,mean_r=NULL,cov=NULL,mean=NULL){
 
     if(!inherits(data,"intData")) stop("Argument data is not an object of class intData\n")
 
@@ -140,6 +150,12 @@ IMah_dist <- function(data,z=NULL,mean_c=NULL,mean_r=NULL,cov=NULL){
         cov <- int_cov_z(z,data)
     }
     
+    if (!is.null(mean)) {
+        if(!inherits(mean,"intData")) stop("Argument mean is not an object of class intData\n")
+        mean_c <- as.numeric(mean@Centers[1, ])
+        mean_r <- as.numeric(mean@Ranges[1, ])
+    }
+
     if(is.null(mean_c) || is.null(mean_r) || is.null(cov)){
         IMCD_res <- IMCD(data,m=floor(data@NObs*0.75))
         if(is.null(cov)) cov <- IMCD_res$cov_IMCD

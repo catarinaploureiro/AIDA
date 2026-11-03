@@ -4,13 +4,21 @@
 \alias{IMah_dist}
 \title{Interval-Mahalanobis Distance}
 \usage{
-IMah_dist(data, z = NULL, mean_c = NULL, mean_r = NULL, cov = NULL)
+IMah_dist(
+  data,
+  z = NULL,
+  mean_c = NULL,
+  mean_r = NULL,
+  cov = NULL,
+  mean = NULL
+)
 }
 \arguments{
 \item{data}{An \code{\linkS4class{intData}} object containing the macrodata/interval data}
 
 \item{z}{(Optional) A vector of 0 and 1, indicating which observations should be considered for the calculation.
 If \code{z} is not \code{NULL}, \code{mean_c}, \code{mean_r}, and \code{cov} will be computed using only the observations with \code{z=1} (see \code{\link{int_mean_z}} and \code{\link{int_cov_z}}).
+Overrules \code{mean_c}, \code{mean_r}, \code{cov}, and \code{mean} if they are provided.
 Defaults to \code{NULL}.}
 
 \item{mean_c}{(Optional) A vector specifying the mean of centers. Defaults to \code{NULL}, in which case
@@ -21,6 +29,8 @@ it will be computed using the \code{\link{IMCD}} function, if \code{z} is also \
 
 \item{cov}{(Optional) A covariance matrix. Defaults to \code{NULL}, in which case it will be computed
 using the \code{\link{IMCD}} function, if \code{z} is also \code{NULL}.}
+
+\item{mean}{(Optional) An \code{\linkS4class{intData}} object containing the barycenter of the data. If provided, it will override \code{mean_c} and \code{mean_r}.}
 }
 \value{
 A vector with the squared Interval-Mahalanobis distance of each observation.
@@ -60,6 +70,9 @@ credit_card_int <- creditcard$intData
 
 # Compute squared Interval-Mahalanobis distance using IMCD estimates of mean and covariance
 credit_card_dist <- IMah_dist(credit_card_int)
+
+# Compute non-robust squared Interval-Mahalanobis distance using sample mean and covariance
+credit_card_dist_nonrobust <- IMah_dist(credit_card_int, z = rep(1, credit_card_int@NObs))
 }
 \references{
 Loureiro, C. P., Oliveira, M. R., Brito, P., & Oliveira, L. (2026).

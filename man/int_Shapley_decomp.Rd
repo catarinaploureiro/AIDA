@@ -4,7 +4,7 @@
 \alias{int_Shapley_decomp}
 \title{Compute Shapley Decomposition into contributions of (Centers, Ranges, and CrossCentersRanges) for Interval-valued Data}
 \usage{
-int_Shapley_decomp(data, mean_c = NULL, mean_r = NULL, cov = NULL)
+int_Shapley_decomp(data, mean_c = NULL, mean_r = NULL, cov = NULL, mean = NULL)
 }
 \arguments{
 \item{data}{An \code{\linkS4class{intData}} object containing the interval-valued dataset (macrodata).}
@@ -14,6 +14,8 @@ int_Shapley_decomp(data, mean_c = NULL, mean_r = NULL, cov = NULL)
 \item{mean_r}{(Optional) A vector specifying the mean of ranges. Defaults to \code{NULL}, in which case it will be computed using the \code{\link{IMCD}} function.}
 
 \item{cov}{(Optional) A covariance matrix. Defaults to \code{NULL}, in which case it will be computed using the \code{\link{IMCD}} function.}
+
+\item{mean}{(Optional) An \code{\linkS4class{intData}} object containing the barycenter of the data. If provided, it will override \code{mean_c} and \code{mean_r}.}
 }
 \value{
 A list containing the matrix of Shapley value decomposition into contributions of (Centers, Ranges, and CrossCentersRanges) per variable for each observation.

@@ -53,8 +53,9 @@
 #' 
 #' @examples
 #' data(creditcard)
-#' head(creditcard$min_max)
 #' head(creditcard$microdata)
+#' head(creditcard$min_max)
+#' head(creditcard$centers_ranges)
 #' head(creditcard$intData)
 #'
 #' @keywords datasets
@@ -72,13 +73,16 @@
 #' @usage data(spotify_tracks)
 #' 
 #' @references This data was retrieved from Kaggle (DOI:10.34740/KAGGLE/DSV/4372070; Spotify Tracks Dataset by Maharshi Pandya).
+#' @references Loureiro, C. P., Oliveira, M. R., Brito, P., & Oliveira, L. (2026). 
+#' Minimum Covariance Determinant Estimator and Outlier Detection for Interval-valued Data. 
+#' arXiv preprint arXiv:2604.26769. \url{https://arxiv.org/abs/2604.26769}
 #' 
 #' @format A list with the following components:
 #' \describe{
 #'      \item{\code{microdata}}{A data frame with `81033` rows and `20` columns. It contains the microdata, with individual measurements of each variable for all observations.}
 #'      \item{\code{microdata_transformed}}{A data frame with `81033` rows and `20` columns. It contains the transformed microdata, with individual measurements of each variable for all observations. Logarithmic transformations were applied to "loudness" and "tempo". "duration_ms" in milliseconds was converted to "duration" in minutes. "popularity" was scaled to the range `[0,1]`.}
 #'      \item{\code{intData_minmax}}{An \code{\linkS4class{intData}} object with `111` interval-valued observations and `11` variables, constructed using min-max aggregation based on the transformed microdata.}
-#'      \item{\code{intData_trimmed}}{An \code{\linkS4class{intData}} object with `111` interval-valued observations and `11` variables, constructed using trimmed aggregation (`1\%` trimming) based on the transformed microdata.}
+#'      \item{\code{intData_trimmed}}{An \code{\linkS4class{intData}} object with `111` interval-valued observations and `11` variables, constructed using trimmed aggregation (1% and 99% quantiles) based on the transformed microdata.}
 #' }
 #' 
 #' @examples

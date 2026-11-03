@@ -1,3 +1,31 @@
+test_that("int_mean returns the barycenter and preserves latent parameters", {
+  Data <- matrix(c(
+    1, 0.2, 5, 0.4,
+    3, 0.4, 7, 0.6,
+    5, 0.6, 9, 0.8
+  ), nrow = 3, byrow = TRUE)
+  latent <- list(0.25)
+  obj <- intData(Data, Seq = "CenRng_VarbyVar", VarNames = c("A", "B"),
+                 LatentParam = latent, LatentCase = "U_id_symmetric",
+                 LatentDist = "Unif")
+
+  result <- int_mean(obj)
+
+  expect_s4_class(result, "intData")
+  expect_equal(as.numeric(result@Centers[1, ]), c(3, 7))
+  expect_equal(as.numeric(result@Ranges[1, ]), c(0.4, 0.6))
+  expect_equal(colnames(result), c("A", "B"))
+  expect_equal(rownames(result), "Barycenter")
+  expect_equal(result@LatentParam, latent)
+  expect_equal(result@LatentCase, obj@LatentCase)
+  expect_equal(result@LatentDist, obj@LatentDist)
+})
+
+test_that("int_mean errors for non-intData inputs", {
+  expect_error(int_mean(data.frame(x = 1:2)),
+               "Argument data is not an object of class intData")
+})
+
 test_that("int_mean_z works", {
   n <- 100
   p <- 4
@@ -155,4 +183,42 @@ test_that("safe_solve_cov handles errors, invertible and singular matrices", {
   sing <- matrix(c(1, 2, 1, 2), nrow = 2)
   expect_warning(inv_sing <- safe_solve_cov(sing, verbose = TRUE), "Moore-Penrose")
   expect_equal(inv_sing, MASS::ginv(sing))
+})
+
+test_that("int_cor computes correlation from intData", {
+  Data <- matrix(c(
+    1, 0.2, 5, 0.4,
+    3, 0.4, 7, 0.6,
+    5, 0.6, 9, 0.8
+  ), nrow = 3, byrow = TRUE)
+  obj <- intData(Data, Seq = "CenRng_VarbyVar", VarNames = c("A", "B"),
+                 LatentParam = list(0.25), LatentCase = "U_id_symmetric",
+                 LatentDist = "Unif")
+  expected <- cov2cor(int_cov(data = obj))
+
+  expect_equal(int_cor(data = obj), expected)
+  expect_equal(rownames(int_cor(data = obj)), c("A", "B"))
+  expect_equal(colnames(int_cor(data = obj)), c("A", "B"))
+})
+
+test_that("int_cor uses a supplied covariance matrix", {
+  covariance <- matrix(c(4, 3, 3, 9), nrow = 2,
+                       dimnames = list(c("A", "B"), c("A", "B")))
+
+  expect_equal(int_cor(cov = covariance), matrix(
+    c(1, 0.5, 0.5, 1), nrow = 2,
+    dimnames = list(c("A", "B"), c("A", "B"))
+  ))
+})
+
+test_that("int_cor computes correlation from explicit covariance components", {
+  sigma_cc <- matrix(c(1, 0.2, 0.2, 2), nrow = 2)
+  sigma_rr <- matrix(c(2, 0.1, 0.1, 1), nrow = 2)
+  covariance <- sigma_cc + 0.25 * sigma_rr
+
+  expect_equal(
+    int_cor(sigma_cc = sigma_cc, sigma_rr = sigma_rr,
+            LatentParam = list(0.25), LatentCase = "U_id_symmetric"),
+    cov2cor(covariance)
+  )
 })

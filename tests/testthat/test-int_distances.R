@@ -9,6 +9,23 @@ test_that("Mallows_dist computes squared distances for U_id_symmetric", {
   expect_equal(result, c('1'=0.25, '2'=0.25))
 })
 
+test_that("Mallows_dist uses the supplied intData mean over mean_c and mean_r", {
+  Data <- data.frame(L1 = c(1, 2), U1 = c(3, 5))
+  obj <- intData(Data, Seq = "LbUb_VarbyVar", VarNames = "V",
+                 LatentParam = list(0.25), LatentCase = "U_id_symmetric",
+                 LatentDist = "Unif")
+  mean_obj <- intData(data.frame(C1 = 4, R1 = 2),
+                      Seq = "CenRng_VarbyVar", VarNames = "V",
+                      LatentParam = list(0.25),
+                      LatentCase = "U_id_symmetric", LatentDist = "Unif")
+
+  result <- Mallows_dist(obj, mean_c = 100, mean_r = 100, mean = mean_obj)
+  expected <- c("1" = (2 - 4)^2 + 0.25 * (2 - 2)^2,
+                "2" = (3.5 - 4)^2 + 0.25 * (3 - 2)^2)
+
+  expect_equal(result, expected)
+})
+
 test_that("Mallows_dist computes the U_id cross term correctly", {
   Data <- data.frame(L1 = c(1, 3), U1 = c(4, 7))
   obj <- intData(Data, Seq = "LbUb_VarbyVar", VarNames = "V", LatentParam = list(0.5, 0.2), LatentCase = "U_id", LatentDist = "Triang")
@@ -190,6 +207,26 @@ test_that("IMah_dist uses explicit mean and covariance", {
   expect_equal(result, expected)
 })
 
+test_that("IMah_dist uses the supplied intData mean over mean_c and mean_r", {
+  Data <- data.frame(L1 = c(1, 2), U1 = c(3, 5))
+  obj <- intData(Data, Seq = "LbUb_VarbyVar", VarNames = "V",
+                 LatentParam = list(0.25), LatentCase = "U_id_symmetric",
+                 LatentDist = "Unif")
+  mean_obj <- intData(data.frame(C1 = 4, R1 = 4),
+                      Seq = "CenRng_VarbyVar", VarNames = "V",
+                      LatentParam = list(0.25),
+                      LatentCase = "U_id_symmetric", LatentDist = "Unif")
+  cov_mat <- diag(1, 1)
+
+  result <- IMah_dist(obj, mean_c = 100, mean_r = 100, cov = cov_mat,
+                      mean = mean_obj)
+  expected <- mahalanobis(obj@Centers, 4, solve(cov_mat), inverted = TRUE) +
+    0.25 * mahalanobis(obj@Ranges, 4, solve(cov_mat), inverted = TRUE)
+  names(expected) <- rownames(obj)
+
+  expect_equal(result, expected)
+})
+
 test_that("IMah_dist_pairs computes symmetric pairwise distances", {
   Data <- data.frame(L1 = c(1, 3), U1 = c(3, 6))
   obj <- intData(Data, Seq = "LbUb_VarbyVar", VarNames = "V", LatentParam = list(0.25), LatentCase = "U_id_symmetric", LatentDist = "Unif")
@@ -208,4 +245,16 @@ test_that("distance functions error on non-intData input", {
   expect_error(Mallows_dist(1:3), "Argument data is not an object of class intData")
   expect_error(IMah_dist(1:3), "Argument data is not an object of class intData")
   expect_error(IMah_dist_pairs(1:3), "Argument data is not an object of class intData")
+})
+
+test_that("Mallows_dist and IMah_dist error for non-intData means", {
+  Data <- data.frame(L1 = c(1, 2), U1 = c(3, 5))
+  obj <- intData(Data, Seq = "LbUb_VarbyVar", VarNames = "V",
+                 LatentParam = list(0.25), LatentCase = "U_id_symmetric",
+                 LatentDist = "Unif")
+
+  expect_error(Mallows_dist(obj, mean = data.frame(x = 1)),
+               "Argument mean is not an object of class intData")
+  expect_error(IMah_dist(obj, cov = diag(1), mean = data.frame(x = 1)),
+               "Argument mean is not an object of class intData")
 })

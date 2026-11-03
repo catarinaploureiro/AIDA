@@ -22,8 +22,9 @@ It is composed of 5 variables: Food, Social, Travel, Gas, and Clothes. It was ag
 }
 \examples{
 data(creditcard)
-head(creditcard$min_max)
 head(creditcard$microdata)
+head(creditcard$min_max)
+head(creditcard$centers_ranges)
 head(creditcard$intData)
 
 }

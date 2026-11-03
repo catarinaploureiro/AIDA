@@ -124,5 +124,12 @@ int_outliers <- function(robust_dist,
     }
     names(w) <- names(robust_dist)
     outliers <- names(which(w))
-    return(list("outliers_names"=outliers,"is_outlier"=w,"cutoff"=cutoff,"cutoff_value"=cutoff_value,"farness_probs"=farness_probs))
+
+    results <- list("outliers_names"=outliers,"is_outlier"=w,"cutoff"=cutoff,"cutoff_value"=cutoff_value)
+
+    if (cutoff=="farness") {
+        results$farness_probs <- farness_probs
+    }
+
+    return(results)
 }

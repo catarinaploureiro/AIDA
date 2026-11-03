@@ -18,5 +18,5 @@ rbind(..., deparse.level = 1)
 An \code{\linkS4class{intData}} object with rows combined from the input \code{\linkS4class{intData}} objects.
 }
 \description{
-Combine multiple \code{\linkS4class{intData}} objects by rows.
+Combine multiple \code{\linkS4class{intData}} objects by rows. Only works if the objects have the same number of interval-valued variables and the same \code{LatentCase}, \code{LatentDist}, and \code{LatentParam.}
 }

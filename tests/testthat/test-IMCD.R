@@ -19,6 +19,24 @@ test_that("IMCD returns raw estimates when m equals n", {
   expect_true(all(names(res$robust_dist) == rownames(obj)))
 })
 
+test_that("IMCD returns the correlation matrix when cor is TRUE", {
+  Data <- data.frame(
+    L1 = c(1, 2, 3, 4, 5, 6), U1 = c(3, 4, 5, 6, 7, 8),
+    L2 = c(0, 1, 0, -1, -1, 1), U2 = c(2, 3, 3, 2, 3, 2)
+  )
+  obj <- intData(Data, Seq = "LbUb_VarbyVar", VarNames = c("X", "Y"),
+                 LatentParam = list(0.25), LatentCase = "U_id_symmetric",
+                 LatentDist = "Unif")
+
+  res <- IMCD(obj, m = obj@NObs, cutoff = "raw", cor = TRUE)
+
+  expect_true(is.matrix(res$cor_IMCD))
+  expect_equal(res$cor_IMCD, cov2cor(res$cov_IMCD))
+  expect_equal(dim(res$cor_IMCD), c(obj@NIVar, obj@NIVar))
+  expect_equal(rownames(res$cor_IMCD), colnames(obj))
+  expect_equal(colnames(res$cor_IMCD), colnames(obj))
+})
+
 test_that("IMCD errors on non-intData input", {
   expect_error(IMCD(1:3), "Argument data is not an object of class intData")
 })

@@ -41,6 +41,8 @@ The latent variables, \eqn{U_{j}}, are defined according to the following model:
 Let \eqn{X_j=(C_j,R_j)^\top=\left[C_j-\dfrac{R_j}{2}, C_j+\dfrac{R_j}{2}\right]} represent the \strong{macrodata} and
 \deqn{V_{j}=C_j+U_{j}\dfrac{R_j}{2},\quad j=1,\dots,p,}
 the \strong{microdata} with \eqn{U_{j}} being random variables with support on \eqn{[-1,1]}, uncorrelated with \eqn{(C_j,R_j)}.
+
+Thus, the latent variables are obtained by normalizing the microdata to the interval \eqn{[-1,1]} using the macrodata. In order to prevent an accumulation of values at the boundaries of the interval, the values that are exactly equal to \eqn{-1} or \eqn{1} are set to \code{NA}.
 }
 \examples{
 data(creditcard)

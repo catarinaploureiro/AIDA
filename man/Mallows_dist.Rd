@@ -4,7 +4,7 @@
 \alias{Mallows_dist}
 \title{Mallows Distance}
 \usage{
-Mallows_dist(data, mean_c = NULL, mean_r = NULL)
+Mallows_dist(data, mean_c = NULL, mean_r = NULL, mean = NULL)
 }
 \arguments{
 \item{data}{An \code{\linkS4class{intData}} object containing the macrodata/interval data}
@@ -14,6 +14,8 @@ it will be computed using the sample mean of centers.}
 
 \item{mean_r}{(Optional) A vector specifying the mean of ranges Defaults to \code{NULL}, in which case
 it will be computed using the sample mean of ranges.}
+
+\item{mean}{(Optional) An \code{\linkS4class{intData}} object containing the barycenter of the data. If provided, it will override \code{mean_c} and \code{mean_r}.}
 }
 \value{
 A vector with the squared Mallows distance of each observation.

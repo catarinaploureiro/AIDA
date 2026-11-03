@@ -6,7 +6,23 @@
 #' @param agrby A factor used to specify the grouping of the microdata for aggregation.
 #' @param agrcrt A string or numeric vector of length 2 specifying the aggregation criterion. The default is \code{"minmax"}, which takes the minimum and maximum values for each variable. If a numeric vector is provided, it should specify the lower and upper percentiles for aggregation (e.g., \code{c(0.05, 0.95)}).
 #' @param LatentParam (Optional) A list with the parameters of the latent variables. 
-#'  Expects a list with a single number if `LatentCase` is `"U_id_symmetric"`, a list of two numbers if `LatentCase` is `"U_id"`, and a list of two matrices if `LatentCase` is `"General"`.
+#'  Expects a list with a single number if `LatentCase` is `"U_id_symmetric"`, a list of two numbers if `LatentCase` is `"U_id"`, and a list of two matrices if `LatentCase` is `"General"`, as in:
+#'      \itemize{
+#'          \item \code{"U_id_symmetric"}: The latent variables are identically distributed and symmetric, so its parameters are:
+#'              \itemize{
+#'                  \item  \eqn{\delta=\mathbb{E}(U^2)/4}
+#'              }
+#'          \item \code{"U_id"}: The latent variables are identically distributed, so its parameters are:
+#'              \itemize{
+#'                  \item  \eqn{\delta=\mathbb{E}(U^2)/4}
+#'                  \item  \eqn{\mathbb{E}(U)}
+#'              }
+#'          \item \code{"General"}: The latent variables do not have any nice properties, so its parameters are:
+#'              \itemize{
+#'                  \item \eqn{[\boldsymbol{\mathfrak{E}}_{UU}]_{j\ell}=\mathcal{E}(U_j,U_\ell)}, \eqn{j\neq \ell}, with \eqn{\mathcal{E}(U_j,U_\ell)=\int_0^1 F_{U_j}^{-1}(t) F_{U_\ell}^{-1}(t) \, dt}, and \eqn{[\boldsymbol{\mathfrak{E}}_{UU}]_{jj}=\mathbb{E}(U_j^2)}, \eqn{j,\ell=1,\dots,p}
+#'                  \item \eqn{\boldsymbol{\Psi}=\text{Diag}(\mathbb{E}(U_1),\dots,\mathbb{E}(U_p))}
+#'              }
+#'       }
 #' @param LatentCase A string specifying which of the three scenarios applies to the latent variables:
 #' \itemize{
 #'   \item \code{"U_id_symmetric"}: The case where the latent variables are identically distributed and symmetric.
@@ -22,8 +38,8 @@
 #' The default is \code{1}.
 #' @param BetaParam.b Parameter beta of the Beta distribution. If the latent variables are identically distributed, it is only necessary to provide a number, if not a vector is needed.
 #' The default is \code{1}.
-#' @param estimate.DistParam Logical parameter indicating if estimation of the parameters of the latent distributions should be performed. Can only be set to TRUE if \code{LatentCase="General"}.
-#' The default is \code{FALSE}.
+#' @param estimate.DistParam Logical parameter indicating if estimation of the parameters of the latent distributions should be performed in the case of triangular or Beta distributions.
+#' Can only be set to TRUE if \code{LatentCase="General"}. The default is \code{FALSE}.
 #' @param removeDegenerate Logical parameter indicating if observations with at least one degenerate interval should be removed. The default is \code{FALSE}.
 #'
 #' @return An \code{\linkS4class{intData}} object containing the aggregated interval-valued data. If \code{removeDegenerate} is \code{TRUE}, observations with degenerate intervals are removed, and \code{NULL} is returned if all observations are removed.

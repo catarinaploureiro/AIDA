@@ -1,5 +1,5 @@
 #' @importFrom methods new show is setClass setMethod
-#' @importFrom stats cov dnorm integrate mad mahalanobis median
+#' @importFrom stats cov dnorm integrate mad mahalanobis median cov2cor
 #' @importFrom stats pnorm qbeta qchisq qf qnorm quantile runif sd setNames
 NULL
 
@@ -9,7 +9,23 @@ NULL
 #' 
 #' @slot Centers A data frame of centers of the intervals.
 #' @slot Ranges A data frame of ranges of the intervals.
-#' @slot LatentParam A list with the parameters of the latent variables.
+#' @slot LatentParam A list with the parameters of the latent variables' distribution defined according to the \code{LatentCase}:
+#'      \itemize{
+#'          \item \code{"U_id_symmetric"}: The latent variables are identically distributed and symmetric, so its parameters are:
+#'              \itemize{
+#'                  \item  \eqn{\delta=\mathbb{E}(U^2)/4}
+#'              }
+#'          \item \code{"U_id"}: The latent variables are identically distributed, so its parameters are:
+#'              \itemize{
+#'                  \item  \eqn{\delta=\mathbb{E}(U^2)/4}
+#'                  \item  \eqn{\mathbb{E}(U)}
+#'              }
+#'          \item \code{"General"}: The latent variables do not have any nice properties, so its parameters are:
+#'              \itemize{
+#'                  \item \eqn{[\boldsymbol{\mathfrak{E}}_{UU}]_{j\ell}=\mathcal{E}(U_j,U_\ell)}, \eqn{j\neq \ell}, with \eqn{\mathcal{E}(U_j,U_\ell)=\int_0^1 F_{U_j}^{-1}(t) F_{U_\ell}^{-1}(t) \, dt}, and \eqn{[\boldsymbol{\mathfrak{E}}_{UU}]_{jj}=\mathbb{E}(U_j^2)}, \eqn{j,\ell=1,\dots,p}
+#'                  \item \eqn{\boldsymbol{\Psi}=\text{Diag}(\mathbb{E}(U_1),\dots,\mathbb{E}(U_p))}
+#'              }
+#'       }
 #' @slot LatentCase A string specifying which of the three scenarios applies to the latent variables:
 #' \itemize{
 #'   \item \code{"U_id_symmetric"}: The case where the latent variables are identically distributed and symmetric.
@@ -117,7 +133,23 @@ setGeneric("LatentDist",function(Sdt) standardGeneric("LatentDist"))
 #'   \item \code{"CenRng_VarbyVar"}: Centers followed by Ranges, variable by variable.
 #' }
 #' @param LatentParam A list with the parameters of the latent variables.
-#'  Expects a list with a single number if `LatentCase` is `"U_id_symmetric"`, a list of two numbers if `LatentCase` is `"U_id"`, and a list of two matrices if `LatentCase` is `"General"`.
+#'  Expects a list with a single number if `LatentCase` is `"U_id_symmetric"`, a list of two numbers if `LatentCase` is `"U_id"`, and a list of two matrices if `LatentCase` is `"General"`, as in:
+#'      \itemize{
+#'          \item \code{"U_id_symmetric"}: The latent variables are identically distributed and symmetric, so its parameters are:
+#'              \itemize{
+#'                  \item  \eqn{\delta=\mathbb{E}(U^2)/4}
+#'              }
+#'          \item \code{"U_id"}: The latent variables are identically distributed, so its parameters are:
+#'              \itemize{
+#'                  \item  \eqn{\delta=\mathbb{E}(U^2)/4}
+#'                  \item  \eqn{\mathbb{E}(U)}
+#'              }
+#'          \item \code{"General"}: The latent variables do not have any nice properties, so its parameters are:
+#'              \itemize{
+#'                  \item \eqn{[\boldsymbol{\mathfrak{E}}_{UU}]_{j\ell}=\mathcal{E}(U_j,U_\ell)}, \eqn{j\neq \ell}, with \eqn{\mathcal{E}(U_j,U_\ell)=\int_0^1 F_{U_j}^{-1}(t) F_{U_\ell}^{-1}(t) \, dt}, and \eqn{[\boldsymbol{\mathfrak{E}}_{UU}]_{jj}=\mathbb{E}(U_j^2)}, \eqn{j,\ell=1,\dots,p}
+#'                  \item \eqn{\boldsymbol{\Psi}=\text{Diag}(\mathbb{E}(U_1),\dots,\mathbb{E}(U_p))}
+#'              }
+#'       }
 #' @param LatentCase A string specifying which of the three scenarios applies to the latent variables:
 #' \itemize{
 #'   \item \code{"U_id_symmetric"}: The case where the latent variables are identically distributed and symmetric.
@@ -135,8 +167,8 @@ setGeneric("LatentDist",function(Sdt) standardGeneric("LatentDist"))
 #' The default is \code{1}.
 #' @param Umicro Latent microdata observations.  
 #'   Needed if \code{estimate.DistParam} is \code{TRUE} or \code{LatentDist} is \code{"KDE"}.
-#' @param estimate.DistParam Logical parameter indicating if estimation of the parameters of the latent distributions should be performed. Can only be set to TRUE if \code{LatentCase="General"}.
-#' The default is \code{FALSE}.
+#' @param estimate.DistParam Logical parameter indicating if estimation of the parameters of the latent distributions should be performed in the case of triangular or Beta distributions.
+#' Can only be set to TRUE if \code{LatentCase="General"}. The default is \code{FALSE}.
 #' @param VarNames A character vector of variable names.
 #' @param ObsNames A character vector of observation names.
 #' @param NbMicroUnits An integer vector indicating the number of individual observations (microdata) aggregated by interval (macrodata).
@@ -189,14 +221,14 @@ intData <- function(macrodata,
   Seq <- match.arg(Seq)
   if (  (Seq == "LbUb_VarbyVar") || (Seq == "AllLb_AllUb") )
   {
-    if (Seq == "LbUb_VarbyVar") { Lbnd <- macrodata[,2*(0:(q-1))+1] ; Ubnd <- macrodata[,2*(1:q)] }
-    if (Seq == "AllLb_AllUb")   { Lbnd <- macrodata[,1:q] ; Ubnd <- macrodata[,(q+1):p] }
+    if (Seq == "LbUb_VarbyVar") { Lbnd <- macrodata[, 2*(0:(q-1))+1, drop = FALSE] ; Ubnd <- macrodata[, 2*(1:q), drop = FALSE] }
+    if (Seq == "AllLb_AllUb")   { Lbnd <- macrodata[, 1:q, drop = FALSE] ; Ubnd <- macrodata[, (q+1):p, drop = FALSE] }
     Centers <- (Lbnd+Ubnd)/2
     Ranges <- (Ubnd-Lbnd)
     if (any(is.na(Ranges))) stop("Invalid data")
   } else {
-    if (Seq == "CenRng_VarbyVar") { Centers <- macrodata[,2*(0:(q-1))+1] ; Ranges <- macrodata[,2*(1:q)] }
-    if (Seq == "AllCen_AllRng")   { Centers <- macrodata[,1:q] ; Ranges <- macrodata[,(q+1):p] }
+    if (Seq == "CenRng_VarbyVar") { Centers <- macrodata[, 2*(0:(q-1))+1, drop = FALSE] ; Ranges <- macrodata[, 2*(1:q), drop = FALSE] }
+    if (Seq == "AllCen_AllRng")   { Centers <- macrodata[, 1:q, drop = FALSE] ; Ranges <- macrodata[, (q+1):p, drop = FALSE] }
   }
   if (is.null(VarNames)) VarNames <- paste("I",1:q,sep="")
   if (!is.data.frame(Centers)) Centers <- as.data.frame(Centers)
@@ -683,7 +715,7 @@ setMethod("[",
 
 #' Row Bind for \code{\linkS4class{intData}}
 #'
-#' Combine multiple \code{\linkS4class{intData}} objects by rows.
+#' Combine multiple \code{\linkS4class{intData}} objects by rows. Only works if the objects have the same number of interval-valued variables and the same `LatentCase`, `LatentDist`, and `LatentParam.`
 #'
 #' @param ... \code{\linkS4class{intData}} objects to combine.
 #' @param deparse.level An integer controlling the construction of labels in the result (default is \code{1}).

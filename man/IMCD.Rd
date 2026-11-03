@@ -6,15 +6,16 @@
 \usage{
 IMCD(
   data,
-  m = 0,
+  m = NULL,
   cutoff = c("farness", "adjbox", "chi-squared", "F-dist", "raw"),
-  cutoff_lvl = NULL
+  cutoff_lvl = NULL,
+  cor = FALSE
 )
 }
 \arguments{
 \item{data}{An \code{\linkS4class{intData}} object containing the interval-valued dataset (macrodata).}
 
-\item{m}{An integer specifying the subset size to use for the estimation. Defaults to \code{floor(0.75*n)}.}
+\item{m}{An integer specifying the subset size to use for the estimation. Defaults to \code{floor(0.75*data@NObs)}.}
 
 \item{cutoff}{Indicates which cutoff should be considered for reweighting the estimates:
 \itemize{
@@ -35,6 +36,8 @@ Defaults to \code{"farness"}.}
 \item If \code{cutoff="raw"}, \code{cutoff_lvl} is ignored.
 }
 If no value is provided, the function uses the default values associated with each cutoff method.}
+
+\item{cor}{A logical value indicating whether to return the correlation matrix. Defaults to \code{FALSE}.}
 }
 \value{
 A list containing the robustly estimated parameters:
@@ -46,6 +49,7 @@ A list containing the robustly estimated parameters:
 \item{\code{cutoff_value}}{Cutoff value used for reweighting.}
 \item{\code{robust_dist}}{Robust distances (\code{\link{IMah_dist}}) for each observation.}
 \item{\code{farness_probs}}{Farness probabilities (if \code{cutoff} is set to \code{"farness"}).}
+\item{\code{cor_IMCD}}{Estimated correlation matrix (if \code{cor} is set to \code{TRUE}).}
 }
 \description{
 Applies an adaptation of the FAST-MCD algorithm to estimate location and scatter for interval-valued data.
